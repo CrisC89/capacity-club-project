@@ -1,6 +1,3 @@
-import { ApiOperationOptions } from '@nestjs/swagger';
-
-export const AppControllerTest: ApiOperationOptions = {
-  summary: 'Hello world',
-  description: 'Ma super description pour cette méthode',
-};
+export * from './api';
+export * from './config';
+export * from './documentation';

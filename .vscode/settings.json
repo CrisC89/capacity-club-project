@@ -1,0 +1,14 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "capacity_club_project_db",
+      "database": "capacity_club_db",
+      "username": "capacity_club"
+    }
+  ]
+}
