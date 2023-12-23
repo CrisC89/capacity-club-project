@@ -11,7 +11,8 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "@common/*": ["./common/*"]
+      "@common/*": ["./common/*"],
+      "@security/*": ["./security/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
