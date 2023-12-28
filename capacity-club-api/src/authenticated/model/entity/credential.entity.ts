@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 import { ulid } from 'ulid';
-
 @Entity()
 export class Credential {
   @PrimaryColumn('varchar', { length: 26, default: () => `'${ulid()}'` })

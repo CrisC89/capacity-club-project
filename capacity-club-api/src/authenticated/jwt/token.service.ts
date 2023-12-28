@@ -1,18 +1,18 @@
+import {
+  TokenGenerationException,
+  TokenExpiredException,
+} from '@authenticated/authenticated.exception';
+import { Credential, RefreshTokenPayload, Token } from '@authenticated/model';
 import { configManager, ConfigKey } from '@common/config';
 import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Credential, RefreshTokenPayload, Token } from '@security/model';
-import {
-  TokenExpiredException,
-  TokenGenerationException,
-} from '@security/model/security.exception';
 import { Builder } from 'builder-pattern';
 import { Repository } from 'typeorm';
 
-//Change credential reposotory bu crrdential srevice
 @Injectable()
 export class TokenService {
+  // Logger for logging messages.
   private readonly logger = new Logger(TokenService.name);
 
   constructor(
@@ -22,18 +22,22 @@ export class TokenService {
     private jwtService: JwtService,
   ) {}
 
+  // Generates and returns access and refresh tokens for a given credential.
   async getTokens(credential: Credential): Promise<Token> {
     try {
-      await this.deleteFor(credential);
-      // Create payload for the token based on credential_id.
+      // Delete existing tokens for the credential to prevent token reuse.
+      await this.repository.delete({ credential });
+
+      // Define payload for JWT.
       const payload = { sub: credential.credential_id };
-      // Generate a new token using JWT service with a specific secret and expiry time.
+
+      // Create a new access token.
       const token = await this.jwtService.signAsync(payload, {
         secret: configManager.getValue(ConfigKey.JWT_TOKEN_SECRET),
         expiresIn: configManager.getValue(ConfigKey.JWT_TOKEN_EXPIRE_IN),
       });
-      // Generates a new refresh token, which may have a different expiration and secret
-      // for enhanced security.
+
+      // Create a new refresh token.
       const refreshToken = await this.jwtService.signAsync(payload, {
         secret: configManager.getValue(ConfigKey.JWT_REFRESH_TOKEN_SECRET),
         expiresIn: configManager.getValue(
@@ -41,8 +45,7 @@ export class TokenService {
         ),
       });
 
-      // Inserts the new token into the database or updates the existing token.
-      // The 'upsert' method decides whether to insert or update based on the 'credential' field.
+      // Insert or update the new tokens in the database.
       await this.repository.upsert(
         Builder<Token>()
           .token(token)
@@ -51,34 +54,36 @@ export class TokenService {
           .build(),
         ['credential'],
       );
-      // Retrieves and returns the newly generated token from the database.
+
+      // Retrieve and return the new token.
       return this.repository.findOneBy({ token: token });
     } catch (e) {
-      // Logs the error and throws a custom exception for token generation failures.
+      // Log error and throw an exception if token generation fails.
       this.logger.error(e.message);
       throw new TokenGenerationException();
     }
   }
 
+  // Deletes tokens associated with a given credential.
   async deleteFor(credential: Credential): Promise<void> {
-    // Delete all tokens associated with the given credential.
     await this.repository.delete({ credential });
   }
 
+  // Refreshes the token using the provided refresh token payload.
   async refresh(payload: RefreshTokenPayload): Promise<Token> {
     try {
-      // Verify the refresh token and extract the credential_id.
+      // Verify the refresh token and extract the credential_id (sub).
       const id = this.jwtService.verify(payload.refresh, {
         secret: configManager.getValue(ConfigKey.JWT_REFRESH_TOKEN_SECRET),
       }).sub;
-      // Fetch the credential details from the database using the extracted user ID.
+      // Fetch the credential details from the database using the extracted credential_id.
       const credential = await this.credentialRepository.findOneBy({
         credential_id: id,
       });
-      // Generate new access and refresh tokens using the found credentials.
+      // Generate and return new tokens for the found credential.
       return await this.getTokens(credential);
     } catch (e) {
-      // Log the error and throw a token expiration exception if something goes wrong.
+      // Log error and throw a token expiration exception if refresh fails.
       this.logger.error(e.message);
       throw new TokenExpiredException();
     }

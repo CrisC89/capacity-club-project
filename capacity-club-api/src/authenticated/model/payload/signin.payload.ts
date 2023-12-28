@@ -1,14 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-
-export class SignupPayload {
+export class SignInPayload {
   @ApiProperty()
   username: string;
   @ApiProperty()
   password: string;
   @ApiProperty()
-  mail: string;
-  @ApiProperty()
   googleHash: string;
   @ApiProperty()
   facebookHash: string;
+  @ApiProperty()
+  socialLogin: boolean;
 }
