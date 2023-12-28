@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AuthenticatedService } from './service/authenticated.service';
+import { AuthenticatedService } from './authenticated.service';
 import { Credential } from './model/entity/credential.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Token } from './model/entity/token.entity';
