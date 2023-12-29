@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { Repository } from 'typeorm';
+import { ulid } from 'ulid';
 
 @Injectable()
 export class TokenService {
@@ -48,6 +49,7 @@ export class TokenService {
       // Insert or update the new tokens in the database.
       await this.repository.upsert(
         Builder<Token>()
+          .token_id(ulid())
           .token(token)
           .refreshToken(refreshToken)
           .credential(credential)
