@@ -12,7 +12,12 @@
     "baseUrl": "./src",
     "paths": {
       "@common/*": ["./common/*"],
-      "@authenticated/*": ["./authenticated/*"]
+      "@authenticated/*": ["./authenticated/*"],
+      "@core/*": ["./core"],
+      "@address": ["./domain-modules/address"],
+      "@member": ["./domain-modules/member"],
+      "@member-plan": ["./domain-modules/member-plan"],
+      "@member-subscription": ["./domain-modules/member-subscription"]
     },
     "incremental": true,
     "skipLibCheck": true,
