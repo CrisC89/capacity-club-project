@@ -22,7 +22,7 @@ export class Member extends BaseEntity {
   lastname: string;
   @Column({ nullable: true })
   birthdate: Date;
-  @Column({ length: 10, nullable: true, default: Gender.OTHER })
+  @Column('varchar', { nullable: true, default: Gender.OTHER })
   gender: Gender;
   @Column({ length: 50, nullable: true })
   mail: string;

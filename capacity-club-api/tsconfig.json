@@ -17,7 +17,8 @@
       "@address": ["./domain-modules/address"],
       "@member": ["./domain-modules/member"],
       "@member-plan": ["./domain-modules/member-plan"],
-      "@member-subscription": ["./domain-modules/member-subscription"]
+      "@member-subscription": ["./domain-modules/member-subscription"],
+      "@domain-modules-shared": ["./domain-modules/shared"]
     },
     "incremental": true,
     "skipLibCheck": true,

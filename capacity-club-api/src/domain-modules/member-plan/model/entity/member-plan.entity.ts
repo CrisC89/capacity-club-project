@@ -10,7 +10,7 @@ import {
 export class MemberPlan extends BaseEntity {
   @PrimaryColumn('varchar', { length: 26, default: () => `'${ulid()}'` })
   member_plan_id: string;
-  @Column({ length: 10, nullable: false, default: MemberPlanType.SUBSCRIPTION })
+  @Column({ nullable: false, default: MemberPlanType.SUBSCRIPTION })
   type: MemberPlanType;
   @Column({ length: 80, nullable: false })
   title: string;
@@ -22,12 +22,12 @@ export class MemberPlan extends BaseEntity {
   price: number;
   @Column({ nullable: false })
   nb_month: number;
-  @Column({ length: 50, default: MemberPlanPayment.MENSUAL })
+  @Column({ default: MemberPlanPayment.MENSUAL })
   payment: MemberPlanPayment;
   @Column({ default: true })
   cumulative: boolean;
   @Column({ default: 7 })
   nb_training: number;
-  @Column({ length: 15, default: MemberPlanFreqTraining.PER_WEEK })
+  @Column({ default: MemberPlanFreqTraining.PER_WEEK })
   freq_training: MemberPlanFreqTraining;
 }

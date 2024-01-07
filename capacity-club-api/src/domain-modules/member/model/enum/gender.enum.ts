@@ -1,3 +1,3 @@
 export enum Gender {
-  OTHER,
+  OTHER = 'OTHER',
 }
