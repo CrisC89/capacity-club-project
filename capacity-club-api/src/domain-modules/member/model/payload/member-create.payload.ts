@@ -8,10 +8,11 @@ import {
   IsArray,
   IsBoolean,
 } from 'class-validator';
-import { Address } from 'cluster';
+
 import { MemberSubscription } from 'domain-modules/member-subscription/model';
 import { Gender } from '../enum';
 import { ApiProperty } from '@nestjs/swagger';
+import { Address } from 'domain-modules/address/model';
 
 export class MemberCreatePayload {
   @ApiProperty()
@@ -34,7 +35,7 @@ export class MemberCreatePayload {
   @ApiProperty()
   @IsEnum(Gender)
   @IsOptional()
-  gender: string;
+  gender: Gender;
 
   @ApiProperty()
   @IsEmail()

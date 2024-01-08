@@ -8,9 +8,11 @@ import {
   OneToMany,
   OneToOne,
   JoinColumn,
+  BeforeInsert,
 } from 'typeorm';
 import { ulid } from 'ulid';
 import { Gender } from '../enum';
+import { isNil } from 'lodash';
 
 @Entity()
 export class Member extends BaseEntity {
@@ -42,4 +44,12 @@ export class Member extends BaseEntity {
   address: Address;
   @Column({ default: false })
   active: boolean;
+
+  @BeforeInsert()
+  setCodeActivation() {
+    console.log('im here', this.code_activation);
+    this.code_activation = isNil(this.code_activation)
+      ? ulid().substring(0, 10)
+      : this.code_activation;
+  }
 }

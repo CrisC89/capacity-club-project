@@ -7,11 +7,12 @@ export class SignupPayload {
   @IsEmail(undefined, { message: ApiCodeResponse.SIGNUP_PAYLOAD_MAIL_INVALID })
   mail: string;
 
-  /*
-    @ApiProperty()
-    @IsNotEmpty({message: ApiCodeResponse.SIGNUP_PAYLOAD_USERNAME_IS_MISSING})
-    @Length(1, 10, {message: ApiCodeResponse.SIGNUP_PAYLOAD_USERNAME_LENGTH_ERROR})
-    username: string */
+  @ApiProperty()
+  @IsNotEmpty({ message: ApiCodeResponse.SIGNUP_PAYLOAD_USERNAME_IS_MISSING })
+  @Length(1, 10, {
+    message: ApiCodeResponse.SIGNUP_PAYLOAD_USERNAME_LENGTH_ERROR,
+  })
+  username: string;
 
   @ApiProperty()
   @IsNotEmpty({ message: ApiCodeResponse.SIGNUP_PAYLOAD_PASSWORD_IS_MISSING })

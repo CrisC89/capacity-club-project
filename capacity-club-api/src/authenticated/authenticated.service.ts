@@ -109,6 +109,7 @@ export class AuthenticatedService {
       const response = await this.repository.save(
         Builder<Credential>()
           .credential_id(ulid())
+          .username(payload.username)
           .password(encryptedPassword)
           .facebookHash(payload.facebookHash)
           .googleHash(payload.googleHash)
