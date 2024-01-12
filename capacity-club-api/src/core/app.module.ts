@@ -8,6 +8,12 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthenticatedModule } from '@authenticated/authenticated.module';
 import { MemberModule } from 'domain-modules/member/member.module';
 import { MemberPlanModule } from 'domain-modules/member-plan/member-plan.module';
+import { WorkoutModule } from 'domain-modules/workout/workout.module';
+import { ExerciseDataModule } from 'domain-modules/exercise-data/exercise-data.module';
+import { ExerciseTrainingModule } from 'domain-modules/exercise-training/exercise-training.module';
+import { TrainingCircuitModule } from 'domain-modules/training-circuit/training-circuit.module';
+import { MemberSubscriptionModule } from 'domain-modules/member-subscription/member-subscription.module';
+import { CollectiveTrainingModule } from 'domain-modules/collective-training/collective-training.module';
 
 @Module({
   imports: [
@@ -15,6 +21,12 @@ import { MemberPlanModule } from 'domain-modules/member-plan/member-plan.module'
     AuthenticatedModule,
     MemberModule,
     MemberPlanModule,
+    MemberSubscriptionModule,
+    ExerciseDataModule,
+    ExerciseTrainingModule,
+    TrainingCircuitModule,
+    WorkoutModule,
+    CollectiveTrainingModule,
   ],
   controllers: [AppController],
   providers: [

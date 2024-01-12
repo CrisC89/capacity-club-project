@@ -9,11 +9,10 @@ import {
   OneToOne,
   Column,
 } from 'typeorm';
-import { ulid } from 'ulid';
 
 @Entity()
 export class MemberSubscription {
-  @PrimaryColumn('varchar', { length: 26, default: () => `'${ulid()}'` })
+  @PrimaryColumn('varchar', { length: 26 })
   member_subscription_id: string;
   @CreateDateColumn()
   start_date: Date;

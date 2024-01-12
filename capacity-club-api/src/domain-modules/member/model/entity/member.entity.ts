@@ -2,7 +2,6 @@ import { Address } from 'domain-modules/address/model';
 import { MemberSubscription } from 'domain-modules/member-subscription/model';
 import {
   Entity,
-  BaseEntity,
   PrimaryColumn,
   Column,
   OneToMany,
@@ -13,6 +12,7 @@ import {
 import { ulid } from 'ulid';
 import { Gender } from '../enum';
 import { isNil } from 'lodash';
+import { BaseEntity } from '@common/model';
 
 @Entity()
 export class Member extends BaseEntity {
