@@ -1,4 +1,5 @@
 import 'package:capacity_club_mobile_app/core/router/go_router_observer.dart';
+import 'package:capacity_club_mobile_app/features/dashboard/dashboard_container.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,7 +8,7 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
 
 final routes = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/home/start',
+  initialLocation: '/dashboard',
   observers: [GoRouterObserver()],
   routes: [
     GoRoute(
@@ -37,29 +38,9 @@ final routes = GoRouter(
       },
     ),
     GoRoute(
-      path: '/home/start',
+      path: '/dashboard',
       builder: (context, state) {
-        return Container(
-          color: Colors.blueGrey,
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () => context.push('/home/settings'),
-                child: const Text('Go to settings'),
-              ),
-              TextButton(
-                onPressed: () {
-                  if (context.canPop()) {
-                    context.pop();
-                  } else {
-                    context.push('/home/settings');
-                  }
-                },
-                child: const Text('Go back'),
-              ),
-            ],
-          ),
-        );
+        return const DashboardContainer();
       },
     )
   ],
