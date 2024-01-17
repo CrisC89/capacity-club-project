@@ -11,9 +11,9 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class MemberSubscription {
+export class MemberPlanSubscription {
   @PrimaryColumn('varchar', { length: 26 })
-  member_subscription_id: string;
+  member_plan_subscription_id: string;
   @CreateDateColumn()
   start_date: Date;
   @ManyToOne(() => Member, { eager: false })

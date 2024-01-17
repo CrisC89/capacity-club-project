@@ -14,16 +14,22 @@
       "@common/*": ["./common/*"],
       "@authenticated/*": ["./authenticated/*"],
       "@core/*": ["./core"],
+      "@domain-modules-shared": ["./domain-modules/shared"],
       "@address": ["./domain-modules/address"],
       "@collective-training": ["./domain-modules/colective-training"],
       "@exercise-training": ["./domain-modules/exercise-training"],
       "@exercise-data": ["./domain-modules/exercise-data"],
       "@member": ["./domain-modules/member"],
       "@member-plan": ["./domain-modules/member-plan"],
-      "@member-subscription": ["./domain-modules/member-subscription"],
+      "@workout": ["./domain-modules/workout"],
+      "@member-plan-subscription": [
+        "./domain-modules/member-plan-subscription"
+      ],
       "@personnal-training": ["./domain-modules/personnal-training"],
-      "@circuit-training": ["./domain-modules/circuit-training"],
-      "@domain-modules-shared": ["./domain-modules/shared"]
+      "@training-circuit": ["./domain-modules/training-circuit"],
+      "@collective-training-session": [
+        "./domain-modules/colective-training-session"
+      ]
     },
     "incremental": true,
     "skipLibCheck": true,

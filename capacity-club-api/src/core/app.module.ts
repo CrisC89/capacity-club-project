@@ -1,3 +1,4 @@
+import { CollectiveTrainingSessionModule } from './../domain-modules/collective-training-session/collective-training-session.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -12,21 +13,24 @@ import { WorkoutModule } from 'domain-modules/workout/workout.module';
 import { ExerciseDataModule } from 'domain-modules/exercise-data/exercise-data.module';
 import { ExerciseTrainingModule } from 'domain-modules/exercise-training/exercise-training.module';
 import { TrainingCircuitModule } from 'domain-modules/training-circuit/training-circuit.module';
-import { MemberSubscriptionModule } from 'domain-modules/member-subscription/member-subscription.module';
 import { CollectiveTrainingModule } from 'domain-modules/collective-training/collective-training.module';
+import { MemberPlanSubscriptionModule } from 'domain-modules/member-plan-subscription/member-plan-subscription.module';
+import { AddressModule } from 'domain-modules/address/address.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(configManager.getTypeOrmConfig()),
     AuthenticatedModule,
     MemberModule,
+    AddressModule,
     MemberPlanModule,
-    MemberSubscriptionModule,
+    MemberPlanSubscriptionModule,
     ExerciseDataModule,
     ExerciseTrainingModule,
     TrainingCircuitModule,
     WorkoutModule,
     CollectiveTrainingModule,
+    CollectiveTrainingSessionModule,
   ],
   controllers: [AppController],
   providers: [

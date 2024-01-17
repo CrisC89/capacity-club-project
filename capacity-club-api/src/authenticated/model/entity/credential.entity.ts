@@ -10,9 +10,6 @@ export class Credential extends BaseEntity {
   @Column({ nullable: false, unique: true })
   mail: string;
 
-  @Column({ nullable: false, unique: true })
-  username: string;
-
   @Exclude({ toPlainOnly: true })
   @Column({ nullable: true })
   password: string;

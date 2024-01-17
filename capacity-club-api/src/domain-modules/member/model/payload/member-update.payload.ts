@@ -10,10 +10,10 @@ import {
   IsBoolean,
 } from 'class-validator';
 
-import { MemberSubscription } from 'domain-modules/member-subscription/model';
 import { Gender } from '../enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { Address } from 'domain-modules/address/model';
+import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
 
 export class MemberUpdatePayload {
   @ApiProperty()
@@ -67,7 +67,7 @@ export class MemberUpdatePayload {
   @ApiProperty()
   @IsOptional()
   @IsArray()
-  subscriptions: MemberSubscription[];
+  subscriptions: MemberPlanSubscription[];
 
   @ApiProperty()
   @IsOptional()

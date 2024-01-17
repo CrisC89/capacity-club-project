@@ -40,10 +40,8 @@ export class CollectiveTrainingService
       return await this.repository.save(
         Builder<CollectiveTraining>()
           .collective_training_id(ulid())
-          .title(payload.title)
-          .training_date(payload.training_date)
-          .start_hours(payload.start_hours)
-          .end_hours(payload.end_hours)
+          .member(payload.member)
+          .collective_training_session(payload.collective_training_session)
           .workout(payload.workout)
           .build(),
       );
@@ -90,10 +88,8 @@ export class CollectiveTrainingService
   ): Promise<CollectiveTraining> {
     try {
       const detail = await this.detail(payload.collective_training_id);
-      detail.title = payload.title;
-      detail.training_date = payload.training_date;
-      detail.start_hours = payload.start_hours;
-      detail.end_hours = payload.end_hours;
+      detail.member = payload.member;
+      detail.collective_training_session = payload.collective_training_session;
       detail.workout = payload.workout;
       return await this.repository.save(detail);
     } catch (e) {

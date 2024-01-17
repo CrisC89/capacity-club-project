@@ -1,5 +1,4 @@
 import { Address } from 'domain-modules/address/model';
-import { MemberSubscription } from 'domain-modules/member-subscription/model';
 import {
   Entity,
   PrimaryColumn,
@@ -13,6 +12,7 @@ import { ulid } from 'ulid';
 import { Gender } from '../enum';
 import { isNil } from 'lodash';
 import { BaseEntity } from '@common/model';
+import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
 
 @Entity()
 export class Member extends BaseEntity {
@@ -34,11 +34,11 @@ export class Member extends BaseEntity {
   iban: string;
   @Column({ length: 10, nullable: true })
   code_activation: string;
-  @OneToMany(() => MemberSubscription, (ms) => ms.member, {
+  @OneToMany(() => MemberPlanSubscription, (ms) => ms.member, {
     cascade: true,
     eager: true,
   })
-  subscriptions: MemberSubscription[];
+  subscriptions: MemberPlanSubscription[];
   @OneToOne(() => Address, { cascade: true, eager: true })
   @JoinColumn({ referencedColumnName: 'address_id', name: 'address_id_fk' })
   address: Address;

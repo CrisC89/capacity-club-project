@@ -79,10 +79,11 @@ export enum ApiCodeResponse {
   MEMBER_PLAN_FREQ_TRAINING_INVALID = 'api.error.member-plan.freq-training.invalid',
   MEMBER_PLAN_NB_TRAINING_INVALID = 'api.error.member-plan.nb-training.invalid',
   MEMBER_PLAN_ID_MANDATORY = 'api.error.member-plan.id.mandatory',
-  MEMBER_SUBSCRIPTION_NOT_FOUND = 'api.error.member-subscription.not-found',
-  MEMBER_SUBSCRIPTION_DELETE_ERROR = 'api.error.member-subscription.error',
-  MEMBER_SUBSCRIPTION_LIST_ERROR = 'api.error.member-subscription-list.error',
-  MEMBER_SUBSCRIPTION_CREATE_ERROR = 'api.error.member-plan-create-error',
+
+  MEMBER_PLAN_SUBSCRIPTION_NOT_FOUND = 'api.error.member-plan-subscription-not-found',
+  MEMBER_PLAN_SUBSCRIPTION_DELETE_ERROR = 'api.error.member-plan-subscription-delete',
+  MEMBER_PLAN_SUBSCRIPTION_LIST_ERROR = 'api.error.member-plan-subscription-list',
+  MEMBER_PLAN_SUBSCRIPTION_CREATE_ERROR = 'api.error.member-plan-subscription-create-error',
 
   ADDRESS_NOT_FOUND = 'api.error.address-not-found',
   ADDRESS_DELETE_SUCCESS = 'api.success.address-delete',
@@ -133,6 +134,16 @@ export enum ApiCodeResponse {
   WORKOUT_LIST_SUCCESS = 'api.success.workout-list',
   WORKOUT_CREATE_ERROR = 'api.error.workout-create',
   WORKOUT_CREATE_SUCCESS = 'api.success.workout-create',
+
+  COLLECTIVE_TRAINING_SESSION_NOT_FOUND = 'api.error.collective-training-session-not-found',
+  COLLECTIVE_TRAINING_SESSION_DELETE_SUCCESS = 'api.success.collective-training-session-delete',
+  COLLECTIVE_TRAINING_SESSION_UPDATE_ERROR = 'api.error.collective-training-session-update',
+  COLLECTIVE_TRAINING_SESSION_UPDATE_SUCCESS = 'api.success.collective-training-session-update',
+  COLLECTIVE_TRAINING_SESSION_DELETE_ERROR = 'api.error.collective-training-session-delete',
+  COLLECTIVE_TRAINING_SESSION_LIST_ERROR = 'api.error.collective-training-session-list',
+  COLLECTIVE_TRAINING_SESSION_LIST_SUCCESS = 'api.success.collective-training-session-list',
+  COLLECTIVE_TRAINING_SESSION_CREATE_ERROR = 'api.error.collective-training-session-create',
+  COLLECTIVE_TRAINING_SESSION_CREATE_SUCCESS = 'api.success.collective-training-session-create',
 
   COLLECTIVE_TRAINING_NOT_FOUND = 'api.error.collective-training-not-found',
   COLLECTIVE_TRAINING_DELETE_SUCCESS = 'api.success.collective-training-delete',

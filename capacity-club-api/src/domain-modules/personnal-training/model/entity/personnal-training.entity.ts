@@ -1,23 +1,33 @@
 import { BaseEntity } from '@common/model';
+import { Member } from 'domain-modules/member/model';
 import { Workout } from 'domain-modules/workout/model';
-import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
+} from 'typeorm';
 
 @Entity()
 export class PersonnalTraining extends BaseEntity {
   @PrimaryColumn('varchar', { length: 26 })
-  collective_training_id: string;
+  personnal_training_id: string;
   @Column({ nullable: false })
   title: string;
   @Column({ nullable: false })
-  training_date: Date;
+  training_start_date: Date;
   @Column({ nullable: false })
-  start_hours: string;
-  @Column({ nullable: false })
-  end_hours: string;
-  @Column({ nullable: false })
-  nb_place: number;
+  training_end_date: Date;
 
-  @OneToOne(() => Workout)
-  @JoinColumn({ name: 'workout_id', referencedColumnName: 'workout_id' })
-  workout: Workout;
+  @OneToOne(() => Member)
+  @JoinColumn({ name: 'member_id', referencedColumnName: 'member_id' })
+  member: Member;
+
+  @OneToMany(() => Workout, (workout) => workout.personnal_training, {
+    cascade: true,
+    eager: true,
+  })
+  workouts: Workout[];
 }

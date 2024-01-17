@@ -1,9 +1,11 @@
 import { CollectiveTraining } from 'domain-modules/collective-training/model/entity/collective-training.entity';
+import { PersonnalTraining } from 'domain-modules/personnal-training/model/entity';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 import {
   BaseEntity,
   Column,
   Entity,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryColumn,
@@ -25,6 +27,8 @@ export class Workout extends BaseEntity {
   )
   training_circuits: TrainingCircuit[];
 
-  @OneToOne(() => CollectiveTraining, { nullable: true, eager: false })
+  @ManyToOne(() => CollectiveTraining, { nullable: true, eager: false })
   collective_training: CollectiveTraining;
+  @ManyToOne(() => PersonnalTraining, { nullable: true, eager: false })
+  personnal_training: PersonnalTraining;
 }
