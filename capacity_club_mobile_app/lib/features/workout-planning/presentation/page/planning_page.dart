@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
+class WorkoutPlanningPage extends StatelessWidget {
+  const WorkoutPlanningPage({super.key});
 
-  static const pageConfig =
-      PageConfig(icon: Icons.settings, name: 'setting', child: SettingPage());
+  static const pageConfig = PageConfig(
+      icon: Icons.lock_clock,
+      name: 'workout-planning',
+      child: WorkoutPlanningPage());
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.purpleAccent,
+      color: Colors.blueAccent,
     );
   }
 }

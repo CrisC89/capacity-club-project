@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class PlanningPage extends StatelessWidget {
-  const PlanningPage({super.key});
+class UserPage extends StatelessWidget {
+  const UserPage({super.key});
 
-  static const pageConfig = PageConfig(
-      icon: Icons.lock_clock, name: 'planning', child: PlanningPage());
+  static const pageConfig =
+      PageConfig(icon: FontAwesomeIcons.user, name: 'user', child: UserPage());
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.purpleAccent,
+      color: Colors.orangeAccent,
     );
   }
 }

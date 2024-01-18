@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/core/router/routes.dart';
+import 'package:capacity_club_mobile_app/config/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
