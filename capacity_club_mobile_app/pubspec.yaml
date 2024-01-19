@@ -20,6 +20,8 @@ dependencies:
   either_dart: ^1.0.0
   equatable: ^2.0.5
   get_it: ^7.6.7
+  bloc: ^8.1.2
+  meta: ^1.10.0
 dependency_overrides:
   font_awesome_flutter:
     path: assets/fonts/font_awesome

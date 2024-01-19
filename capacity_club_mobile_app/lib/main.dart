@@ -1,9 +1,15 @@
 import 'package:capacity_club_mobile_app/config/routes/routes.dart';
+import 'package:capacity_club_mobile_app/features/user/data/repository/member-repository-mock.dart';
+import 'package:capacity_club_mobile_app/features/user/domain/repository/member.repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  runApp(const BasicApp());
+  runApp(RepositoryProvider<MemberRepository>(
+    create: (context) => MemberRepositoryMock(),
+    child: const BasicApp(),
+  ));
 }
 
 class BasicApp extends StatelessWidget {

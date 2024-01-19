@@ -3,7 +3,6 @@ import 'package:capacity_club_mobile_app/core/model/failure.dart';
 import 'package:capacity_club_mobile_app/features/user/domain/entity/member.entity.dart';
 import 'package:capacity_club_mobile_app/features/user/domain/repository/member.repository.dart';
 import 'package:either_dart/either.dart';
-import 'package:either_dart/src/either.dart';
 
 class Me implements UseCase<Member, NoParams> {
   final MemberRepository repository;

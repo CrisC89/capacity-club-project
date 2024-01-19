@@ -1,7 +1,7 @@
 import 'package:capacity_club_mobile_app/features/core/model/page_config.dart';
 import 'package:capacity_club_mobile_app/features/home/presentation/page/home_page.dart';
 import 'package:capacity_club_mobile_app/features/setting/presentation/page/setting_page.dart';
-import 'package:capacity_club_mobile_app/features/user/presentation/page/user_page.dart';
+import 'package:capacity_club_mobile_app/features/user/presentation/page/user/user_page.dart';
 import 'package:capacity_club_mobile_app/features/workout-planning/presentation/page/planning_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
