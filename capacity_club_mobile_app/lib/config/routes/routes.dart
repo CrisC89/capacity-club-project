@@ -1,6 +1,6 @@
 import 'package:capacity_club_mobile_app/config/routes/go_router_observer.dart';
 import 'package:capacity_club_mobile_app/features/dashboard/dashboard_container.dart';
-import 'package:capacity_club_mobile_app/features/home/presentation/page/home_page.dart';
+import 'package:capacity_club_mobile_app/features/home/presentation/page/home/home_page.dart';
 import 'package:capacity_club_mobile_app/features/setting/presentation/page/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

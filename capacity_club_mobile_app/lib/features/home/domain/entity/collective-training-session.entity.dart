@@ -2,9 +2,10 @@ class CollectiveTrainingSession {
   final String collective_training_session_id;
   final String title;
   final DateTime training_date;
-  final DateTime start_hours;
-  final DateTime end_hours;
+  final String start_hours;
+  final String end_hours;
   final int nb_place;
+  final int nb_subscription;
   //workout: Workout;
 
   const CollectiveTrainingSession(
@@ -13,15 +14,17 @@ class CollectiveTrainingSession {
       required this.training_date,
       required this.start_hours,
       required this.end_hours,
-      required this.nb_place});
+      required this.nb_place,
+      required this.nb_subscription});
 
   factory CollectiveTrainingSession.empty() {
     return CollectiveTrainingSession(
         collective_training_session_id: '',
         title: '',
         training_date: DateTime.now(),
-        start_hours: DateTime.now(),
-        end_hours: DateTime.now(),
-        nb_place: 0);
+        start_hours: '',
+        end_hours: '',
+        nb_place: 0,
+        nb_subscription: 0);
   }
 }
