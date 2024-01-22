@@ -1,36 +1,38 @@
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/collective_training_session_page.dart';
 import 'package:capacity_club_mobile_app/features/core/model/page_config.dart';
-import 'package:capacity_club_mobile_app/features/home/presentation/page/home/home_page.dart';
 import 'package:capacity_club_mobile_app/features/setting/presentation/page/setting_page.dart';
 import 'package:capacity_club_mobile_app/features/user/presentation/page/user/user_page.dart';
-import 'package:capacity_club_mobile_app/features/workout-planning/presentation/page/planning_page.dart';
+import 'package:capacity_club_mobile_app/features/personnal-workout-planning/presentation/page/personnal_workout_planning_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
 
-class DashboardContainer extends StatefulWidget {
-  DashboardContainer({
+class DashboardNavigation extends StatefulWidget {
+  DashboardNavigation({
     super.key,
     required String tab,
   }) : index = tabs.indexWhere((element) => element.name == tab);
 
   static const pageConfig = PageConfig(
-      icon: Icons.hourglass_empty, name: 'dashboard', child: HomePage());
+      icon: Icons.hourglass_empty,
+      name: 'dashboard',
+      child: CollectiveTrainingSessionPage());
   final int index;
 
   // list of all tabs that should be displayed inside our navigation bar
   static const tabs = [
-    HomePage.pageConfig,
-    WorkoutPlanningPage.pageConfig,
+    CollectiveTrainingSessionPage.pageConfig,
+    PersonnalWorkoutPlanningPage.pageConfig,
     UserPage.pageConfig,
     SettingPage.pageConfig
   ];
 
   @override
-  State<DashboardContainer> createState() => _DashboardContainerState();
+  State<DashboardNavigation> createState() => _DashboardNavigationState();
 }
 
-class _DashboardContainerState extends State<DashboardContainer> {
-  final destinations = DashboardContainer.tabs
+class _DashboardNavigationState extends State<DashboardNavigation> {
+  final destinations = DashboardNavigation.tabs
       .map(
         (page) =>
             NavigationDestination(icon: Icon(page.icon), label: page.name),
@@ -84,7 +86,7 @@ class _DashboardContainerState extends State<DashboardContainer> {
             config: <Breakpoint, SlotLayoutConfig>{
               Breakpoints.smallAndUp: SlotLayout.from(
                 key: const Key('primary-body-small'),
-                builder: (_) => DashboardContainer.tabs[widget.index].child,
+                builder: (_) => DashboardNavigation.tabs[widget.index].child,
               ),
             },
           ),
@@ -103,9 +105,9 @@ class _DashboardContainerState extends State<DashboardContainer> {
 
   void _tapOnNavigationDestination(BuildContext context, int index) =>
       context.goNamed(
-        DashboardContainer.pageConfig.name,
+        DashboardNavigation.pageConfig.name,
         pathParameters: {
-          'tab': DashboardContainer.tabs[index].name,
+          'tab': DashboardNavigation.tabs[index].name,
         },
       );
 }

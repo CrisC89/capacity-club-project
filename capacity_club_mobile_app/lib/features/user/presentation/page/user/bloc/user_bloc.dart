@@ -9,15 +9,14 @@ part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final Me repository;
+  final GetUser getUser;
 
-  UserBloc({required this.repository, UserState? initialState})
+  UserBloc({required this.getUser, UserState? initialState})
       : super(initialState ?? UserStateLoading()) {
     on<UserRequestedEvent>((event, emit) async {
-      print('enter in the event');
       emit(UserStateLoading());
       try {
-        final user = await repository.call(NoParams());
+        final user = await getUser.call(NoParams());
 
         if (user.isLeft) {
           emit(UserStateError(message: 'Not found'));

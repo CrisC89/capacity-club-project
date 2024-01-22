@@ -1,8 +1,8 @@
 import 'package:capacity_club_mobile_app/core/model/failure.dart';
-import 'package:capacity_club_mobile_app/features/core/model/unique_id.dart';
-import 'package:capacity_club_mobile_app/features/home/domain/entity/collective-training-session.entity.dart';
-import 'package:capacity_club_mobile_app/features/home/domain/repository/collective-training-session.repository.dart';
-import 'package:either_dart/src/either.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/domain/entity/collective-training-session.entity.dart';
+import 'package:either_dart/either.dart';
+
+import '../../domain/repository/collective-training-session.repository.dart';
 
 class CollectiveTrainingSessionRepositoryMock
     implements CollectiveTrainingSessionRepository {
@@ -92,7 +92,7 @@ class CollectiveTrainingSessionRepositoryMock
 
   @override
   Future<Either<Failure, List<CollectiveTrainingSession>>>
-      readAllCollectiveTraining() {
+      readAllCollectiveTrainingSession() {
     try {
       return Future.delayed(
         const Duration(milliseconds: 200),

@@ -4,10 +4,10 @@ import 'package:capacity_club_mobile_app/features/user/domain/entity/member.enti
 import 'package:capacity_club_mobile_app/features/user/domain/repository/member.repository.dart';
 import 'package:either_dart/either.dart';
 
-class Me implements UseCase<Member, NoParams> {
+class GetUser implements UseCase<Member, NoParams> {
   final MemberRepository repository;
 
-  const Me({required this.repository});
+  const GetUser({required this.repository});
 
   @override
   Future<Either<Failure, Member>> call(NoParams params) async {

@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/features/home/domain/entity/collective-training-session.entity.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/domain/entity/collective-training-session.entity.dart';
 import 'package:flutter/material.dart';
 
 class CollectiveTrainingSessionLoaded extends StatelessWidget {

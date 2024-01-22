@@ -1,6 +1,6 @@
 import 'package:capacity_club_mobile_app/config/routes/go_router_observer.dart';
-import 'package:capacity_club_mobile_app/features/dashboard/dashboard_container.dart';
-import 'package:capacity_club_mobile_app/features/home/presentation/page/home/home_page.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/collective_training_session_page.dart';
+import 'package:capacity_club_mobile_app/features/dashboard/dashboard_navigation.dart';
 import 'package:capacity_club_mobile_app/features/setting/presentation/page/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +14,8 @@ const String _basePath = '/dashboard';
 
 final routes = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '$_basePath/${HomePage.pageConfig.name}',
+  initialLocation:
+      '$_basePath/${CollectiveTrainingSessionPage.pageConfig.name}',
   observers: [GoRouterObserver()],
   routes: [
     GoRoute(
@@ -29,9 +30,9 @@ final routes = GoRouter(
       builder: (context, state, child) => child,
       routes: [
         GoRoute(
-          name: DashboardContainer.pageConfig.name,
+          name: DashboardNavigation.pageConfig.name,
           path: '$_basePath/:tab',
-          builder: (context, state) => DashboardContainer(
+          builder: (context, state) => DashboardNavigation(
             key: state.pageKey,
             tab: state.pathParameters['tab'] ?? 'home',
           ),

@@ -15,8 +15,8 @@ class UserPageProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          UserBloc(repository: Me(repository: RepositoryProvider.of(context))),
+      create: (context) => UserBloc(
+          getUser: GetUser(repository: RepositoryProvider.of(context))),
       child: const UserPage(),
     );
   }
