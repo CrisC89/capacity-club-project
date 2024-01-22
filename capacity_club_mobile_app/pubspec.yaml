@@ -31,3 +31,14 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 flutter:
   uses-material-design: true
+  assets:
+    - assets/img/
+  fonts:
+    - family: Titillium
+      fonts:
+        - asset: assets/fonts/TitilliumWeb-Light.ttf
+        - asset: assets/fonts/TitilliumWeb-Regular.ttf
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Light.ttf

@@ -15,7 +15,7 @@ class CollectiveTrainingSessionBloc extends Bloc<CollectiveTrainingSessionEvent,
   CollectiveTrainingSessionBloc(
       {required this.readAllCollectiveTrainingSession})
       : super(CollectiveTrainingSessionStateLoading()) {
-    on<CollectiveTrainingSessionEvent>((event, emit) async {
+    on<CollectiveTrainingSessionRequestedEvent>((event, emit) async {
       emit(CollectiveTrainingSessionStateLoading());
       try {
         final sessions =

@@ -1,4 +1,5 @@
 import 'package:capacity_club_mobile_app/features/core/model/page_config.dart';
+import 'package:capacity_club_mobile_app/features/user/domain/repository/member.repository.dart';
 import 'package:capacity_club_mobile_app/features/user/domain/usecase/me.dart';
 import 'package:capacity_club_mobile_app/features/user/presentation/page/user/bloc/user_bloc.dart';
 import 'package:capacity_club_mobile_app/features/user/presentation/page/user/view_state/user-error.view.dart';
@@ -16,7 +17,8 @@ class UserPageProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => UserBloc(
-          getUser: GetUser(repository: RepositoryProvider.of(context))),
+          getUser: GetUser(
+              repository: RepositoryProvider.of<MemberRepository>(context))),
       child: const UserPage(),
     );
   }

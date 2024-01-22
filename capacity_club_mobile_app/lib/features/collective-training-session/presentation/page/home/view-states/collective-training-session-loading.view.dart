@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CollectiveTrainingSessionLoading extends StatelessWidget {
-  const CollectiveTrainingSessionLoading({super.key});
+class CollectiveTrainingSessionLoadingView extends StatelessWidget {
+  const CollectiveTrainingSessionLoadingView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CollectiveTrainingSessionError extends StatelessWidget {
-  const CollectiveTrainingSessionError({super.key});
+class CollectiveTrainingSessionErrorView extends StatelessWidget {
+  const CollectiveTrainingSessionErrorView({super.key});
 
   @override
   Widget build(BuildContext context) {
