@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/features/core/module/exercise-trainin-data/model/exercise-data.entity.dart';
+import 'package:capacity_club_mobile_app/features/core/module/exercise-trainin-data/domain/entity/exercise-data.entity.dart';
 
 class ExerciseTraining {
   final String exercise_training_id;

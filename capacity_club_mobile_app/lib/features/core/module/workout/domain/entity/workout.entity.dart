@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/features/core/module/training-circuit/model/training-circit.entity.dart';
+import 'package:capacity_club_mobile_app/features/core/module/training-circuit/domain/entity/training-circuit.entity.dart';
 
 class Workout {
   final String workout_id;

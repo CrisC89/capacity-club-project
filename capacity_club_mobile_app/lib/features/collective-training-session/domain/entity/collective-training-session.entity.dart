@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/features/core/module/workout/model/workout.entity.dart';
+import 'package:capacity_club_mobile_app/features/core/module/workout/domain/entity/workout.entity.dart';
 
 class CollectiveTrainingSession {
   final String collective_training_session_id;
@@ -8,7 +8,7 @@ class CollectiveTrainingSession {
   final String end_hours;
   final int nb_place;
   final int nb_subscription;
-  final Workout workout;
+  final String fk_workout_id;
 
   const CollectiveTrainingSession(
       {required this.collective_training_session_id,
@@ -18,7 +18,7 @@ class CollectiveTrainingSession {
       required this.end_hours,
       required this.nb_place,
       required this.nb_subscription,
-      required this.workout});
+      required this.fk_workout_id});
 
   factory CollectiveTrainingSession.empty() {
     return CollectiveTrainingSession(
@@ -29,6 +29,6 @@ class CollectiveTrainingSession {
         end_hours: '',
         nb_place: 0,
         nb_subscription: 0,
-        workout: Workout.empty());
+        fk_workout_id: '');
   }
 }
