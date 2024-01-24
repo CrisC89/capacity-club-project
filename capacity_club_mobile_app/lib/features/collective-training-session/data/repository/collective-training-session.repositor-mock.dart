@@ -10,160 +10,195 @@ class CollectiveTrainingSessionRepositoryMock
   final List<CollectiveTrainingSession> collectiveTrainingList = [
     CollectiveTrainingSession(
         collective_training_session_id: 'id_1',
-        title: 'Session de Formation 1',
-        training_date: DateTime.now(),
+        title: 'D1 Session de Formation 1',
+        training_date: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day),
         start_hours: '9:00',
         end_hours: '10:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_2',
-        title: 'Session de Formation 2',
-        training_date: DateTime.now(),
+        title: 'D1 Session de Formation 2',
+        training_date: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day),
         start_hours: '10:00',
         end_hours: '11:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_3',
-        title: 'Session de Formation 3',
-        training_date: DateTime.now(),
+        title: 'D1 Session de Formation 3',
+        training_date: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day),
         start_hours: '11:00',
         end_hours: '12:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_4',
-        title: 'Session de Formation 4',
-        training_date: DateTime.now(),
+        title: 'D1 Session de Formation 4',
+        training_date: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day),
         start_hours: '12:00',
         end_hours: '13:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_5',
-        title: 'Session de Formation 1',
-        training_date: DateTime.now(),
+        title: 'D1 Session de Formation 1',
+        training_date: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day),
         start_hours: '13:00',
         end_hours: '14:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_1',
-        title: 'Session de Formation 1',
-        training_date: DateTime.now().add(const Duration(days: 1)),
+        title: 'D2 Session de Formation 1',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 1)),
         start_hours: '9:00',
         end_hours: '10:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_2',
-        title: 'Session de Formation 2',
-        training_date: DateTime.now().add(const Duration(days: 1)),
+        title: 'D2 Session de Formation 2',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 1)),
         start_hours: '10:00',
         end_hours: '11:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_3',
-        title: 'Session de Formation 3',
-        training_date: DateTime.now().add(const Duration(days: 1)),
+        title: 'D2 Session de Formation 3',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 1)),
         start_hours: '11:00',
         end_hours: '12:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_4',
-        title: 'Session de Formation 4',
-        training_date: DateTime.now().add(const Duration(days: 1)),
+        title: 'D2 Session de Formation 4',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 1)),
         start_hours: '12:00',
         end_hours: '13:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_5',
-        title: 'Session de Formation 5',
-        training_date: DateTime.now().add(const Duration(days: 1)),
+        title: 'D2 Session de Formation 5',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 1)),
         start_hours: '13:00',
         end_hours: '14:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_1',
-        title: 'Session de Formation 1',
-        training_date: DateTime.now().add(const Duration(days: 2)),
+        title: 'D3 Session de Formation 1',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 2)),
         start_hours: '9:00',
         end_hours: '10:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_2',
-        title: 'Session de Formation 2',
-        training_date: DateTime.now().add(const Duration(days: 2)),
+        title: 'D3 Session de Formation 2',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 2)),
         start_hours: '10:00',
         end_hours: '11:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_3',
-        title: 'Session de Formation 3',
-        training_date: DateTime.now().add(const Duration(days: 2)),
+        title: 'D3 Session de Formation 3',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 2)),
         start_hours: '11:00',
         end_hours: '12:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_4',
-        title: 'Session de Formation 4',
-        training_date: DateTime.now().add(const Duration(days: 2)),
+        title: 'D3 Session de Formation 4',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 2)),
         start_hours: '12:00',
         end_hours: '13:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_5',
-        title: 'Session de Formation 5',
-        training_date: DateTime.now().add(const Duration(days: 2)),
+        title: 'D3 Session de Formation 5',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 2)),
         start_hours: '13:00',
         end_hours: '14:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_1',
-        title: 'Session de Formation 1',
-        training_date: DateTime.now().add(const Duration(days: 3)),
+        title: 'D4 Session de Formation 1',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 3)),
         start_hours: '9:00',
         end_hours: '10:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_2',
-        title: 'Session de Formation 2',
-        training_date: DateTime.now().add(const Duration(days: 3)),
+        title: 'D4 Session de Formation 2',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 3)),
         start_hours: '10:00',
         end_hours: '11:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_3',
-        title: 'Session de Formation 3',
-        training_date: DateTime.now().add(const Duration(days: 3)),
+        title: 'D4 Session de Formation 3',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 3)),
         start_hours: '11:00',
         end_hours: '12:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_4',
-        title: 'Session de Formation 4',
-        training_date: DateTime.now().add(const Duration(days: 3)),
+        title: 'D4 Session de Formation 4',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 3)),
         start_hours: '12:00',
         end_hours: '13:00',
         nb_place: 20,
         nb_subscription: 0),
     CollectiveTrainingSession(
         collective_training_session_id: 'id_5',
-        title: 'Session de Formation 5',
-        training_date: DateTime.now().add(const Duration(days: 3)),
+        title: 'D4 Session de Formation 5',
+        training_date: DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .add(const Duration(days: 3)),
         start_hours: '13:00',
         end_hours: '14:00',
         nb_place: 20,

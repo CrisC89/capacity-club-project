@@ -1,5 +1,5 @@
 import 'package:capacity_club_mobile_app/features/collective-training-session/domain/entity/collective-training-session.entity.dart';
-import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/widget/collective-training-session-card.widget.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/widget/collective-training-session-card/collective-training-session-card.widget.dart';
 import 'package:flutter/material.dart';
 
 class CollectiveTrainingSessionLoadedView extends StatelessWidget {

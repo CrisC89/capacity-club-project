@@ -1,7 +1,6 @@
 import 'package:capacity_club_mobile_app/config/routes/routes.dart';
 import 'package:capacity_club_mobile_app/features/collective-training-session/data/repository/collective-training-session.repositor-mock.dart';
 import 'package:capacity_club_mobile_app/features/collective-training-session/domain/repository/collective-training-session.repository.dart';
-import 'package:capacity_club_mobile_app/features/core/model/unique_id.dart';
 import 'package:capacity_club_mobile_app/features/user/data/repository/member-repository-mock.dart';
 import 'package:capacity_club_mobile_app/features/user/domain/repository/member.repository.dart';
 import 'package:flutter/material.dart';

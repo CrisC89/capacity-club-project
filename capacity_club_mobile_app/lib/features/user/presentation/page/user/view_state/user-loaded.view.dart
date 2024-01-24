@@ -1,4 +1,5 @@
 import 'package:capacity_club_mobile_app/features/core/weekly-calendar/weekly-calendar-button.widget.dart';
+import 'package:capacity_club_mobile_app/features/core/weekly-calendar/weekly-calendar.widget.dart';
 import 'package:capacity_club_mobile_app/features/user/domain/entity/member.entity.dart';
 import 'package:flutter/material.dart';
 

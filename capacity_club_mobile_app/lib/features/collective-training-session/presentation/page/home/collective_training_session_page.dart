@@ -1,13 +1,13 @@
 import 'package:capacity_club_mobile_app/features/collective-training-session/domain/repository/collective-training-session.repository.dart';
 import 'package:capacity_club_mobile_app/features/collective-training-session/domain/usecase/read-all-collective-training-session.dart';
-import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/bloc/bloc/collective_training_session_bloc.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/bloc/collective_training_session_bloc.dart';
 import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/view-states/collective-training-session-error.view.dart';
 import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/view-states/collective-training-session-loaded.view.dart';
 import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/view-states/collective-training-session-loading.view.dart';
 import 'package:capacity_club_mobile_app/features/core/model/page_config.dart';
+import 'package:capacity_club_mobile_app/features/core/weekly-calendar/weekly-calendar.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CollectiveTrainingSessionPageProvider extends StatelessWidget {
@@ -33,14 +33,24 @@ class CollectiveTrainingSessionPage extends StatelessWidget {
       icon: FontAwesomeIcons.lightHouse,
       name: 'home',
       child: CollectiveTrainingSessionPageProvider());
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       BlocProvider.of<CollectiveTrainingSessionBloc>(context)
-          .add(CollectiveTrainingSessionRequestedEvent());
+          .add(CollectiveTrainingSessionFirstRequestedEvent());
     });
-    return Container(
-      child: BlocBuilder<CollectiveTrainingSessionBloc,
+
+    void onDateChange(DateTime date) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        BlocProvider.of<CollectiveTrainingSessionBloc>(context)
+            .add(CollectiveTrainingSessionChangedDateEvent(date: date));
+      });
+    }
+
+    return Column(children: [
+      WeeklyCalendar(onDateChange: onDateChange),
+      Expanded(child: BlocBuilder<CollectiveTrainingSessionBloc,
           CollectiveTrainingSessionState>(builder: (context, state) {
         if (state is CollectiveTrainingSessionStateLoading) {
           return const CollectiveTrainingSessionLoadingView();
@@ -49,7 +59,7 @@ class CollectiveTrainingSessionPage extends StatelessWidget {
         } else {
           return const CollectiveTrainingSessionErrorView();
         }
-      }),
-    );
+      }))
+    ]);
   }
 }
