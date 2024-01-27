@@ -1,11 +1,11 @@
 import 'package:capacity_club_mobile_app/features/collective-training-session/domain/repository/collective-training-session.repository.dart';
 import 'package:capacity_club_mobile_app/features/collective-training-session/domain/usecase/read-all-collective-training-session.dart';
-import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/bloc/collective_training_session_bloc.dart';
-import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/view-states/collective-training-session-error.view.dart';
-import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/view-states/collective-training-session-loaded.view.dart';
-import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/view-states/collective-training-session-loading.view.dart';
-import 'package:capacity_club_mobile_app/features/core/model/page_config.dart';
-import 'package:capacity_club_mobile_app/features/core/weekly-calendar/weekly-calendar.widget.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/collective-training-session/bloc/collective_training_session_bloc.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/collective-training-session/view-states/collective-training-session-error.view.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/collective-training-session/view-states/collective-training-session-loaded.view.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/collective-training-session/view-states/collective-training-session-loading.view.dart';
+import 'package:capacity_club_mobile_app/features/core/contract/page_config.dart';
+import 'package:capacity_club_mobile_app/features/core/widget/weekly-calendar/weekly-calendar.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

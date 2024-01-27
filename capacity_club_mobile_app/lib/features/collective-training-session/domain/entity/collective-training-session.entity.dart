@@ -8,7 +8,7 @@ class CollectiveTrainingSession {
   final String end_hours;
   final int nb_place;
   final int nb_subscription;
-  final String fk_workout_id;
+  final Workout workout;
 
   const CollectiveTrainingSession(
       {required this.collective_training_session_id,
@@ -18,7 +18,7 @@ class CollectiveTrainingSession {
       required this.end_hours,
       required this.nb_place,
       required this.nb_subscription,
-      required this.fk_workout_id});
+      required this.workout});
 
   factory CollectiveTrainingSession.empty() {
     return CollectiveTrainingSession(
@@ -29,6 +29,6 @@ class CollectiveTrainingSession {
         end_hours: '',
         nb_place: 0,
         nb_subscription: 0,
-        fk_workout_id: '');
+        workout: Workout.empty());
   }
 }

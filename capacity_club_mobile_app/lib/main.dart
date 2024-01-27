@@ -15,13 +15,6 @@ void main() {
         create: (context) => CollectiveTrainingSessionRepositoryMock()),
   ], child: const BasicApp()));
 }
-/*
-void main() {
-  runApp(RepositoryProvider<MemberRepository>(
-    create: (context) => MemberRepositoryMock(),
-    child: const BasicApp(),
-  ));
-*/
 
 class BasicApp extends StatelessWidget {
   const BasicApp({super.key});

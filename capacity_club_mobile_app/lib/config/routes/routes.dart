@@ -1,6 +1,7 @@
 import 'package:capacity_club_mobile_app/config/routes/go_router_observer.dart';
-import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/home/collective_training_session_page.dart';
-import 'package:capacity_club_mobile_app/features/dashboard/dashboard_navigation.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/collective-training-session-detail/collective-training-session-detail.page.dart';
+import 'package:capacity_club_mobile_app/features/collective-training-session/presentation/page/collective-training-session/collective_training_session_page.dart';
+import 'package:capacity_club_mobile_app/features/dashboard-navigation/dashboard_navigation.dart';
 import 'package:capacity_club_mobile_app/features/setting/presentation/page/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -38,6 +39,33 @@ final routes = GoRouter(
           ),
         ),
       ],
+    ),
+    GoRoute(
+      name: CollectiveTrainingSessionDetail.pageConfig.name,
+      path: '$_basePath/home/:collectionId',
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            leading: BackButton(
+              onPressed: () {
+                if (context.canPop()) {
+                  context.pop();
+                } else {
+                  context.goNamed(
+                    DashboardNavigation.pageConfig.name,
+                    pathParameters: {
+                      'tab': CollectiveTrainingSessionPage.pageConfig.name
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+          body: CollectiveTrainingSessionDetailProvider(
+            collective_id: state.pathParameters['collectionId'] ?? '',
+          ),
+        );
+      },
     ),
   ],
 );

@@ -2,9 +2,9 @@ import 'package:capacity_club_mobile_app/features/core/module/workout/domain/ent
 import 'package:flutter/material.dart';
 
 class WorkoutLoadedView extends StatelessWidget {
-  Workout workout;
+  final Workout workout;
 
-  WorkoutLoadedView({super.key, required this.workout});
+  const WorkoutLoadedView({super.key, required this.workout});
 
   @override
   Widget build(BuildContext context) {

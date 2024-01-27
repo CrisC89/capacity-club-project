@@ -12,3 +12,14 @@ class NoParams extends Params {
   @override
   List<Object?> get props => [];
 }
+
+class CollectiveTrainingSessionIdParam extends Params {
+  CollectiveTrainingSessionIdParam({
+    required this.collective_training_session_id,
+  }) : super();
+
+  final String collective_training_session_id;
+
+  @override
+  List<Object> get props => [collective_training_session_id];
+}

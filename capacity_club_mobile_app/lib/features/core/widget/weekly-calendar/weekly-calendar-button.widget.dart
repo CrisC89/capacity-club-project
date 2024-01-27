@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/features/core/weekly-calendar/weekly-calendar.utils.dart';
+import 'package:capacity_club_mobile_app/features/core/widget/weekly-calendar/weekly-calendar.utils.dart';
 import 'package:flutter/material.dart';
 
 class WeeklyCalendarButton extends StatelessWidget {

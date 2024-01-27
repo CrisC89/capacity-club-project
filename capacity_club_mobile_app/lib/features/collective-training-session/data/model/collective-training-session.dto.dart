@@ -1,3 +1,5 @@
+import 'package:capacity_club_mobile_app/features/core/module/workout/domain/entity/workout.entity.dart';
+
 class CollectiveTrainingSessionDto {
   final String collective_training_session_id;
   final String title;
@@ -5,7 +7,7 @@ class CollectiveTrainingSessionDto {
   final DateTime start_hours;
   final DateTime end_hours;
   final int nb_place;
-  final String fk_workout_id;
+  final Workout workout;
 
   const CollectiveTrainingSessionDto(
       {required this.collective_training_session_id,
@@ -14,7 +16,7 @@ class CollectiveTrainingSessionDto {
       required this.start_hours,
       required this.end_hours,
       required this.nb_place,
-      required this.fk_workout_id});
+      required this.workout});
 
   factory CollectiveTrainingSessionDto.fromJson(Map<String, dynamic> json) {
     return CollectiveTrainingSessionDto(
@@ -24,7 +26,7 @@ class CollectiveTrainingSessionDto {
         start_hours: json['start_hours'],
         end_hours: json['end_hours'],
         nb_place: json['nb_place'],
-        fk_workout_id: json['fk_workout_id']);
+        workout: json['workout']);
   }
 
   Map<String, dynamic> toJson() => {
@@ -34,6 +36,6 @@ class CollectiveTrainingSessionDto {
         'start_hours': start_hours,
         'end_hours': end_hours,
         'nb_place': nb_place,
-        'fk_workout_id': fk_workout_id
+        'workout': workout
       };
 }

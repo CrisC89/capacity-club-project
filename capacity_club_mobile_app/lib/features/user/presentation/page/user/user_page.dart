@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/features/core/model/page_config.dart';
+import 'package:capacity_club_mobile_app/features/core/contract/page_config.dart';
 import 'package:capacity_club_mobile_app/features/user/domain/repository/member.repository.dart';
 import 'package:capacity_club_mobile_app/features/user/domain/usecase/me.dart';
 import 'package:capacity_club_mobile_app/features/user/presentation/page/user/bloc/user_bloc.dart';

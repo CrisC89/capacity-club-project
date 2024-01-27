@@ -5,4 +5,6 @@ import 'package:either_dart/either.dart';
 abstract class CollectiveTrainingSessionRepository {
   Future<Either<Failure, List<CollectiveTrainingSession>>>
       readAllCollectiveTrainingSession();
+  Future<Either<Failure, CollectiveTrainingSession>>
+      collectiveTrainingSessionById(String id);
 }

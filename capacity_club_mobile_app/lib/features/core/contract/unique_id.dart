@@ -1,5 +1,3 @@
-import 'package:capacity_club_mobile_app/features/auth/data/model/credential.dart';
-
 class UniqueId {
   final String id;
 
