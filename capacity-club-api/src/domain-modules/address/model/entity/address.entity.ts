@@ -1,9 +1,8 @@
 import { Entity, BaseEntity, PrimaryColumn, Column } from 'typeorm';
-import { ulid } from 'ulid';
 
 @Entity()
 export class Address extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26, default: () => `'${ulid()}'` })
+  @PrimaryColumn('varchar', { length: 26 })
   address_id: string;
   @Column({ length: 50, nullable: true, unique: false })
   street: string;
