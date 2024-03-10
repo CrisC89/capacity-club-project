@@ -1,4 +1,4 @@
-import { CrudController, Filter } from '@domain-modules-shared';
+import { CrudController } from '@domain-modules-shared';
 import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import {
   CollectiveTrainingSession,
@@ -7,6 +7,7 @@ import {
 } from './model';
 import { CollectiveTrainingSessionService } from './collective-training-session.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { CollectiveTrainingSessionFilter } from './model/filter';
 
 ApiBearerAuth('access-token');
 @ApiTags('Collective Training Session')
@@ -17,6 +18,7 @@ export class CollectiveTrainingSessionController
       CollectiveTrainingSession,
       CollectiveTrainingSessionCreatePayload,
       CollectiveTrainingSessionUpdatePayload,
+      CollectiveTrainingSessionFilter,
       string
     >
 {
@@ -27,7 +29,9 @@ export class CollectiveTrainingSessionController
     return this.service.getAll();
   }
   @Post('filter')
-  filter(filter: Filter): Promise<CollectiveTrainingSession[]> {
+  filter(
+    filter: CollectiveTrainingSessionFilter,
+  ): Promise<CollectiveTrainingSession[]> {
     return this.service.filter(filter);
   }
   @Get('detail/:id')

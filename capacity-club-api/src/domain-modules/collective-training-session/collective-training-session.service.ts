@@ -1,4 +1,4 @@
-import { CrudService, Filter } from '@domain-modules-shared';
+import { CrudService } from '@domain-modules-shared';
 import { Injectable } from '@nestjs/common';
 import {
   CollectiveTrainingSession,
@@ -17,6 +17,7 @@ import {
 import { isNil } from 'lodash';
 import { ulid } from 'ulid';
 import { Builder } from 'builder-pattern';
+import { CollectiveTrainingSessionFilter } from './model/filter';
 
 @Injectable()
 export class CollectiveTrainingSessionService
@@ -25,6 +26,7 @@ export class CollectiveTrainingSessionService
       CollectiveTrainingSession,
       CollectiveTrainingSessionCreatePayload,
       CollectiveTrainingSessionUpdatePayload,
+      CollectiveTrainingSessionFilter,
       string
     >
 {
@@ -41,7 +43,9 @@ export class CollectiveTrainingSessionService
     }
   }
 
-  async filter(filter: Filter): Promise<CollectiveTrainingSession[]> {
+  async filter(
+    filter: CollectiveTrainingSessionFilter,
+  ): Promise<CollectiveTrainingSession[]> {
     console.log(filter);
     return Promise.resolve([]);
   }

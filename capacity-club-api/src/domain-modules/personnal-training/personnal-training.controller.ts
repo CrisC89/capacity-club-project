@@ -1,4 +1,4 @@
-import { CrudController, Filter } from '@domain-modules-shared';
+import { CrudController } from '@domain-modules-shared';
 import {
   Body,
   Controller,
@@ -15,6 +15,7 @@ import {
   PersonnalTrainingUpdatePayload,
 } from './model';
 import { PersonnalTrainingService } from './personnal-training.service';
+import { PersonnalTrainingFilter } from './model/filter';
 
 @ApiBearerAuth('access-token')
 @ApiTags('Entrainement personnel')
@@ -25,6 +26,7 @@ export class PersonnalTrainingController
       PersonnalTraining,
       PersonnalTrainingCreatePayload,
       PersonnalTrainingUpdatePayload,
+      PersonnalTrainingFilter,
       string
     >
 {
@@ -48,7 +50,9 @@ export class PersonnalTrainingController
   }
 
   @Post('filter')
-  filter(@Body() filter: Filter): Promise<PersonnalTraining[]> {
+  filter(
+    @Body() filter: PersonnalTrainingFilter,
+  ): Promise<PersonnalTraining[]> {
     return this.service.filter(filter);
   }
 

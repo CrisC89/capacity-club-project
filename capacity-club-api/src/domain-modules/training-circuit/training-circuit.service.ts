@@ -15,7 +15,8 @@ import {
   TrainingCircuitListException,
   TrainingCircuitUpdateException,
 } from './training-circuit.exception';
-import { CrudService, Filter } from '@domain-modules-shared';
+import { CrudService } from '@domain-modules-shared';
+import { TrainingCircuitFilter } from './model/filter';
 
 @Injectable()
 export class TrainingCircuitService
@@ -24,6 +25,7 @@ export class TrainingCircuitService
       TrainingCircuit,
       TrainingCircuitCreatePayload,
       TrainingCircuitUpdatePayload,
+      TrainingCircuitFilter,
       string
     >
 {
@@ -69,7 +71,7 @@ export class TrainingCircuitService
     throw new TrainingCircuitNotFoundException();
   }
 
-  filter(filter: Filter): Promise<TrainingCircuit[]> {
+  filter(filter: TrainingCircuitFilter): Promise<TrainingCircuit[]> {
     console.log(filter);
     return Promise.resolve([]);
   }

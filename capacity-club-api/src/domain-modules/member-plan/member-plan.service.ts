@@ -13,7 +13,7 @@ import {
 } from './member-plan.exception';
 import { MemberPlan, MemberPlanCreatePayload } from './model';
 import { MemberPlanUpdatePayload } from './model/payload/member-plan-update.payload';
-import { Filter } from 'domain-modules/shared/model/interface/filter.interface';
+import { MemberPlanFilter } from './model/filter';
 
 @Injectable()
 export class MemberPlanService
@@ -22,6 +22,7 @@ export class MemberPlanService
       MemberPlan,
       MemberPlanCreatePayload,
       MemberPlanUpdatePayload,
+      MemberPlanFilter,
       string
     >
 {
@@ -68,7 +69,7 @@ export class MemberPlanService
     throw new MemberPlanNotFoundException();
   }
 
-  filter(filter: Filter): Promise<MemberPlan[]> {
+  filter(filter: MemberPlanFilter): Promise<MemberPlan[]> {
     console.log(filter);
     return Promise.resolve([]);
   }

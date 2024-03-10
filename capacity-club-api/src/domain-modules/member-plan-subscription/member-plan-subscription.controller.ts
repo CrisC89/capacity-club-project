@@ -1,4 +1,4 @@
-import { CrudController, Filter } from '@domain-modules-shared';
+import { CrudController } from '@domain-modules-shared';
 import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import {
   MemberPlanSubscription,
@@ -17,6 +17,7 @@ export class MemberPlanSubscriptionController
       MemberPlanSubscription,
       MemberPlanSubscriptionCreatePayload,
       MemberPlanSubscriptionUpdatePayload,
+      MemberPlanSubscription,
       string
     >
 {
@@ -26,7 +27,7 @@ export class MemberPlanSubscriptionController
     return this.service.getAll();
   }
   @Post('filter')
-  filter(filter: Filter): Promise<MemberPlanSubscription[]> {
+  filter(filter: MemberPlanSubscription): Promise<MemberPlanSubscription[]> {
     return this.service.filter(filter);
   }
   @Get('detail/:id')

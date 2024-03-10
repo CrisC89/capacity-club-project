@@ -1,9 +1,13 @@
-import { Filter } from './filter.interface';
-
-export interface CrudService<ENTITY, CREATE_PAYLOAD, UPDATE_PAYLOAD, ID> {
+export interface CrudService<
+  ENTITY,
+  CREATE_PAYLOAD,
+  UPDATE_PAYLOAD,
+  FILTER,
+  ID,
+> {
   getAll(): Promise<ENTITY[]>;
 
-  filter(filter: Filter): Promise<ENTITY[]>;
+  filter(filter: FILTER): Promise<ENTITY[]>;
 
   detail(id: ID): Promise<ENTITY>;
 

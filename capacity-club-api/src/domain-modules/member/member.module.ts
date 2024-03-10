@@ -6,6 +6,7 @@ import { MemberController } from './member.controller';
 import { Member } from './model';
 import { MemberService } from './member.service';
 import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
+import { Credential } from '@authenticated/model';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/
       MemberPlan,
       MemberPlanSubscription,
       Address,
+      Credential,
     ]),
   ],
   controllers: [MemberController],

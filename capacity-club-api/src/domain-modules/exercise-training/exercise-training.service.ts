@@ -4,7 +4,7 @@ import {
   ExerciseTrainingCreatePayload,
   ExerciseTrainingUpdatePayload,
 } from './model';
-import { Filter } from '@domain-modules-shared';
+import { CrudService } from '@domain-modules-shared';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { isNil } from 'lodash';
@@ -17,9 +17,19 @@ import {
   ExerciseTrainingUpdateException,
 } from './exercise-training.exception';
 import { ulid } from 'ulid';
+import { ExerciseTrainingFilter } from './model/filter';
 
 @Injectable()
-export class ExerciseTrainingService {
+export class ExerciseTrainingService
+  implements
+    CrudService<
+      ExerciseTraining,
+      ExerciseTrainingCreatePayload,
+      ExerciseTrainingUpdatePayload,
+      ExerciseTrainingFilter,
+      string
+    >
+{
   constructor(
     @InjectRepository(ExerciseTraining)
     private readonly repository: Repository<ExerciseTraining>,
@@ -63,7 +73,7 @@ export class ExerciseTrainingService {
     throw new ExerciseTrainingNotFoundException();
   }
 
-  filter(filter: Filter): Promise<ExerciseTraining[]> {
+  filter(filter: ExerciseTrainingFilter): Promise<ExerciseTraining[]> {
     console.log(filter);
     return Promise.resolve([]);
   }

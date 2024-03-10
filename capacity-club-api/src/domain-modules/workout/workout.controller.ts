@@ -9,15 +9,22 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Workout, WorkoutCreatePayload, WorkoutUpdatePayload } from './model';
-import { CrudController, Filter } from '@domain-modules-shared';
+import { CrudController } from '@domain-modules-shared';
 import { WorkoutService } from './workout.service';
+import { WorkoutFilter } from './model/filter';
 
 @ApiBearerAuth('access-token')
 @ApiTags('Workout')
 @Controller('workout')
 export class WorkoutController
   implements
-    CrudController<Workout, WorkoutCreatePayload, WorkoutUpdatePayload, string>
+    CrudController<
+      Workout,
+      WorkoutCreatePayload,
+      WorkoutUpdatePayload,
+      WorkoutFilter,
+      string
+    >
 {
   constructor(private readonly service: WorkoutService) {}
 
@@ -37,7 +44,7 @@ export class WorkoutController
   }
 
   @Post('filter')
-  filter(@Body() filter: Filter): Promise<Workout[]> {
+  filter(@Body() filter: WorkoutFilter): Promise<Workout[]> {
     return this.service.filter(filter);
   }
 

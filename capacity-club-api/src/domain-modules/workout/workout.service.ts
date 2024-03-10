@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Workout, WorkoutCreatePayload, WorkoutUpdatePayload } from './model';
-import { CrudService, Filter } from '@domain-modules-shared';
+import { CrudService } from '@domain-modules-shared';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { TrainingCircuitUpdateException } from 'domain-modules/training-circuit/training-circuit.exception';
@@ -12,11 +12,18 @@ import {
   WorkoutNotFoundException,
   WorkoutListException,
 } from './workout.exception';
+import { WorkoutFilter } from './model/filter';
 
 @Injectable()
 export class WorkoutService
   implements
-    CrudService<Workout, WorkoutCreatePayload, WorkoutUpdatePayload, string>
+    CrudService<
+      Workout,
+      WorkoutCreatePayload,
+      WorkoutUpdatePayload,
+      WorkoutFilter,
+      string
+    >
 {
   constructor(
     @InjectRepository(Workout)
@@ -56,7 +63,7 @@ export class WorkoutService
     throw new WorkoutNotFoundException();
   }
 
-  filter(filter: Filter): Promise<Workout[]> {
+  filter(filter: WorkoutFilter): Promise<Workout[]> {
     console.log(filter);
     return Promise.resolve([]);
   }

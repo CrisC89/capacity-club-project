@@ -1,15 +1,22 @@
-import { CrudController, Filter } from '@domain-modules-shared';
+import { CrudController } from '@domain-modules-shared';
 import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Address, AddressCreatePayload, AddressUpdatePayload } from './model';
 import { AddressService } from './address.service';
+import { AddressFilter } from './model/filter/address.filter';
 
 @ApiBearerAuth('access-token')
 @ApiTags('Address')
 @Controller('address')
 export class AddressController
   implements
-    CrudController<Address, AddressCreatePayload, AddressUpdatePayload, string>
+    CrudController<
+      Address,
+      AddressCreatePayload,
+      AddressUpdatePayload,
+      AddressFilter,
+      string
+    >
 {
   constructor(private readonly service: AddressService) {}
 
@@ -18,7 +25,7 @@ export class AddressController
     return this.service.getAll();
   }
   @Post('filter')
-  filter(filter: Filter): Promise<Address[]> {
+  filter(filter: AddressFilter): Promise<Address[]> {
     return this.service.filter(filter);
   }
   @Get('detail/:id')

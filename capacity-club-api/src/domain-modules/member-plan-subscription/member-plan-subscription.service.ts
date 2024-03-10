@@ -1,4 +1,4 @@
-import { CrudService, Filter } from '@domain-modules-shared';
+import { CrudService } from '@domain-modules-shared';
 import { Injectable } from '@nestjs/common';
 import {
   MemberPlanSubscription,
@@ -24,6 +24,7 @@ export class MemberPlanSubscriptionService
       MemberPlanSubscription,
       MemberPlanSubscriptionCreatePayload,
       MemberPlanSubscriptionUpdatePayload,
+      MemberPlanSubscription,
       string
     >
 {
@@ -40,7 +41,7 @@ export class MemberPlanSubscriptionService
     }
   }
 
-  filter(filter: Filter): Promise<MemberPlanSubscription[]> {
+  filter(filter: MemberPlanSubscription): Promise<MemberPlanSubscription[]> {
     console.log(filter);
     return Promise.resolve([]);
   }

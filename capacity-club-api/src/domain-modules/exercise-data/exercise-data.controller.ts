@@ -1,4 +1,4 @@
-import { CrudController, Filter } from '@domain-modules-shared';
+import { CrudController } from '@domain-modules-shared';
 import {
   Body,
   Controller,
@@ -15,6 +15,7 @@ import {
   ExerciseDataCreatePayload,
   ExerciseDataUpdatePayload,
 } from './model';
+import { ExerciseDataFilter } from './model/filter';
 
 @ApiBearerAuth('access-token')
 @ApiTags('Exercise Data')
@@ -25,6 +26,7 @@ export class ExerciseDataController
       ExerciseData,
       ExerciseDataCreatePayload,
       ExerciseDataUpdatePayload,
+      ExerciseDataFilter,
       string
     >
 {
@@ -45,7 +47,7 @@ export class ExerciseDataController
   }
 
   @Post('filter')
-  filter(@Body() filter: Filter): Promise<ExerciseData[]> {
+  filter(@Body() filter: ExerciseDataFilter): Promise<ExerciseData[]> {
     return this.service.filter(filter);
   }
 

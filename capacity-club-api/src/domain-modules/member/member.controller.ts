@@ -11,14 +11,20 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { MemberService } from './member.service';
 import { Member, MemberCreatePayload, MemberUpdatePayload } from './model';
 import { CrudController } from 'domain-modules/shared/model/interface/crud-controller.interface';
-import { Filter } from 'domain-modules/shared/model/interface/filter.interface';
+import { MemberFilter } from './model/filter';
 
 @ApiBearerAuth('access-token')
 @ApiTags('Membre')
 @Controller('member')
 export class MemberController
   implements
-    CrudController<Member, MemberCreatePayload, MemberUpdatePayload, string>
+    CrudController<
+      Member,
+      MemberCreatePayload,
+      MemberUpdatePayload,
+      MemberFilter,
+      string
+    >
 {
   constructor(private readonly service: MemberService) {}
 
@@ -38,7 +44,7 @@ export class MemberController
   }
 
   @Post('filter')
-  filter(@Body() filter: Filter): Promise<Member[]> {
+  filter(@Body() filter: MemberFilter): Promise<Member[]> {
     return this.service.filter(filter);
   }
 

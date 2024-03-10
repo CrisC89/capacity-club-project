@@ -1,6 +1,11 @@
 import { CrudService, Filter } from '@domain-modules-shared';
 import { Injectable } from '@nestjs/common';
-import { Address, AddressCreatePayload, AddressUpdatePayload } from './model';
+import {
+  Address,
+  AddressCreatePayload,
+  AddressFilter,
+  AddressUpdatePayload,
+} from './model';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
@@ -17,7 +22,13 @@ import { isNil } from 'lodash';
 @Injectable()
 export class AddressService
   implements
-    CrudService<Address, AddressCreatePayload, AddressUpdatePayload, string>
+    CrudService<
+      Address,
+      AddressCreatePayload,
+      AddressUpdatePayload,
+      AddressFilter,
+      string
+    >
 {
   constructor(
     @InjectRepository(Address)
@@ -31,7 +42,7 @@ export class AddressService
       throw new AddressListException();
     }
   }
-  filter(filter: Filter): Promise<Address[]> {
+  filter(filter: AddressFilter): Promise<Address[]> {
     console.log(filter);
     return Promise.resolve([]);
   }

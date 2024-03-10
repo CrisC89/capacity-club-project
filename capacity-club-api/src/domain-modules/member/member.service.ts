@@ -12,13 +12,19 @@ import {
   MemberNotFoundException,
   MemberUpdateException,
 } from './member.exception';
-import { Filter } from 'domain-modules/shared/model/interface/filter.interface';
 import { ulid } from 'ulid';
+import { MemberFilter } from './model/filter';
 
 @Injectable()
 export class MemberService
   implements
-    CrudService<Member, MemberCreatePayload, MemberUpdatePayload, string>
+    CrudService<
+      Member,
+      MemberCreatePayload,
+      MemberUpdatePayload,
+      MemberFilter,
+      string
+    >
 {
   constructor(
     @InjectRepository(Member) private readonly repository: Repository<Member>,
@@ -80,9 +86,26 @@ export class MemberService
     throw new MemberNotFoundException();
   }
 
-  filter(filter: Filter): Promise<Member[]> {
-    console.log(filter);
-    return Promise.resolve([]);
+  filter(filter: MemberFilter): Promise<Member[]> {
+    const queryBuilder = this.repository.createQueryBuilder('member');
+
+    Object.keys(filter).forEach((key) => {
+      if (filter[key] !== undefined && filter[key] !== null) {
+        const value = filter[key];
+        if (typeof value === 'boolean') {
+          queryBuilder.andWhere(`member.${key} = :${key}`, { [key]: value });
+        } else {
+          queryBuilder.andWhere(`member.${key} LIKE :${key}`, {
+            [key]: `%${value}%`,
+          });
+        }
+      }
+    });
+
+    return queryBuilder.getMany();
+
+    //console.log(filter);
+    //return Promise.resolve([]);
   }
 
   async getAll(): Promise<Member[]> {

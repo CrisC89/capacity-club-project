@@ -13,10 +13,11 @@ import { Gender } from '../enum';
 import { isNil } from 'lodash';
 import { BaseEntity } from '@common/model';
 import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
+import { Credential } from '@authenticated/model';
 
 @Entity()
 export class Member extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26, default: () => `'${ulid()}'` })
+  @PrimaryColumn('varchar')
   member_id: string;
   @Column({ length: 50, nullable: true })
   firstname: string;
@@ -34,16 +35,25 @@ export class Member extends BaseEntity {
   iban: string;
   @Column({ length: 10, nullable: true })
   code_activation: string;
+  @Column({ default: false })
+  active: boolean;
+
   @OneToMany(() => MemberPlanSubscription, (ms) => ms.member, {
     cascade: true,
     eager: true,
+    nullable: true,
   })
   subscriptions: MemberPlanSubscription[];
-  @OneToOne(() => Address, { cascade: true, eager: true })
+  @OneToOne(() => Address, { cascade: true, eager: true, nullable: true })
   @JoinColumn({ referencedColumnName: 'address_id', name: 'address_id_fk' })
   address: Address;
-  @Column({ default: false })
-  active: boolean;
+
+  @OneToOne(() => Credential, { nullable: true })
+  @JoinColumn({
+    name: 'credential_id_fk',
+    referencedColumnName: 'credential_id',
+  })
+  credential: Credential;
 
   @BeforeInsert()
   setCodeActivation() {

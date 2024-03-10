@@ -1,4 +1,4 @@
-import { CrudService, Filter } from '@domain-modules-shared';
+import { CrudService } from '@domain-modules-shared';
 import { Injectable } from '@nestjs/common';
 import {
   PersonnalTraining,
@@ -17,6 +17,7 @@ import {
 } from './personnal-training.exception';
 import { Builder } from 'builder-pattern';
 import { isNil } from 'lodash';
+import { PersonnalTrainingFilter } from './model/filter';
 
 @Injectable()
 export class PersonnalTrainingService
@@ -25,6 +26,7 @@ export class PersonnalTrainingService
       PersonnalTraining,
       PersonnalTrainingCreatePayload,
       PersonnalTrainingUpdatePayload,
+      PersonnalTrainingFilter,
       string
     >
 {
@@ -40,7 +42,7 @@ export class PersonnalTrainingService
       throw new PersonnalTrainingListException();
     }
   }
-  async filter(filter: Filter): Promise<PersonnalTraining[]> {
+  async filter(filter: PersonnalTrainingFilter): Promise<PersonnalTraining[]> {
     console.log(filter);
     return Promise.resolve([]);
   }

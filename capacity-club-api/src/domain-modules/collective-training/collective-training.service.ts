@@ -1,4 +1,4 @@
-import { CrudService, Filter } from '@domain-modules-shared';
+import { CrudService } from '@domain-modules-shared';
 import { Injectable } from '@nestjs/common';
 import {
   CollectiveTraining,
@@ -17,6 +17,7 @@ import {
   CollectiveTrainingNotFoundException,
   CollectiveTrainingUpdateException,
 } from './collective-training.exception';
+import { CollectiveTrainingFilter } from './model/filter';
 
 @Injectable()
 export class CollectiveTrainingService
@@ -25,6 +26,7 @@ export class CollectiveTrainingService
       CollectiveTraining,
       CollectiveTrainingCreatePayload,
       CollectiveTrainingUpdatePayload,
+      CollectiveTrainingFilter,
       string
     >
 {
@@ -70,7 +72,7 @@ export class CollectiveTrainingService
     throw new CollectiveTrainingNotFoundException();
   }
 
-  filter(filter: Filter): Promise<CollectiveTraining[]> {
+  filter(filter: CollectiveTrainingFilter): Promise<CollectiveTraining[]> {
     console.log(filter);
     return Promise.resolve([]);
   }

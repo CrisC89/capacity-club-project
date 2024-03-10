@@ -14,7 +14,7 @@ import { CrudController } from 'domain-modules/shared/model/interface/crud-contr
 import { MemberPlanCreatePayload } from './model/payload/member-plan-create.payload';
 import { MemberPlanUpdatePayload } from './model/payload/member-plan-update.payload';
 import { MemberPlanService } from './member-plan.service';
-import { Filter } from 'domain-modules/shared/model/interface/filter.interface';
+import { MemberPlanFilter } from './model/filter';
 
 @ApiBearerAuth('access-token')
 @ApiTags('Abonnement membre')
@@ -25,6 +25,7 @@ export class MemberPlanController
       MemberPlan,
       MemberPlanCreatePayload,
       MemberPlanUpdatePayload,
+      MemberPlanFilter,
       string
     >
 {
@@ -46,7 +47,7 @@ export class MemberPlanController
   }
 
   @Post('filter')
-  filter(@Body() filter: Filter): Promise<MemberPlan[]> {
+  filter(@Body() filter: MemberPlanFilter): Promise<MemberPlan[]> {
     return this.service.filter(filter);
   }
 

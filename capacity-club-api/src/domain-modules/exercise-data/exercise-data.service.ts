@@ -1,4 +1,4 @@
-import { CrudService, Filter } from '@domain-modules-shared';
+import { CrudService } from '@domain-modules-shared';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
@@ -17,6 +17,7 @@ import {
   ExerciseDataListException,
   ExerciseDataUpdateException,
 } from './exercise-data.exception';
+import { ExerciseDataFilter } from './model/filter';
 
 @Injectable()
 export class ExerciseDataService
@@ -25,6 +26,7 @@ export class ExerciseDataService
       ExerciseData,
       ExerciseDataCreatePayload,
       ExerciseDataUpdatePayload,
+      ExerciseDataFilter,
       string
     >
 {
@@ -66,7 +68,7 @@ export class ExerciseDataService
     throw new ExerciseDataNotFoundException();
   }
 
-  filter(filter: Filter): Promise<ExerciseData[]> {
+  filter(filter: ExerciseDataFilter): Promise<ExerciseData[]> {
     console.log(filter);
     return Promise.resolve([]);
   }
