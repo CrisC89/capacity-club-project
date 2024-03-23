@@ -103,9 +103,6 @@ export class MemberService
     });
 
     return queryBuilder.getMany();
-
-    //console.log(filter);
-    //return Promise.resolve([]);
   }
 
   async getAll(): Promise<Member[]> {

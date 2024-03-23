@@ -69,8 +69,24 @@ export class ExerciseDataService
   }
 
   filter(filter: ExerciseDataFilter): Promise<ExerciseData[]> {
-    console.log(filter);
-    return Promise.resolve([]);
+    const queryBuilder = this.repository.createQueryBuilder('exercise-data');
+
+    Object.keys(filter).forEach((key) => {
+      if (filter[key] !== undefined && filter[key] !== null) {
+        const value = filter[key];
+        if (typeof value === 'boolean') {
+          queryBuilder.andWhere(`member.${key} = :${key}`, {
+            [key]: value,
+          });
+        } else {
+          queryBuilder.andWhere(`member.${key} LIKE :${key}`, {
+            [key]: `%${value}%`,
+          });
+        }
+      }
+    });
+
+    return queryBuilder.getMany();
   }
 
   async getAll(): Promise<ExerciseData[]> {

@@ -43,8 +43,24 @@ export class AddressService
     }
   }
   filter(filter: AddressFilter): Promise<Address[]> {
-    console.log(filter);
-    return Promise.resolve([]);
+    const queryBuilder = this.repository.createQueryBuilder('address');
+
+    Object.keys(filter).forEach((key) => {
+      if (filter[key] !== undefined && filter[key] !== null) {
+        const value = filter[key];
+        if (typeof value === 'boolean') {
+          queryBuilder.andWhere(`member.${key} = :${key}`, {
+            [key]: value,
+          });
+        } else {
+          queryBuilder.andWhere(`member.${key} LIKE :${key}`, {
+            [key]: `%${value}%`,
+          });
+        }
+      }
+    });
+
+    return queryBuilder.getMany();
   }
   async detail(id: string): Promise<Address> {
     const result = await this.repository.findOneBy({ address_id: id });
