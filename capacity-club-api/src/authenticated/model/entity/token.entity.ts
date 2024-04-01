@@ -5,8 +5,8 @@ import { BaseEntity } from '@common/model';
 import { Transform } from 'class-transformer';
 @Entity()
 export class Token extends BaseEntity {
-  @Transform(uniqueIdTransformer.to, { toClassOnly: true }) // Pour la désérialisation (DB -> Class)
-  @Transform(uniqueIdTransformer.from, { toPlainOnly: true }) // Pour la sérialisation (Class -> DB)
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
   @PrimaryColumn('varchar')
   token_id: UniqueId;
   @Column({ nullable: false })
