@@ -27,6 +27,7 @@ class ConfigManager {
       // Auto-detect TypeORM entities in any directory two levels up, covering both TypeScript and JavaScript files.
       entities: [__dirname + '/../../**/*.entity{.ts,.js}'],
       synchronize: this.getValue(ConfigKey.DB_SYNC) === 'true',
+      logging: ['query', 'error', 'schema'],
     };
   }
 

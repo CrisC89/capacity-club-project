@@ -1,10 +1,14 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
 import { ExerciseDataCategory } from '../enum/exercise-data-category.enum';
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Transform } from 'class-transformer';
 
 @Entity()
 export class ExerciseData extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26 })
-  exercise_data_id: string;
+  @PrimaryColumn('varchar')
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
+  exercise_data_id: UniqueId;
   @Column({ nullable: false })
   title: string;
   @Column('text', { nullable: true, array: true, default: [] })

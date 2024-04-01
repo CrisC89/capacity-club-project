@@ -1,4 +1,4 @@
-import { CrudService, Filter } from '@domain-modules-shared';
+import { CrudService } from '@domain-modules-shared';
 import { Injectable } from '@nestjs/common';
 import {
   Address,
@@ -9,7 +9,6 @@ import {
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
-import { ulid } from 'ulid';
 import {
   AddressCreateException,
   AddressDeleteException,
@@ -18,6 +17,7 @@ import {
   AddressUpdateException,
 } from './address.exception';
 import { isNil } from 'lodash';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class AddressService
@@ -73,7 +73,7 @@ export class AddressService
     try {
       return await this.repository.save(
         Builder<Address>()
-          .address_id(ulid())
+          .address_id(UniqueId.generate())
           .street(payload.street)
           .number(payload.number)
           .zipcode(payload.zipcode)
@@ -89,7 +89,7 @@ export class AddressService
   }
   async update(payload: AddressUpdatePayload): Promise<Address> {
     try {
-      const detail = await this.detail(payload.address_id);
+      const detail = await this.detail(payload.address_id.toString());
       detail.street = payload.street;
       detail.number = payload.number;
       detail.zipcode = payload.zipcode;

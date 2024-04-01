@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { isNil } from 'lodash';
 import { Repository } from 'typeorm';
-import { ulid } from 'ulid';
 import {
   ExerciseData,
   ExerciseDataCreatePayload,
@@ -18,6 +17,7 @@ import {
   ExerciseDataUpdateException,
 } from './exercise-data.exception';
 import { ExerciseDataFilter } from './model/filter';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class ExerciseDataService
@@ -38,7 +38,7 @@ export class ExerciseDataService
     try {
       return await this.repository.save(
         Builder<ExerciseData>()
-          .exercise_data_id(ulid())
+          .exercise_data_id(UniqueId.generate())
           .title(payload.title)
           .description(payload.description)
           .categories(payload.categories)
@@ -99,7 +99,7 @@ export class ExerciseDataService
 
   async update(payload: ExerciseDataUpdatePayload): Promise<ExerciseData> {
     try {
-      const detail = await this.detail(payload.exercise_data_id);
+      const detail = await this.detail(payload.exercise_data_id.toString());
       detail.title = payload.title;
       detail.description = payload.description;
       detail.categories = payload.categories;

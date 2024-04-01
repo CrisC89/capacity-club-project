@@ -1,11 +1,15 @@
 import { BaseEntity } from '@common/model';
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Transform } from 'class-transformer';
 import { Workout } from 'domain-modules/workout/model';
 import { PrimaryColumn, Column, JoinColumn, OneToOne, Entity } from 'typeorm';
 
 @Entity()
 export class CollectiveTrainingSession extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26 })
-  collective_training_session_id: string;
+  @PrimaryColumn('varchar')
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
+  collective_training_session_id: UniqueId;
   @Column({ nullable: false })
   title: string;
   @Column({ nullable: false })

@@ -2,12 +2,13 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsString, Length } from 'class-validator';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model/entity/training-circuit.entity';
 import { TrainingIntensity } from '../enum';
+import { UniqueId } from '@common/model/unique-id';
 
 export class ExerciseTrainingUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()
   @Length(26, 26)
-  exercise_training_id: string;
+  exercise_training_id: UniqueId;
 
   @ApiProperty()
   @IsString()

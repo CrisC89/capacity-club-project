@@ -1,3 +1,4 @@
+import { UniqueId } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 
@@ -5,7 +6,7 @@ export class AddressUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()
   @Length(26, 26)
-  address_id: string;
+  address_id: UniqueId;
   @ApiProperty()
   @IsNotEmpty()
   @IsString()

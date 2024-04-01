@@ -16,8 +16,8 @@ import {
   ExerciseTrainingListException,
   ExerciseTrainingUpdateException,
 } from './exercise-training.exception';
-import { ulid } from 'ulid';
 import { ExerciseTrainingFilter } from './model/filter';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class ExerciseTrainingService
@@ -40,7 +40,7 @@ export class ExerciseTrainingService
     try {
       return await this.repository.save(
         Builder<ExerciseTraining>()
-          .exercise_training_id(ulid())
+          .exercise_training_id(UniqueId.generate())
           .title(payload.title)
           .nb_reps(payload.nb_reps)
           .intensity(payload.intensity)
@@ -107,7 +107,7 @@ export class ExerciseTrainingService
     payload: ExerciseTrainingUpdatePayload,
   ): Promise<ExerciseTraining> {
     try {
-      const detail = await this.detail(payload.exercise_training_id);
+      const detail = await this.detail(payload.exercise_training_id.toString());
       detail.title = payload.title;
       detail.nb_reps = payload.nb_reps;
       detail.intensity = payload.intensity;

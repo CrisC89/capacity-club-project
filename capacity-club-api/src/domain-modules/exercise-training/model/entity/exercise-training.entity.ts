@@ -3,11 +3,15 @@ import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 import { PrimaryColumn, Column, ManyToOne, JoinColumn, Entity } from 'typeorm';
 import { TrainingIntensity } from '../enum';
 import { ExerciseData } from 'domain-modules/exercise-data/model';
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Transform } from 'class-transformer';
 
 @Entity()
 export class ExerciseTraining extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26 })
-  exercise_training_id: string;
+  @PrimaryColumn('varchar')
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
+  exercise_training_id: UniqueId;
   @Column({ nullable: false })
   title: string;
   @Column({ nullable: false })

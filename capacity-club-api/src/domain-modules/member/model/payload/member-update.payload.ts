@@ -5,7 +5,6 @@ import {
   IsOptional,
   IsDate,
   IsEnum,
-  IsEmail,
   IsArray,
   IsBoolean,
 } from 'class-validator';
@@ -14,12 +13,13 @@ import { Gender } from '../enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { Address } from 'domain-modules/address/model';
 import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
+import { Credential } from '@authenticated/model';
+import { UniqueId } from '@common/model/unique-id';
 
 export class MemberUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()
-  @Length(26, 26)
-  member_id: string;
+  member_id: UniqueId;
 
   @ApiProperty()
   @IsString()
@@ -44,20 +44,9 @@ export class MemberUpdatePayload {
   gender: Gender;
 
   @ApiProperty()
-  @IsEmail()
-  @IsOptional()
-  @Length(1, 50)
-  mail: string;
-
-  @ApiProperty()
   @IsOptional()
   @Length(1, 50)
   phone: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @Length(1, 34)
-  iban: string;
 
   @ApiProperty()
   @IsOptional()
@@ -72,6 +61,10 @@ export class MemberUpdatePayload {
   @ApiProperty()
   @IsOptional()
   address: Address;
+
+  @ApiProperty()
+  @IsOptional()
+  credential: Credential;
 
   @ApiProperty()
   @IsOptional()

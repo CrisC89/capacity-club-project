@@ -12,8 +12,9 @@ import {
   MemberNotFoundException,
   MemberUpdateException,
 } from './member.exception';
-import { ulid } from 'ulid';
 import { MemberFilter } from './model/filter';
+import { UniqueId } from '@common/model/unique-id';
+import { Credential } from '@authenticated/model';
 
 @Injectable()
 export class MemberService
@@ -28,41 +29,28 @@ export class MemberService
 {
   constructor(
     @InjectRepository(Member) private readonly repository: Repository<Member>,
+    @InjectRepository(Credential)
+    private credentialRepository: Repository<Credential>,
   ) {}
 
   async create(payload: MemberCreatePayload): Promise<Member> {
     try {
-      /*
-      return await this.repository.save(
-        Builder<Member>()
-          .firstname(payload.firstname)
-          .lastname(payload.lastname)
-          .mail(payload.mail)
-          .iban(payload.iban)
-          .phone(payload.phone)
-          .gender(payload.gender)
-          .birthdate(payload.birthdate)
-          .address(payload.address)
-          .active(payload.active)
-          .build(),
-      ); */
-      const newMember = Object.assign(
+      const created_member = Object.assign(
         new Member(),
         Builder<Member>()
-          .member_id(ulid())
+          .member_id(UniqueId.generate())
           .firstname(payload.firstname)
           .lastname(payload.lastname)
-          .mail(payload.mail)
-          .iban(payload.iban)
           .phone(payload.phone)
           .gender(payload.gender)
           .birthdate(payload.birthdate)
           .address(payload.address)
           .active(payload.active)
           .code_activation(payload.code_activation)
+          .credential(payload.credential)
           .build(),
       );
-      return await this.repository.save(newMember);
+      return await this.repository.save(created_member);
     } catch (e) {
       console.log(e.message);
       throw new MemberCreateException();
@@ -79,7 +67,9 @@ export class MemberService
   }
 
   async detail(id: string): Promise<Member> {
-    const result = await this.repository.findOneBy({ member_id: id });
+    const result = await this.repository.findOneBy({
+      member_id: UniqueId.from(id),
+    });
     if (!isNil(result)) {
       return result;
     }
@@ -115,16 +105,17 @@ export class MemberService
 
   async update(payload: MemberUpdatePayload): Promise<Member> {
     try {
-      const detail: Member = await this.detail(payload.member_id);
+      const detail: Member = await this.detail(payload.member_id.toString());
       detail.firstname = payload.firstname;
       detail.lastname = payload.lastname;
       detail.birthdate = payload.birthdate;
       detail.gender = payload.gender;
-      detail.mail = payload.mail;
       detail.phone = payload.phone;
-      detail.iban = payload.iban;
       detail.address = payload.address;
       detail.active = payload.active;
+      detail.credential = await this.credentialRepository.findOneBy({
+        credential_id: payload.credential.credential_id,
+      });
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

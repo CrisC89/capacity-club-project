@@ -1,3 +1,4 @@
+import { TransformFnParams } from 'class-transformer';
 import { ulid } from 'ulid';
 
 export class UniqueId {
@@ -7,16 +8,22 @@ export class UniqueId {
     return new UniqueId(ulid());
   }
 
+  static from(id: string) {
+    return new UniqueId(id);
+  }
+
   toString() {
     return this.unique_id;
   }
 }
 
 export const uniqueIdTransformer = {
-  to(value: UniqueId): string | null {
-    return value ? value.toString() : null;
+  to(params: TransformFnParams): UniqueId {
+    const plainId = params.value;
+    return UniqueId.from(plainId);
   },
-  from(value: string): UniqueId | null {
-    return value ? new UniqueId(value) : null;
+  from(params: TransformFnParams): string {
+    const instance: UniqueId = params.value;
+    return instance.toString();
   },
 };

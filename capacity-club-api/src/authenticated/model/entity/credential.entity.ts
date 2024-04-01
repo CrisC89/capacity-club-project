@@ -1,11 +1,16 @@
 import { BaseEntity } from '@common/model/base.entity';
-import { Exclude } from 'class-transformer';
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Exclude, Transform } from 'class-transformer';
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Credential extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26 })
-  credential_id: string;
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true }) // Pour la désérialisation (DB -> Class)
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true }) // Pour la sérialisation (Class -> DB)
+  @PrimaryColumn({
+    type: 'varchar',
+  })
+  credential_id: UniqueId;
 
   @Column({ nullable: false, unique: true })
   mail: string;

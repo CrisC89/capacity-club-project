@@ -13,12 +13,13 @@ import {
   MemberPlanFreqTraining,
 } from '../enum';
 import { ApiProperty } from '@nestjs/swagger';
+import { UniqueId } from '@common/model/unique-id';
 
 export class MemberPlanUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()
   @Length(26, 26)
-  member_plan_id: string;
+  member_plan_id: UniqueId;
 
   @ApiProperty()
   @IsOptional()

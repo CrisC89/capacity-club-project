@@ -1,4 +1,6 @@
 import { BaseEntity } from '@common/model';
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Transform } from 'class-transformer';
 import { CollectiveTrainingSession } from 'domain-modules/collective-training-session/model';
 import { Member } from 'domain-modules/member/model';
 import { Workout } from 'domain-modules/workout/model';
@@ -6,8 +8,10 @@ import { PrimaryColumn, JoinColumn, OneToOne, Entity } from 'typeorm';
 
 @Entity()
 export class CollectiveTraining extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26 })
-  collective_training_id: string;
+  @PrimaryColumn('varchar')
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
+  collective_training_id: UniqueId;
   @OneToOne(() => Member)
   @JoinColumn({
     name: 'member_id',

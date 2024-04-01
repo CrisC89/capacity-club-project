@@ -10,7 +10,6 @@ import { Builder } from 'builder-pattern';
 import { ExerciseTrainingListException } from 'domain-modules/exercise-training/exercise-training.exception';
 import { isNil } from 'lodash';
 import { Repository } from 'typeorm';
-import { ulid } from 'ulid';
 import {
   CollectiveTrainingCreateException,
   CollectiveTrainingDeleteException,
@@ -18,6 +17,7 @@ import {
   CollectiveTrainingUpdateException,
 } from './collective-training.exception';
 import { CollectiveTrainingFilter } from './model/filter';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class CollectiveTrainingService
@@ -41,7 +41,7 @@ export class CollectiveTrainingService
     try {
       return await this.repository.save(
         Builder<CollectiveTraining>()
-          .collective_training_id(ulid())
+          .collective_training_id(UniqueId.generate())
           .member(payload.member)
           .collective_training_session(payload.collective_training_session)
           .workout(payload.workout)
@@ -89,7 +89,9 @@ export class CollectiveTrainingService
     payload: CollectiveTrainingUpdatePayload,
   ): Promise<CollectiveTraining> {
     try {
-      const detail = await this.detail(payload.collective_training_id);
+      const detail = await this.detail(
+        payload.collective_training_id.toString(),
+      );
       detail.member = payload.member;
       detail.collective_training_session = payload.collective_training_session;
       detail.workout = payload.workout;

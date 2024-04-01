@@ -6,10 +6,14 @@ import {
   MemberPlanPayment,
   MemberPlanType,
 } from '../enum';
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Transform } from 'class-transformer';
 @Entity()
 export class MemberPlan extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26, default: () => `'${ulid()}'` })
-  member_plan_id: string;
+  @PrimaryColumn('varchar')
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
+  member_plan_id: UniqueId;
   @Column({ nullable: false, default: MemberPlanType.SUBSCRIPTION })
   type: MemberPlanType;
   @Column({ length: 80, nullable: false })

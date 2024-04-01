@@ -17,6 +17,7 @@ import {
 } from './training-circuit.exception';
 import { CrudService } from '@domain-modules-shared';
 import { TrainingCircuitFilter } from './model/filter';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class TrainingCircuitService
@@ -40,6 +41,7 @@ export class TrainingCircuitService
     try {
       return await this.repository.save(
         Builder<TrainingCircuit>()
+          .training_circuit_id(UniqueId.generate())
           .title(payload.title)
           .exercise_training_list(
             payload.exercise_training_list
@@ -104,7 +106,7 @@ export class TrainingCircuitService
     payload: TrainingCircuitUpdatePayload,
   ): Promise<TrainingCircuit> {
     try {
-      const detail = await this.detail(payload.training_circuit_id);
+      const detail = await this.detail(payload.training_circuit_id.toString());
       detail.title = payload.title;
       detail.exercise_training_list = payload.exercise_training_list
         ? payload.exercise_training_list

@@ -7,7 +7,6 @@ import {
 } from './model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ulid } from 'ulid';
 import {
   PersonnalTrainingCreateException,
   PersonnalTrainingDeleteException,
@@ -18,6 +17,7 @@ import {
 import { Builder } from 'builder-pattern';
 import { isNil } from 'lodash';
 import { PersonnalTrainingFilter } from './model/filter';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class PersonnalTrainingService
@@ -61,7 +61,7 @@ export class PersonnalTrainingService
     try {
       return await this.repository.save(
         Builder<PersonnalTraining>()
-          .personnal_training_id(ulid())
+          .personnal_training_id(UniqueId.generate())
           .training_start_date(payload.training_start_date)
           .training_end_date(payload.training_end_date)
           .member(payload.member)
@@ -76,7 +76,9 @@ export class PersonnalTrainingService
     payload: PersonnalTrainingUpdatePayload,
   ): Promise<PersonnalTraining> {
     try {
-      const detail = await this.detail(payload.personnal_training_id);
+      const detail = await this.detail(
+        payload.personnal_training_id.toString(),
+      );
       detail.title = payload.title;
       detail.training_start_date = payload.training_start_date;
       detail.training_end_date = payload.training_end_date;

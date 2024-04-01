@@ -14,11 +14,15 @@ import { isNil } from 'lodash';
 import { BaseEntity } from '@common/model';
 import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
 import { Credential } from '@authenticated/model';
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Transform } from 'class-transformer';
 
 @Entity()
 export class Member extends BaseEntity {
   @PrimaryColumn('varchar')
-  member_id: string;
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
+  member_id: UniqueId;
   @Column({ length: 50, nullable: true })
   firstname: string;
   @Column({ length: 50, nullable: true })
@@ -27,12 +31,8 @@ export class Member extends BaseEntity {
   birthdate: Date;
   @Column('varchar', { nullable: true, default: Gender.OTHER })
   gender: Gender;
-  @Column({ length: 50, nullable: true })
-  mail: string;
   @Column({ length: 15, nullable: true })
   phone: string;
-  @Column({ length: 34, nullable: true })
-  iban: string;
   @Column({ length: 10, nullable: true })
   code_activation: string;
   @Column({ default: false })
@@ -48,7 +48,7 @@ export class Member extends BaseEntity {
   @JoinColumn({ referencedColumnName: 'address_id', name: 'address_id_fk' })
   address: Address;
 
-  @OneToOne(() => Credential, { nullable: true })
+  @OneToOne(() => Credential, { nullable: true, eager: true })
   @JoinColumn({
     name: 'credential_id_fk',
     referencedColumnName: 'credential_id',
@@ -57,7 +57,6 @@ export class Member extends BaseEntity {
 
   @BeforeInsert()
   setCodeActivation() {
-    console.log('im here', this.code_activation);
     this.code_activation = isNil(this.code_activation)
       ? ulid().substring(0, 10)
       : this.code_activation;

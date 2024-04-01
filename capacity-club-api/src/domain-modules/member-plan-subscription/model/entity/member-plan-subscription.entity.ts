@@ -1,3 +1,5 @@
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Transform } from 'class-transformer';
 import { MemberPlan } from 'domain-modules/member-plan/model/entity';
 import { Member } from 'domain-modules/member/model';
 import {
@@ -12,8 +14,10 @@ import {
 
 @Entity()
 export class MemberPlanSubscription {
-  @PrimaryColumn('varchar', { length: 26 })
-  member_plan_subscription_id: string;
+  @PrimaryColumn('varchar')
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
+  member_plan_subscription_id: UniqueId;
   @CreateDateColumn()
   start_date: Date;
   @ManyToOne(() => Member, { eager: false })

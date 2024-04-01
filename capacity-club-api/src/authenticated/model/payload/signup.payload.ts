@@ -18,4 +18,6 @@ export class SignupPayload {
   googleHash: string;
   @ApiProperty()
   facebookHash: string;
+  @ApiProperty()
+  code_activation: string;
 }

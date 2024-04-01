@@ -1,4 +1,6 @@
 import { BaseEntity } from '@common/model';
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Transform } from 'class-transformer';
 import { ExerciseTraining } from 'domain-modules/exercise-training/model/entity/exercise-training.entity';
 import { Workout } from 'domain-modules/workout/model/entity/workout.entity';
 
@@ -13,8 +15,10 @@ import {
 
 @Entity()
 export class TrainingCircuit extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26 })
-  training_circuit_id: string;
+  @PrimaryColumn('varchar')
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
+  training_circuit_id: UniqueId;
   @Column({ nullable: false })
   title: string;
 

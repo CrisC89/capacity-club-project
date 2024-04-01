@@ -16,6 +16,7 @@ import {
   MemberPlanSubscriptionUpdateException,
 } from './member-plan-subscription.exception';
 import { isNil } from 'lodash';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class MemberPlanSubscriptionService
@@ -60,6 +61,7 @@ export class MemberPlanSubscriptionService
     try {
       return await this.repository.save(
         Builder<MemberPlanSubscription>()
+          .member_plan_subscription_id(UniqueId.generate())
           .start_date(payload.start_date)
           .member_plan(payload.member_plan)
           .member(payload.member)
@@ -74,7 +76,9 @@ export class MemberPlanSubscriptionService
     payload: MemberPlanSubscriptionUpdatePayload,
   ): Promise<MemberPlanSubscription> {
     try {
-      const detail = await this.detail(payload.member_plan_subscription_id);
+      const detail = await this.detail(
+        payload.member_plan_subscription_id.toString(),
+      );
       detail.start_date = payload.start_date;
       detail.member = payload.member;
       detail.member_plan = payload.member_plan;

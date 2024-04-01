@@ -18,7 +18,7 @@ import {
 } from './model';
 import { comparePassword, encryptPassword } from './utils';
 import { Builder } from 'builder-pattern';
-import { ulid } from 'ulid';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class AuthenticatedService {
@@ -33,7 +33,9 @@ export class AuthenticatedService {
 
   // Retrieves credential details by id or throws UserNotFoundException if not found.
   async detail(id: string): Promise<Credential> {
-    const result = await this.repository.findOneBy({ credential_id: id });
+    const result = await this.repository.findOneBy({
+      credential_id: id,
+    });
     if (!isNil(result)) {
       return result;
     }
@@ -96,6 +98,8 @@ export class AuthenticatedService {
       throw new UserAlreadyExistException();
     }
 
+    console.log('result ' + result);
+
     this.logger.log('googleHash');
     this.logger.log(isNil(payload.facebookHash));
     try {
@@ -108,23 +112,19 @@ export class AuthenticatedService {
       // Create new user credential and save to repository.
       const response = await this.repository.save(
         Builder<Credential>()
-          .credential_id(ulid())
+          .credential_id(UniqueId.generate())
           .password(encryptedPassword)
           .facebookHash(payload.facebookHash)
           .googleHash(payload.googleHash)
           .mail(payload.mail)
           .build(),
       );
+      console.log(response);
       // Prepare payload for sign-in after successful signup.
       const signInPayload: SignInPayload = {
         ...payload,
         socialLogin: !(payload.facebookHash == '' && payload.googleHash == ''),
       } as SignInPayload;
-
-      this.logger.log('response');
-      this.logger.log(response);
-      this.logger.log('signin payload');
-      this.logger.log(signInPayload);
       // Auto sign-in the user after successful registration.
       return this.signIn(signInPayload, false);
     } catch (e) {

@@ -6,6 +6,7 @@ import { configManager, ConfigKey } from './common';
 import { Logger } from '@nestjs/common/services/logger.service';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 import { ApiInterceptor } from '@common/api/api.interceptor';
+import 'reflect-metadata';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

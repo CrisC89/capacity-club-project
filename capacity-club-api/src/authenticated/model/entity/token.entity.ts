@@ -1,15 +1,22 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
 import { Credential } from './credential.entity';
-import { ulid } from 'ulid';
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { BaseEntity } from '@common/model';
+import { Transform } from 'class-transformer';
 @Entity()
-export class Token {
-  @PrimaryColumn('varchar', { length: 26, default: () => `'${ulid()}'` })
-  token_id: string;
+export class Token extends BaseEntity {
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true }) // Pour la désérialisation (DB -> Class)
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true }) // Pour la sérialisation (Class -> DB)
+  @PrimaryColumn('varchar')
+  token_id: UniqueId;
   @Column({ nullable: false })
   token: string;
   @Column({ nullable: false })
   refreshToken: string;
   @OneToOne(() => Credential, { eager: true })
-  @JoinColumn({ name: 'credential_id' })
+  @JoinColumn({
+    name: 'credential_id_fk',
+    referencedColumnName: 'credential_id',
+  })
   credential: Credential;
 }

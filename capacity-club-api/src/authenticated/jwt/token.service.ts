@@ -4,12 +4,12 @@ import {
 } from '@authenticated/authenticated.exception';
 import { Credential, RefreshTokenPayload, Token } from '@authenticated/model';
 import { configManager, ConfigKey } from '@common/config';
+import { UniqueId } from '@common/model/unique-id';
 import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { Repository } from 'typeorm';
-import { ulid } from 'ulid';
 
 @Injectable()
 export class TokenService {
@@ -27,7 +27,9 @@ export class TokenService {
   async getTokens(credential: Credential): Promise<Token> {
     try {
       // Delete existing tokens for the credential to prevent token reuse.
-      await this.repository.delete({ credential });
+      await this.repository.delete({
+        credential: { credential_id: credential.credential_id },
+      });
 
       // Define payload for JWT.
       const payload = { sub: credential.credential_id };
@@ -49,7 +51,7 @@ export class TokenService {
       // Insert or update the new tokens in the database.
       await this.repository.upsert(
         Builder<Token>()
-          .token_id(ulid())
+          .token_id(UniqueId.generate())
           .token(token)
           .refreshToken(refreshToken)
           .credential(credential)
@@ -58,7 +60,7 @@ export class TokenService {
       );
 
       // Retrieve and return the new token.
-      return this.repository.findOneBy({ token: token });
+      return await this.repository.findOneBy({ token: token });
     } catch (e) {
       // Log error and throw an exception if token generation fails.
       this.logger.error(e.message);
@@ -68,7 +70,9 @@ export class TokenService {
 
   // Deletes tokens associated with a given credential.
   async deleteFor(credential: Credential): Promise<void> {
-    await this.repository.delete({ credential });
+    await this.repository.delete({
+      credential: { credential_id: credential.credential_id },
+    });
   }
 
   // Refreshes the token using the provided refresh token payload.
@@ -79,8 +83,11 @@ export class TokenService {
         secret: configManager.getValue(ConfigKey.JWT_REFRESH_TOKEN_SECRET),
       }).sub;
       // Fetch the credential details from the database using the extracted credential_id.
-      const credential = await this.credentialRepository.findOneBy({
+      /*const credential = await this.credentialRepository.findOneBy({
         credential_id: id,
+      });*/
+      const credential = await this.credentialRepository.findOneBy({
+        credential_id: UniqueId.from(id),
       });
       // Generate and return new tokens for the found credential.
       return await this.getTokens(credential);

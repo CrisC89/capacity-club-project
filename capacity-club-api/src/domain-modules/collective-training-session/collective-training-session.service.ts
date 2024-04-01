@@ -15,9 +15,9 @@ import {
   CollectiveTrainingSessionUpdateException,
 } from './collective-training-session.exception';
 import { isNil } from 'lodash';
-import { ulid } from 'ulid';
 import { Builder } from 'builder-pattern';
 import { CollectiveTrainingSessionFilter } from './model/filter';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class CollectiveTrainingSessionService
@@ -64,7 +64,7 @@ export class CollectiveTrainingSessionService
     try {
       return await this.repository.save(
         Builder<CollectiveTrainingSession>()
-          .collective_training_session_id(ulid())
+          .collective_training_session_id(UniqueId.generate())
           .title(payload.title)
           .training_date(payload.training_date)
           .start_hours(payload.start_hours)
@@ -82,7 +82,9 @@ export class CollectiveTrainingSessionService
     payload: CollectiveTrainingSessionUpdatePayload,
   ): Promise<CollectiveTrainingSession> {
     try {
-      const detail = await this.detail(payload.collective_training_session_id);
+      const detail = await this.detail(
+        payload.collective_training_session_id.toString(),
+      );
       detail.title = payload.title;
       detail.training_date = payload.training_date;
       detail.start_hours = payload.start_hours;

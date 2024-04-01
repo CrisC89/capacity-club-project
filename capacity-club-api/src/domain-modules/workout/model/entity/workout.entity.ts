@@ -1,3 +1,5 @@
+import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Transform } from 'class-transformer';
 import { CollectiveTraining } from 'domain-modules/collective-training/model/entity/collective-training.entity';
 import { PersonnalTraining } from 'domain-modules/personnal-training/model/entity';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
@@ -11,8 +13,10 @@ import {
 } from 'typeorm';
 @Entity()
 export class Workout extends BaseEntity {
-  @PrimaryColumn('varchar', { length: 26 })
-  workout_id: string;
+  @PrimaryColumn('varchar')
+  @Transform(uniqueIdTransformer.to, { toClassOnly: true })
+  @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
+  workout_id: UniqueId;
   @Column({ nullable: false })
   title: string;
 

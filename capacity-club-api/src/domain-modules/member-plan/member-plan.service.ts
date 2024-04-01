@@ -14,6 +14,7 @@ import {
 import { MemberPlan, MemberPlanCreatePayload } from './model';
 import { MemberPlanUpdatePayload } from './model/payload/member-plan-update.payload';
 import { MemberPlanFilter } from './model/filter';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class MemberPlanService
@@ -35,6 +36,7 @@ export class MemberPlanService
     try {
       return await this.repository.save(
         Builder<MemberPlan>()
+          .member_plan_id(UniqueId.generate())
           .type(payload.type)
           .title(payload.title)
           .description(payload.description)
@@ -100,7 +102,7 @@ export class MemberPlanService
 
   async update(payload: MemberPlanUpdatePayload): Promise<MemberPlan> {
     try {
-      const detail = await this.detail(payload.member_plan_id);
+      const detail = await this.detail(payload.member_plan_id.toString());
       detail.type = payload.type;
       detail.title = payload.title;
       detail.description = payload.description;

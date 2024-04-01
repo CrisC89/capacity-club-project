@@ -13,6 +13,7 @@ import {
   WorkoutListException,
 } from './workout.exception';
 import { WorkoutFilter } from './model/filter';
+import { UniqueId } from '@common/model/unique-id';
 
 @Injectable()
 export class WorkoutService
@@ -34,6 +35,7 @@ export class WorkoutService
     try {
       return await this.repository.save(
         Builder<Workout>()
+          .workout_id(UniqueId.generate())
           .title(payload.title)
           .training_circuits(
             payload.training_circuits ? payload.training_circuits : [],
@@ -94,7 +96,7 @@ export class WorkoutService
 
   async update(payload: WorkoutUpdatePayload): Promise<Workout> {
     try {
-      const detail = await this.detail(payload.workout_id);
+      const detail = await this.detail(payload.workout_id.toString());
       detail.title = payload.title;
       detail.training_circuits = payload.training_circuits
         ? payload.training_circuits

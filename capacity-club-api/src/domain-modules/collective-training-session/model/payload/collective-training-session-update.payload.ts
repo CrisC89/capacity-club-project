@@ -1,3 +1,4 @@
+import { UniqueId } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { Workout } from 'domain-modules/workout/model';
@@ -5,7 +6,7 @@ import { Workout } from 'domain-modules/workout/model';
 export class CollectiveTrainingSessionUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()
-  collective_training_session_id: string;
+  collective_training_session_id: UniqueId;
   @ApiProperty()
   title: string;
   @ApiProperty()

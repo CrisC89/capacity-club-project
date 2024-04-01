@@ -41,6 +41,7 @@ export class JwtGuard implements CanActivate {
   }
   // Method to validate JWT token
   private validateToken(request: any): Observable<boolean> {
+    console.log('Enter validate token');
     // Check if authorization header is present
     if (!isNil(request.headers['authorization'])) {
       try {
