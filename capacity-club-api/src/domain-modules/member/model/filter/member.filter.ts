@@ -13,42 +13,37 @@ export class MemberFilter {
   @IsString()
   @IsOptional()
   @Length(1, 50)
-  firstname: string;
+  firstname?: string;
 
   @ApiProperty()
   @IsString()
   @IsOptional()
   @Length(1, 50)
-  lastname: string;
+  lastname?: string;
 
   @ApiProperty()
   @IsDate()
   @IsOptional()
-  birthdate: Date;
+  birthdate?: Date;
 
   @ApiProperty()
   @IsEmail()
   @IsOptional()
   @Length(1, 50)
-  mail: string;
+  mail?: string;
 
   @ApiProperty()
   @IsOptional()
   @Length(1, 50)
-  phone: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @Length(1, 34)
-  iban: string;
+  phone?: string;
 
   @ApiProperty()
   @IsOptional()
   @Length(1, 10)
-  code_activation: string;
+  code_activation?: string;
 
   @ApiProperty()
   @IsOptional()
   @IsBoolean()
-  active: boolean;
+  active?: boolean;
 }

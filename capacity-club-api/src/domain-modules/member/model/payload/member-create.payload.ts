@@ -49,6 +49,11 @@ export class MemberCreatePayload {
 
   @ApiProperty()
   @IsOptional()
+  @IsBoolean()
+  active: boolean;
+
+  @ApiProperty()
+  @IsOptional()
   @IsArray()
   subscriptions: MemberPlanSubscription[];
 
@@ -59,9 +64,4 @@ export class MemberCreatePayload {
   @ApiProperty()
   @IsOptional()
   credential: Credential;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsBoolean()
-  active: boolean;
 }
