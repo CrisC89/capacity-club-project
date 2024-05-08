@@ -1,3 +1,4 @@
+import 'package:capacity_club_mobile_app/core/routing/go_router.dart';
 import 'package:flutter/material.dart';
 
 class InitPage extends StatelessWidget {
@@ -5,15 +6,19 @@ class InitPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'ToDo App',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
       ),
-      home: Container(
-          color: Colors.amberAccent, child: const Text('Hello world !')),
+      darkTheme: ThemeData.from(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepOrange,
+        ),
+      ),
+      routerConfig: routes,
     );
   }
 }
