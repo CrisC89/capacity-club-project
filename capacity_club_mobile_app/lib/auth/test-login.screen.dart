@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/authenticated/is_logged.dart';
+import 'package:capacity_club_mobile_app/auth/is_logged.dart';
 import 'package:capacity_club_mobile_app/core/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/core/routing/navigator_key.dart';
 import 'package:flutter/material.dart';

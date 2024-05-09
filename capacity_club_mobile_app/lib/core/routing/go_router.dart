@@ -1,5 +1,5 @@
-import 'package:capacity_club_mobile_app/authenticated/test-login.screen.dart';
-import 'package:capacity_club_mobile_app/authenticated/test-register.dart';
+import 'package:capacity_club_mobile_app/auth/test-login.screen.dart';
+import 'package:capacity_club_mobile_app/auth/test-register.dart';
 import 'package:capacity_club_mobile_app/core/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/core/public_layout.dart';
 import 'package:capacity_club_mobile_app/core/routing/go_router_observer.dart';
