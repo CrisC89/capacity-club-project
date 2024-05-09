@@ -61,6 +61,7 @@ export class MemberController
   }
 
   @ApiOperation(MemberControllerList)
+  @Get('list')
   getAll(): Promise<Member[]> {
     return this.service.getAll();
   }

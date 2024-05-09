@@ -1,5 +1,6 @@
 import 'package:capacity_club_mobile_app/authenticated/is_logged.dart';
 import 'package:capacity_club_mobile_app/core/provider/auth_provider.dart';
+import 'package:capacity_club_mobile_app/core/routing/navigator_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,7 @@ class Auth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider =
-        Provider.of<AuthProvider>(context, listen: false);
+        Provider.of<AuthProvider>(context, listen: true);
     return Container(
         child: Center(
       child: Column(
@@ -23,17 +24,15 @@ class Auth extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              // Naviguer vers la page d'inscription
-              context.push('/signup');
+              GoRouter.of(context).go('/signup');
             },
             child: Text('Register'),
           ),
           ElevatedButton(
             onPressed: () {
-              // Naviguer directement vers le tableau de bord (à utiliser avec prudence)
-              context.go('/login');
+              GoRouter.of(context).go('/login');
             },
-            child: Text('Go to Login'),
+            child: Text('Go to Login Page'),
           ),
         ],
       ),
