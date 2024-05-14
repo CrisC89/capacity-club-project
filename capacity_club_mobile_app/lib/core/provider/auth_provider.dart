@@ -1,23 +1,35 @@
+import 'package:capacity_club_mobile_app/core/auth-flow/bloc/auth_flow_bloc.dart';
 import 'package:capacity_club_mobile_app/core/routing/go_router.dart';
 import 'package:capacity_club_mobile_app/core/routing/navigator_key.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
 
-  bool get isLoggedIn => _isLoggedIn;
+  // Instance unique de AuthProvider
+  static final AuthProvider _instance = AuthProvider._internal();
 
-  void login() {
-    _isLoggedIn = true;
-    notifyListeners();
-    routes.replace('/dashboard');
-    authenticatedNavigatorKey.currentState
-        ?.pushNamedAndRemoveUntil('/dashboard', (route) => false);
+  // Constructeur privé pour empêcher l'instanciation en dehors de cette classe
+  AuthProvider._internal();
+
+  // Méthode statique pour récupérer l'instance unique de AuthProvider
+  factory AuthProvider() {
+    return _instance;
   }
 
-  void logout() {
+  bool get isLoggedIn => _isLoggedIn;
+
+  void login(BuildContext context) {
+    _isLoggedIn = true;
+    notifyListeners();
+    BlocProvider.of<AuthFlowBloc>(context).add(AuthFlowStartedEvent());
+  }
+
+  void logout(BuildContext context) {
     _isLoggedIn = false;
     notifyListeners();
-    routes.replace('/login');
+    BlocProvider.of<AuthFlowBloc>(context).add(AuthFlowStartedEvent());
   }
 }

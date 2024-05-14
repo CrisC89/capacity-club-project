@@ -20,7 +20,7 @@ class Login extends StatelessWidget {
           Text('Login Page'),
           ElevatedButton(
             onPressed: () {
-              authProvider.login();
+              authProvider.login(context);
             },
             child: Text('Login'),
           ),

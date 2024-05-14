@@ -18,7 +18,7 @@ class Auth extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              authProvider.logout();
+              authProvider.logout(context);
             },
             child: Text('Logout'),
           ),

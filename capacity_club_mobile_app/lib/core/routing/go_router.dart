@@ -8,7 +8,6 @@ import 'package:capacity_club_mobile_app/domain-features/authenticated_layout.da
 import 'package:capacity_club_mobile_app/domain-features/test-auth.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 final GoRouter routes = GoRouter(
   initialLocation: '/login',
@@ -34,14 +33,21 @@ final GoRouter routes = GoRouter(
               Redirection.checkAuth(context, state, needsAuth: false),
         ),
       ],
-    ),
+    )
+  ],
+);
+
+final GoRouter routes2 = GoRouter(
+  initialLocation: '/dashboard',
+  observers: [GoRouterObserver()],
+  routes: [
     ShellRoute(
       navigatorKey:
           authenticatedNavigatorKey, // Clé pour la navigation authentifiée
       builder: (context, state, child) => AuthenticatedLayout(child: child),
       routes: [
         GoRoute(
-          name: '/dashbord',
+          name: '/dashboard',
           path: '/dashboard',
           builder: (context, state) => Auth(),
           redirect: (context, state) =>
@@ -56,8 +62,10 @@ final GoRouter routes = GoRouter(
 class Redirection {
   static String? checkAuth(BuildContext context, GoRouterState state,
       {required bool needsAuth}) {
-    final isLoggedIn =
-        Provider.of<AuthProvider>(context, listen: false).isLoggedIn;
+    print('---------------------------------------------------');
+    print('redirection enter');
+    print('---------------------------------------------------');
+    final isLoggedIn = AuthProvider().isLoggedIn;
 
     if (needsAuth && !isLoggedIn) {
       return '/login';

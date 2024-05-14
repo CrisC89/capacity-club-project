@@ -19,7 +19,7 @@ class Register extends StatelessWidget {
           Text('Register Page'),
           ElevatedButton(
             onPressed: () {
-              authProvider.login();
+              authProvider.login(context);
             },
             child: Text('Login'),
           ),
