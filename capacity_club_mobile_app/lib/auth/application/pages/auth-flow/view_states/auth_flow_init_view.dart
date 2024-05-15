@@ -1,13 +1,17 @@
+import 'package:capacity_club_mobile_app/core/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/core/routing/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
-class AuthRouteur extends StatelessWidget {
-  const AuthRouteur({super.key});
+class AuthFlowInitView extends StatelessWidget {
+  final GoRouter router;
+  const AuthFlowInitView({super.key, required this.router});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'ToDo App',
+      title: 'Capacity Club',
       themeMode: ThemeMode.system,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -18,7 +22,7 @@ class AuthRouteur extends StatelessWidget {
           seedColor: Colors.deepOrange,
         ),
       ),
-      routerConfig: routes,
+      routerConfig: router,
     );
   }
 }
