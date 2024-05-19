@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AuthFlowLoadingView extends StatefulWidget {
-  const AuthFlowLoadingView({super.key});
+class AuthLoadingView extends StatefulWidget {
+  const AuthLoadingView({super.key});
 
   @override
-  State<AuthFlowLoadingView> createState() => _AuthFlowLoadingViewState();
+  State<AuthLoadingView> createState() => _AuthFlowLoadingViewState();
 }
 
-class _AuthFlowLoadingViewState extends State<AuthFlowLoadingView>
+class _AuthFlowLoadingViewState extends State<AuthLoadingView>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 

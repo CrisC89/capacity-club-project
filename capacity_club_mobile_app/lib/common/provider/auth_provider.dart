@@ -1,6 +1,6 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
-import 'package:capacity_club_mobile_app/core/routing/go_router.dart';
-import 'package:capacity_club_mobile_app/core/routing/navigator_key.dart';
+import 'package:capacity_club_mobile_app/common/routing/go_router.dart';
+import 'package:capacity_club_mobile_app/common/routing/navigator_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

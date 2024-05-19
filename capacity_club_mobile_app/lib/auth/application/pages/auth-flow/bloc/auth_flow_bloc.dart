@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:capacity_club_mobile_app/core/provider/auth_provider.dart';
-import 'package:capacity_club_mobile_app/core/routing/go_router.dart';
+import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
+import 'package:capacity_club_mobile_app/common/routing/go_router.dart';
 import 'package:equatable/equatable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meta/meta.dart';
