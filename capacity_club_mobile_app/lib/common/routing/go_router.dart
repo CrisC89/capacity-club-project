@@ -1,3 +1,4 @@
+import 'package:capacity_club_mobile_app/auth/application/pages/login/login_page.dart';
 import 'package:capacity_club_mobile_app/auth/test-login.screen.dart';
 import 'package:capacity_club_mobile_app/auth/test-register.dart';
 import 'package:capacity_club_mobile_app/auth/public_layout.dart';
@@ -19,7 +20,7 @@ final GoRouter publicRouter = GoRouter(
         GoRoute(
           name: '/login',
           path: '/login',
-          builder: (context, state) => Login(),
+          builder: (context, state) => LoginPage(),
         ),
         GoRoute(
             name: '/signup',

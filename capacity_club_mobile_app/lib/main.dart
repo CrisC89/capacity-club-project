@@ -1,5 +1,6 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/auth_flow_page.dart';
+import 'package:capacity_club_mobile_app/auth/application/pages/login/bloc/login_bloc.dart';
 import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,8 +26,8 @@ void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => AuthProvider()),
-      BlocProvider<AuthFlowBloc>(
-          create: (_) => AuthFlowBloc()), // Fournir votre AuthFlowBloc
+      BlocProvider<AuthFlowBloc>(create: (_) => AuthFlowBloc()),
+      BlocProvider<LoginBloc>(create: (_) => LoginBloc())
     ], child: AuthFlowPage()),
   );
 }
