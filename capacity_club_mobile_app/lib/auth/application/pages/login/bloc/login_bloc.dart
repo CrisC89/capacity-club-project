@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:capacity_club_mobile_app/auth/test-login.screen.dart';
+import 'package:capacity_club_mobile_app/auth/data/builder/sign_in_request_builder.dart';
+import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart';
+import 'package:capacity_club_mobile_app/common/utils/dio_client.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -36,16 +38,46 @@ class LoginBloc extends Bloc<LoginEvent, LoginGenericState> {
       LoginByMailEvent event, Emitter<LoginGenericState> emit) async {
     emit(
         state.copyWith(status: LoginStatus.loading, message: 'Submitting ...'));
-    Map data = {'email': state.email, 'password': state.password};
-    print(
-        "--------------------------------------------------------------------------------");
-    print(data);
-    print(
-        "--------------------------------------------------------------------------------");
-    try {
-      final response =
-          await Dio().post('https://reqres.in/api/login', data: data);
+    SignInRequest data = SignInRequestBuilder()
+        .setMail(state.email)
+        .setPassword(state.password)
+        .build();
 
+    print(
+        "--------------------------------------------------------------------------------");
+    print(
+        "--------------------------MAIL---------------------------------------------");
+    print(data.mail);
+    print(
+        "--------------------------------------------------------------------------------");
+
+    print(
+        "--------------------------------------------------------------------------------");
+    print(
+        "--------------------------PWD---------------------------------------------");
+
+    print(data.password);
+    print(
+        "--------------------------------------------------------------------------------");
+    print(data.toJson());
+
+    try {
+      print(
+          "--------------------------------------------------------------------------------");
+      print(
+          "--------------------------ENTER TRY---------------------------------------------");
+      print(
+          "--------------------------------------------------------------------------------");
+      final response = await DioClient().getClient.post(
+          'http://localhost:3000/api/authenticated/signin',
+          data: jsonEncode(data));
+      print(
+          "--------------------------------------------------------------------------------");
+      print(
+          "--------------------------RESPONSE----------------------------------------------");
+      print(response.data);
+      print(
+          "--------------------------------------------------------------------------------");
       if (response.statusCode == 200) {
         emit(state.copyWith(
             status: LoginStatus.succes, message: 'Login successfull'));
@@ -56,6 +88,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginGenericState> {
     } catch (e) {
       print(
           "--------------------------------------------------------------------------------");
+      print(
+          "-----------------------------ERROR---------------------------------------------");
       print(e.toString());
       print(
           "--------------------------------------------------------------------------------");

@@ -1,6 +1,7 @@
-class ApiResponse {
+class ApiResponse<T> {
   final bool result;
-  final Map<String, dynamic>? data;
+  final T? data;
+  //final Map<String, dynamic>? data;
   //final dynamic? data;
   final String code;
 
@@ -10,10 +11,11 @@ class ApiResponse {
     required this.code,
   });
 
-  factory ApiResponse.fromJson(Map<String, dynamic> json) {
+  factory ApiResponse.fromJson(
+      Map<String, dynamic> json, T Function(Map<String, dynamic>) fromJsonT) {
     return ApiResponse(
       result: json['result'],
-      data: json['data'],
+      data: fromJsonT(json['data']),
       code: json['code'],
     );
   }

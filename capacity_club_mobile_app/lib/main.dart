@@ -24,10 +24,17 @@ class MyApp extends StatelessWidget {
 
 void main() {
   runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => AuthProvider()),
-      BlocProvider<AuthFlowBloc>(create: (_) => AuthFlowBloc()),
-      BlocProvider<LoginBloc>(create: (_) => LoginBloc())
-    ], child: AuthFlowPage()),
+    MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthProvider()),
+          BlocProvider<AuthFlowBloc>(create: (_) => AuthFlowBloc()),
+          BlocProvider<LoginBloc>(create: (_) => LoginBloc())
+        ],
+        child: Builder(builder: (context) {
+          AuthProvider authProvider =
+              Provider.of<AuthProvider>(context, listen: false);
+          authProvider.initialize(context);
+          return const AuthFlowPage();
+        })),
   );
 }

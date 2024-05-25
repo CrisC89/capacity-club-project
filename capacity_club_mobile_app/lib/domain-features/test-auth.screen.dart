@@ -11,30 +11,18 @@ class Auth extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: true);
-    return Container(
-        child: Center(
+    return Center(
       child: Column(
         children: [
+          const Text('YOU ARE CONNECTED !'),
           ElevatedButton(
             onPressed: () {
               authProvider.logout(context);
             },
-            child: Text('Logout'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              GoRouter.of(context).go('/signup');
-            },
-            child: Text('Register'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              GoRouter.of(context).go('/login');
-            },
-            child: Text('Go to Login Page'),
-          ),
+            child: const Text('Logout'),
+          )
         ],
       ),
-    ));
+    );
   }
 }

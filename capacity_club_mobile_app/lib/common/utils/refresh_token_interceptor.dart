@@ -4,21 +4,28 @@ import 'package:capacity_club_mobile_app/common/utils/local_storage.dart';
 import 'package:dio/dio.dart';
 
 class RefreshTokenInterceptor extends Interceptor {
-  final LocalStorage _localStorage;
+  final LocalStorage localStorage = LocalStorage();
   final String _baseURL = BASE_URL;
   String? token;
   String? refreshToken;
   //List<Map<dynamic, dynamic>> failedRequests = [];
   //bool isRefreshing = false;
 
-  RefreshTokenInterceptor(this._localStorage) {
+  // Instance singleton
+  static final RefreshTokenInterceptor _instance =
+      RefreshTokenInterceptor._internal();
+
+  factory RefreshTokenInterceptor() {
+    return _instance;
+  }
+
+  RefreshTokenInterceptor._internal() {
     _retrieveTokens();
   }
 
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    print(options.path);
     if (!options.path.contains('http')) {
       options.path = '$_baseURL${options.path}';
     }
@@ -42,11 +49,11 @@ class RefreshTokenInterceptor extends Interceptor {
     print('refresh $token');
   }
 
-  void setToken(String value) {
+  void setToken(String? value) {
     token = value;
   }
 
-  void setRefreshToken(String value) {
+  void setRefreshToken(String? value) {
     refreshToken = value;
   }
 }
