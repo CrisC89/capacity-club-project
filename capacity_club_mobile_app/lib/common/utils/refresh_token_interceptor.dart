@@ -26,18 +26,24 @@ class RefreshTokenInterceptor extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
+    print("----dio on request------------");
     if (!options.path.contains('http')) {
+      print("----dio on request if http------------");
       options.path = '$_baseURL${options.path}';
     }
     if (options.path != ApiURI.getEndpoint('ACCOUNT', 'SIGNIN') &&
         options.path != ApiURI.getEndpoint('ACCOUNT', 'SIGNUP')) {
+      print("----dio on request if path------------");
       options.headers['Authorization'] = 'Bearer $token';
     }
+    print("----dio on request after if------------");
     return handler.next(options);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
+    print("----dio on error------------");
+    print(err.toString());
     if ((err.response?.statusCode == 401 &&
         err.response?.data['code'] == "api.error.token-expired")) {}
   }

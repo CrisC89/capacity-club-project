@@ -51,15 +51,19 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  void login(BuildContext context) {
+  void login() {
     _isLoggedIn = true;
     notifyListeners();
-    BlocProvider.of<AuthFlowBloc>(context).add(AuthFlowStartedEvent());
+    if (_authFlowBloc != null) {
+      _authFlowBloc?.add(AuthFlowStartedEvent());
+    }
   }
 
-  void logout(BuildContext context) {
+  void logout() {
     _isLoggedIn = false;
     notifyListeners();
-    BlocProvider.of<AuthFlowBloc>(context).add(AuthFlowStartedEvent());
+    if (_authFlowBloc != null) {
+      _authFlowBloc?.add(AuthFlowStartedEvent());
+    }
   }
 }

@@ -17,7 +17,7 @@ class Auth extends StatelessWidget {
           const Text('YOU ARE CONNECTED !'),
           ElevatedButton(
             onPressed: () {
-              authProvider.logout(context);
+              authProvider.logout();
             },
             child: const Text('Logout'),
           )

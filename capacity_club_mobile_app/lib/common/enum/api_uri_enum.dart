@@ -1,9 +1,9 @@
 enum ApiURI {
-  ACCOUNT_SIGNIN('account/signin'),
-  ACCOUNT_SIGNUP('account/signup'),
-  ACCOUNT_ME('account/me'),
-  ACCOUNT_DELETE('account/delete'),
-  ACCOUNT_REFRESH('account/refresh'),
+  ACCOUNT_SIGNIN('authenticated/signin'),
+  ACCOUNT_SIGNUP('authenticated/signup'),
+  ACCOUNT_ME('authenticated/me'),
+  ACCOUNT_DELETE('authenticated/delete'),
+  ACCOUNT_REFRESH('authenticated/refresh'),
 
   MEMBER_CREATE('member/create'),
   MEMBER_DELETE('member/delete/'),

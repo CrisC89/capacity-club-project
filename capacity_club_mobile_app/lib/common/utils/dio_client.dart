@@ -32,6 +32,7 @@ class DioClient {
       String path,
       Map<String, dynamic>? queryParameters,
       T Function(Map<String, dynamic> json) fromJsonT) async {
+    print('$_baseURL$path');
     try {
       ApiResponse<T> response = ApiResponse.fromJson(
           (await client.get('$_baseURL$path',
@@ -51,6 +52,9 @@ class DioClient {
   Future<ApiResponse> post<T>(String path, Payload payload,
       T Function(Map<String, dynamic> json) fromJsonT) async {
     try {
+      print(
+          '------------------------POST--------------------------------------');
+      print('$_baseURL$path');
       ApiResponse<T> response = ApiResponse.fromJson(
           (await client.post('$_baseURL$path', data: jsonEncode(payload))).data,
           fromJsonT);

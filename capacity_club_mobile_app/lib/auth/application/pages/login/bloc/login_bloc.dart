@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:capacity_club_mobile_app/auth/data/builder/sign_in_request_builder.dart';
 import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart';
-import 'package:capacity_club_mobile_app/common/utils/dio_client.dart';
-import 'package:dio/dio.dart';
+import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -13,7 +12,8 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginGenericState> {
-  LoginBloc()
+  final AuthUseCase authUseCase;
+  LoginBloc({required this.authUseCase})
       : super(LoginGenericState(
             email: '',
             password: '',
@@ -43,51 +43,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginGenericState> {
         .setPassword(state.password)
         .build();
 
-    print(
-        "--------------------------------------------------------------------------------");
-    print(
-        "--------------------------MAIL---------------------------------------------");
-    print(data.mail);
-    print(
-        "--------------------------------------------------------------------------------");
-
-    print(
-        "--------------------------------------------------------------------------------");
-    print(
-        "--------------------------PWD---------------------------------------------");
-
-    print(data.password);
-    print(
-        "--------------------------------------------------------------------------------");
-    print(data.toJson());
-
     try {
       print(
-          "--------------------------------------------------------------------------------");
-      print(
           "--------------------------ENTER TRY---------------------------------------------");
-      print(
-          "--------------------------------------------------------------------------------");
-      final response = await DioClient().getClient.post(
-          'http://localhost:3000/api/authenticated/signin',
-          data: jsonEncode(data));
-      print(
-          "--------------------------------------------------------------------------------");
+      final response = await authUseCase.signIn(data);
       print(
           "--------------------------RESPONSE----------------------------------------------");
-      print(response.data);
+      print(response);
       print(
           "--------------------------------------------------------------------------------");
-      if (response.statusCode == 200) {
+      if (response is bool && response == true) {
+        print(
+            "--------------------------IF-------------------------------R--------------------");
         emit(state.copyWith(
             status: LoginStatus.succes, message: 'Login successfull'));
       } else {
-        emit(state.copyWith(
-            status: LoginStatus.error, message: response.data['error']));
+        print(
+            "--------------------------ELSE--------------------------------------------------");
+        emit(state.copyWith(status: LoginStatus.error, message: 'error'));
       }
     } catch (e) {
-      print(
-          "--------------------------------------------------------------------------------");
       print(
           "-----------------------------ERROR---------------------------------------------");
       print(e.toString());

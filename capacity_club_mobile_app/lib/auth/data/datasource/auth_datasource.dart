@@ -6,6 +6,7 @@ import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart'
 import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/common/enum/api_uri_enum.dart';
 import 'package:capacity_club_mobile_app/common/model/api_response.dart';
+import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/common/utils/config_constant.dart';
 import 'package:capacity_club_mobile_app/common/utils/dio_client.dart';
 import 'package:capacity_club_mobile_app/common/utils/local_storage.dart';
@@ -15,23 +16,31 @@ class AuthDataSource implements AuthDataSourceInterface {
   static final LocalStorage localStorage = LocalStorage();
   final bool? isAuthenticated$ = null;
   final CredentialAndTokenModeluser$ = null;
-  final DioClient dioClient = DioClient();
+  final DioClient dioClient;
+
+  AuthDataSource({required this.dioClient});
 
   @override
   Future<bool> signin(SignInRequest request) async {
+    print(
+        '-------------------------------SIGNIN--------------------------------------');
+    print(ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'));
     ApiResponse<CredentialAndTokenModel> response =
         await dioClient.post<CredentialAndTokenModel>(
                 ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'),
                 request,
                 (json) => CredentialAndTokenModel.fromJson(json))
             as ApiResponse<CredentialAndTokenModel>;
+    print(
+        '-------------------------------AFTER RESPONSE--------------------------------------');
     RefreshTokenInterceptor().setToken(response.data?.token);
     RefreshTokenInterceptor().setRefreshToken(response.data?.refreshToken);
-
+    print(response.code);
     if (!response.result) {
       print(response.code);
       // errorSnackBar(_apiService.messageFromCode(response.code));
     }
+    AuthProvider().login();
     return handleSignInSignupPostProcess(response);
   }
 
