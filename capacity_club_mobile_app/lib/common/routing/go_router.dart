@@ -2,7 +2,7 @@ import 'package:capacity_club_mobile_app/auth/application/pages/login/login_page
 import 'package:capacity_club_mobile_app/auth/public_layout.dart';
 import 'package:capacity_club_mobile_app/common/routing/go_router_observer.dart';
 import 'package:capacity_club_mobile_app/common/routing/navigator_key.dart';
-import 'package:capacity_club_mobile_app/domain-features/common/authenticated_layout.dart';
+import 'package:capacity_club_mobile_app/domain-features/common-features/authenticated_layout.dart';
 import 'package:capacity_club_mobile_app/domain-features/test-auth.screen.dart';
 import 'package:go_router/go_router.dart';
 

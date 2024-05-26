@@ -1,4 +1,5 @@
 import 'package:capacity_club_mobile_app/common/enum/api_uri_enum.dart';
+import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/common/utils/config_constant.dart';
 import 'package:capacity_club_mobile_app/common/utils/local_storage.dart';
 import 'package:dio/dio.dart';
