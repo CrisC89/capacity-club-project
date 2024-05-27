@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthProvider extends ChangeNotifier {
-  bool _isLoggedIn = false;
+  bool _isLoggedIn = true;
   CredentialAndTokenModel? _user;
   AuthFlowBloc? _authFlowBloc;
   BuildContext? _context;
