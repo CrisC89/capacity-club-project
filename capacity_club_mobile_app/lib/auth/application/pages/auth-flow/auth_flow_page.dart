@@ -1,14 +1,48 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/view_states/auth_flow_init_view.dart';
 import 'package:capacity_club_mobile_app/auth/application/core/view/auth_flow_loading_view.dart';
+import 'package:capacity_club_mobile_app/common/i18n/app_local.dart';
 import 'package:capacity_club_mobile_app/common/routing/go_router.dart';
-import 'package:capacity_club_mobile_app/common/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
 
-class AuthFlowPage extends StatelessWidget {
+class AuthFlowPage extends StatefulWidget {
   const AuthFlowPage({super.key});
+
+  @override
+  State<AuthFlowPage> createState() => _AuthFlowPageState();
+}
+
+class _AuthFlowPageState extends State<AuthFlowPage> {
+  final FlutterLocalization _localization = FlutterLocalization.instance;
+
+  @override
+  void initState() {
+    _localization.init(
+      mapLocales: [
+        const MapLocale(
+          'en',
+          AppLocale.enTranslation,
+          countryCode: 'US',
+        ),
+        const MapLocale(
+          'fr',
+          AppLocale.frTranslation,
+          countryCode: 'FR',
+        ),
+      ],
+      initLanguageCode: 'en',
+    );
+    _localization.onTranslatedLanguage = _onTranslatedLanguage;
+    super.initState();
+  }
+
+  void _onTranslatedLanguage(Locale? locale) {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +58,7 @@ class AuthFlowPage extends StatelessWidget {
           } else {
             router = publicRouter;
           }
-          return AuthFlowInitView(router: router);
+          return AuthFlowInitView(router: router, localization: _localization);
         }
       },
     );

@@ -6,6 +6,7 @@ import 'package:capacity_club_mobile_app/common/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/common/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:provider/provider.dart';
 import 'common/utils/dependency_injection.dart' as dependencyInjection;
 
@@ -41,8 +42,6 @@ void main() async {
         child: Builder(builder: (context) {
           AuthProvider authProvider =
               Provider.of<AuthProvider>(context, listen: false);
-          ThemeProvider themeProvider =
-              Provider.of<ThemeProvider>(context, listen: false);
           authProvider.initialize(context);
           return const AuthFlowPage();
         })),

@@ -44,6 +44,7 @@ dependencies:
   get_it: ^7.7.0
   flutter_adaptive_scaffold: ^0.1.10+2
   google_fonts: ^6.2.1
+  flutter_localization: ^0.2.0
 
 dev_dependencies:
   flutter_test:
