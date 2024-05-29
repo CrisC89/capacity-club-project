@@ -33,11 +33,11 @@ class _LoginPageState extends State<LoginPage> {
             create: (_) => serviceLocator<LoginBloc>(),
             child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    BlocBuilder<LoginBloc, LoginGenericState>(
+                child: Center(child: const LoginLoadedView()))));
+  }
+}
+/*
+ BlocBuilder<LoginBloc, LoginGenericState>(
                         buildWhen: (current, previous) =>
                             current.email != previous.email,
                         builder: (context, state) {
@@ -111,7 +111,5 @@ class _LoginPageState extends State<LoginPage> {
                             );
                           }),
                     )
-                  ],
-                ))));
-  }
-}
+ 
+  */

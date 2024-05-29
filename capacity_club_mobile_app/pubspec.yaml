@@ -45,6 +45,7 @@ dependencies:
   flutter_adaptive_scaffold: ^0.1.10+2
   google_fonts: ^6.2.1
   flutter_localization: ^0.2.0
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
