@@ -17,7 +17,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late LoginBloc _loginBloc;
+  late LoginBloc _loginBloc = serviceLocator<LoginBloc>();
   final emailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
 
@@ -30,10 +30,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: BlocProvider(
-            create: (_) => serviceLocator<LoginBloc>(),
+            create: (_) => _loginBloc,
             child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Center(child: const LoginLoadedView()))));
+                child: Center(child: LoginLoadedView(loginBloc: _loginBloc)))));
   }
 }
 /*

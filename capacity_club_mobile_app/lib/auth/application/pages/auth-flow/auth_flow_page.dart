@@ -4,7 +4,6 @@ import 'package:capacity_club_mobile_app/auth/application/core/view/auth_flow_lo
 import 'package:capacity_club_mobile_app/common/i18n/app_local.dart';
 import 'package:capacity_club_mobile_app/common/routing/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
