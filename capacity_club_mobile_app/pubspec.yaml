@@ -47,6 +47,8 @@ dependencies:
   flutter_localization: ^0.2.0
   auto_size_text: ^3.0.0
   reactive_forms: ^17.0.1
+  font_awesome_flutter: ^10.7.0
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:

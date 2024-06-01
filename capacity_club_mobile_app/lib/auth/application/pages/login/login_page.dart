@@ -17,7 +17,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late LoginBloc _loginBloc = serviceLocator<LoginBloc>();
+  final LoginBloc _loginBloc = serviceLocator<LoginBloc>();
   final emailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
 

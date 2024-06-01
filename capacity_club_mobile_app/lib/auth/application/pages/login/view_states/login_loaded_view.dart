@@ -34,10 +34,10 @@ class _LoginLoadedViewState extends State<LoginLoadedView> {
       body: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            minHeight: size.height,
+            minHeight: size.height * 0.9,
           ),
           child: IntrinsicHeight(
-            child: loginBodyContent(size, form),
+            child: loginBodyContent(context, form),
           ),
         ),
       ),

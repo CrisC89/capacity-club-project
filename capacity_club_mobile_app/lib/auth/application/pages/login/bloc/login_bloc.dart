@@ -11,38 +11,15 @@ import 'package:meta/meta.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginGenericState> {
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthUseCase authUseCase;
-  LoginBloc({required this.authUseCase})
-      : super(LoginGenericState(
-            email: '',
-            password: '',
-            message: '',
-            status: LoginStatus.initial)) {
-    on<LoginMailChangedEvent>(_onLoginMailChanged);
-    on<LoginPasswordChangedEvent>(_onLoginPasswordChanged);
+  LoginBloc({required this.authUseCase}) : super(LoginByMailState()) {
     on<LoginByMailEvent>(_onLoginByMail);
   }
 
-  FutureOr<void> _onLoginMailChanged(
-      LoginMailChangedEvent event, Emitter<LoginGenericState> emit) {
-    emit(state.copyWith(email: event.email));
-  }
-
-  FutureOr<void> _onLoginPasswordChanged(
-      LoginPasswordChangedEvent event, Emitter<LoginGenericState> emit) {
-    emit(state.copyWith(password: event.password));
-  }
-
   FutureOr<void> _onLoginByMail(
-      LoginByMailEvent event, Emitter<LoginGenericState> emit) async {
-    emit(
-        state.copyWith(status: LoginStatus.loading, message: 'Submitting ...'));
-    SignInRequest data = SignInRequestBuilder()
-        .setMail(state.email)
-        .setPassword(state.password)
-        .build();
-
+      LoginByMailEvent event, Emitter<LoginState> emit) async {
+    SignInRequest data = event.signInRequest;
     try {
       print(
           "--------------------------ENTER TRY---------------------------------------------");
@@ -55,12 +32,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginGenericState> {
       if (response is bool && response == true) {
         print(
             "--------------------------IF-------------------------------R--------------------");
-        emit(state.copyWith(
-            status: LoginStatus.succes, message: 'Login successfull'));
       } else {
         print(
             "--------------------------ELSE--------------------------------------------------");
-        emit(state.copyWith(status: LoginStatus.error, message: 'error'));
       }
     } catch (e) {
       print(
@@ -68,7 +42,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginGenericState> {
       print(e.toString());
       print(
           "--------------------------------------------------------------------------------");
-      emit(state.copyWith(status: LoginStatus.error, message: e.toString()));
     }
   }
 }

@@ -2,34 +2,38 @@ import 'package:capacity_club_mobile_app/auth/data/builder/sign_in_request_build
 import 'package:capacity_club_mobile_app/auth/data/builder/sign_up_request_builder.dart';
 import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart';
 import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/common/i18n/app_local.dart';
 import 'package:capacity_club_mobile_app/common/widgets/black_botton_widget.dart';
 import 'package:capacity_club_mobile_app/common/widgets/text_field_with_icon_widgt.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AuthFormHelper {
-  static Widget getSignupForm(FormGroup form, Function signUp) {
+  static Widget getSignupForm(
+      FormGroup form, Function signUp, BuildContext context) {
     return ReactiveForm(
         formGroup: form,
         child: Column(
           children: [
             textFieldWithIcon(Icons.verified_user_outlined, 'mail',
-                'local.signup_screen_label_username', false, {
-              'required': (error) =>
-                  ' local.signup_screen_error_username_required',
-              'email': (error) => 'local.signup_screen_error_username_email'
+                AppLocale.label_mail.getString(context), false, {
+              'required': (error) => AppLocale.mail_required.getString(context),
+              'email': (error) =>
+                  AppLocale.email_format_error.getString(context)
             }),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             textFieldWithIcon(
               Icons.lock_clock,
               'password',
-              'local.signup_screen_label_password',
+              AppLocale.label_password,
               true,
               {
                 'required': (error) =>
-                    'local.signup_screen_error_password_required',
+                    AppLocale.password_required.getString(context),
                 'minLength': (error) =>
-                    'local.signup_screen_error_password_minLength'
+                    AppLocale.password_error_min_length.getString(context)
               },
             ),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
@@ -49,32 +53,33 @@ class AuthFormHelper {
         ));
   }
 
-  static Widget getSignInForm(FormGroup form, Function signUp) {
+  static Widget getSignInForm(
+      FormGroup form, Function signUp, BuildContext context) {
     return ReactiveForm(
         formGroup: form,
         child: Column(
           children: [
-            textFieldWithIcon(Icons.supervised_user_circle, 'mail',
-                'local.signup_screen_label_username', false, {
-              'required': (error) =>
-                  'local.signup_screen_error_username_required',
-              'email': (error) => 'local.signup_screen_error_username_email'
+            textFieldWithIcon(FontAwesomeIcons.user, 'mail',
+                AppLocale.label_mail.getString(context), false, {
+              'required': (error) => AppLocale.mail_required.getString(context),
+              'email': (error) =>
+                  AppLocale.email_format_error.getString(context)
             }),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             textFieldWithIcon(
-              Icons.cabin,
+              FontAwesomeIcons.eye,
               'password',
-              'local.signup_screen_label_password',
+              AppLocale.label_password.getString(context),
               true,
               {
                 'required': (error) =>
-                    'local.signup_screen_error_password_required',
+                    AppLocale.password_required.getString(context),
                 'minLength': (error) =>
-                    'local.signup_screen_error_password_minLength'
+                    AppLocale.password_error_min_length.getString(context)
               },
             ),
             const Padding(padding: EdgeInsets.only(bottom: 15)),
-            blackButton('local.signin_screen_button', signUp)
+            blackButton(AppLocale.sign_in.getString(context), signUp)
           ],
         ));
   }
