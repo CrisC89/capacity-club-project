@@ -2,8 +2,12 @@ import 'package:capacity_club_mobile_app/auth/application/pages/login/login_page
 import 'package:capacity_club_mobile_app/auth/shared/layout/public_layout.dart';
 import 'package:capacity_club_mobile_app/common/routing/go_router_observer.dart';
 import 'package:capacity_club_mobile_app/common/routing/navigator_key.dart';
+import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/home_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/common-features/authenticated_layout.dart';
+import 'package:capacity_club_mobile_app/domain-features/personal-training/application/pages/personal-training-page/personal_training_page.dart';
+import 'package:capacity_club_mobile_app/domain-features/setting/application/pages/setting-page/setting_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/test-auth.screen.dart';
+import 'package:capacity_club_mobile_app/domain-features/user-profile/application/pages/user-profile/user_profile_page.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter publicRouter = GoRouter(
@@ -27,18 +31,27 @@ final GoRouter publicRouter = GoRouter(
 
 final GoRouter privateRouter = GoRouter(
   initialLocation: '/dashboard',
-  observers: [GoRouterObserver()],
   routes: [
     ShellRoute(
-      navigatorKey:
-          authenticatedNavigatorKey, // Clé pour la navigation authentifiée
-      builder: (context, state, child) => AuthenticatedLayout(child: child),
+      navigatorKey: authenticatedNavigatorKey,
+      builder: (context, state, child) => AuthenticatedLayout(),
       routes: [
         GoRoute(
-            name: '/dashboard',
-            path: '/dashboard',
-            builder: (context, state) => Auth()),
-        // Autres routes nécessitant une authentification ici...
+          path: '/dashboard',
+          builder: (context, state) => HomePage(),
+        ),
+        GoRoute(
+          path: '/training',
+          builder: (context, state) => PersonalTrainingPage(),
+        ),
+        GoRoute(
+          path: '/user',
+          builder: (context, state) => UserProfilePage(),
+        ),
+        GoRoute(
+          path: '/setting',
+          builder: (context, state) => SettingPage(),
+        ),
       ],
     ),
   ],
