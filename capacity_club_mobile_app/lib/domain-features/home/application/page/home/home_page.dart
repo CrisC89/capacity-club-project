@@ -1,3 +1,5 @@
+import 'package:capacity_club_mobile_app/domain-features/common-features/exercise-video-player/exercise_video_player_screen.dart';
+import 'package:capacity_club_mobile_app/domain-features/common-features/youtube-video/youtube_video_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/expension_calendar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -26,8 +28,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ExpansionCalender(
+        Flexible(
+            child: ExerciseVideoPlayer(
+                videoPath: 'assets/videos/alternated_kb_clean.mp4')),
+      ],
+    );
+  }
+}
+
+/*
+ExpansionCalender(
           focusedDay: today,
           onDaySelected: (selectedDay, focusedDay) {
             setState(() {
@@ -44,7 +57,4 @@ class _HomePageState extends State<HomePage> {
           calendarFormat:
               calendarType ? CalendarFormat.month : CalendarFormat.week,
         ),
-      ],
-    );
-  }
-}
+*/

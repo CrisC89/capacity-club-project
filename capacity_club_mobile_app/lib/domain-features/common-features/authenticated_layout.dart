@@ -25,6 +25,41 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
     const NavigationDestination(icon: Icon(Icons.settings), label: 'Setting')
   ];
 
+  _onNavigate(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        BlocProvider.of<NavigationBloc>(context).add(NavigateToHomePage());
+        break;
+      case 1:
+        BlocProvider.of<NavigationBloc>(context)
+            .add(NavigateToPersonalTrainingPage());
+        break;
+      case 2:
+        BlocProvider.of<NavigationBloc>(context)
+            .add(NavigateToUserProfilePage());
+        break;
+      case 3:
+        BlocProvider.of<NavigationBloc>(context).add(NavigateToSettingPage());
+        break;
+    }
+  }
+
+  int _onSelectedIndex(BuildContext context) {
+    final state = context.read<NavigationBloc>().state;
+
+    if (state is HomeState) {
+      return 0;
+    } else if (state is PersonalTrainingState) {
+      return 1;
+    } else if (state is UserProfileState) {
+      return 2;
+    } else if (state is SettingState) {
+      return 3;
+    } else {
+      return 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -68,33 +103,9 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                               AdaptiveScaffold.toRailDestination(element),
                         )
                         .toList(),
-                    selectedIndex: () {
-                      final state = context.read<NavigationBloc>().state;
-                      if (state is HomeState) return 0;
-                      if (state is PersonalTrainingState) return 1;
-                      if (state is UserProfileState) return 2;
-                      if (state is SettingState) return 3;
-                      return 0;
-                    }(),
+                    selectedIndex: _onSelectedIndex(context),
                     onDestinationSelected: (index) {
-                      switch (index) {
-                        case 0:
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigateToHomePage());
-                          break;
-                        case 1:
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigateToPersonalTrainingPage());
-                          break;
-                        case 2:
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigateToUserProfilePage());
-                          break;
-                        case 3:
-                          BlocProvider.of<NavigationBloc>(context)
-                              .add(NavigateToSettingPage());
-                          break;
-                      }
+                      _onNavigate(context, index);
                     },
                   ),
                 ),
@@ -107,16 +118,6 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                   builder: (context) =>
                       BlocBuilder<NavigationBloc, NavigationState>(
                     builder: (context, state) {
-                      int currentIndex = 0;
-                      if (state is HomeState) {
-                        currentIndex = 0;
-                      } else if (state is PersonalTrainingState) {
-                        currentIndex = 1;
-                      } else if (state is UserProfileState) {
-                        currentIndex = 2;
-                      } else if (state is SettingState) {
-                        currentIndex = 3;
-                      }
                       return BottomNavigationBar(
                         items: destinations
                             .map(
@@ -126,31 +127,14 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                               ),
                             )
                             .toList(),
-                        currentIndex: currentIndex,
+                        currentIndex: _onSelectedIndex(context),
                         selectedItemColor:
                             Theme.of(context).colorScheme.primary,
                         unselectedItemColor:
                             Theme.of(context).colorScheme.secondary,
                         backgroundColor: Theme.of(context).colorScheme.surface,
                         onTap: (index) {
-                          switch (index) {
-                            case 0:
-                              BlocProvider.of<NavigationBloc>(context)
-                                  .add(NavigateToHomePage());
-                              break;
-                            case 1:
-                              BlocProvider.of<NavigationBloc>(context)
-                                  .add(NavigateToPersonalTrainingPage());
-                              break;
-                            case 2:
-                              BlocProvider.of<NavigationBloc>(context)
-                                  .add(NavigateToUserProfilePage());
-                              break;
-                            case 3:
-                              BlocProvider.of<NavigationBloc>(context)
-                                  .add(NavigateToSettingPage());
-                              break;
-                          }
+                          _onNavigate(context, index);
                         },
                       );
                     },

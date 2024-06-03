@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+<!-- Application -->
     <application
         android:label="capacity_club_mobile_app"
         android:name="${applicationName}"
