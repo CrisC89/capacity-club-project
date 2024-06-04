@@ -31,16 +31,7 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Flexible(
-            child: ExerciseVideoPlayer(
-                videoPath: 'assets/videos/alternated_kb_clean.mp4')),
-      ],
-    );
-  }
-}
-
-/*
-ExpansionCalender(
+        ExpansionCalender(
           focusedDay: today,
           onDaySelected: (selectedDay, focusedDay) {
             setState(() {
@@ -57,4 +48,11 @@ ExpansionCalender(
           calendarFormat:
               calendarType ? CalendarFormat.month : CalendarFormat.week,
         ),
+      ],
+    );
+  }
+}
+
+/*
+
 */

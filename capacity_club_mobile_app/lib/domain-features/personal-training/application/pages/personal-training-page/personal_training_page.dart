@@ -1,3 +1,4 @@
+import 'package:capacity_club_mobile_app/domain-features/common-features/exercise-video-player/exercise_video_player_screen.dart';
 import 'package:flutter/material.dart';
 
 class PersonalTrainingPage extends StatefulWidget {
@@ -8,12 +9,23 @@ class PersonalTrainingPage extends StatefulWidget {
 }
 
 class _PersonalTrainingPageState extends State<PersonalTrainingPage> {
-  // Définir l'état local pour PersonalTrainingPage ici
+  void showFullScreenVideo(BuildContext context, String videoPath) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return ExerciseVideoPlayer(videoPath: videoPath);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Personal Training Page'),
+      child: TextButton(
+          onPressed: () => showFullScreenVideo(
+              context, 'assets/videos/alternated_kb_clean.mp4'),
+          child: Text("SHOW EXO")),
     );
   }
 }
