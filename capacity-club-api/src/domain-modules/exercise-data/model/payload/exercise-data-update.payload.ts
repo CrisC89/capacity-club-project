@@ -17,6 +17,7 @@ export class ExerciseDataUpdatePayload {
   @IsNotEmpty()
   categories: ExerciseDataCategory[];
   @ApiProperty()
-  @IsNotEmpty()
-  video_link: string;
+  video_youtube_link: string;
+  @ApiProperty()
+  video_asset_link: string;
 }

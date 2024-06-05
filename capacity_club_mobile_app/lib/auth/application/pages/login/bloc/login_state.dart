@@ -40,4 +40,4 @@ final class LoginLoading extends LoginState {}
 
 final class LoginSucces extends LoginState {}
 
-final class LoginFailure extends LoginState {}
+final class LoginFailure2 extends LoginState {}

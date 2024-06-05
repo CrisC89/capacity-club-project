@@ -20,6 +20,8 @@ export class CollectiveTrainingSession extends BaseEntity {
   end_hours: string;
   @Column({ nullable: false })
   nb_place: number;
+  @Column({ nullable: false })
+  nb_subscription: number;
 
   @OneToOne(() => Workout)
   @JoinColumn({ name: 'workout_id', referencedColumnName: 'workout_id' })

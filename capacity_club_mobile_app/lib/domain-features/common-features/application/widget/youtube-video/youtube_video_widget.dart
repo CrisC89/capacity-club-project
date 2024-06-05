@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/domain-features/common-features/youtube-video/bloc/youtube_video_bloc.dart';
+import 'package:capacity_club_mobile_app/domain-features/common-features/application/widget/youtube-video/bloc/youtube_video_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';

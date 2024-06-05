@@ -70,6 +70,7 @@ export class CollectiveTrainingSessionService
           .start_hours(payload.start_hours)
           .end_hours(payload.end_hours)
           .nb_place(payload.nb_place)
+          .nb_subscription(payload.nb_subscription)
           .workout(payload.workout)
           .build(),
       );
@@ -90,6 +91,7 @@ export class CollectiveTrainingSessionService
       detail.start_hours = payload.start_hours;
       detail.end_hours = payload.end_hours;
       detail.nb_place = payload.nb_place;
+      detail.nb_subscription = payload.nb_subscription;
       detail.workout = payload.workout;
       return await this.repository.save(detail);
     } catch (e) {

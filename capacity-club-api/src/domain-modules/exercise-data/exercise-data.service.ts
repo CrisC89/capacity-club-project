@@ -42,7 +42,8 @@ export class ExerciseDataService
           .title(payload.title)
           .description(payload.description)
           .categories(payload.categories)
-          .video_link(payload.video_link)
+          .video_youtube_link(payload.video_youtube_link)
+          .video_asset_link(payload.video_asset_link)
           .build(),
       );
     } catch (e) {
@@ -103,7 +104,8 @@ export class ExerciseDataService
       detail.title = payload.title;
       detail.description = payload.description;
       detail.categories = payload.categories;
-      detail.video_link = payload.video_link;
+      detail.video_youtube_link = payload.video_youtube_link;
+      detail.video_asset_link = payload.video_asset_link;
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

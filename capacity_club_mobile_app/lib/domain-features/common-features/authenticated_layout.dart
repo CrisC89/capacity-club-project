@@ -1,5 +1,5 @@
 import 'package:capacity_club_mobile_app/common/provider/theme_provider.dart';
-import 'package:capacity_club_mobile_app/domain-features/common-features/navigation/bloc/navigation_bloc.dart';
+import 'package:capacity_club_mobile_app/domain-features/common-features/application/navigation/bloc/navigation_bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/home_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/personal-training/application/pages/personal-training-page/personal_training_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/setting/application/pages/setting-page/setting_page.dart';

@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/domain-features/common-features/exercise-video-player/exercise_video_player_screen.dart';
+import 'package:capacity_club_mobile_app/domain-features/common-features/application/widget/exercise-video-player/exercise_video_player_screen.dart';
 import 'package:flutter/material.dart';
 
 class PersonalTrainingPage extends StatefulWidget {

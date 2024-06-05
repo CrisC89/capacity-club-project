@@ -15,8 +15,10 @@ export class ExerciseData extends BaseEntity {
   categories: ExerciseDataCategory[];
   @Column('text', { nullable: false, array: true, default: [] })
   description: string[];
-  @Column({ nullable: false })
-  video_link: string;
+  @Column({ nullable: true })
+  video_youtube_link: string;
+  @Column({ nullable: true })
+  video_asset_link: string;
 
   /* @OneToMany(
     () => ExerciseTraining,

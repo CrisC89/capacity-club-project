@@ -18,5 +18,7 @@ export class CollectiveTrainingSessionUpdatePayload {
   @ApiProperty()
   nb_place: number;
   @ApiProperty()
+  nb_subscription: number;
+  @ApiProperty()
   workout: Workout;
 }
