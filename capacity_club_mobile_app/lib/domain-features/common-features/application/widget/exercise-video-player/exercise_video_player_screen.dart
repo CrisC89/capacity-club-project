@@ -41,7 +41,7 @@ class _ExerciseVideoPlayerState extends State<ExerciseVideoPlayer> {
   Widget videoPlayer(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    double videoHeight = screenHeight / 3; // 1/3 of the screen height
+    double videoHeight = screenHeight / 3;
 
     return ClipRect(
       child: Align(
@@ -67,6 +67,14 @@ class _ExerciseVideoPlayerState extends State<ExerciseVideoPlayer> {
     double videoHeight = screenHeight * 0.60;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(''),
+        leading: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -77,10 +85,6 @@ class _ExerciseVideoPlayerState extends State<ExerciseVideoPlayer> {
             ),
             SizedBox(height: 30),
             exerciseDescription(context),
-            IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
           ],
         ),
       ),
@@ -91,6 +95,17 @@ class _ExerciseVideoPlayerState extends State<ExerciseVideoPlayer> {
 Widget exerciseDescription(BuildContext context) {
   return Container(
     padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(15),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black12,
+          offset: Offset(0, 2),
+          blurRadius: 6.0,
+        ),
+      ],
+    ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

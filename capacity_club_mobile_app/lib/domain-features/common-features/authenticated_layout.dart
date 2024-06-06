@@ -1,12 +1,14 @@
 import 'package:capacity_club_mobile_app/common/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/domain-features/common-features/application/navigation/bloc/navigation_bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/home_page.dart';
+import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/test-home.page.dart';
 import 'package:capacity_club_mobile_app/domain-features/personal-training/application/pages/personal-training-page/personal_training_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/setting/application/pages/setting-page/setting_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/user-profile/application/pages/user-profile/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class AuthenticatedLayout extends StatefulWidget {
@@ -18,11 +20,14 @@ class AuthenticatedLayout extends StatefulWidget {
 
 class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
   List<NavigationDestination> destinations = [
-    const NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-    const NavigationDestination(icon: Icon(Icons.work), label: 'Training'),
     const NavigationDestination(
-        icon: Icon(Icons.verified_user_rounded), label: 'User'),
-    const NavigationDestination(icon: Icon(Icons.settings), label: 'Setting')
+        icon: FaIcon(FontAwesomeIcons.home), label: 'Home'),
+    const NavigationDestination(
+        icon: FaIcon(FontAwesomeIcons.dumbbell), label: 'Training'),
+    const NavigationDestination(
+        icon: FaIcon(FontAwesomeIcons.user), label: 'User'),
+    const NavigationDestination(
+        icon: FaIcon(FontAwesomeIcons.cog), label: 'Setting')
   ];
 
   _onNavigate(BuildContext context, int index) {
@@ -65,18 +70,7 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
     return BlocProvider(
       create: (context) => NavigationBloc(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Auth Layout'),
-          centerTitle: true,
-          actions: [
-            Switch(
-                value: Provider.of<ThemeProvider>(context).isDarkModeOn,
-                onChanged: (_) {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .toggleTheme();
-                })
-          ],
-        ),
+        appBar: AppBar(title: const Text('CAPACITY CLUB'), centerTitle: true),
         body: SafeArea(
           child: AdaptiveLayout(
             primaryNavigation: SlotLayout(
@@ -150,7 +144,7 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                       BlocBuilder<NavigationBloc, NavigationState>(
                     builder: (context, state) {
                       if (state is HomeState) {
-                        return HomePage();
+                        return HomePageTest();
                       } else if (state is PersonalTrainingState) {
                         return PersonalTrainingPage();
                       } else if (state is UserProfileState) {
@@ -158,7 +152,7 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                       } else if (state is SettingState) {
                         return SettingPage();
                       }
-                      return HomePage(); // Default case
+                      return HomePageTest(); // Default case
                     },
                   ),
                 ),
