@@ -56,7 +56,7 @@ class CoachInfoCard extends StatelessWidget {
             Row(
               children: <Widget>[
                 CircleAvatar(
-                  backgroundImage: NetworkImage(imageUrl),
+                  backgroundImage: AssetImage(imageUrl),
                   radius: 40,
                 ),
                 SizedBox(width: 16),

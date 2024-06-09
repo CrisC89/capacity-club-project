@@ -99,7 +99,16 @@ class _ContactPageState extends State<ContactPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              'MOVE CONCEPT\nRue Alphonse Collette 19,\n4910 Theux,\nBelgique',
+              'MOVE CONCEPT',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[700],
+              ),
+            ),
+            Text(
+              'Rue Alphonse Collette 19,\n4910 Theux,\nBelgique',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
@@ -147,9 +156,8 @@ class _ContactPageState extends State<ContactPage> {
             SizedBox(height: 16),
             CoachInfoCard(
               name: 'Jehan LECARME',
-              description:
-                  'Experienced fitness coach specializing in crossfit and HIIT. Dedicated to helping you achieve your fitness goals.',
-              imageUrl: 'https://via.placeholder.com/150',
+              description: 'COACH / PRÉPARATION PHYSIQUE / CROSSFIT / HALTÉRO',
+              imageUrl: 'assets/img/jl_logo.png',
               email: 'jehan.lecarme@example.com',
               phoneNumber: '+123456789',
             ),

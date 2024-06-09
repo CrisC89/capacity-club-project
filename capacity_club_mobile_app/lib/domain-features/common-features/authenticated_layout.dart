@@ -145,7 +145,7 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                       BlocBuilder<NavigationBloc, NavigationState>(
                     builder: (context, state) {
                       if (state is HomeState) {
-                        return HomePageTest();
+                        return HomePage();
                       } else if (state is PersonalTrainingState) {
                         return PersonalTrainingPage();
                       } else if (state is UserProfileState) {
@@ -153,7 +153,7 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                       } else if (state is SettingState) {
                         return ContactPage();
                       }
-                      return HomePageTest(); // Default case
+                      return HomePage(); // Default case
                     },
                   ),
                 ),

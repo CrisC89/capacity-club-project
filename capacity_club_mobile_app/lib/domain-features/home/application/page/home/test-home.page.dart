@@ -173,95 +173,10 @@ class _HomePageStateTest extends State<HomePageTest> {
             thickness: 2,
             indent: 20,
             endIndent: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Contact the Coach',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Row(
-                      children: <Widget>[
-                        CircleAvatar(
-                          backgroundImage:
-                              NetworkImage('https://via.placeholder.com/150'),
-                          radius: 40,
-                        ),
-                        SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                'Jehan LECARME',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Experienced fitness coach specializing in crossfit and HIIT. Dedicated to helping you achieve your fitness goals.',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey[600],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-                    ElevatedButton.icon(
-                      onPressed: _sendEmail,
-                      icon: Icon(Icons.email),
-                      label: Text('Contact via Email'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          )
         ],
       ),
     );
-  }
-
-  Future<void> _sendEmail() async {
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: 'coach@example.com',
-      queryParameters: {
-        'subject': 'Contact',
-        'body': 'Hello Coach',
-      },
-    );
-
-    try {
-      if (await canLaunchUrl(emailLaunchUri)) {
-        await launchUrl(emailLaunchUri);
-      } else {
-        throw 'Could not launch $emailLaunchUri';
-      }
-    } catch (e) {
-      // Handle the error appropriately
-      print(e.toString());
-    }
   }
 }
 
