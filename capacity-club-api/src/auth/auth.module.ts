@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { AuthenticatedService } from './authenticated.service';
 import { Credential } from './model/entity/credential.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Token } from './model/entity/token.entity';
 import { TokenService } from './jwt/token.service';
-import { AuthenticatedController } from './authenticated.controller';
 import { JwtModule } from '@nestjs/jwt/dist/jwt.module';
 import { configManager } from '@common/config/config.manager';
 import { ConfigKey } from '@common/config/enum/config-key.enum';
 import { Member } from 'domain-modules/member/model';
+import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
@@ -21,8 +21,8 @@ import { Member } from 'domain-modules/member/model';
     }),
     TypeOrmModule.forFeature([Credential, Token, Member]),
   ],
-  exports: [AuthenticatedService],
-  providers: [AuthenticatedService, TokenService],
-  controllers: [AuthenticatedController],
+  exports: [AuthService],
+  providers: [AuthService, TokenService],
+  controllers: [AuthController],
 })
-export class AuthenticatedModule {}
+export class AuthModule {}

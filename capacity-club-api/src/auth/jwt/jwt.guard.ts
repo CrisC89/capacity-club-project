@@ -1,9 +1,9 @@
 import {
   TokenExpiredException,
   NoTokenFoundedException,
-} from '@authenticated/authenticated.exception';
-import { AuthenticatedService } from '@authenticated/authenticated.service';
-import { Credential } from '@authenticated/model';
+} from '@auth/auth.exception';
+import { AuthService } from '@auth/auth.service';
+import { Credential } from '@auth/model';
 import { IS_PUBLIC_KEY } from '@common/config';
 import {
   Injectable,
@@ -22,7 +22,7 @@ export class JwtGuard implements CanActivate {
 
   constructor(
     private readonly jwtService: JwtService,
-    private readonly authenticatedService: AuthenticatedService,
+    private readonly authService: AuthService,
     private reflector: Reflector,
   ) {}
   // Main guard method to check if the request is authorized
@@ -50,7 +50,7 @@ export class JwtGuard implements CanActivate {
           request.headers['authorization'].replace('Bearer ', ''),
         ).sub;
         // Retrieve credential details and set in request
-        return from(this.authenticatedService.detail(id)).pipe(
+        return from(this.authService.detail(id)).pipe(
           map((user: Credential) => {
             request.user = user;
             return true;

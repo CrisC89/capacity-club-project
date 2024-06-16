@@ -12,7 +12,7 @@
     "baseUrl": "./src",
     "paths": {
       "@common/*": ["./common/*"],
-      "@authenticated/*": ["./authenticated/*"],
+      "@auth/*": ["./auth/*"],
       "@core/*": ["./core"],
       "@domain-modules-shared": ["./domain-modules/shared"],
       "@address": ["./domain-modules/address"],
@@ -20,6 +20,7 @@
       "@exercise-training": ["./domain-modules/exercise-training"],
       "@exercise-data": ["./domain-modules/exercise-data"],
       "@member": ["./domain-modules/member"],
+      "@member-card": ["./domain-modules/member-card"],
       "@member-plan": ["./domain-modules/member-plan"],
       "@workout": ["./domain-modules/workout"],
       "@member-plan-subscription": [

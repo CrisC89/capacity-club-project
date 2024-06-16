@@ -13,9 +13,10 @@ import { Gender } from '../enum';
 import { isNil } from 'lodash';
 import { BaseEntity } from '@common/model';
 import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
-import { Credential } from '@authenticated/model';
+import { Credential } from '@auth/model';
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { Transform } from 'class-transformer';
+import { MemberCard } from 'domain-modules/member-card/model/entity/member-card.entity';
 
 @Entity()
 export class Member extends BaseEntity {
@@ -33,6 +34,8 @@ export class Member extends BaseEntity {
   gender: Gender;
   @Column({ length: 15, nullable: true })
   phone: string;
+  @Column({ nullable: true })
+  mail: string;
   @Column({ length: 10, nullable: true })
   code_activation: string;
   @Column({ default: false })
@@ -54,6 +57,13 @@ export class Member extends BaseEntity {
     referencedColumnName: 'credential_id',
   })
   credential: Credential;
+
+  @OneToOne(() => MemberCard, (memberCard) => memberCard.member, {
+    cascade: true,
+    nullable: true,
+  })
+  @JoinColumn()
+  member_card: MemberCard;
 
   @BeforeInsert()
   setCodeActivation() {

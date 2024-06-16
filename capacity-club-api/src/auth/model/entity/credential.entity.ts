@@ -13,7 +13,7 @@ export class Credential extends BaseEntity {
   credential_id: UniqueId;
 
   @Column({ nullable: false, unique: true })
-  mail: string;
+  username: string;
 
   @Exclude({ toPlainOnly: true })
   @Column({ nullable: true })

@@ -1,16 +1,10 @@
-import { TokenService } from '@authenticated/jwt/token.service';
+import { Credential } from '@auth/model';
+import { TokenService } from '@auth/jwt/token.service';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isNil } from 'lodash';
 import { Repository } from 'typeorm';
 import {
-  CredentialDeleteException,
-  SignupException,
-  UserAlreadyExistException,
-  UserNotFoundException,
-} from './authenticated.exception';
-import {
-  Credential,
   RefreshTokenPayload,
   SignInPayload,
   SignupPayload,
@@ -19,9 +13,16 @@ import {
 import { comparePassword, encryptPassword } from './utils';
 import { Builder } from 'builder-pattern';
 import { UniqueId } from '@common/model/unique-id';
+import {
+  CredentialDeleteException,
+  SignupException,
+  UserAlreadyExistException,
+  UserNotFoundException,
+} from './auth.exception';
+import { CredentialUpdatepPayload } from './model/payload/credential-update.payload';
 
 @Injectable()
-export class AuthenticatedService {
+export class AuthService {
   // Logger for logging messages.
   private readonly logger = new Logger();
 
@@ -70,7 +71,7 @@ export class AuthenticatedService {
       // Handle regular login
       // Find the user by email and admin status.
       result = await this.repository.findOneBy({
-        mail: payload.mail,
+        username: payload.username,
         isAdmin: isAdmin,
       });
     }
@@ -90,7 +91,7 @@ export class AuthenticatedService {
   // Handles new user registration and returns an authentication token.
   async signup(payload: SignupPayload): Promise<Token | null> {
     const result: Credential | null = await this.repository.findOneBy({
-      mail: payload.mail,
+      username: payload.username,
     });
 
     // Check if user already exists and throw an exception if so.
@@ -116,7 +117,7 @@ export class AuthenticatedService {
           .password(encryptedPassword)
           .facebookHash(payload.facebookHash)
           .googleHash(payload.googleHash)
-          .mail(payload.mail)
+          .username(payload.username)
           .build(),
       );
       console.log(response);
@@ -137,6 +138,54 @@ export class AuthenticatedService {
   // Refreshes the authentication token using the provided refresh token payload.
   async refresh(payload: RefreshTokenPayload): Promise<Token | null> {
     return this.tokenService.refresh(payload);
+  }
+
+  async linkFacebookAccount(payload: CredentialUpdatepPayload): Promise<void> {
+    const credential = await this.repository.findOneBy({
+      credential_id: payload.credential_id.toString(),
+    });
+
+    if (isNil(credential)) {
+      throw new UserNotFoundException();
+    }
+
+    credential.facebookHash = payload.facebookHash;
+    await this.repository.save(credential);
+  }
+
+  async linkGoogleAccount(payload: CredentialUpdatepPayload): Promise<void> {
+    const credential = await this.repository.findOneBy({
+      credential_id: payload.credential_id.toString(),
+    });
+
+    if (isNil(credential)) {
+      throw new UserNotFoundException();
+    }
+
+    credential.googleHash = payload.facebookHash;
+    await this.repository.save(credential);
+  }
+
+  async linkUsername(payload: CredentialUpdatepPayload): Promise<void> {
+    const credential = await this.repository.findOneBy({
+      credential_id: payload.credential_id.toString(),
+    });
+
+    if (isNil(credential)) {
+      throw new UserNotFoundException();
+    }
+
+    const existingCredential = await this.repository.findOneBy({
+      username: payload.username,
+    });
+
+    if (!isNil(existingCredential)) {
+      throw new UserAlreadyExistException();
+    }
+
+    credential.username = payload.username;
+    credential.password = await encryptPassword(payload.password);
+    await this.repository.save(credential);
   }
 
   // Deletes a user and their associated tokens.

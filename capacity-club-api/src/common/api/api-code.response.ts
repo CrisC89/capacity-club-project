@@ -56,6 +56,16 @@ export enum ApiCodeResponse {
   MEMBER_PAYLOAD_MEMBER_ID_LENGTH_ERROR = 'api.error.member-payload-member_id-length-error',
   MEMBER_PAYLOAD_ACTIVE_INVALID = 'api.error.member-payload-active-invalid',
 
+  MEMBER_CARD_NOT_FOUND = 'api.error.member-card-not-found',
+  MEMBER_CARD_DELETE_SUCCESS = 'api.success.member-card-delete',
+  MEMBER_CARD_UPDATE_ERROR = 'api.error.member-card-update',
+  MEMBER_CARD_UPDATE_SUCCESS = 'api.success.member-card-update',
+  MEMBER_CARD_DELETE_ERROR = 'api.error.member-card-delete',
+  MEMBER_CARD_LIST_ERROR = 'api.error.member-card-list',
+  MEMBER_CARD_LIST_SUCCESS = 'api.success.member-card-list',
+  MEMBER_CARD_CREATE_ERROR = 'api.error.member-card-create',
+  MEMBER_CARD_CREATE_SUCCESS = 'api.success.member-card-create',
+
   MEMBER_PLAN_NOT_FOUND = 'api.error.member-plan-not-found',
   MEMBER_PLAN_DELETE_SUCCESS = 'api.success.member-plan-delete',
   MEMBER_PLAN_DELETE_ERROR = 'api.error.member-plan-delete',

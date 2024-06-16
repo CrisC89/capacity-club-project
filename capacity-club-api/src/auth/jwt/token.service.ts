@@ -1,8 +1,8 @@
 import {
   TokenGenerationException,
   TokenExpiredException,
-} from '@authenticated/authenticated.exception';
-import { Credential, RefreshTokenPayload, Token } from '@authenticated/model';
+} from '@auth/auth.exception';
+import { Credential, RefreshTokenPayload, Token } from '@auth/model';
 import { configManager, ConfigKey } from '@common/config';
 import { UniqueId } from '@common/model/unique-id';
 import { Injectable, Logger } from '@nestjs/common';

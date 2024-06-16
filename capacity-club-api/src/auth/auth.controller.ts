@@ -1,6 +1,9 @@
 import {
   AuthenticatedControllerAdminSignIn,
   AuthenticatedControllerDelete,
+  AuthenticatedControllerLinkFacebookAccount,
+  AuthenticatedControllerLinkGoogleAccount,
+  AuthenticatedControllerLinkUsername,
   AuthenticatedControllerMe,
   AuthenticatedControllerRefresh,
   AuthenticatedControllerSignIn,
@@ -8,7 +11,6 @@ import {
 } from './../common/documentation/swagger.annotations';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AuthenticatedService } from './authenticated.service';
 import { Public } from '@common/config/metadata/public.metadata';
 import {
   SignInPayload,
@@ -17,14 +19,16 @@ import {
   Credential,
 } from './model';
 import { User } from '@common/config/metadata/user.metadata';
+import { AuthService } from './auth.service';
+import { CredentialUpdatepPayload } from './model/payload/credential-update.payload';
 
 // Decorators for Swagger documentation and setting up the controller for API routes
 @ApiBearerAuth('access-token')
-@ApiTags('Authenticated')
-@Controller('authenticated')
-export class AuthenticatedController {
+@ApiTags('Auth')
+@Controller('auth')
+export class AuthController {
   // Dependency injection of AuthenticatedService
-  constructor(private readonly service: AuthenticatedService) {}
+  constructor(private readonly service: AuthService) {}
 
   //Method for user sign in
   @ApiOperation(AuthenticatedControllerSignIn)
@@ -63,6 +67,27 @@ export class AuthenticatedController {
   @Get('me')
   public me(@User() user: Credential) {
     return user;
+  }
+
+  @ApiOperation(AuthenticatedControllerLinkGoogleAccount)
+  @Public()
+  @Post('link-facebook')
+  public linkFacebookAccount(@Body() payload: CredentialUpdatepPayload) {
+    return this.service.linkFacebookAccount(payload);
+  }
+
+  @ApiOperation(AuthenticatedControllerLinkFacebookAccount)
+  @Public()
+  @Post('link-google')
+  public linkGoogleAccount(@Body() payload: CredentialUpdatepPayload) {
+    return this.service.linkFacebookAccount(payload);
+  }
+
+  @ApiOperation(AuthenticatedControllerLinkUsername)
+  @Public()
+  @Post('link-username')
+  public linkUsername(@Body() payload: CredentialUpdatepPayload) {
+    return this.service.linkUsername(payload);
   }
 
   //Method to delete a credential by id

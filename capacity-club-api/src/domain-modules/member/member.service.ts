@@ -14,7 +14,7 @@ import {
 } from './member.exception';
 import { MemberFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
-import { Credential } from '@authenticated/model';
+import { Credential } from '@auth/model';
 
 @Injectable()
 export class MemberService
@@ -42,6 +42,7 @@ export class MemberService
           .firstname(payload.firstname)
           .lastname(payload.lastname)
           .phone(payload.phone)
+          .mail(payload.mail)
           .gender(payload.gender)
           .birthdate(payload.birthdate)
           .address(payload.address)
@@ -111,6 +112,7 @@ export class MemberService
       detail.birthdate = payload.birthdate;
       detail.gender = payload.gender;
       detail.phone = payload.phone;
+      detail.mail = payload.mail;
       detail.address = payload.address;
       detail.active = payload.active;
       detail.credential = await this.credentialRepository.findOneBy({

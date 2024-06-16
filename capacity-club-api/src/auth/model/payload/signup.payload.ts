@@ -1,11 +1,10 @@
 import { ApiCodeResponse } from '@common/api';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsEmail, Length } from 'class-validator';
+import { IsNotEmpty, Length } from 'class-validator';
 export class SignupPayload {
   @ApiProperty()
   @IsNotEmpty({ message: ApiCodeResponse.SIGNUP_PAYLOAD_MAIL_IS_MISSING })
-  @IsEmail(undefined, { message: ApiCodeResponse.SIGNUP_PAYLOAD_MAIL_INVALID })
-  mail: string;
+  username: string;
 
   @ApiProperty()
   @IsNotEmpty({ message: ApiCodeResponse.SIGNUP_PAYLOAD_PASSWORD_IS_MISSING })
