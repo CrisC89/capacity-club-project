@@ -1,6 +1,6 @@
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { Transform } from 'class-transformer';
-import { CollectiveTraining } from 'domain-modules/collective-training/model/entity/collective-training.entity';
+import { CollectiveTraining } from 'domain-modules/collective-training/model';
 import { PersonnalTraining } from 'domain-modules/personnal-training/model/entity';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 import {

@@ -41,11 +41,11 @@ export class ExerciseTrainingService
       return await this.repository.save(
         Builder<ExerciseTraining>()
           .exercise_training_id(UniqueId.generate())
-          .title(payload.title)
           .nb_reps(payload.nb_reps)
           .intensity(payload.intensity)
           .member_feedback(payload.member_feedback)
-          .member_note(payload.member_note)
+          .exercise_data(payload.exercise_data)
+          .training_circuit(payload.training_circuit)
           .build(),
       );
     } catch (e) {
@@ -108,11 +108,11 @@ export class ExerciseTrainingService
   ): Promise<ExerciseTraining> {
     try {
       const detail = await this.detail(payload.exercise_training_id.toString());
-      detail.title = payload.title;
       detail.nb_reps = payload.nb_reps;
       detail.intensity = payload.intensity;
       detail.member_feedback = payload.member_feedback;
-      detail.member_note = payload.member_note;
+      detail.exercise_data = payload.exercise_data;
+      detail.training_circuit = payload.training_circuit;
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

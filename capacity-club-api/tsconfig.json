@@ -27,10 +27,7 @@
         "./domain-modules/member-plan-subscription"
       ],
       "@personnal-training": ["./domain-modules/personnal-training"],
-      "@training-circuit": ["./domain-modules/training-circuit"],
-      "@collective-training-session": [
-        "./domain-modules/colective-training-session"
-      ]
+      "@training-circuit": ["./domain-modules/training-circuit"]
     },
     "incremental": true,
     "skipLibCheck": true,

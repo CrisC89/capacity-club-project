@@ -1,13 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Length, IsEnum } from 'class-validator';
+import { Length, IsEnum } from 'class-validator';
 import { TrainingIntensity } from '../enum';
+import { ExerciseData } from 'domain-modules/exercise-data/model';
 
 export class ExerciseTrainingFilter {
-  @ApiProperty()
-  @IsString()
-  @Length(1, 50)
-  title: string;
-
   @ApiProperty()
   @Length(1, 50)
   nb_reps: number;
@@ -20,7 +16,5 @@ export class ExerciseTrainingFilter {
   member_feedback: number;
 
   @ApiProperty()
-  @IsString()
-  @Length(1, 1000)
-  member_note: string;
+  exercise_data: ExerciseData;
 }

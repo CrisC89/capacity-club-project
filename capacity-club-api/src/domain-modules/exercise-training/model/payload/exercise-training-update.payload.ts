@@ -1,19 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsEnum, IsNotEmpty, Length } from 'class-validator';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model/entity/training-circuit.entity';
 import { TrainingIntensity } from '../enum';
 import { UniqueId } from '@common/model/unique-id';
+import { ExerciseData } from 'domain-modules/exercise-data/model';
 
 export class ExerciseTrainingUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()
   @Length(26, 26)
   exercise_training_id: UniqueId;
-
-  @ApiProperty()
-  @IsString()
-  @Length(1, 50)
-  title: string;
 
   @ApiProperty()
   @Length(1, 50)
@@ -27,9 +23,7 @@ export class ExerciseTrainingUpdatePayload {
   member_feedback: number;
 
   @ApiProperty()
-  @IsString()
-  @Length(1, 1000)
-  member_note: string;
+  exercise_data: ExerciseData;
 
   @ApiProperty()
   training_circuit: TrainingCircuit;

@@ -19,8 +19,8 @@ export class ExerciseData extends BaseEntity {
   video_youtube_link: string;
   @Column({ nullable: true })
   video_asset_link: string;
-
-  /* @OneToMany(
+  /*
+  @OneToMany(
     () => ExerciseTraining,
     (exerciseTraining) => exerciseTraining.exercise_data,
     {
@@ -29,5 +29,5 @@ export class ExerciseData extends BaseEntity {
       nullable: true,
     },
   )
-  exercise_training_list: ExerciseTraining[]; */
+  exercise_training_list: ExerciseTraining[];*/
 }

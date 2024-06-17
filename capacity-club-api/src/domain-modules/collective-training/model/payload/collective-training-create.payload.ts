@@ -1,19 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
-import { CollectiveTrainingSession } from 'domain-modules/collective-training-session/model';
-import { Member } from 'domain-modules/member/model';
 import { Workout } from 'domain-modules/workout/model';
 
 export class CollectiveTrainingCreatePayload {
   @ApiProperty()
-  @IsNotEmpty()
-  member: Member;
-
+  title: string;
   @ApiProperty()
-  @IsNotEmpty()
-  collective_training_session: CollectiveTrainingSession;
-
+  training_date: Date;
   @ApiProperty()
-  @IsNotEmpty()
+  start_hours: string;
+  @ApiProperty()
+  end_hours: string;
+  @ApiProperty()
+  nb_place: number;
+  @ApiProperty()
+  nb_subscription: number;
+  @ApiProperty()
   workout: Workout;
 }

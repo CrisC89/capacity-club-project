@@ -13,15 +13,11 @@ export class ExerciseTraining extends BaseEntity {
   @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
   exercise_training_id: UniqueId;
   @Column({ nullable: false })
-  title: string;
-  @Column({ nullable: false })
   nb_reps: number;
   @Column('varchar', { nullable: false, default: TrainingIntensity.RPE })
   intensity: TrainingIntensity;
   @Column({ nullable: true })
   member_feedback: number;
-  @Column({ nullable: true })
-  member_note: string;
 
   @ManyToOne(() => ExerciseData)
   @JoinColumn({
