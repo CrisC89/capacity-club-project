@@ -25,21 +25,29 @@ export class JwtGuard implements CanActivate {
     private readonly authService: AuthService,
     private reflector: Reflector,
   ) {}
-  // Main guard method to check if the request is authorized
+  /**
+   * Main guard method to check if the request is authorized.
+   * @param context - The execution context of the request.
+   * @returns A boolean or a Promise/Observable of boolean indicating if the request is authorized.
+   */
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    //Here we check if route have @Public decorator;
     const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
-    // If public, allow access; otherwise validate the JWT token
     return isPublic
       ? true
       : this.validateToken(context.switchToHttp().getRequest());
   }
-  // Method to validate JWT token
+  /**
+   * Method to validate JWT token.
+   * @param request - The HTTP request object.
+   * @returns An Observable of boolean indicating if the token is valid.
+   * @throws TokenExpiredException if the token is expired.
+   * @throws NoTokenFoundedException if no token is found.
+   */
   private validateToken(request: any): Observable<boolean> {
     console.log('Enter validate token');
     // Check if authorization header is present

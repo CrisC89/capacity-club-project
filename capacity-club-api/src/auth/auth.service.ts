@@ -24,7 +24,7 @@ import { CredentialUpdatepPayload } from './model/payload/credential-update.payl
 @Injectable()
 export class AuthService {
   // Logger for logging messages.
-  private readonly logger = new Logger();
+  private readonly logger = new Logger(AuthService.name);
 
   constructor(
     @InjectRepository(Credential)
@@ -32,7 +32,11 @@ export class AuthService {
     private readonly tokenService: TokenService,
   ) {}
 
-  // Retrieves credential details by id or throws UserNotFoundException if not found.
+  /**
+   * Retrieves credential details by id or throws UserNotFoundException if not found.
+   * @param id - The credential ID to retrieve.
+   * @returns The found credential.
+   */
   async detail(id: string): Promise<Credential> {
     const result = await this.repository.findOneBy({
       credential_id: id,
@@ -43,40 +47,37 @@ export class AuthService {
     throw new UserNotFoundException();
   }
 
-  // Handles the sign-in process for both social (Facebook and Google) and regular logins.
+  /**
+   * Handles the sign-in process for both social (Facebook and Google) and regular logins.
+   * @param payload - The sign-in payload containing login details.
+   * @param isAdmin - Indicates if the user is an admin.
+   * @returns The authentication token if sign-in is successful.
+   * @throws UserNotFoundException if user is not found or password mismatch.
+   */
   async signIn(
     payload: SignInPayload,
     isAdmin: boolean,
   ): Promise<Token | null> {
     let result = null;
-    // Handle social login
     if (payload.socialLogin) {
-      // Check if it's a Facebook login and facebookHash is provided.
       if (!isNil(payload.facebookHash) && payload.facebookHash.length > 0) {
-        // Find the user by Facebook hash and admin status.
         result = await this.repository.findOneBy({
           facebookHash: payload.facebookHash,
           isAdmin: isAdmin,
         });
-      }
-      // Check if it's a Google login and googleHash is provided.
-      else if (!isNil(payload.googleHash) && payload.googleHash.length > 0) {
-        // Find the user by Google hash and admin status.
+      } else if (!isNil(payload.googleHash) && payload.googleHash.length > 0) {
         result = await this.repository.findOneBy({
           googleHash: payload.googleHash,
           isAdmin: isAdmin,
         });
       }
     } else {
-      // Handle regular login
-      // Find the user by email and admin status.
       result = await this.repository.findOneBy({
         username: payload.username,
         isAdmin: isAdmin,
       });
     }
 
-    // Validate user and password, generate tokens if valid.
     if (
       !isNil(result) &&
       (payload.socialLogin ||
@@ -84,17 +85,21 @@ export class AuthService {
     ) {
       return this.tokenService.getTokens(result);
     }
-    // Throw an exception if user not found or password mismatch.
     throw new UserNotFoundException();
   }
 
-  // Handles new user registration and returns an authentication token.
+  /**
+   * Handles new user registration and returns an authentication token.
+   * @param payload - The signup payload containing registration details.
+   * @returns The authentication token after successful signup.
+   * @throws UserAlreadyExistException if the username is already taken.
+   * @throws SignupException if there is an error during signup.
+   */
   async signup(payload: SignupPayload): Promise<Token | null> {
     const result: Credential | null = await this.repository.findOneBy({
       username: payload.username,
     });
 
-    // Check if user already exists and throw an exception if so.
     if (!isNil(result)) {
       throw new UserAlreadyExistException();
     }
@@ -104,13 +109,10 @@ export class AuthService {
     this.logger.log('googleHash');
     this.logger.log(isNil(payload.facebookHash));
     try {
-      // Encrypt password for regular signup, leave empty for social login.
-      //with isNill we don't check if the value is empty string
       const encryptedPassword =
         payload.facebookHash == '' && payload.googleHash == ''
           ? await encryptPassword(payload.password)
           : '';
-      // Create new user credential and save to repository.
       const response = await this.repository.save(
         Builder<Credential>()
           .credential_id(UniqueId.generate())
@@ -121,25 +123,31 @@ export class AuthService {
           .build(),
       );
       console.log(response);
-      // Prepare payload for sign-in after successful signup.
       const signInPayload: SignInPayload = {
         ...payload,
         socialLogin: !(payload.facebookHash == '' && payload.googleHash == ''),
       } as SignInPayload;
-      // Auto sign-in the user after successful registration.
       return this.signIn(signInPayload, false);
     } catch (e) {
-      // Log the error and throw a signup exception.
       this.logger.error(e.message);
       throw new SignupException();
     }
   }
 
-  // Refreshes the authentication token using the provided refresh token payload.
+  /**
+   * Refreshes the authentication token using the provided refresh token payload.
+   * @param payload - The refresh token payload.
+   * @returns The new authentication token.
+   */
   async refresh(payload: RefreshTokenPayload): Promise<Token | null> {
     return this.tokenService.refresh(payload);
   }
 
+  /**
+   * Links a Facebook account to the user's credentials.
+   * @param payload - The payload containing the credential ID and Facebook hash.
+   * @throws UserNotFoundException if the credential is not found.
+   */
   async linkFacebookAccount(payload: CredentialUpdatepPayload): Promise<void> {
     const credential = await this.repository.findOneBy({
       credential_id: payload.credential_id.toString(),
@@ -153,6 +161,11 @@ export class AuthService {
     await this.repository.save(credential);
   }
 
+  /**
+   * Links a Google account to the user's credentials.
+   * @param payload - The payload containing the credential ID and Google hash.
+   * @throws UserNotFoundException if the credential is not found.
+   */
   async linkGoogleAccount(payload: CredentialUpdatepPayload): Promise<void> {
     const credential = await this.repository.findOneBy({
       credential_id: payload.credential_id.toString(),
@@ -166,6 +179,12 @@ export class AuthService {
     await this.repository.save(credential);
   }
 
+  /**
+   * Links a username and password to the user's credentials.
+   * @param payload - The payload containing the credential ID, username, and password.
+   * @throws UserNotFoundException if the credential is not found.
+   * @throws UserAlreadyExistException if the username is already taken.
+   */
   async linkUsername(payload: CredentialUpdatepPayload): Promise<void> {
     const credential = await this.repository.findOneBy({
       credential_id: payload.credential_id.toString(),
@@ -188,16 +207,17 @@ export class AuthService {
     await this.repository.save(credential);
   }
 
-  // Deletes a user and their associated tokens.
+  /**
+   * Deletes a user and their associated tokens.
+   * @param id - The ID of the user to delete.
+   * @throws CredentialDeleteException if deletion fails.
+   */
   async delete(id): Promise<void> {
     try {
-      // Retrieve user details to be deleted.
       const detail = await this.detail(id);
-      // Delete associated tokens and user credentials.
       await this.tokenService.deleteFor(detail);
       await this.repository.remove(detail);
     } catch (e) {
-      // Throw an exception if deletion fails.
       throw new CredentialDeleteException();
     }
   }

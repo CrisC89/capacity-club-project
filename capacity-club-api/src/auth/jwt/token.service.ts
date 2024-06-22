@@ -23,24 +23,24 @@ export class TokenService {
     private jwtService: JwtService,
   ) {}
 
-  // Generates and returns access and refresh tokens for a given credential.
+  /**
+   * Generates and returns access and refresh tokens for a given credential.
+   * @param credential - The credential for which to generate tokens.
+   * @returns The generated tokens.
+   * @throws TokenGenerationException if token generation fails.
+   */
   async getTokens(credential: Credential): Promise<Token> {
     try {
-      // Delete existing tokens for the credential to prevent token reuse.
       await this.repository.delete({
         credential: { credential_id: credential.credential_id },
       });
 
-      // Define payload for JWT.
       const payload = { sub: credential.credential_id };
-
-      // Create a new access token.
       const token = await this.jwtService.signAsync(payload, {
         secret: configManager.getValue(ConfigKey.JWT_TOKEN_SECRET),
         expiresIn: configManager.getValue(ConfigKey.JWT_TOKEN_EXPIRE_IN),
       });
 
-      // Create a new refresh token.
       const refreshToken = await this.jwtService.signAsync(payload, {
         secret: configManager.getValue(ConfigKey.JWT_REFRESH_TOKEN_SECRET),
         expiresIn: configManager.getValue(
@@ -48,7 +48,6 @@ export class TokenService {
         ),
       });
 
-      // Insert or update the new tokens in the database.
       await this.repository.upsert(
         Builder<Token>()
           .token_id(UniqueId.generate())
@@ -59,40 +58,42 @@ export class TokenService {
         ['credential'],
       );
 
-      // Retrieve and return the new token.
       return await this.repository.findOneBy({ token: token });
     } catch (e) {
-      // Log error and throw an exception if token generation fails.
       this.logger.error(e.message);
       throw new TokenGenerationException();
     }
   }
 
-  // Deletes tokens associated with a given credential.
+  /**
+   * Deletes tokens associated with a given credential.
+   * @param credential - The credential for which to delete tokens.
+   */
   async deleteFor(credential: Credential): Promise<void> {
     await this.repository.delete({
       credential: { credential_id: credential.credential_id },
     });
   }
 
-  // Refreshes the token using the provided refresh token payload.
+  /**
+   * Refreshes the token using the provided refresh token payload.
+   * @param payload - The refresh token payload.
+   * @returns The new tokens.
+   * @throws TokenExpiredException if the refresh token is expired or invalid.
+   */
   async refresh(payload: RefreshTokenPayload): Promise<Token> {
     try {
-      // Verify the refresh token and extract the credential_id (sub).
       const id = this.jwtService.verify(payload.refresh, {
         secret: configManager.getValue(ConfigKey.JWT_REFRESH_TOKEN_SECRET),
       }).sub;
-      // Fetch the credential details from the database using the extracted credential_id.
       /*const credential = await this.credentialRepository.findOneBy({
         credential_id: id,
       });*/
       const credential = await this.credentialRepository.findOneBy({
         credential_id: UniqueId.from(id),
       });
-      // Generate and return new tokens for the found credential.
       return await this.getTokens(credential);
     } catch (e) {
-      // Log error and throw a token expiration exception if refresh fails.
       this.logger.error(e.message);
       throw new TokenExpiredException();
     }

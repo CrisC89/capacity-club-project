@@ -27,10 +27,13 @@ import { CredentialUpdatepPayload } from './model/payload/credential-update.payl
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  // Dependency injection of AuthenticatedService
   constructor(private readonly service: AuthService) {}
 
-  //Method for user sign in
+  /**
+   * Handles user sign-in.
+   * @param payload - The sign-in payload containing login details.
+   * @returns The authentication token if sign-in is successful.
+   */
   @ApiOperation(AuthenticatedControllerSignIn)
   @Public()
   @Post('signin')
@@ -38,7 +41,11 @@ export class AuthController {
     return this.service.signIn(payload, false);
   }
 
-  //Method for admin sign in
+  /**
+   * Handles admin sign-in.
+   * @param payload - The sign-in payload containing login details.
+   * @returns The authentication token if sign-in is successful.
+   */
   @ApiOperation(AuthenticatedControllerAdminSignIn)
   @Public()
   @Post('admin-signin')
@@ -46,7 +53,11 @@ export class AuthController {
     return this.service.signIn(payload, true);
   }
 
-  //Method for user sign up
+  /**
+   * Handles user signup.
+   * @param payload - The signup payload containing registration details.
+   * @returns The authentication token after successful signup.
+   */
   @ApiOperation(AuthenticatedControllerSignUp)
   @Public()
   @Post('signup')
@@ -54,7 +65,11 @@ export class AuthController {
     return this.service.signup(payload);
   }
 
-  //Method for refreshing the auth token
+  /**
+   * Refreshes the authentication token.
+   * @param payload - The refresh token payload.
+   * @returns The new authentication token.
+   */
   @ApiOperation(AuthenticatedControllerRefresh)
   @Public()
   @Post('refresh')
@@ -62,13 +77,22 @@ export class AuthController {
     return this.service.refresh(payload);
   }
 
-  //Get current user's information
+  /**
+   * Retrieves the current authenticated user's details.
+   * @param user - The current authenticated user.
+   * @returns The user's details.
+   */
   @ApiOperation(AuthenticatedControllerMe)
   @Get('me')
   public me(@User() user: Credential) {
     return user;
   }
 
+  /**
+   * Links a Facebook account to the user's credentials.
+   * @param payload - The payload containing the credential ID and Facebook hash.
+   * @returns A success message if linking is successful.
+   */
   @ApiOperation(AuthenticatedControllerLinkGoogleAccount)
   @Public()
   @Post('link-facebook')
@@ -76,13 +100,23 @@ export class AuthController {
     return this.service.linkFacebookAccount(payload);
   }
 
+  /**
+   * Links a Google account to the user's credentials.
+   * @param payload - The payload containing the credential ID and Google hash.
+   * @returns A success message if linking is successful.
+   */
   @ApiOperation(AuthenticatedControllerLinkFacebookAccount)
   @Public()
   @Post('link-google')
   public linkGoogleAccount(@Body() payload: CredentialUpdatepPayload) {
-    return this.service.linkFacebookAccount(payload);
+    return this.service.linkGoogleAccount(payload);
   }
 
+  /**
+   * Links a username and password to the user's credentials.
+   * @param payload - The payload containing the credential ID, username, and password.
+   * @returns A success message if linking is successful.
+   */
   @ApiOperation(AuthenticatedControllerLinkUsername)
   @Public()
   @Post('link-username')
@@ -90,7 +124,11 @@ export class AuthController {
     return this.service.linkUsername(payload);
   }
 
-  //Method to delete a credential by id
+  /**
+   * Deletes a user and their associated tokens.
+   * @param id - The ID of the user to delete.
+   * @returns A success message if deletion is successful.
+   */
   @ApiOperation(AuthenticatedControllerDelete)
   @Delete('delete/:id')
   public delete(@Param('id') id: string) {

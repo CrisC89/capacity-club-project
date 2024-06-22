@@ -27,7 +27,4 @@ export class Credential extends BaseEntity {
 
   @Column({ default: false })
   isAdmin: boolean;
-
-  @Column({ default: true })
-  active: boolean;
 }

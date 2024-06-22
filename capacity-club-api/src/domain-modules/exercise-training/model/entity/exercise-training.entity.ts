@@ -19,7 +19,9 @@ export class ExerciseTraining extends BaseEntity {
   @Column({ nullable: true })
   member_feedback: number;
 
-  @ManyToOne(() => ExerciseData)
+  @ManyToOne(() => ExerciseData, {
+    eager: false,
+  })
   @JoinColumn({
     referencedColumnName: 'exercise_data_id',
     name: 'exercise_data_id',
