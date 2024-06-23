@@ -15,6 +15,10 @@ import {
 import { WorkoutFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
 
+/**
+ * Service for managing workouts.
+ * Implements CRUD operations and filtering for Workout entities.
+ */
 @Injectable()
 export class WorkoutService
   implements
@@ -31,6 +35,12 @@ export class WorkoutService
     private readonly repository: Repository<Workout>,
   ) {}
 
+  /**
+   * Creates a new workout.
+   * @param payload - Data for creating a new workout.
+   * @returns The created Workout.
+   * @throws WorkoutCreateException if creation fails.
+   */
   async create(payload: WorkoutCreatePayload): Promise<Workout> {
     try {
       return await this.repository.save(
@@ -48,6 +58,11 @@ export class WorkoutService
     }
   }
 
+  /**
+   * Deletes a workout by ID.
+   * @param id - The ID of the workout to delete.
+   * @throws WorkoutDeleteException if deletion fails.
+   */
   async delete(id: string): Promise<void> {
     try {
       const detail = await this.detail(id);
@@ -57,6 +72,12 @@ export class WorkoutService
     }
   }
 
+  /**
+   * Retrieves the details of a workout by ID.
+   * @param id - The ID of the workout to retrieve.
+   * @returns The found Workout.
+   * @throws WorkoutNotFoundException if the workout is not found.
+   */
   async detail(id: string): Promise<Workout> {
     const result = await this.repository.findOneBy({ workout_id: id });
     if (!isNil(result)) {
@@ -65,6 +86,11 @@ export class WorkoutService
     throw new WorkoutNotFoundException();
   }
 
+  /**
+   * Filters workouts based on specified criteria.
+   * @param filter - The filtering criteria.
+   * @returns A list of Workout entries matching the criteria.
+   */
   filter(filter: WorkoutFilter): Promise<Workout[]> {
     const queryBuilder = this.repository.createQueryBuilder('workout');
 
@@ -86,6 +112,11 @@ export class WorkoutService
     return queryBuilder.getMany();
   }
 
+  /**
+   * Retrieves all workouts.
+   * @returns A list of all Workout entries.
+   * @throws WorkoutListException if retrieval fails.
+   */
   async getAll(): Promise<Workout[]> {
     try {
       return await this.repository.find();
@@ -94,6 +125,12 @@ export class WorkoutService
     }
   }
 
+  /**
+   * Updates an existing workout.
+   * @param payload - Data for updating the workout.
+   * @returns The updated Workout.
+   * @throws TrainingCircuitUpdateException if update fails.
+   */
   async update(payload: WorkoutUpdatePayload): Promise<Workout> {
     try {
       const detail = await this.detail(payload.workout_id.toString());

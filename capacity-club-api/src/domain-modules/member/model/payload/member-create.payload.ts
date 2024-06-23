@@ -15,6 +15,10 @@ import { Address } from 'domain-modules/address/model';
 import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
 import { Credential } from '@auth/model';
 
+/**
+ * Class used to create member.
+ * This class defines the payload used when creating new member.
+ */
 export class MemberCreatePayload {
   @ApiProperty()
   @IsString()

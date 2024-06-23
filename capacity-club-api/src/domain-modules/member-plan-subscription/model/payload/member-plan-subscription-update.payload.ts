@@ -10,7 +10,6 @@ import { Member } from 'domain-modules/member/model';
  * Class used to update  member plan subscription.
  * This class defines the payload used when updating existing  member plan subscription.
  */
-
 export class MemberPlanSubscriptionUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()

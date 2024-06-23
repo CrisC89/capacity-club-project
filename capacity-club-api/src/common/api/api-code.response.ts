@@ -179,4 +179,14 @@ export enum ApiCodeResponse {
   HOME_TRAINING_LIST_SUCCESS = 'api.success.home-training-list',
   HOME_TRAINING_CREATE_ERROR = 'api.error.home-training-create',
   HOME_TRAINING_CREATE_SUCCESS = 'api.success.home-training-create',
+
+  MEMBER_HOME_TRAINING_NOT_FOUND = 'api.error.member-home-training-not-found',
+  MEMBER_HOME_TRAINING_DELETE_SUCCESS = 'api.success.member-home-training-delete',
+  MEMBER_HOME_TRAINING_UPDATE_ERROR = 'api.error.member-home-training-update',
+  MEMBER_HOME_TRAINING_UPDATE_SUCCESS = 'api.success.member-home-training-update',
+  MEMBER_HOME_TRAINING_DELETE_ERROR = 'api.error.member-home-training-delete',
+  MEMBER_HOME_TRAINING_LIST_ERROR = 'api.error.member-home-training-list',
+  MEMBER_HOME_TRAINING_LIST_SUCCESS = 'api.success.member-home-training-list',
+  MEMBER_HOME_TRAINING_CREATE_ERROR = 'api.error.member-home-training-create',
+  MEMBER_HOME_TRAINING_CREATE_SUCCESS = 'api.success.member-home-training-create',
 }

@@ -7,7 +7,6 @@ import { Member } from 'domain-modules/member/model';
  * Class used to filter member plan subscription.
  * This class defines the criteria used to filter a list of member plan subscription.
  */
-
 export class MemberPlanSubscriptionFilter {
   @ApiProperty()
   purchase_date: Date;

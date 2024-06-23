@@ -5,27 +5,33 @@ import { IsNotEmpty, Length } from 'class-validator';
 import { Workout } from 'domain-modules/workout/model';
 
 /**
- * Class used to update home training.
- * This class defines the payload used when updating existing home training.
+ * Class used to update indoor training.
+ * This class defines the payload used when updating existing indoor training.
  */
-export class HomeTrainingUpdatePayload implements Payload {
+export class IndoorTrainingUpdatePayload implements Payload {
   @ApiProperty()
   @IsNotEmpty()
   @Length(26, 26)
-  home_training_id: UniqueId;
+  indoor_training_id: UniqueId;
   @ApiProperty()
   @IsNotEmpty()
   title: string;
   @ApiProperty()
   @IsNotEmpty()
-  nb_week: number;
+  training_date: Date;
   @ApiProperty()
   @IsNotEmpty()
-  nb_training_by_week: number;
+  start_hours: string;
   @ApiProperty()
   @IsNotEmpty()
-  price: number;
+  end_hours: string;
   @ApiProperty()
   @IsNotEmpty()
-  workouts: Workout[];
+  nb_place: number;
+  @ApiProperty()
+  @IsNotEmpty()
+  nb_subscription: number;
+  @ApiProperty()
+  @IsNotEmpty()
+  workout: Workout;
 }

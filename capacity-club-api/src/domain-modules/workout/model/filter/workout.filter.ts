@@ -1,8 +1,13 @@
-import { ApiProperty, ApiHideProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsString, Length, IsOptional } from 'class-validator';
-import { CollectiveTraining } from '@common/collective-training/model';
+import { HomeTraining } from 'domain-modules/home-training/model/entity';
+import { IndoorTraining } from 'domain-modules/indoor-training/model/entity';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 
+/**
+ * Class used to filter workout.
+ * This class defines the criteria used to filter a list of workout.
+ */
 export class WorkoutFilter {
   @ApiProperty()
   @IsString()
@@ -11,7 +16,10 @@ export class WorkoutFilter {
   @ApiProperty()
   @IsOptional()
   training_circuits: TrainingCircuit[];
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
-  collective_training: CollectiveTraining;
+  home_training: HomeTraining;
+  @ApiProperty()
+  @IsOptional()
+  indoor_training: IndoorTraining;
 }

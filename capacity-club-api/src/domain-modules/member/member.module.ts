@@ -8,6 +8,9 @@ import { MemberService } from './member.service';
 import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
 import { Credential } from '@auth/model';
 
+/**
+ * Module for managing Member.
+ */
 @Module({
   imports: [
     TypeOrmModule.forFeature([

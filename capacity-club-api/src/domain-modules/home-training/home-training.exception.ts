@@ -1,5 +1,8 @@
 import { ApiException, ApiCodeResponse } from '@common/api';
-
+/**
+ * Custom exceptions for HomeTraining operations.
+ * These exceptions provide specific error messages and codes for different failure scenarios.
+ */
 export class HomeTrainingNotFoundException extends ApiException {
   constructor() {
     super(ApiCodeResponse.HOME_TRAINING_NOT_FOUND, 200);

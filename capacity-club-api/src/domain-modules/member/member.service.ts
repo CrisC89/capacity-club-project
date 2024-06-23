@@ -16,6 +16,10 @@ import { MemberFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
 import { Credential } from '@auth/model';
 
+/**
+ * Service for managing members.
+ * Implements CRUD operations and filtering for Member entities.
+ */
 @Injectable()
 export class MemberService
   implements
@@ -33,6 +37,12 @@ export class MemberService
     private credentialRepository: Repository<Credential>,
   ) {}
 
+  /**
+   * Creates a new member.
+   * @param payload - Data for creating a new member.
+   * @returns The created Member.
+   * @throws MemberCreateException if creation fails.
+   */
   async create(payload: MemberCreatePayload): Promise<Member> {
     try {
       const created_member = Object.assign(
@@ -58,6 +68,11 @@ export class MemberService
     }
   }
 
+  /**
+   * Deletes a member by ID.
+   * @param id - The ID of the member to delete.
+   * @throws MemberDeleteException if deletion fails.
+   */
   async delete(id: string): Promise<void> {
     try {
       const detail = await this.detail(id);
@@ -67,6 +82,12 @@ export class MemberService
     }
   }
 
+  /**
+   * Retrieves the details of a member by ID.
+   * @param id - The ID of the member to retrieve.
+   * @returns The found Member.
+   * @throws MemberNotFoundException if the member is not found.
+   */
   async detail(id: string): Promise<Member> {
     const result = await this.repository.findOneBy({
       member_id: UniqueId.from(id),
@@ -77,6 +98,11 @@ export class MemberService
     throw new MemberNotFoundException();
   }
 
+  /**
+   * Filters members based on specified criteria.
+   * @param filter - The filtering criteria.
+   * @returns A list of Member entries matching the criteria.
+   */
   filter(filter: MemberFilter): Promise<Member[]> {
     const queryBuilder = this.repository.createQueryBuilder('member');
 
@@ -96,6 +122,11 @@ export class MemberService
     return queryBuilder.getMany();
   }
 
+  /**
+   * Retrieves all members.
+   * @returns A list of all Member entries.
+   * @throws MemberListException if retrieval fails.
+   */
   async getAll(): Promise<Member[]> {
     try {
       return await this.repository.find();
@@ -104,6 +135,12 @@ export class MemberService
     }
   }
 
+  /**
+   * Updates an existing member.
+   * @param payload - Data for updating the member.
+   * @returns The updated Member.
+   * @throws MemberUpdateException if update fails.
+   */
   async update(payload: MemberUpdatePayload): Promise<Member> {
     try {
       const detail: Member = await this.detail(payload.member_id.toString());

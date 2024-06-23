@@ -1,8 +1,13 @@
-import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsString, Length, IsOptional } from 'class-validator';
-import { CollectiveTraining } from '@common/collective-training/model/entity/collective-training.entity';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
+import { HomeTraining } from 'domain-modules/home-training/model/entity';
+import { IndoorTraining } from 'domain-modules/indoor-training/model/entity';
 
+/**
+ * Class used to create workout.
+ * This class defines the payload used when creating new workout.
+ */
 export class WorkoutCreatePayload {
   @ApiProperty()
   @IsString()
@@ -11,7 +16,10 @@ export class WorkoutCreatePayload {
   @ApiProperty()
   @IsOptional()
   training_circuits: TrainingCircuit[];
-  @ApiHideProperty()
+  @ApiProperty()
   @IsOptional()
-  collective_training: CollectiveTraining;
+  home_training: HomeTraining;
+  @ApiProperty()
+  @IsOptional()
+  indoor_training: IndoorTraining;
 }

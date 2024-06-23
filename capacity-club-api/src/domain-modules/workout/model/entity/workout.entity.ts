@@ -1,6 +1,5 @@
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { Transform } from 'class-transformer';
-import { CollectiveTraining } from '@common/collective-training/model';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 import {
   BaseEntity,
@@ -11,8 +10,18 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 import { HomeTraining } from 'domain-modules/home-training/model/entity/home-training.entity';
+import { IndoorTraining } from 'domain-modules/indoor-training/model/entity';
+
+/**
+ * Entity representing a workout.
+ * A workout includes multiple training circuits.
+ */
 @Entity()
 export class Workout extends BaseEntity {
+  /**
+   * Unique identifier for the workout.
+   * Uses a custom transformer for serialization.
+   */
   @PrimaryColumn('varchar')
   @Transform(uniqueIdTransformer.to, { toClassOnly: true })
   @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
@@ -30,8 +39,8 @@ export class Workout extends BaseEntity {
   )
   training_circuits: TrainingCircuit[];
 
-  @ManyToOne(() => CollectiveTraining, { nullable: true, eager: false })
-  collective_training: CollectiveTraining;
+  @ManyToOne(() => IndoorTraining, { nullable: true, eager: false })
+  indoor_training: IndoorTraining;
   @ManyToOne(() => HomeTraining, { nullable: true, eager: false })
   home_training: HomeTraining;
 }

@@ -8,6 +8,10 @@ import {
   IsBoolean,
 } from 'class-validator';
 
+/**
+ * Class used to filter member.
+ * This class defines the criteria used to filter a list of member.
+ */
 export class MemberFilter {
   @ApiProperty()
   @IsString()

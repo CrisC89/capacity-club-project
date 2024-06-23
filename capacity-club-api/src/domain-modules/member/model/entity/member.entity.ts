@@ -17,9 +17,18 @@ import { Credential } from '@auth/model';
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { Transform } from 'class-transformer';
 import { MemberCard } from 'domain-modules/member-card/model/entity/member-card.entity';
+import { MemberHomeTraining } from 'domain-modules/member-home-training/model/entity';
 
+/**
+ * Entity representing a member.
+ * Contains personal details, subscriptions, home trainings, address, credentials, and member card.
+ */
 @Entity()
 export class Member extends BaseEntity {
+  /**
+   * Unique identifier for the member.
+   * Uses a custom transformer for serialization.
+   */
   @PrimaryColumn('varchar')
   @Transform(uniqueIdTransformer.to, { toClassOnly: true })
   @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
@@ -47,6 +56,14 @@ export class Member extends BaseEntity {
     nullable: true,
   })
   subscriptions: MemberPlanSubscription[];
+
+  @OneToMany(() => MemberHomeTraining, (mht) => mht.member, {
+    cascade: true,
+    eager: true,
+    nullable: true,
+  })
+  member_home_trainings: MemberHomeTraining[];
+
   @OneToOne(() => Address, { cascade: true, eager: true, nullable: true })
   @JoinColumn({ referencedColumnName: 'address_id', name: 'address_id_fk' })
   address: Address;

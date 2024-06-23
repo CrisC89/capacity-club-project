@@ -5,6 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Workout } from './model';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 
+/**
+ * Module for managing Workout.
+ */
 @Module({
   imports: [TypeOrmModule.forFeature([Workout, TrainingCircuit])],
   providers: [WorkoutService],

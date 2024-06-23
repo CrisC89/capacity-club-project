@@ -1,5 +1,10 @@
 import { ApiException, ApiCodeResponse } from '@common/api';
 
+/**
+ * Custom exceptions for Member operations.
+ * These exceptions provide specific error messages and codes for different failure scenarios.
+ */
+
 export class MemberNotFoundException extends ApiException {
   constructor() {
     super(ApiCodeResponse.MEMBER_NOT_FOUND, 200);

@@ -1,5 +1,9 @@
 import { ApiException, ApiCodeResponse } from '@common/api';
 
+/**
+ * Custom exceptions for Workout operations.
+ * These exceptions provide specific error messages and codes for different failure scenarios.
+ */
 export class WorkoutNotFoundException extends ApiException {
   constructor() {
     super(ApiCodeResponse.WORKOUT_NOT_FOUND, 200);
