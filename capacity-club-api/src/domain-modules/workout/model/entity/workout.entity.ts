@@ -1,7 +1,6 @@
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { Transform } from 'class-transformer';
-import { CollectiveTraining } from 'domain-modules/collective-training/model';
-import { PersonnalTraining } from 'domain-modules/personnal-training/model/entity';
+import { CollectiveTraining } from '@common/collective-training/model';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 import {
   BaseEntity,
@@ -11,6 +10,7 @@ import {
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
+import { HomeTraining } from 'domain-modules/home-training/model/entity/home-training.entity';
 @Entity()
 export class Workout extends BaseEntity {
   @PrimaryColumn('varchar')
@@ -32,6 +32,6 @@ export class Workout extends BaseEntity {
 
   @ManyToOne(() => CollectiveTraining, { nullable: true, eager: false })
   collective_training: CollectiveTraining;
-  @ManyToOne(() => PersonnalTraining, { nullable: true, eager: false })
-  personnal_training: PersonnalTraining;
+  @ManyToOne(() => HomeTraining, { nullable: true, eager: false })
+  home_training: HomeTraining;
 }

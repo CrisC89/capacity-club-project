@@ -13,8 +13,16 @@ import {
   JoinColumn,
 } from 'typeorm';
 
+/**
+ * Entity representing a training circuit.
+ * A training circuit is a collection of exercise training and is part of a workout.
+ */
 @Entity()
 export class TrainingCircuit extends BaseEntity {
+  /**
+   * Unique identifier for the training circuit.
+   * Uses a custom transformer for serialization.
+   */
   @PrimaryColumn('varchar')
   @Transform(uniqueIdTransformer.to, { toClassOnly: true })
   @Transform(uniqueIdTransformer.from, { toPlainOnly: true })

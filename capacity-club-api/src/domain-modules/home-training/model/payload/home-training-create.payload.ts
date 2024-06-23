@@ -1,22 +1,18 @@
+import { Payload } from '@domain-modules-shared';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { Member } from 'domain-modules/member/model';
 import { Workout } from 'domain-modules/workout/model';
 
-export class PersonnalTrainingCreatePayload {
+export class HomeTrainingCreatePayload implements Payload {
   @ApiProperty()
   @IsNotEmpty()
   title: string;
   @ApiProperty()
   @IsNotEmpty()
-  training_start_date: Date;
+  nb_week: number;
   @ApiProperty()
   @IsNotEmpty()
-  training_end_date: Date;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  member: Member;
+  nb_training_by_week: number;
   @ApiProperty()
   @IsNotEmpty()
   workouts: Workout[];

@@ -14,8 +14,6 @@ import { ExerciseTrainingModule } from 'domain-modules/exercise-training/exercis
 import { TrainingCircuitModule } from 'domain-modules/training-circuit/training-circuit.module';
 import { MemberPlanSubscriptionModule } from 'domain-modules/member-plan-subscription/member-plan-subscription.module';
 import { AddressModule } from 'domain-modules/address/address.module';
-import { CollectiveTrainingModule } from 'domain-modules/collective-training/collective-training.module';
-
 /**
  * AppModule is the root module of the application.
  *
@@ -33,7 +31,6 @@ import { CollectiveTrainingModule } from 'domain-modules/collective-training/col
     ExerciseTrainingModule,
     TrainingCircuitModule,
     WorkoutModule,
-    CollectiveTrainingModule,
   ],
   controllers: [AppController],
   providers: [

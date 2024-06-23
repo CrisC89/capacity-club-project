@@ -5,6 +5,9 @@ import { MemberCard } from './model/entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Member } from 'domain-modules/member/model';
 
+/**
+ * Module for managing MemberCard.
+ */
 @Module({
   imports: [TypeOrmModule.forFeature([MemberCard, Member])],
   providers: [MemberCardService],

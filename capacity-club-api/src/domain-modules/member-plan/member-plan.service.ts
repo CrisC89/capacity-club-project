@@ -99,11 +99,11 @@ export class MemberPlanService
       if (filter[key] !== undefined && filter[key] !== null) {
         const value = filter[key];
         if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`member.${key} = :${key}`, {
+          queryBuilder.andWhere(`member-plan.${key} = :${key}`, {
             [key]: value,
           });
         } else {
-          queryBuilder.andWhere(`member.${key} LIKE :${key}`, {
+          queryBuilder.andWhere(`member-plan.${key} LIKE :${key}`, {
             [key]: `%${value}%`,
           });
         }

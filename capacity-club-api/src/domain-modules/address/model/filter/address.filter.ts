@@ -1,6 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
+/**
+ * Class used to filter address.
+ * This class defines the criteria used to filter a list of address.
+ */
 export class AddressFilter {
   @ApiProperty()
   @IsNotEmpty()

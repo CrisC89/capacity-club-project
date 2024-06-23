@@ -1,6 +1,6 @@
 import { ApiProperty, ApiHideProperty } from '@nestjs/swagger';
 import { IsString, Length, IsOptional } from 'class-validator';
-import { CollectiveTraining } from 'domain-modules/collective-training/model';
+import { CollectiveTraining } from '@common/collective-training/model';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 
 export class WorkoutFilter {

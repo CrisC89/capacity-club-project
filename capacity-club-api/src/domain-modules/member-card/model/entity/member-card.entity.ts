@@ -4,8 +4,16 @@ import { Transform } from 'class-transformer';
 import { Member } from 'domain-modules/member/model';
 import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
 
+/**
+ * Entity representing a member card.
+ * This entity represents the member card for each member and allows the member to view the number of individual and collective sessions they have.
+ */
 @Entity()
 export class MemberCard extends BaseEntity {
+  /**
+   * Unique identifier for the token.
+   * Uses a custom transformer for serialization.
+   */
   @Transform(uniqueIdTransformer.to, { toClassOnly: true }) // Pour la désérialisation (DB -> Class)
   @Transform(uniqueIdTransformer.from, { toPlainOnly: true }) // Pour la sérialisation (Class -> DB)
   @PrimaryColumn({

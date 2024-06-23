@@ -19,6 +19,10 @@ import { CrudService } from '@domain-modules-shared';
 import { TrainingCircuitFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
 
+/**
+ * Service for managing training circuits.
+ * Implements CRUD operations and filtering for TrainingCircuit entities.
+ */
 @Injectable()
 export class TrainingCircuitService
   implements
@@ -35,6 +39,12 @@ export class TrainingCircuitService
     private readonly repository: Repository<TrainingCircuit>,
   ) {}
 
+  /**
+   * Creates a new training circuit.
+   * @param payload - Data for creating a new training circuit.
+   * @returns The created TrainingCircuit.
+   * @throws TrainingCircuitCreateException if creation fails.
+   */
   async create(
     payload: TrainingCircuitCreatePayload,
   ): Promise<TrainingCircuit> {
@@ -48,6 +58,7 @@ export class TrainingCircuitService
               ? payload.exercise_training_list
               : [],
           )
+          .workout(payload.workout)
           .build(),
       );
     } catch (e) {
@@ -56,6 +67,11 @@ export class TrainingCircuitService
     }
   }
 
+  /**
+   * Deletes an existing training circuit by ID.
+   * @param id - The ID of the training circuit to delete.
+   * @throws TrainingCircuitDeleteException if deletion fails.
+   */
   async delete(id: string): Promise<void> {
     try {
       const detail = await this.detail(id);
@@ -65,6 +81,12 @@ export class TrainingCircuitService
     }
   }
 
+  /**
+   * Retrieves the details of a training circuit by ID.
+   * @param id - The ID of the training circuit to retrieve.
+   * @returns The found TrainingCircuit.
+   * @throws TrainingCircuitNotFoundException if the training circuit is not found.
+   */
   async detail(id: string): Promise<TrainingCircuit> {
     const result = await this.repository.findOneBy({ training_circuit_id: id });
     if (!isNil(result)) {
@@ -73,6 +95,11 @@ export class TrainingCircuitService
     throw new TrainingCircuitNotFoundException();
   }
 
+  /**
+   * Filters training circuits based on specified criteria.
+   * @param filter - The filtering criteria.
+   * @returns A list of TrainingCircuit entries matching the criteria.
+   */
   filter(filter: TrainingCircuitFilter): Promise<TrainingCircuit[]> {
     const queryBuilder = this.repository.createQueryBuilder('training-circuit');
 
@@ -80,11 +107,11 @@ export class TrainingCircuitService
       if (filter[key] !== undefined && filter[key] !== null) {
         const value = filter[key];
         if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`member.${key} = :${key}`, {
+          queryBuilder.andWhere(`training-circuit.${key} = :${key}`, {
             [key]: value,
           });
         } else {
-          queryBuilder.andWhere(`member.${key} LIKE :${key}`, {
+          queryBuilder.andWhere(`training-circuit.${key} LIKE :${key}`, {
             [key]: `%${value}%`,
           });
         }
@@ -94,6 +121,11 @@ export class TrainingCircuitService
     return queryBuilder.getMany();
   }
 
+  /**
+   * Retrieves all training circuits.
+   * @returns A list of all TrainingCircuit entries.
+   * @throws TrainingCircuitListException if retrieval fails.
+   */
   async getAll(): Promise<TrainingCircuit[]> {
     try {
       return await this.repository.find();
@@ -102,6 +134,12 @@ export class TrainingCircuitService
     }
   }
 
+  /**
+   * Updates an existing training circuit.
+   * @param payload - Data for updating the training circuit.
+   * @returns The updated TrainingCircuit.
+   * @throws TrainingCircuitUpdateException if update fails.
+   */
   async update(
     payload: TrainingCircuitUpdatePayload,
   ): Promise<TrainingCircuit> {
@@ -111,7 +149,7 @@ export class TrainingCircuitService
       detail.exercise_training_list = payload.exercise_training_list
         ? payload.exercise_training_list
         : [];
-
+      detail.workout = payload.workout;
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

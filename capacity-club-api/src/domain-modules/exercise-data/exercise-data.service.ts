@@ -102,11 +102,11 @@ export class ExerciseDataService
       if (filter[key] !== undefined && filter[key] !== null) {
         const value = filter[key];
         if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`member.${key} = :${key}`, {
+          queryBuilder.andWhere(`exercise-data.${key} = :${key}`, {
             [key]: value,
           });
         } else {
-          queryBuilder.andWhere(`member.${key} LIKE :${key}`, {
+          queryBuilder.andWhere(`exercise-data.${key} LIKE :${key}`, {
             [key]: `%${value}%`,
           });
         }

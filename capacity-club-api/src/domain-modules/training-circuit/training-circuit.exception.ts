@@ -1,5 +1,10 @@
 import { ApiCodeResponse, ApiException } from '@common/api';
 
+/**
+ * Custom exceptions for TrainingCircuit operations.
+ * These exceptions provide specific error messages and codes for different failure scenarios.
+ */
+
 export class TrainingCircuitNotFoundException extends ApiException {
   constructor() {
     super(ApiCodeResponse.TRAINING_CIRCUIT_NOT_FOUND, 200);

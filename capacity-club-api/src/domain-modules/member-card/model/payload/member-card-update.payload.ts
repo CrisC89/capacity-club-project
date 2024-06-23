@@ -3,6 +3,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { Member } from 'domain-modules/member/model';
 
+/**
+ * Class used to update member card.
+ * This class defines the payload used when updating existing member card.
+ */
 export class MemberCardUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()

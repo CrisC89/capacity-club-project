@@ -1,6 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
+/**
+ * Class used to create address.
+ * This class defines the payload used when creating new address.
+ */
 export class AddressCreatePayload {
   @ApiProperty()
   @IsNotEmpty()

@@ -1,7 +1,7 @@
 import { UniqueId } from '@common/model/unique-id';
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, Length, IsString, IsOptional } from 'class-validator';
-import { CollectiveTraining } from 'domain-modules/collective-training/model/entity/collective-training.entity';
+import { CollectiveTraining } from '@common/collective-training/model/entity/collective-training.entity';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 
 export class WorkoutUpdatePayload {

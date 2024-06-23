@@ -6,6 +6,9 @@ import { TrainingCircuit } from './model';
 import { ExerciseTraining } from 'domain-modules/exercise-training/model/entity/exercise-training.entity';
 import { Workout } from 'domain-modules/workout/model/entity/workout.entity';
 
+/**
+ * Module for managing TrainingCircuit.
+ */
 @Module({
   imports: [
     TypeOrmModule.forFeature([TrainingCircuit, ExerciseTraining, Workout]),

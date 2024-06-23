@@ -1,5 +1,10 @@
 import { ApiCodeResponse, ApiException } from '@common/api';
 
+/**
+ * Custom exceptions for MemberPlanSubscription operations.
+ * These exceptions provide specific error messages and codes for different failure scenarios.
+ */
+
 export class MemberPlanSubscriptionNotFoundException extends ApiException {
   constructor() {
     super(ApiCodeResponse.MEMBER_PLAN_SUBSCRIPTION_NOT_FOUND, 200);

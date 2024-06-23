@@ -1,5 +1,9 @@
 import { ApiException, ApiCodeResponse } from '@common/api';
 
+/**
+ * Custom exceptions for MemberCard operations.
+ * These exceptions provide specific error messages and codes for different failure scenarios.
+ */
 export class MemberCardNotFoundException extends ApiException {
   constructor() {
     super(ApiCodeResponse.MEMBER_CARD_NOT_FOUND, 200);

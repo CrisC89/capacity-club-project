@@ -20,6 +20,10 @@ import {
 import { isNil } from 'lodash';
 import { Member } from 'domain-modules/member/model';
 
+/**
+ * Service for managing member cards.
+ * Implements CRUD operations and filtering for MemberCard entities.
+ */
 @Injectable()
 export class MemberCardService
   implements
@@ -37,6 +41,11 @@ export class MemberCardService
     @InjectRepository(Member)
     private readonly memberRepository: Repository<Member>,
   ) {}
+  /**
+   * Retrieves all member cards.
+   * @returns A list of all MemberCard entries.
+   * @throws MemberCardListException if retrieval fails.
+   */
   async getAll(): Promise<MemberCard[]> {
     try {
       return await this.repository.find();
@@ -44,6 +53,12 @@ export class MemberCardService
       throw new MemberCardListException();
     }
   }
+
+  /**
+   * Filters member cards based on specified criteria.
+   * @param filter - The filtering criteria.
+   * @returns A list of MemberCard entries matching the criteria.
+   */
   filter(filter: MemberCardFilter): Promise<MemberCard[]> {
     const queryBuilder = this.repository.createQueryBuilder('member-card');
 
@@ -64,6 +79,13 @@ export class MemberCardService
 
     return queryBuilder.getMany();
   }
+
+  /**
+   * Retrieves the details of a member card by ID.
+   * @param id - The ID of the member card to retrieve.
+   * @returns The found MemberCard.
+   * @throws MemberCardNotFoundException if the member card is not found.
+   */
   async detail(id: string): Promise<MemberCard> {
     const result = await this.repository.findOneBy({
       member_card_id: UniqueId.from(id),
@@ -73,6 +95,13 @@ export class MemberCardService
     }
     throw new MemberCardNotFoundException();
   }
+
+  /**
+   * Creates a new member card.
+   * @param payload - Data for creating a new member card.
+   * @returns The created MemberCard.
+   * @throws MemberCardCreateException if creation fails.
+   */
   async create(payload: MemberCardCreatePayload): Promise<MemberCard> {
     try {
       const created_member_card = Object.assign(
@@ -90,6 +119,13 @@ export class MemberCardService
       throw new MemberCardCreateException();
     }
   }
+
+  /**
+   * Updates an existing member card.
+   * @param payload - Data for updating the member card.
+   * @returns The updated MemberCard.
+   * @throws MemberCardUpdateException if update fails.
+   */
   async update(payload: MemberCardUpdatePayload): Promise<MemberCard> {
     try {
       const detail: MemberCard = await this.detail(
@@ -104,6 +140,12 @@ export class MemberCardService
       throw new MemberCardUpdateException();
     }
   }
+
+  /**
+   * Deletes an existing member card by ID.
+   * @param id - The ID of the member card to delete.
+   * @throws MemberCardDeleteException if deletion fails.
+   */
   async delete(id: string): Promise<void> {
     try {
       const detail = await this.detail(id);

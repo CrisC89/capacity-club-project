@@ -1,5 +1,9 @@
 import { ApiException, ApiCodeResponse } from '@common/api';
 
+/**
+ * Custom exceptions for Address operations.
+ * These exceptions provide specific error messages and codes for different failure scenarios.
+ */
 export class AddressNotFoundException extends ApiException {
   constructor() {
     super(ApiCodeResponse.ADDRESS_NOT_FOUND, 200);

@@ -17,6 +17,10 @@ import {
 import { TrainingCircuitService } from './training-circuit.service';
 import { TrainingCircuitFilter } from './model/filter';
 
+/**
+ * Controller for managing training circuits.
+ * Provides endpoints for creating, deleting, retrieving, filtering, listing, and updating training circuits.
+ */
 @ApiBearerAuth('access-token')
 @ApiTags('Training Circuit')
 @Controller('training-circuit')
@@ -32,6 +36,11 @@ export class TrainingCircuitController
 {
   constructor(private readonly service: TrainingCircuitService) {}
 
+  /**
+   * Endpoint to create a new training circuit.
+   * @param payload - Data for creating a new training circuit.
+   * @returns The created TrainingCircuit.
+   */
   @Post('create')
   create(
     @Body() payload: TrainingCircuitCreatePayload,
@@ -39,26 +48,49 @@ export class TrainingCircuitController
     return this.service.create(payload);
   }
 
+  /**
+   * Endpoint to delete a training circuit by ID.
+   * @param id - The ID of the training circuit to delete.
+   */
   @Delete('delete/:id')
   delete(@Param('id') id: string): Promise<void> {
     return this.service.delete(id);
   }
 
+  /**
+   * Endpoint to retrieve the details of a training circuit by ID.
+   * @param id - The ID of the training circuit to retrieve.
+   * @returns The found TrainingCircuit.
+   */
   @Get('detail/:id')
   detail(@Param('id') id: string): Promise<TrainingCircuit> {
     return this.service.detail(id);
   }
 
+  /**
+   * Endpoint to filter training circuits based on specified criteria.
+   * @param filter - The filtering criteria.
+   * @returns A list of TrainingCircuit entries matching the criteria.
+   */
   @Post('filter')
   filter(@Body() filter: TrainingCircuitFilter): Promise<TrainingCircuit[]> {
     return this.service.filter(filter);
   }
 
+  /**
+   * Endpoint to retrieve all training circuits.
+   * @returns A list of all TrainingCircuit entries.
+   */
   @Get('list')
   getAll(): Promise<TrainingCircuit[]> {
     return this.service.getAll();
   }
 
+  /**
+   * Endpoint to update an existing training circuit.
+   * @param payload - Data for updating the training circuit.
+   * @returns The updated TrainingCircuit.
+   */
   @Put('update')
   update(
     @Body() payload: TrainingCircuitUpdatePayload,
