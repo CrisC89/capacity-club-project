@@ -50,14 +50,11 @@ export class JwtGuard implements CanActivate {
    */
   private validateToken(request: any): Observable<boolean> {
     console.log('Enter validate token');
-    // Check if authorization header is present
     if (!isNil(request.headers['authorization'])) {
       try {
-        // Extract credential_id from JWT token
         const id = this.jwtService.verify(
           request.headers['authorization'].replace('Bearer ', ''),
         ).sub;
-        // Retrieve credential details and set in request
         return from(this.authService.detail(id)).pipe(
           map((user: Credential) => {
             request.user = user;
@@ -65,12 +62,10 @@ export class JwtGuard implements CanActivate {
           }),
         );
       } catch (e) {
-        // Log error and throw token expired exception
         this.logger.log(e.message);
         throw new TokenExpiredException();
       }
     }
-    // Log error and throw token expired exception
     throw new NoTokenFoundedException();
   }
 }

@@ -9,7 +9,10 @@ import { ConfigKey } from '@common/config/enum/config-key.enum';
 import { Member } from 'domain-modules/member/model';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-
+/**
+ * AuthModule handles the authentication and authorization functionalities.
+ * It imports necessary modules, declares providers and controllers, and exports services for use in other modules.
+ */
 @Module({
   imports: [
     JwtModule.register({

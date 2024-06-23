@@ -2,6 +2,11 @@ import { ApiCodeResponse } from '@common/api';
 import { UniqueId } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, Length, IsOptional } from 'class-validator';
+
+/**
+ * DTO (Data Transfer Object) for updating user credentials.
+ * This class defines the structure and validation rules for the payload used when updating user credentials.
+ */
 export class CredentialUpdatepPayload {
   @ApiProperty()
   @IsNotEmpty()

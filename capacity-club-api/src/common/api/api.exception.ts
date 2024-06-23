@@ -4,7 +4,11 @@ import { ValidationError } from 'class-validator/types/validation/ValidationErro
 
 // Custom exception class extending NestJS's HttpException for API-specific errors.
 export class ApiException extends HttpException {
-  // Constructor to initialize the ApiException with a specific API response code and HTTP status.
+  /**
+   * Constructor to initialize the ApiException with a specific API response code and HTTP status.
+   * @param code - The API response code.
+   * @param status - The HTTP status code.
+   */
   constructor(code: ApiCodeResponse, status: number) {
     super(
       {
@@ -17,7 +21,12 @@ export class ApiException extends HttpException {
   }
 }
 
+// Custom exception class for handling validation errors.
 export class ValidationException extends HttpException {
+  /**
+   * Constructor to initialize the ValidationException with validation errors.
+   * @param errors - An array of validation errors.
+   */
   constructor(errors: ValidationError[]) {
     console.log(errors);
     super(

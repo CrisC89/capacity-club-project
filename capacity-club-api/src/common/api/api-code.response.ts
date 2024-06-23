@@ -1,4 +1,9 @@
-// Enum defining API response codes.
+/**
+ * This file defines an enumeration `ApiCodeResponse` which contains a comprehensive list of standardized
+ * API response codes. Each code represents a specific type of success or error message that the API can return.
+ * These codes are used throughout the application to ensure consistent and meaningful responses for various
+ * operations such as user authentication, member management, and other functionalities.
+ */
 export enum ApiCodeResponse {
   TEST = 'api.result.test',
   PAYLOAD_PARAM_IS_MISSING = 'api.error.payload-param-is-missing',

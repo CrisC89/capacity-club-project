@@ -1,4 +1,11 @@
 import { ApiCodeResponse, ApiException } from '@common/api';
+
+/**
+ * This file defines custom exception classes for handling various error scenarios in the application.
+ * Each exception class extends from ApiException and is associated with a specific API response code and HTTP status code.
+ * These exceptions provide standardized error handling and responses for different error conditions.
+ */
+
 export class NoTokenFoundedException extends ApiException {
   constructor() {
     super(ApiCodeResponse.NO_TOKEN_FOUNDED, 401);

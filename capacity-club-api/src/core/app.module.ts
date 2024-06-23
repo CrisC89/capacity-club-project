@@ -16,6 +16,11 @@ import { MemberPlanSubscriptionModule } from 'domain-modules/member-plan-subscri
 import { AddressModule } from 'domain-modules/address/address.module';
 import { CollectiveTrainingModule } from 'domain-modules/collective-training/collective-training.module';
 
+/**
+ * AppModule is the root module of the application.
+ *
+ * It imports various feature modules and configures TypeORM with the database settings.
+ */
 @Module({
   imports: [
     TypeOrmModule.forRoot(configManager.getTypeOrmConfig()),
