@@ -4,6 +4,10 @@ import { ExerciseDataCategory } from '../enum/exercise-data-category.enum';
 import { UniqueId } from '@common/model/unique-id';
 import { ExerciseTraining } from 'domain-modules/exercise-training/model';
 
+/**
+ * Class used to update exercise data.
+ * This class defines the payload used when updating existing exercise data.
+ */
 export class ExerciseDataUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()

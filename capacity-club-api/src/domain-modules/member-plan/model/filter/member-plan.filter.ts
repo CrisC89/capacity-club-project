@@ -1,67 +1,28 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsOptional,
-  IsEnum,
-  IsNotEmpty,
-  Length,
-  IsString,
-  IsNumber,
-  IsBoolean,
-} from 'class-validator';
-import {
-  MemberPlanType,
-  MemberPlanPayment,
-  MemberPlanFreqTraining,
-} from '../enum';
+import { IsNumber, IsOptional, Length } from 'class-validator';
 
+/**
+ * Class used to filter exercise data.
+ * This class defines the criteria used to filter a list of member plans.
+ */
 export class MemberPlanFilter {
   @ApiProperty()
   @IsOptional()
-  @IsEnum(MemberPlanType)
-  type: MemberPlanType;
-
-  @ApiProperty()
-  @IsNotEmpty()
   @Length(1, 80)
   title: string;
 
   @ApiProperty()
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  description: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @Length(1, 40)
-  picture: string;
+  nb_individual_training: number;
 
   @ApiProperty()
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
+  nb_collective_training: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsOptional()
   price: number;
-
-  @ApiProperty()
-  @IsNumber()
-  @IsNotEmpty()
-  nb_month: number;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsEnum(MemberPlanPayment)
-  payment: MemberPlanPayment;
-
-  @ApiProperty()
-  @IsBoolean()
-  @IsOptional()
-  cumulative: boolean;
-
-  @ApiProperty()
-  @IsNumber()
-  @IsOptional()
-  nb_training: number;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsEnum(MemberPlanFreqTraining)
-  freq_training: MemberPlanFreqTraining;
 }

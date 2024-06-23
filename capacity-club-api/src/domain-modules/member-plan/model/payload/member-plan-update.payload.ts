@@ -2,29 +2,21 @@ import {
   IsNotEmpty,
   Length,
   IsOptional,
-  IsEnum,
   IsString,
   IsNumber,
-  IsBoolean,
 } from 'class-validator';
-import {
-  MemberPlanType,
-  MemberPlanPayment,
-  MemberPlanFreqTraining,
-} from '../enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { UniqueId } from '@common/model/unique-id';
 
+/**
+ * Class used to update member plan.
+ * This class defines the payload used when updating existing member plan.
+ */
 export class MemberPlanUpdatePayload {
   @ApiProperty()
   @IsNotEmpty()
   @Length(26, 26)
   member_plan_id: UniqueId;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsEnum(MemberPlanType)
-  type: MemberPlanType;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -37,37 +29,17 @@ export class MemberPlanUpdatePayload {
   description: string;
 
   @ApiProperty()
+  @IsNumber()
   @IsOptional()
-  @Length(1, 40)
-  picture: string;
+  nb_individual_training: number;
 
   @ApiProperty()
   @IsNumber()
   @IsOptional()
+  nb_collective_training: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
   price: number;
-
-  @ApiProperty()
-  @IsNumber()
-  @IsOptional()
-  nb_month: number;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsEnum(MemberPlanPayment)
-  payment: MemberPlanPayment;
-
-  @ApiProperty()
-  @IsBoolean()
-  @IsOptional()
-  cumulative: boolean;
-
-  @ApiProperty()
-  @IsNumber()
-  @IsOptional()
-  nb_training: number;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsEnum(MemberPlanFreqTraining)
-  freq_training: MemberPlanFreqTraining;
 }

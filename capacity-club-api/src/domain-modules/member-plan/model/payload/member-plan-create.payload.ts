@@ -1,25 +1,18 @@
 import {
   IsOptional,
-  IsEnum,
   IsNotEmpty,
   Length,
   IsString,
   IsNumber,
-  IsBoolean,
 } from 'class-validator';
-import {
-  MemberPlanType,
-  MemberPlanPayment,
-  MemberPlanFreqTraining,
-} from '../enum';
+
 import { ApiProperty } from '@nestjs/swagger';
 
+/**
+ * Class used to create member plan.
+ * This class defines the payload used when creating new member plan.
+ */
 export class MemberPlanCreatePayload {
-  @ApiProperty()
-  @IsOptional()
-  @IsEnum(MemberPlanType)
-  type: MemberPlanType;
-
   @ApiProperty()
   @IsNotEmpty()
   @Length(1, 80)
@@ -31,37 +24,17 @@ export class MemberPlanCreatePayload {
   description: string;
 
   @ApiProperty()
+  @IsNumber()
   @IsOptional()
-  @Length(1, 40)
-  picture: string;
+  nb_individual_training: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsOptional()
+  nb_collective_training: number;
 
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
   price: number;
-
-  @ApiProperty()
-  @IsNumber()
-  @IsNotEmpty()
-  nb_month: number;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsEnum(MemberPlanPayment)
-  payment: MemberPlanPayment;
-
-  @ApiProperty()
-  @IsBoolean()
-  @IsOptional()
-  cumulative: boolean;
-
-  @ApiProperty()
-  @IsNumber()
-  @IsOptional()
-  nb_training: number;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsEnum(MemberPlanFreqTraining)
-  freq_training: MemberPlanFreqTraining;
 }

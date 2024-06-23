@@ -1,5 +1,8 @@
+/**
+ * Enumeration representing different training intensity measurements.
+ */
 export enum TrainingIntensity {
-  RR = 'RR',
-  RPE = 'RPE',
-  PERCENT = 'PERCENT',
+  RR = 'RR', // Relative Rate
+  RPE = 'RPE', // Rate of Perceived Exertion
+  PERCENT = 'PERCENT', // Percentage of Maximum Effort
 }

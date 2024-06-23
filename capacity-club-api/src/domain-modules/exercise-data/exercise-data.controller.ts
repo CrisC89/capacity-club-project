@@ -17,6 +17,11 @@ import {
 } from './model';
 import { ExerciseDataFilter } from './model/filter';
 
+/**
+ * Controller for managing exercise data.
+ * Provides endpoints for creating, deleting, retrieving, filtering, listing, and updating exercise data.
+ */
+
 @ApiBearerAuth('access-token')
 @ApiTags('Exercise Data')
 @Controller('exercise-data')
@@ -31,31 +36,59 @@ export class ExerciseDataController
     >
 {
   constructor(private readonly service: ExerciseDataService) {}
+  /**
+   * Endpoint to create a new exercise data entry.
+   * @param payload - Data for creating a new exercise.
+   * @returns The created ExerciseData.
+   */
   @Post('create')
   create(@Body() payload: ExerciseDataCreatePayload): Promise<ExerciseData> {
     return this.service.create(payload);
   }
 
+  /**
+   * Endpoint to delete an exercise data entry by ID.
+   * @param id - The ID of the exercise data to delete.
+   */
   @Delete('delete/:id')
   delete(@Param('id') id: string): Promise<void> {
     return this.service.delete(id);
   }
 
+  /**
+   * Endpoint to retrieve the details of an exercise data entry by ID.
+   * @param id - The ID of the exercise data to retrieve.
+   * @returns The found ExerciseData.
+   */
   @Get('detail/:id')
   detail(@Param('id') id: string): Promise<ExerciseData> {
     return this.service.detail(id);
   }
 
+  /**
+   * Endpoint to filter exercise data based on specified criteria.
+   * @param filter - The filtering criteria.
+   * @returns A list of ExerciseData entries matching the criteria.
+   */
   @Post('filter')
   filter(@Body() filter: ExerciseDataFilter): Promise<ExerciseData[]> {
     return this.service.filter(filter);
   }
 
+  /**
+   * Endpoint to retrieve all exercise data entries.
+   * @returns A list of all ExerciseData entries.
+   */
   @Get('list')
   getAll(): Promise<ExerciseData[]> {
     return this.service.getAll();
   }
 
+  /**
+   * Endpoint to update an existing exercise data entry.
+   * @param payload - Data for updating the exercise.
+   * @returns The updated ExerciseData.
+   */
   @Put('update')
   update(@Body() payload: ExerciseDataUpdatePayload): Promise<ExerciseData> {
     return this.service.update(payload);

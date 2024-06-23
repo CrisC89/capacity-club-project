@@ -3,6 +3,10 @@ import { IsNotEmpty } from 'class-validator';
 import { ExerciseDataCategory } from '../enum/exercise-data-category.enum';
 import { ExerciseTraining } from 'domain-modules/exercise-training/model';
 
+/**
+ * Class used to create exercise data.
+ * This class defines the payload used when creating new exercise data.
+ */
 export class ExerciseDataCreatePayload {
   @ApiProperty()
   @IsNotEmpty()

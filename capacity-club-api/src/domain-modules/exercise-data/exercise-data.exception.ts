@@ -1,5 +1,9 @@
 import { ApiException, ApiCodeResponse } from '@common/api';
 
+/**
+ * Custom exceptions for ExerciseData operations.
+ * These exceptions provide specific error messages and codes for different failure scenarios.
+ */
 export class ExerciseDataNotFoundException extends ApiException {
   constructor() {
     super(ApiCodeResponse.EXERCISE_DATA_NOT_FOUND, 200);

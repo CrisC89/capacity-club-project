@@ -19,6 +19,10 @@ import {
 import { ExerciseDataFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
 
+/**
+ * Service for managing exercise data.
+ * Implements CRUD operations and filtering for ExerciseData entities.
+ */
 @Injectable()
 export class ExerciseDataService
   implements
@@ -34,6 +38,13 @@ export class ExerciseDataService
     @InjectRepository(ExerciseData)
     private readonly repository: Repository<ExerciseData>,
   ) {}
+
+  /**
+   * Creates a new exercise data entry.
+   * @param payload - Data for creating a new exercise.
+   * @returns The created ExerciseData.
+   * @throws ExerciseDataCreateException if creation fails.
+   */
   async create(payload: ExerciseDataCreatePayload): Promise<ExerciseData> {
     try {
       return await this.repository.save(
@@ -51,7 +62,11 @@ export class ExerciseDataService
       throw new ExerciseDataCreateException();
     }
   }
-
+  /**
+   * Deletes an existing exercise data entry by ID.
+   * @param id - The ID of the exercise data to delete.
+   * @throws ExerciseDataDeleteException if deletion fails.
+   */
   async delete(id: string): Promise<void> {
     try {
       const detail = await this.detail(id);
@@ -61,6 +76,12 @@ export class ExerciseDataService
     }
   }
 
+  /**
+   * Retrieves the details of an exercise data entry by ID.
+   * @param id - The ID of the exercise data to retrieve.
+   * @returns The found ExerciseData.
+   * @throws ExerciseDataNotFoundException if the exercise data is not found.
+   */
   async detail(id: string): Promise<ExerciseData> {
     const result = await this.repository.findOneBy({ exercise_data_id: id });
     if (!isNil(result)) {
@@ -69,6 +90,11 @@ export class ExerciseDataService
     throw new ExerciseDataNotFoundException();
   }
 
+  /**
+   * Filters exercise data based on specified criteria.
+   * @param filter - The filtering criteria.
+   * @returns A list of ExerciseData entries matching the criteria.
+   */
   filter(filter: ExerciseDataFilter): Promise<ExerciseData[]> {
     const queryBuilder = this.repository.createQueryBuilder('exercise-data');
 
@@ -90,6 +116,11 @@ export class ExerciseDataService
     return queryBuilder.getMany();
   }
 
+  /**
+   * Retrieves all exercise data entries.
+   * @returns A list of all ExerciseData entries.
+   * @throws ExerciseDataListException if retrieval fails.
+   */
   async getAll(): Promise<ExerciseData[]> {
     try {
       return await this.repository.find();
@@ -98,6 +129,12 @@ export class ExerciseDataService
     }
   }
 
+  /**
+   * Updates an existing exercise data entry.
+   * @param payload - Data for updating the exercise.
+   * @returns The updated ExerciseData.
+   * @throws ExerciseDataUpdateException if update fails.
+   */
   async update(payload: ExerciseDataUpdatePayload): Promise<ExerciseData> {
     try {
       const detail = await this.detail(payload.exercise_data_id.toString());

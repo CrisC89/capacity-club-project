@@ -19,6 +19,10 @@ import {
 import { ExerciseTrainingFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
 
+/**
+ * Service for managing exercise training sessions.
+ * Implements CRUD operations and filtering for ExerciseTraining entities.
+ */
 @Injectable()
 export class ExerciseTrainingService
   implements
@@ -34,6 +38,13 @@ export class ExerciseTrainingService
     @InjectRepository(ExerciseTraining)
     private readonly repository: Repository<ExerciseTraining>,
   ) {}
+
+  /**
+   * Creates a new exercise training session.
+   * @param payload - Data for creating a new exercise training session.
+   * @returns The created ExerciseTraining.
+   * @throws ExerciseTrainingCreateException if creation fails.
+   */
   async create(
     payload: ExerciseTrainingCreatePayload,
   ): Promise<ExerciseTraining> {
@@ -43,7 +54,7 @@ export class ExerciseTrainingService
           .exercise_training_id(UniqueId.generate())
           .nb_reps(payload.nb_reps)
           .intensity(payload.intensity)
-          .member_feedback(payload.member_feedback)
+          .intensityType(payload.intensityType)
           .exercise_data(payload.exercise_data)
           .training_circuit(payload.training_circuit)
           .build(),
@@ -54,6 +65,11 @@ export class ExerciseTrainingService
     }
   }
 
+  /**
+   * Deletes an existing exercise training session by ID.
+   * @param id - The ID of the exercise training session to delete.
+   * @throws ExerciseTrainingDeleteException if deletion fails.
+   */
   async delete(id: string): Promise<void> {
     try {
       const detail = await this.detail(id);
@@ -63,6 +79,12 @@ export class ExerciseTrainingService
     }
   }
 
+  /**
+   * Retrieves the details of an exercise training session by ID.
+   * @param id - The ID of the exercise training session to retrieve.
+   * @returns The found ExerciseTraining.
+   * @throws ExerciseTrainingNotFoundException if the exercise training session is not found.
+   */
   async detail(id: string): Promise<ExerciseTraining> {
     const result = await this.repository.findOneBy({
       exercise_training_id: id,
@@ -73,6 +95,11 @@ export class ExerciseTrainingService
     throw new ExerciseTrainingNotFoundException();
   }
 
+  /**
+   * Filters exercise training sessions based on specified criteria.
+   * @param filter - The filtering criteria.
+   * @returns A list of ExerciseTraining entries matching the criteria.
+   */
   filter(filter: ExerciseTrainingFilter): Promise<ExerciseTraining[]> {
     const queryBuilder =
       this.repository.createQueryBuilder('exercise-training');
@@ -95,6 +122,11 @@ export class ExerciseTrainingService
     return queryBuilder.getMany();
   }
 
+  /**
+   * Retrieves all exercise training sessions.
+   * @returns A list of all ExerciseTraining entries.
+   * @throws ExerciseTrainingListException if retrieval fails.
+   */
   async getAll(): Promise<ExerciseTraining[]> {
     try {
       return await this.repository.find();
@@ -103,6 +135,12 @@ export class ExerciseTrainingService
     }
   }
 
+  /**
+   * Updates an existing exercise training session.
+   * @param payload - Data for updating the exercise training session.
+   * @returns The updated ExerciseTraining.
+   * @throws ExerciseTrainingUpdateException if update fails.
+   */
   async update(
     payload: ExerciseTrainingUpdatePayload,
   ): Promise<ExerciseTraining> {
@@ -110,7 +148,7 @@ export class ExerciseTrainingService
       const detail = await this.detail(payload.exercise_training_id.toString());
       detail.nb_reps = payload.nb_reps;
       detail.intensity = payload.intensity;
-      detail.member_feedback = payload.member_feedback;
+      detail.intensityType = payload.intensityType;
       detail.exercise_data = payload.exercise_data;
       detail.training_circuit = payload.training_circuit;
       return await this.repository.save(detail);

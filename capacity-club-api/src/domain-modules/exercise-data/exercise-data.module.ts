@@ -4,6 +4,9 @@ import { ExerciseDataService } from './exercise-data.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExerciseData } from './model';
 
+/**
+ * Module for managing ExerciseData.
+ */
 @Module({
   imports: [TypeOrmModule.forFeature([ExerciseData])],
   controllers: [ExerciseDataController],

@@ -4,6 +4,9 @@ import { MemberPlanController } from './member-plan.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MemberPlan } from './model';
 
+/**
+ * Module for managing MemberPlan.
+ */
 @Module({
   imports: [TypeOrmModule.forFeature([MemberPlan])],
   providers: [MemberPlanService],

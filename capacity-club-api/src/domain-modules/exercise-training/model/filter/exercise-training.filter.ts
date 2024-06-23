@@ -1,20 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Length, IsEnum } from 'class-validator';
-import { TrainingIntensity } from '../enum';
+import { IsOptional } from 'class-validator';
 import { ExerciseData } from 'domain-modules/exercise-data/model';
+import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 
+/**
+ * Class used to filter exercise training.
+ * This class defines the criteria used to filter a list of exercises training.
+ */
 export class ExerciseTrainingFilter {
   @ApiProperty()
-  @Length(1, 50)
-  nb_reps: number;
-
-  @ApiProperty()
-  @IsEnum(TrainingIntensity)
-  intensity: TrainingIntensity;
-
-  @ApiProperty()
-  member_feedback: number;
-
-  @ApiProperty()
+  @IsOptional()
   exercise_data: ExerciseData;
+
+  @ApiProperty()
+  @IsOptional()
+  training_circuit: TrainingCircuit;
 }
