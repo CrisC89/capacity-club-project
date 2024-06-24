@@ -7,23 +7,23 @@ import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
  */
 export class AddressFilter {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   street: string;
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   number: string;
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   zipcode: string;
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   town: string;
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   country: string;
   @ApiProperty()

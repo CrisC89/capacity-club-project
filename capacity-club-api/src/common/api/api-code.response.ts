@@ -27,6 +27,8 @@ export enum ApiCodeResponse {
   SIGNUP_PAYLOAD_MAIL_IS_MISSING = 'api.error.signup-payload-mail-empty',
   SIGNUP_PAYLOAD_MAIL_INVALID = 'api.error.signup-payload-mail-invalid',
 
+  CREDENTIAL_ID_MISSING = 'api.error.credential-id-missing',
+
   USER_NOT_FOUND = 'api.error.user-not-found',
   USER_ALREADY_EXIST = 'api.error.user-already-exist',
   TOKEN_GEN_ERROR = 'api.error.token-generator',
@@ -109,6 +111,13 @@ export enum ApiCodeResponse {
   ADDRESS_LIST_SUCCESS = 'api.success.address-list',
   ADDRESS_CREATE_ERROR = 'api.error.address-create',
   ADDRESS_CREATE_SUCCESS = 'api.success.address-create',
+
+  ADDRESS_PAYLOAD_ID_IS_MISSING = 'api.error.address-payload-id-is-missing',
+  ADDRESS_PAYLOAD_STREET_IS_MISSING = 'api.error.address-payload-street-is-missing',
+  ADDRESS_PAYLOAD_NUMBER_IS_MISSING = 'api.error.address-payload-number-is-missing',
+  ADDRESS_PAYLOAD_TOWN_IS_MISSING = 'api.error.address-payload-town-is-missing',
+  ADDRESS_PAYLOAD_ZIPCODE_IS_MISSING = 'api.error.address-payload-zipcode-is-missing',
+  ADDRESS_PAYLOAD_COUNTRY_IS_MISSING = 'api.error.address-payload-country-is-missing',
 
   EXERCISE_DATA_NOT_FOUND = 'api.error.exercise-data-not-found',
   EXERCISE_DATA_DELETE_SUCCESS = 'api.success.exercise-data-delete',

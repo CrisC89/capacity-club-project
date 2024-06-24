@@ -226,6 +226,37 @@ export const AddressControllerFilter: ApiOperationOptions = {
   summary: 'Filter Addresses',
   description:
     'Retrieve a list of addresses based on specific filtering criteria.',
+};
 
-  /*--------------------------------------- ENTITY -------------------------------------------------------*/
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+export const addressProperties = {
+  address_id: {
+    name: 'address_id',
+    description:
+      'Unique identifier for the address. Uses a custom transformer for serialization.',
+  },
+  street: {
+    name: 'street',
+    description: 'Street name of the address',
+  },
+  number: {
+    name: 'number',
+    description: 'House number of the address',
+  },
+  zipcode: {
+    name: 'zipcode',
+    description: 'Zip code of the address',
+  },
+  town: {
+    name: 'town',
+    description: 'Town or city of the address',
+  },
+  country: {
+    name: 'country',
+    description: 'Country of the address',
+  },
+  complement: {
+    name: 'complement',
+    description: 'Additional address information',
+  },
 };

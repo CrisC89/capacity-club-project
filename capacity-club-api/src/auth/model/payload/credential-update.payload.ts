@@ -13,7 +13,7 @@ export class CredentialUpdatepPayload {
     name: credentialProperties.credential_id.name,
     description: credentialProperties.credential_id.description,
   })
-  @IsNotEmpty()
+  @IsNotEmpty({ message: ApiCodeResponse.CREDENTIAL_ID_MISSING })
   credential_id: UniqueId;
   @ApiProperty({
     name: credentialProperties.username.name,
