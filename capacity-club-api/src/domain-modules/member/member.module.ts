@@ -7,6 +7,9 @@ import { Member } from './model';
 import { MemberService } from './member.service';
 import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
 import { Credential } from '@auth/model';
+import { MemberHomeTraining } from 'domain-modules/member-home-training/model';
+import { IndoorTraining } from 'domain-modules/indoor-training/model';
+import { MemberCard } from 'domain-modules/member-card/model/entity';
 
 /**
  * Module for managing Member.
@@ -19,6 +22,9 @@ import { Credential } from '@auth/model';
       MemberPlanSubscription,
       Address,
       Credential,
+      MemberHomeTraining,
+      IndoorTraining,
+      MemberCard,
     ]),
   ],
   controllers: [MemberController],

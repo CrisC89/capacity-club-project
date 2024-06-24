@@ -16,6 +16,7 @@ import { Address } from 'domain-modules/address/model';
 import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
 import { Credential } from '@auth/model';
 import { UniqueId } from '@common/model/unique-id';
+import { MemberHomeTraining } from 'domain-modules/member-home-training/model';
 
 export class MemberUpdatePayload {
   @ApiProperty()
@@ -64,16 +65,19 @@ export class MemberUpdatePayload {
   @IsBoolean()
   active: boolean;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => MemberPlanSubscription, isArray: true })
   @IsOptional()
   @IsArray()
   subscriptions: MemberPlanSubscription[];
+
+  @ApiProperty({ type: () => MemberHomeTraining, isArray: true })
+  member_home_trainings: MemberHomeTraining;
 
   @ApiProperty()
   @IsOptional()
   address: Address;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => Credential })
   @IsOptional()
   credential: Credential;
 }

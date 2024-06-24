@@ -14,6 +14,10 @@ import { ExerciseTrainingModule } from 'domain-modules/exercise-training/exercis
 import { TrainingCircuitModule } from 'domain-modules/training-circuit/training-circuit.module';
 import { MemberPlanSubscriptionModule } from 'domain-modules/member-plan-subscription/member-plan-subscription.module';
 import { AddressModule } from 'domain-modules/address/address.module';
+import { MemberCardModule } from 'domain-modules/member-card/member-card.module';
+import { HomeTrainingModule } from 'domain-modules/home-training/home-training.module';
+import { IndoorTrainingModule } from 'domain-modules/indoor-training/indoor-training.module';
+import { MemberHomeTrainingModule } from 'domain-modules/member-home-training/member-home-training.module';
 /**
  * AppModule is the root module of the application.
  *
@@ -31,6 +35,10 @@ import { AddressModule } from 'domain-modules/address/address.module';
     ExerciseTrainingModule,
     TrainingCircuitModule,
     WorkoutModule,
+    MemberCardModule,
+    HomeTrainingModule,
+    IndoorTrainingModule,
+    MemberHomeTrainingModule,
   ],
   controllers: [AppController],
   providers: [

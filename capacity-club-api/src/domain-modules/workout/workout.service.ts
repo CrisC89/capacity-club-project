@@ -47,9 +47,9 @@ export class WorkoutService
         Builder<Workout>()
           .workout_id(UniqueId.generate())
           .title(payload.title)
-          .training_circuits(
-            payload.training_circuits ? payload.training_circuits : [],
-          )
+          .training_circuits(Promise.resolve(payload.training_circuits))
+          .home_training(Promise.resolve(payload.home_training))
+          .indoor_training(Promise.resolve(payload.indoor_training))
           .build(),
       );
     } catch (e) {
@@ -135,9 +135,9 @@ export class WorkoutService
     try {
       const detail = await this.detail(payload.workout_id.toString());
       detail.title = payload.title;
-      detail.training_circuits = payload.training_circuits
-        ? payload.training_circuits
-        : [];
+      detail.training_circuits = Promise.resolve(payload.training_circuits);
+      detail.home_training = Promise.resolve(payload.home_training);
+      detail.indoor_training = Promise.resolve(payload.indoor_training);
 
       return await this.repository.save(detail);
     } catch (e) {

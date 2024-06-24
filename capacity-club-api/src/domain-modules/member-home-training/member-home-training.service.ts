@@ -112,7 +112,7 @@ export class MemberHomeTrainingService
         Builder<MemberHomeTraining>()
           .member_home_training_id(UniqueId.generate())
           .purchase_date(payload.purchase_date)
-          .member(payload.member)
+          .member(Promise.resolve(payload.member))
           .build(),
       );
     } catch (e) {
@@ -134,7 +134,7 @@ export class MemberHomeTrainingService
         payload.member_home_training_id.toString(),
       );
       detail.purchase_date = payload.purchase_date;
-      detail.member = payload.member;
+      detail.member = Promise.resolve(payload.member);
       return await this.repository.save(detail);
     } catch (e) {
       throw new MemberHomeTrainingUpdateException();

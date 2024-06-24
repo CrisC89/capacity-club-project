@@ -58,7 +58,7 @@ export class MemberService
           .address(payload.address)
           .active(payload.active)
           .code_activation(payload.code_activation)
-          .credential(payload.credential)
+          .credential(Promise.resolve(payload.credential))
           .build(),
       );
       return await this.repository.save(created_member);
@@ -152,9 +152,11 @@ export class MemberService
       detail.mail = payload.mail;
       detail.address = payload.address;
       detail.active = payload.active;
-      detail.credential = await this.credentialRepository.findOneBy({
-        credential_id: payload.credential.credential_id,
-      });
+      detail.credential = Promise.resolve(
+        await this.credentialRepository.findOneBy({
+          credential_id: payload.credential.credential_id,
+        }),
+      );
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

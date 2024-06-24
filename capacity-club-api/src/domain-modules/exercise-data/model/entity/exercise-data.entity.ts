@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { ExerciseDataCategory } from '../enum/exercise-data-category.enum';
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
@@ -35,9 +36,10 @@ export class ExerciseData extends BaseEntity {
     (exerciseTraining) => exerciseTraining.exercise_data,
     {
       cascade: true,
-      eager: false,
+      lazy: true,
       nullable: true,
     },
   )
-  exercise_training_list: ExerciseTraining[];
+  @ApiProperty({ type: () => ExerciseTraining, isArray: true })
+  exercise_training_list: Promise<ExerciseTraining[]>;
 }

@@ -25,7 +25,7 @@ export class HomeTrainingUpdatePayload implements Payload {
   @ApiProperty()
   @IsNotEmpty()
   price: number;
-  @ApiProperty()
+  @ApiProperty({ type: () => Workout, isArray: true })
   @IsNotEmpty()
   workouts: Workout[];
 }

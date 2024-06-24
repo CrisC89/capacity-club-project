@@ -18,6 +18,7 @@ import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { Transform } from 'class-transformer';
 import { MemberCard } from 'domain-modules/member-card/model/entity/member-card.entity';
 import { MemberHomeTraining } from 'domain-modules/member-home-training/model/entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 /**
  * Entity representing a member.
@@ -33,53 +34,69 @@ export class Member extends BaseEntity {
   @Transform(uniqueIdTransformer.to, { toClassOnly: true })
   @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
   member_id: UniqueId;
+
   @Column({ length: 50, nullable: true })
   firstname: string;
+
   @Column({ length: 50, nullable: true })
   lastname: string;
+
   @Column({ nullable: true })
   birthdate: Date;
+
   @Column('varchar', { nullable: true, default: Gender.OTHER })
   gender: Gender;
+
   @Column({ length: 15, nullable: true })
   phone: string;
+
   @Column({ nullable: true })
   mail: string;
+
   @Column({ length: 10, nullable: true })
   code_activation: string;
+
   @Column({ default: false })
   active: boolean;
 
   @OneToMany(() => MemberPlanSubscription, (ms) => ms.member, {
     cascade: true,
-    eager: true,
+    lazy: true,
     nullable: true,
   })
-  subscriptions: MemberPlanSubscription[];
+  @ApiProperty({ type: () => MemberPlanSubscription, isArray: true })
+  subscriptions: Promise<MemberPlanSubscription[]>;
 
   @OneToMany(() => MemberHomeTraining, (mht) => mht.member, {
     cascade: true,
-    eager: true,
+    lazy: true,
     nullable: true,
   })
-  member_home_trainings: MemberHomeTraining[];
+  @ApiProperty({ type: () => MemberHomeTraining, isArray: true })
+  member_home_trainings: Promise<MemberHomeTraining[]>;
 
   @OneToOne(() => Address, { cascade: true, eager: true, nullable: true })
   @JoinColumn({ referencedColumnName: 'address_id', name: 'address_id_fk' })
   address: Address;
 
-  @OneToOne(() => Credential, { nullable: true, eager: true })
+  @OneToOne(() => Credential, { nullable: true, lazy: true })
   @JoinColumn({
     name: 'credential_id_fk',
     referencedColumnName: 'credential_id',
   })
-  credential: Credential;
+  @ApiProperty({ type: () => Credential })
+  credential: Promise<Credential>;
 
-  @OneToOne(() => MemberCard, (memberCard) => memberCard.member, {
+  @OneToOne(() => MemberCard, {
     cascade: true,
     nullable: true,
+    lazy: true,
   })
-  @JoinColumn()
+  @JoinColumn({
+    name: 'member_card_id_fk',
+    referencedColumnName: 'member_card_id',
+  })
+  @ApiProperty({ type: () => MemberCard })
   member_card: MemberCard;
 
   @BeforeInsert()

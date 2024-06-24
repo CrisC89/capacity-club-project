@@ -10,7 +10,7 @@ import { Member } from 'domain-modules/member/model';
 export class MemberPlanSubscriptionCreatePayload {
   @ApiProperty()
   purchase_date: Date;
-  @ApiProperty()
+  @ApiProperty({ type: () => Member })
   member: Member;
   @ApiProperty()
   member_plan: MemberPlan;

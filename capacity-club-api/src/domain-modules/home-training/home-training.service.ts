@@ -107,7 +107,7 @@ export class HomeTrainingService
           .nb_week(payload.nb_week)
           .nb_training_by_week(payload.nb_training_by_week)
           .price(payload.price)
-          .workouts(payload.workouts)
+          .workouts(Promise.resolve(payload.workouts))
           .build(),
       );
     } catch (e) {
@@ -129,7 +129,7 @@ export class HomeTrainingService
       detail.nb_week = payload.nb_week;
       detail.nb_training_by_week = payload.nb_training_by_week;
       detail.price = payload.price;
-      detail.workouts = payload.workouts;
+      detail.workouts = Promise.resolve(payload.workouts);
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

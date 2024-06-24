@@ -11,10 +11,10 @@ export class TrainingCircuitCreatePayload {
   @IsString()
   @Length(1, 50)
   title: string;
-  @ApiProperty()
+  @ApiProperty({ type: () => ExerciseTraining, isArray: true })
   @IsOptional()
   exercise_training_list: ExerciseTraining[];
-  @ApiProperty()
+  @ApiProperty({ type: () => Workout })
   @IsOptional()
   workout: Workout;
 }

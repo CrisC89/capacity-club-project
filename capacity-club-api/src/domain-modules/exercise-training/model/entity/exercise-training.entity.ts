@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { BaseEntity } from '@common/model';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 import { PrimaryColumn, Column, ManyToOne, JoinColumn, Entity } from 'typeorm';
@@ -5,6 +6,7 @@ import { TrainingIntensity } from '../enum';
 import { ExerciseData } from 'domain-modules/exercise-data/model';
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { Transform } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
 
 /**
  * Entity representing a specific exercise training session.
@@ -27,22 +29,27 @@ export class ExerciseTraining extends BaseEntity {
   @Column('varchar', { nullable: false, default: TrainingIntensity.RPE })
   intensityType: TrainingIntensity;
 
-  @ManyToOne(() => ExerciseData, {
-    eager: false,
+  @ManyToOne((type) => ExerciseData, (data) => data.exercise_training_list, {
+    lazy: true,
   })
   @JoinColumn({
     referencedColumnName: 'exercise_data_id',
     name: 'exercise_data_id',
   })
-  exercise_data: ExerciseData;
+  @ApiProperty({ type: () => ExerciseData })
+  exercise_data: Promise<ExerciseData>;
 
   @ManyToOne(
-    () => TrainingCircuit,
+    (type) => TrainingCircuit,
     (training_circuit) => training_circuit.exercise_training_list,
+    {
+      lazy: true,
+    },
   )
   @JoinColumn({
     referencedColumnName: 'training_circuit_id',
     name: 'training_circuit_id',
   })
-  training_circuit: TrainingCircuit;
+  @ApiProperty({ type: () => TrainingCircuit })
+  training_circuit: Promise<TrainingCircuit>;
 }

@@ -8,7 +8,7 @@ import {
   AuthenticatedControllerRefresh,
   AuthenticatedControllerSignIn,
   AuthenticatedControllerSignUp,
-} from './../common/documentation/swagger.annotations';
+} from '../common/documentation/swagger.annotations';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Public } from '@common/config/metadata/public.metadata';

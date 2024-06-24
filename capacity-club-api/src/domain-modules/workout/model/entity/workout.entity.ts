@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { HomeTraining } from 'domain-modules/home-training/model/entity/home-training.entity';
 import { IndoorTraining } from 'domain-modules/indoor-training/model/entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 /**
  * Entity representing a workout.
@@ -34,13 +35,17 @@ export class Workout extends BaseEntity {
     (trainingCircuit) => trainingCircuit.workout,
     {
       cascade: true,
-      eager: true,
+      lazy: true,
     },
   )
-  training_circuits: TrainingCircuit[];
+  @ApiProperty({ type: () => TrainingCircuit, isArray: true })
+  training_circuits: Promise<TrainingCircuit[]>;
 
-  @ManyToOne(() => IndoorTraining, { nullable: true, eager: false })
-  indoor_training: IndoorTraining;
-  @ManyToOne(() => HomeTraining, { nullable: true, eager: false })
-  home_training: HomeTraining;
+  @ManyToOne(() => IndoorTraining, { nullable: true, lazy: true })
+  @ApiProperty({ type: () => IndoorTraining })
+  indoor_training: Promise<IndoorTraining>;
+
+  @ManyToOne(() => HomeTraining, { nullable: true, lazy: true })
+  @ApiProperty({ type: () => HomeTraining })
+  home_training: Promise<HomeTraining>;
 }

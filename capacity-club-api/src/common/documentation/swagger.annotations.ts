@@ -8,9 +8,11 @@ import { ApiOperationOptions } from '@nestjs/swagger';
  * member cards, ...
  */
 
-/*------------------------------------*/
-/*----- Authenticated Controller -----*/
-/*------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------- AUTH -----------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
 
 export const AuthenticatedControllerSignIn: ApiOperationOptions = {
   summary: 'User Sign-In',
@@ -64,9 +66,57 @@ export const AuthenticatedControllerLinkUsername: ApiOperationOptions = {
     'Method for linking a username and password to an existing user account.',
 };
 
-/*------------------------------------*/
-/*-------- Member Controller ---------*/
-/*------------------------------------*/
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const credentialProperties = {
+  credential_id: {
+    description:
+      'Unique identifier for the credential. Uses a custom transformer for serialization.',
+    name: 'credential_id',
+  },
+  username: {
+    description: 'Username for the credential',
+    name: 'username',
+  },
+  password: {
+    description:
+      'Password for the credential, excluded from plain serialization',
+    name: 'password',
+  },
+  facebook_hash: {
+    description: 'Facebook hash associated with the credential',
+    name: 'facebookHash',
+  },
+  google_hash: {
+    description: 'Google hash associated with the credential',
+    name: 'googleHash',
+  },
+  is_admin: {
+    description: 'Flag indicating if the user is an admin',
+    name: 'isAdmin',
+  },
+};
+
+export const signInProperties = {
+  social_login: {
+    name: 'socialLogin',
+    description: 'Indicates if the login is done through social networks',
+  },
+};
+
+export const signUpProperties = {
+  code_activation: {
+    name: 'code_activation',
+    description:
+      'Activation code used to link an existing member to a credential',
+  },
+};
+
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- MEMBER -------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
 
 export const MemberControllerCreate: ApiOperationOptions = {
   summary: 'Create Member',
@@ -98,6 +148,14 @@ export const MemberControllerFilter: ApiOperationOptions = {
   description:
     'Retrieve a list of members based on specific filtering criteria.',
 };
+
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------*/
+/*------------------------------------- MEMBER CARD ----------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
 
 export const MemberCardControllerCreate: ApiOperationOptions = {
   summary: 'Create MemberCard',
@@ -131,6 +189,14 @@ export const MemberCardControllerFilter: ApiOperationOptions = {
     'Retrieve a list of member cards based on specific filtering criteria.',
 };
 
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- ADDRESS ------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+
 export const AddressControllerCreate: ApiOperationOptions = {
   summary: 'Create Address',
   description: 'Create a new address and store its details in the database.',
@@ -160,4 +226,6 @@ export const AddressControllerFilter: ApiOperationOptions = {
   summary: 'Filter Addresses',
   description:
     'Retrieve a list of addresses based on specific filtering criteria.',
+
+  /*--------------------------------------- ENTITY -------------------------------------------------------*/
 };

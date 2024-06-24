@@ -116,7 +116,7 @@ export class MemberPlanSubscriptionService
           .member_plan_subscription_id(UniqueId.generate())
           .purchase_date(payload.purchase_date)
           .member_plan(payload.member_plan)
-          .member(payload.member)
+          .member(Promise.resolve(payload.member))
           .member_card(payload.member_card)
           .build(),
       );
@@ -139,7 +139,7 @@ export class MemberPlanSubscriptionService
         payload.member_plan_subscription_id.toString(),
       );
       detail.purchase_date = payload.purchase_date;
-      detail.member = payload.member;
+      detail.member = Promise.resolve(payload.member);
       detail.member_plan = payload.member_plan;
       detail.member_card = payload.member_card;
       return await this.repository.save(detail);

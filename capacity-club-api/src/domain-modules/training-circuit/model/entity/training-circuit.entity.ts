@@ -1,5 +1,6 @@
 import { BaseEntity } from '@common/model';
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { ExerciseTraining } from 'domain-modules/exercise-training/model/entity/exercise-training.entity';
 import { Workout } from 'domain-modules/workout/model/entity/workout.entity';
@@ -36,11 +37,19 @@ export class TrainingCircuit extends BaseEntity {
     {
       cascade: true,
       eager: true,
+      lazy: true,
     },
   )
-  exercise_training_list: ExerciseTraining[];
+  @ApiProperty({ type: () => ExerciseTraining, isArray: true })
+  exercise_training_list: Promise<ExerciseTraining[]>;
 
-  @ManyToOne(() => Workout, (workout) => workout.training_circuits)
-  @JoinColumn({ referencedColumnName: 'workout_id', name: 'workout_id' })
-  workout: Workout;
+  @ManyToOne(() => Workout, (workout) => workout.training_circuits, {
+    lazy: true,
+  })
+  @JoinColumn({
+    referencedColumnName: 'workout_id',
+    name: 'workout_id',
+  })
+  @ApiProperty({ type: () => Workout })
+  workout: Promise<Workout>;
 }

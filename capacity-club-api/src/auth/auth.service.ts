@@ -104,7 +104,7 @@ export class AuthService {
       throw new UserAlreadyExistException();
     }
 
-    console.log('result ' + result);
+    this.logger.log('result ' + result);
 
     this.logger.log('googleHash');
     this.logger.log(isNil(payload.facebookHash));
@@ -122,7 +122,7 @@ export class AuthService {
           .username(payload.username)
           .build(),
       );
-      console.log(response);
+      this.logger.log(response);
       const signInPayload: SignInPayload = {
         ...payload,
         socialLogin: !(payload.facebookHash == '' && payload.googleHash == ''),

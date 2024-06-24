@@ -21,9 +21,9 @@ export class ExerciseTrainingCreatePayload {
   @IsEnum(TrainingIntensity)
   intensityType: TrainingIntensity;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => ExerciseData })
   exercise_data: ExerciseData;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => TrainingCircuit })
   training_circuit: TrainingCircuit;
 }

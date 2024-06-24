@@ -55,8 +55,8 @@ export class ExerciseTrainingService
           .nb_reps(payload.nb_reps)
           .intensity(payload.intensity)
           .intensityType(payload.intensityType)
-          .exercise_data(payload.exercise_data)
-          .training_circuit(payload.training_circuit)
+          .exercise_data(Promise.resolve(payload.exercise_data))
+          .training_circuit(Promise.resolve(payload.training_circuit))
           .build(),
       );
     } catch (e) {
@@ -149,8 +149,8 @@ export class ExerciseTrainingService
       detail.nb_reps = payload.nb_reps;
       detail.intensity = payload.intensity;
       detail.intensityType = payload.intensityType;
-      detail.exercise_data = payload.exercise_data;
-      detail.training_circuit = payload.training_circuit;
+      detail.exercise_data = Promise.resolve(payload.exercise_data);
+      detail.training_circuit = Promise.resolve(payload.training_circuit);
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

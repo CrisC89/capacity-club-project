@@ -18,7 +18,6 @@ import {
   MemberCardUpdateException,
 } from './member-card.exception';
 import { isNil } from 'lodash';
-import { Member } from 'domain-modules/member/model';
 
 /**
  * Service for managing member cards.
@@ -38,8 +37,6 @@ export class MemberCardService
   constructor(
     @InjectRepository(MemberCard)
     private readonly repository: Repository<MemberCard>,
-    @InjectRepository(Member)
-    private readonly memberRepository: Repository<Member>,
   ) {}
   /**
    * Retrieves all member cards.
@@ -110,7 +107,6 @@ export class MemberCardService
           .member_card_id(UniqueId.generate())
           .collective_session_count(payload.collective_session_count)
           .individual_session_count(payload.individual_session_count)
-          .member(payload.member)
           .build(),
       );
       return await this.repository.save(created_member_card);
@@ -133,7 +129,6 @@ export class MemberCardService
       );
       detail.collective_session_count = payload.collective_session_count;
       detail.individual_session_count = payload.individual_session_count;
-      detail.member = payload.member;
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

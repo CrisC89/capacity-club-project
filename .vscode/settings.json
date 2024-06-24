@@ -10,5 +10,6 @@
       "database": "capacity_club_db",
       "username": "capacity_club"
     }
-  ]
+  ],
+  "cmake.sourceDirectory": "C:/Users/Cris/OneDrive/Bureau/Workspace/Capacity Club Project/capacity_club_mobile_app/linux"
 }

@@ -25,6 +25,6 @@ export class ExerciseDataUpdatePayload {
   video_youtube_link: string;
   @ApiProperty()
   video_asset_link: string;
-  @ApiProperty()
+  @ApiProperty({ type: () => ExerciseTraining, isArray: true })
   exercise_training_list: ExerciseTraining[];
 }

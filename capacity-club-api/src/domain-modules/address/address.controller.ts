@@ -5,7 +5,7 @@ import {
   AddressControllerFilter,
   AddressControllerList,
   AddressControllerUpdate,
-} from './../../common/documentation/swagger.annotations';
+} from '../../common/documentation/swagger.annotations';
 import { CrudController } from '@domain-modules-shared';
 import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';

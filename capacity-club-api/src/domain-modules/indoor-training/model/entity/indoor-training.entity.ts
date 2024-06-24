@@ -1,5 +1,6 @@
 import { BaseEntity } from '@common/model';
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { Workout } from 'domain-modules/workout/model';
 import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
@@ -30,7 +31,10 @@ export class IndoorTraining extends BaseEntity {
   @Column({ nullable: false })
   nb_subscription: number;
 
-  @OneToOne(() => Workout)
+  @OneToOne(() => Workout, {
+    lazy: true,
+  })
   @JoinColumn({ name: 'workout_id', referencedColumnName: 'workout_id' })
-  workout: Workout;
+  @ApiProperty({ type: () => Workout })
+  workout: Promise<Workout>;
 }

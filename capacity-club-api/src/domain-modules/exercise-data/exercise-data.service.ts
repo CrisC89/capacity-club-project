@@ -55,6 +55,9 @@ export class ExerciseDataService
           .categories(payload.categories)
           .video_youtube_link(payload.video_youtube_link)
           .video_asset_link(payload.video_asset_link)
+          .exercise_training_list(
+            Promise.resolve(payload.exercise_training_list),
+          )
           .build(),
       );
     } catch (e) {
@@ -143,6 +146,9 @@ export class ExerciseDataService
       detail.categories = payload.categories;
       detail.video_youtube_link = payload.video_youtube_link;
       detail.video_asset_link = payload.video_asset_link;
+      detail.exercise_training_list = Promise.resolve(
+        payload.exercise_training_list,
+      );
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

@@ -35,6 +35,17 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "plugins": [
+      {
+        "name": "@nestjs/swagger",
+        "options": {
+          "classValidatorShim": true,
+          "dtoFileNameSuffix": [".dto.ts", ".entity.ts", ".payload.ts"],
+          "controllerFileNameSuffix": [".controller.ts"],
+          "dtoKeyOfComment": "description"
+        }
+      }
+    ]
   }
 }

@@ -17,7 +17,7 @@ export class MemberPlanSubscriptionUpdatePayload {
   member_plan_subscription_id: UniqueId;
   @ApiProperty()
   purchase_date: Date;
-  @ApiProperty()
+  @ApiProperty({ type: () => Member })
   member: Member;
   @ApiProperty()
   member_plan: MemberPlan;

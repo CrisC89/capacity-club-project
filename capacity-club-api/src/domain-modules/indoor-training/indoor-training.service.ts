@@ -109,7 +109,7 @@ export class IndoorTrainingService
           .end_hours(payload.end_hours)
           .nb_place(payload.nb_place)
           .nb_subscription(payload.nb_subscription)
-          .workout(payload.workout)
+          .workout(Promise.resolve(payload.workout))
           .build(),
       );
     } catch (e) {
@@ -133,7 +133,7 @@ export class IndoorTrainingService
       detail.end_hours = payload.end_hours;
       detail.nb_place = payload.nb_place;
       detail.nb_subscription = payload.nb_subscription;
-      detail.workout = payload.workout;
+      detail.workout = Promise.resolve(payload.workout);
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

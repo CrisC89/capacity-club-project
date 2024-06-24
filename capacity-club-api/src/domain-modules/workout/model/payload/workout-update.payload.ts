@@ -18,13 +18,13 @@ export class WorkoutUpdatePayload {
   @IsString()
   @Length(1, 50)
   title: string;
-  @ApiProperty()
+  @ApiProperty({ type: () => TrainingCircuit, isArray: true })
   @IsOptional()
   training_circuits: TrainingCircuit[];
-  @ApiProperty()
+  @ApiProperty({ type: () => HomeTraining })
   @IsOptional()
   home_training: HomeTraining;
-  @ApiProperty()
+  @ApiProperty({ type: () => IndoorTraining })
   @IsOptional()
   indoor_training: IndoorTraining;
 }

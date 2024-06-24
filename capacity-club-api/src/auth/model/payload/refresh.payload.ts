@@ -4,6 +4,5 @@ import { ApiProperty } from '@nestjs/swagger';
  * This class defines the structure for the payload used when requesting a token refresh.
  */
 export class RefreshTokenPayload {
-  @ApiProperty()
   refresh: string;
 }

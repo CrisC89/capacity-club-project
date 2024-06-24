@@ -14,6 +14,6 @@ export class MemberHomeTrainingUpdatePayload {
   member_home_training_id: UniqueId;
   @ApiProperty()
   purchase_date: Date;
-  @ApiProperty()
+  @ApiProperty({ type: () => Member })
   member: Member;
 }

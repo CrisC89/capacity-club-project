@@ -1,4 +1,5 @@
 import { uniqueIdTransformer, UniqueId } from '@common/model';
+import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { Workout } from 'domain-modules/workout/model';
 import { Entity, BaseEntity, PrimaryColumn, Column, OneToMany } from 'typeorm';
@@ -29,7 +30,8 @@ export class HomeTraining extends BaseEntity {
 
   @OneToMany(() => Workout, (workout) => workout.home_training, {
     cascade: true,
-    eager: true,
+    lazy: true,
   })
-  workouts: Workout[];
+  @ApiProperty({ type: () => Workout, isArray: true })
+  workouts: Promise<Workout[]>;
 }

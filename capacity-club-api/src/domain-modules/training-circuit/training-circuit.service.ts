@@ -54,11 +54,9 @@ export class TrainingCircuitService
           .training_circuit_id(UniqueId.generate())
           .title(payload.title)
           .exercise_training_list(
-            payload.exercise_training_list
-              ? payload.exercise_training_list
-              : [],
+            Promise.resolve(payload.exercise_training_list),
           )
-          .workout(payload.workout)
+          .workout(Promise.resolve(payload.workout))
           .build(),
       );
     } catch (e) {
@@ -146,10 +144,10 @@ export class TrainingCircuitService
     try {
       const detail = await this.detail(payload.training_circuit_id.toString());
       detail.title = payload.title;
-      detail.exercise_training_list = payload.exercise_training_list
-        ? payload.exercise_training_list
-        : [];
-      detail.workout = payload.workout;
+      detail.exercise_training_list = Promise.resolve(
+        payload.exercise_training_list,
+      );
+      detail.workout = Promise.resolve(payload.workout);
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

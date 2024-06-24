@@ -8,6 +8,6 @@ import { Member } from 'domain-modules/member/model';
 export class MemberHomeTrainingCreatePayload {
   @ApiProperty()
   purchase_date: Date;
-  @ApiProperty()
+  @ApiProperty({ type: () => Member })
   member: Member;
 }

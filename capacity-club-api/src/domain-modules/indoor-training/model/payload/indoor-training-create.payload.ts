@@ -26,7 +26,7 @@ export class IndoorTrainingCreatePayload implements Payload {
   @ApiProperty()
   @IsNotEmpty()
   nb_subscription: number;
-  @ApiProperty()
+  @ApiProperty({ type: () => Workout })
   @IsNotEmpty()
   workout: Workout;
 }

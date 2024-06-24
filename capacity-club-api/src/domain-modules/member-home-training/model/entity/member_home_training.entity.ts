@@ -1,4 +1,5 @@
 import { BaseEntity, UniqueId, uniqueIdTransformer } from '@common/model';
+import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { Member } from 'domain-modules/member/model';
 import {
@@ -6,6 +7,7 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  Entity,
 } from 'typeorm';
 
 /**
@@ -13,6 +15,7 @@ import {
  * This entity indicates the purchase of a home training program by a member.
  * It links the home training templates to the specific home training instances owned by the member.
  */
+@Entity()
 export class MemberHomeTraining extends BaseEntity {
   /**
    * Unique identifier for the member plan subscription.
@@ -24,7 +27,8 @@ export class MemberHomeTraining extends BaseEntity {
   member_home_training_id: UniqueId;
   @CreateDateColumn()
   purchase_date: Date;
-  @ManyToOne(() => Member, { eager: false })
+  @ManyToOne(() => Member, { lazy: true })
   @JoinColumn({ referencedColumnName: 'member_id', name: 'member_id_fk' })
-  member: Member;
+  @ApiProperty({ type: () => Member })
+  member: Promise<Member>;
 }
