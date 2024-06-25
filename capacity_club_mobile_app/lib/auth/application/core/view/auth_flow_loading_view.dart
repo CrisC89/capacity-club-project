@@ -16,9 +16,8 @@ class _AuthFlowLoadingViewState extends State<AuthLoadingView>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration:
-          Duration(seconds: 1), // Durée d'une transition d'opacité complète
-    )..repeat(reverse: true); // Répéter l'animation en alternance
+      duration: const Duration(seconds: 1),
+    )..repeat(reverse: true);
   }
 
   @override
@@ -34,7 +33,7 @@ class _AuthFlowLoadingViewState extends State<AuthLoadingView>
       body: Center(
         child: FadeTransition(
             opacity: _animationController,
-            child: Image.asset('assets/img/icon_logo.png', width: 300)),
+            child: Image.asset('assets/img/icon_logo_v2.png', width: 300)),
       ),
     );
   }

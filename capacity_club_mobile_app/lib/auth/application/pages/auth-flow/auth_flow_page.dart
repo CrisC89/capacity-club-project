@@ -49,7 +49,8 @@ class _AuthFlowPageState extends State<AuthFlowPage> {
     return BlocBuilder<AuthFlowBloc, AuthFlowState>(
       builder: (context, state) {
         if (state is AuthFlowInitial) {
-          return const MaterialApp(home: AuthLoadingView());
+          return const MaterialApp(
+              debugShowCheckedModeBanner: false, home: AuthLoadingView());
         } else {
           GoRouter router;
           if (state is AuthFlowSuccess) {

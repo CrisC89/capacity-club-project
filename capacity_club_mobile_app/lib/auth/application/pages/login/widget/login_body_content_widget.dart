@@ -6,7 +6,6 @@ import 'package:capacity_club_mobile_app/auth/shared/helper/auth_form_helper.dar
 import 'package:capacity_club_mobile_app/auth/shared/widgets/social_rouded_button_widget.dart';
 import 'package:capacity_club_mobile_app/common/i18n/app_local.dart';
 import 'package:capacity_club_mobile_app/common/theme/theme.dart';
-import 'package:capacity_club_mobile_app/common/utils/dependency_injection.dart';
 import 'package:capacity_club_mobile_app/common/widgets/app_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +19,9 @@ Widget loginBodyContent(BuildContext context, FormGroup form) {
         .add(LoginByMailEvent(signInRequest: signInRequest));
   }
 
+  final colorScheme = Theme.of(context).colorScheme;
   return Container(
+    color: colorScheme.surface,
     height: MediaQuery.of(context).size.height * 0.6,
     padding: const EdgeInsets.symmetric(
         horizontal: AppTheme.fixPadding * 1.5, vertical: AppTheme.fixPadding),
