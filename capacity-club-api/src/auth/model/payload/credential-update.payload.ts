@@ -3,6 +3,7 @@ import { credentialProperties } from '@common/documentation';
 import { UniqueId } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, Length, IsOptional } from 'class-validator';
+import { Member } from 'domain-modules/member/model';
 
 /**
  * DTO (Data Transfer Object) for updating user credentials.
@@ -13,7 +14,7 @@ export class CredentialUpdatepPayload {
     name: credentialProperties.credential_id.name,
     description: credentialProperties.credential_id.description,
   })
-  @IsNotEmpty({ message: ApiCodeResponse.CREDENTIAL_ID_MISSING })
+  @IsNotEmpty({ message: ApiCodeResponse.CREDENTIAL_PAYLOAD_ID_IS_MISSING })
   credential_id: UniqueId;
   @ApiProperty({
     name: credentialProperties.username.name,
@@ -44,4 +45,14 @@ export class CredentialUpdatepPayload {
   })
   @IsOptional()
   facebookHash: string;
+
+  @ApiProperty({
+    name: credentialProperties.member.name,
+    description: credentialProperties.member.description,
+    type: () => Member,
+  })
+  @IsNotEmpty({
+    message: ApiCodeResponse.CREDENTIAL_PAYLOAD_MEMBER_IS_MISSING,
+  })
+  member: Promise<Member>;
 }

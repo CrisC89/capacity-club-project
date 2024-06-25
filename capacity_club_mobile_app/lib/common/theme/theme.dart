@@ -1,7 +1,154 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   AppTheme._();
+
+  static final lightTheme = ThemeData(
+      scaffoldBackgroundColor: const Color(0xfffafafa),
+      brightness: Brightness.light,
+      useMaterial3: true,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+      }),
+      fontFamily: GoogleFonts.openSans().fontFamily,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xfffafafa),
+        surfaceTintColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Color(0xff393d40),
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarColor: Color(0xFFf7f7f7),
+            systemNavigationBarIconBrightness: Brightness.dark),
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          color: Color(0xff393d40),
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffeaebed)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffeaebed)),
+          ),
+          hintStyle: TextStyle(color: Color(0xffeaebed)),
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+          isDense: true),
+      tabBarTheme: const TabBarTheme(
+        indicatorColor: Color(0xff1e86ff),
+        labelColor: Color(0xff1e86ff),
+        unselectedLabelColor: Colors.grey,
+        dividerColor: Colors.transparent,
+      ),
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(color: Color(0xff393d40)),
+      ));
+  static final lightTheme2 = ThemeData(
+      scaffoldBackgroundColor: const Color(0xffffffff),
+      brightness: Brightness.light,
+      useMaterial3: true,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+      }),
+      fontFamily: GoogleFonts.openSans().fontFamily,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xffffffff),
+        surfaceTintColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Color(0xff393d40),
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarColor: Color(0xFFf7f7f7),
+            systemNavigationBarIconBrightness: Brightness.dark),
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          color: Color(0xff393d40),
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffeaebed)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffeaebed)),
+          ),
+          hintStyle: TextStyle(color: Color(0xffeaebed)),
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+          isDense: true),
+      tabBarTheme: const TabBarTheme(
+        indicatorColor: Color(0xff1e86ff),
+        labelColor: Color(0xff1e86ff),
+        unselectedLabelColor: Colors.grey,
+        dividerColor: Colors.transparent,
+      ),
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(color: Color(0xff393d40)),
+      ));
+  static final darkTheme = ThemeData(
+      brightness: Brightness.dark,
+      useMaterial3: true,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+      }),
+      fontFamily: GoogleFonts.openSans().fontFamily,
+      appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
+              statusBarIconBrightness: Brightness.light,
+              systemNavigationBarColor: Color(0xFF1c1b1f),
+              systemNavigationBarIconBrightness: Brightness.light),
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            color: Color(0xffe6e1e5),
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          )),
+      inputDecorationTheme: const InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xff25232a)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xff25232a)),
+          ),
+          filled: true,
+          fillColor: Color(0xff25232a),
+          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+          isDense: true),
+      tabBarTheme: const TabBarTheme(
+        indicatorColor: Color(0xff1e86ff),
+        labelColor: Color(0xff1e86ff),
+        unselectedLabelColor: Colors.white,
+        dividerColor: Colors.transparent,
+      ));
+
+  static const Color _mainColor = const Color(0xffe77610);
+  static const Color _tabBarColor = const Color(0xFF15121f);
+  static const Color _greyTextColor = const Color(0xff808a96);
+  static const Color _bookmarkColor = const Color(0xff6ed993);
+  static const Color _cardColor = const Color(0xffededed);
+  static const Color _darkColor = const Color(0xff25232a);
+
 // Light Mode Colors
   static const Color kPrimaryColorLight = Color(0xFF007AFF);
   static const Color kAccentColorLight = Color(0xFFFF4081);
@@ -33,100 +180,6 @@ class AppTheme {
   static const Color kSurfaceColorDarkBis = Color(0xFF222222);
   static const Color kSecondaryColorDarkBis = Color(0xFF00FFAB);
   static const Color kTextColorDarkBis = Color(0xFFEBEBEB);
-
-  static final ThemeData lightTheme = ThemeData(
-    primaryColor: kPrimaryColorLight,
-    scaffoldBackgroundColor: kSurfaceColorLight,
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: kTextColorLight),
-      bodyMedium: TextStyle(color: kTextColorLight),
-      displayLarge: TextStyle(color: kTextColorLight),
-      displayMedium: TextStyle(color: kTextColorLight),
-      bodySmall: TextStyle(color: kTextColorLight),
-    ),
-    colorScheme: const ColorScheme.light(
-      primary: kPrimaryColorLight,
-      secondary: kSecondaryColorLight,
-      background: kBackgroundColorLight,
-      surface: kSurfaceColorLight,
-      onPrimary: kSurfaceColorLight,
-      onSecondary: kTextColorLight,
-      onBackground: kTextColorLight,
-      onSurface: kTextColorLight,
-    )
-        .copyWith(secondary: kAccentColorLight)
-        .copyWith(background: kBackgroundColorLight),
-  );
-
-  static final ThemeData darkTheme = ThemeData(
-    primaryColor: kPrimaryColorDark,
-    hintColor: kAccentColorDark,
-    scaffoldBackgroundColor: kSurfaceColorDark,
-    colorScheme: const ColorScheme.dark(
-      primary: kPrimaryColorDark,
-      secondary: kSecondaryColorDark,
-      background: kBackgroundColorDark,
-      surface: kSurfaceColorDark,
-      onPrimary: kTextColorDark,
-      onSecondary: kTextColorDark,
-      onBackground: kTextColorDark,
-      onSurface: kTextColorDark,
-    ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: kTextColorDark),
-      bodyMedium: TextStyle(color: kTextColorDark),
-      displayLarge: TextStyle(color: kTextColorDark),
-      displayMedium: TextStyle(color: kTextColorDark),
-      bodySmall: TextStyle(color: kTextColorDark),
-    ),
-  );
-
-  final ThemeData lightThemeBis = ThemeData(
-    primaryColor: kPrimaryColorLightBis,
-    hintColor: kAccentColorLightBis,
-    scaffoldBackgroundColor: kSurfaceColorLightBis,
-    colorScheme: const ColorScheme.light(
-      primary: kPrimaryColorLightBis,
-      secondary: kSecondaryColorLightBis,
-      background: kBackgroundColorLightBis,
-      surface: kSurfaceColorLightBis,
-      onPrimary: kSurfaceColorLightBis,
-      onSecondary: kTextColorLightBis,
-      onBackground: kTextColorLightBis,
-      onSurface: kTextColorLightBis,
-    ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: kTextColorLightBis),
-      bodyMedium: TextStyle(color: kTextColorLightBis),
-      displayLarge: TextStyle(color: kTextColorLightBis),
-      displayMedium: TextStyle(color: kTextColorLightBis),
-      bodySmall: TextStyle(color: kTextColorLightBis),
-    ),
-  );
-
-  final ThemeData darkThemeBis = ThemeData(
-    primaryColor: kPrimaryColorDarkBis,
-    hintColor: kAccentColorDarkBis,
-    scaffoldBackgroundColor: kSurfaceColorDarkBis,
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: kTextColorDarkBis),
-      bodyMedium: TextStyle(color: kTextColorDarkBis),
-      displayLarge: TextStyle(color: kTextColorDarkBis),
-      displayMedium: TextStyle(color: kTextColorDarkBis),
-      bodySmall: TextStyle(color: kTextColorDarkBis),
-    ),
-    colorScheme: const ColorScheme.dark(
-      primary: kPrimaryColorDarkBis,
-      secondary: kSecondaryColorDarkBis,
-      background: kBackgroundColorDarkBis,
-      surface: kSurfaceColorDarkBis,
-      onPrimary: kTextColorDarkBis,
-      onSecondary: kTextColorDarkBis,
-      onBackground: kTextColorDarkBis,
-      onSurface: kTextColorDarkBis,
-    ).copyWith(background: kBackgroundColorDarkBis),
-  );
-
   static const primaryColor = Color(0xff005662);
   static const pink = Colors.pink;
   static const yellow = Color(0xffFFCE31);

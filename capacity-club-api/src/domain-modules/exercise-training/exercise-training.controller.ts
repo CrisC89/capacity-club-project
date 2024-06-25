@@ -8,7 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ExerciseTrainingService } from './exercise-training.service';
 import {
   ExerciseTraining,
@@ -16,6 +16,14 @@ import {
   ExerciseTrainingUpdatePayload,
 } from './model';
 import { ExerciseTrainingFilter } from './model/filter';
+import {
+  ExerciseTrainingControllerCreate,
+  ExerciseTrainingControllerDelete,
+  ExerciseTrainingControllerDetail,
+  ExerciseTrainingControllerFilter,
+  ExerciseTrainingControllerList,
+  ExerciseTrainingControllerUpdate,
+} from '@common/documentation';
 
 /**
  * Controller for managing exercise training sessions.
@@ -42,6 +50,7 @@ export class ExerciseTrainingController
    * @param payload - Data for creating a new exercise training session.
    * @returns The created ExerciseTraining.
    */
+  @ApiOperation(ExerciseTrainingControllerCreate)
   @Post('create')
   create(
     @Body() payload: ExerciseTrainingCreatePayload,
@@ -53,6 +62,7 @@ export class ExerciseTrainingController
    * Endpoint to delete an exercise training session by ID.
    * @param id - The ID of the exercise training session to delete.
    */
+  @ApiOperation(ExerciseTrainingControllerDelete)
   @Delete('delete/:id')
   delete(@Param('id') id: string): Promise<void> {
     return this.service.delete(id);
@@ -63,6 +73,7 @@ export class ExerciseTrainingController
    * @param id - The ID of the exercise training session to retrieve.
    * @returns The found ExerciseTraining.
    */
+  @ApiOperation(ExerciseTrainingControllerDetail)
   @Get('detail/:id')
   detail(@Param('id') id: string): Promise<ExerciseTraining> {
     return this.service.detail(id);
@@ -73,6 +84,7 @@ export class ExerciseTrainingController
    * @param filter - The filtering criteria.
    * @returns A list of ExerciseTraining entries matching the criteria.
    */
+  @ApiOperation(ExerciseTrainingControllerFilter)
   @Post('filter')
   filter(@Body() filter: ExerciseTrainingFilter): Promise<ExerciseTraining[]> {
     return this.service.filter(filter);
@@ -82,6 +94,7 @@ export class ExerciseTrainingController
    * Endpoint to retrieve all exercise training sessions.
    * @returns A list of all ExerciseTraining entries.
    */
+  @ApiOperation(ExerciseTrainingControllerList)
   @Get('list')
   getAll(): Promise<ExerciseTraining[]> {
     return this.service.getAll();
@@ -92,6 +105,7 @@ export class ExerciseTrainingController
    * @param payload - Data for updating the exercise training session.
    * @returns The updated ExerciseTraining.
    */
+  @ApiOperation(ExerciseTrainingControllerUpdate)
   @Put('update')
   update(
     @Body() payload: ExerciseTrainingUpdatePayload,

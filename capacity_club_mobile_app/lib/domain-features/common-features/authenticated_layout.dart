@@ -5,6 +5,7 @@ import 'package:capacity_club_mobile_app/domain-features/home/application/page/h
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/test-home.page.dart';
 import 'package:capacity_club_mobile_app/domain-features/personal-training/application/pages/personal-training-page/personal_training_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/setting/application/pages/setting-page/setting_page.dart';
+import 'package:capacity_club_mobile_app/domain-features/test-auth.screen.dart';
 import 'package:capacity_club_mobile_app/domain-features/user-profile/application/pages/user-profile/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
@@ -79,18 +80,18 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                 Breakpoints.mediumAndUp: SlotLayout.from(
                   key: const Key('primary-navigation-medium'),
                   builder: (context) => AdaptiveScaffold.standardNavigationRail(
-                    backgroundColor: Theme.of(context).colorScheme.background,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
                     selectedIconTheme: IconThemeData(
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     unselectedIconTheme: IconThemeData(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     selectedLabelTextStyle: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     unSelectedLabelTextStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     destinations: destinations
                         .map(
@@ -149,7 +150,7 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                       } else if (state is PersonalTrainingState) {
                         return PersonalTrainingPage();
                       } else if (state is UserProfileState) {
-                        return UserProfilePage();
+                        return HomePageTest();
                       } else if (state is SettingState) {
                         return ContactPage();
                       }

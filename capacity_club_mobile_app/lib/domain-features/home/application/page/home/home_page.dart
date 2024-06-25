@@ -1,5 +1,6 @@
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/fake_data.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective_training_detail_screen.dart';
+import 'package:capacity_club_mobile_app/domain-features/home/application/widget/date_time_line_calendar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -110,31 +111,7 @@ class _HomePageState extends State<HomePage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          TableCalendar(
-            focusedDay: today,
-            firstDay: DateTime.utc(2020, 10, 16),
-            lastDay: DateTime.utc(2030, 3, 14),
-            calendarFormat:
-                calendarType ? CalendarFormat.month : CalendarFormat.week,
-            availableCalendarFormats: const {
-              CalendarFormat.month: 'Mois',
-              CalendarFormat.week: 'Semaine',
-            },
-            onFormatChanged: (format) {
-              setState(() {
-                calendarType = !calendarType;
-              });
-            },
-            selectedDayPredicate: (day) {
-              return isSameDay(selectedDay, day);
-            },
-            onDaySelected: (selectedDay, focusedDay) {
-              setState(() {
-                this.selectedDay = selectedDay;
-                this.today = focusedDay;
-              });
-            },
-          ),
+          DateTimeLineCalendar(),
           SizedBox(height: 4),
           Divider(
             height: 20,
@@ -276,7 +253,7 @@ class WorkoutCard extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width *
             0.8, // Reduced width for collective training cards
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -284,8 +261,8 @@ class WorkoutCard extends StatelessWidget {
             // Logo de l'entreprise
             Center(
                 child: Image.asset('assets/img/icon_logo_v2.png',
-                    width: 100)), // Reduced logo size
-            SizedBox(height: 8),
+                    width: 50)), // Reduced logo size
+            SizedBox(height: 4),
             Text(
               workoutName,
               style: TextStyle(
@@ -308,7 +285,7 @@ class WorkoutCard extends StatelessWidget {
                 color: Colors.grey[600],
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -337,7 +314,7 @@ class WorkoutCard extends StatelessWidget {
                   ),
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
@@ -357,7 +334,7 @@ class WorkoutCard extends StatelessWidget {
                       foregroundColor: Colors.green,
                     ),
                   ),
-                SizedBox(width: 8),
+                SizedBox(width: 4),
                 ElevatedButton(
                   onPressed: onDetails,
                   child: Text('Détails'),

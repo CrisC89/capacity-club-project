@@ -95,6 +95,10 @@ export const credentialProperties = {
     description: 'Flag indicating if the user is an admin',
     name: 'isAdmin',
   },
+  member: {
+    name: 'member',
+    description: 'Associated Member entity',
+  },
 };
 
 export const signInProperties = {
@@ -151,6 +155,66 @@ export const MemberControllerFilter: ApiOperationOptions = {
 
 /*--------------------------------------- ENTITY -------------------------------------------------------*/
 
+export const memberProperties = {
+  member_id: {
+    name: 'member_id',
+    description:
+      'Unique identifier for the member. Uses a custom transformer for serialization.',
+  },
+  firstname: {
+    name: 'firstname',
+    description: 'First name of the member.',
+  },
+  lastname: {
+    name: 'lastname',
+    description: 'Last name of the member.',
+  },
+  birthdate: {
+    name: 'birthdate',
+    description: 'Birthdate of the member.',
+  },
+  gender: {
+    name: 'gender',
+    description: 'Gender of the member.',
+  },
+  phone: {
+    name: 'phone',
+    description: 'Phone number of the member.',
+  },
+  mail: {
+    name: 'mail',
+    description: 'Email address of the member.',
+  },
+  code_activation: {
+    name: 'code_activation',
+    description: 'Activation code for the member.',
+  },
+  active: {
+    name: 'active',
+    description: 'Indicates whether the member is active.',
+  },
+  subscriptions: {
+    name: 'subscriptions',
+    description: 'List of subscriptions for the member.',
+  },
+  member_home_trainings: {
+    name: 'member_home_trainings',
+    description: 'List of home trainings for the member.',
+  },
+  address: {
+    name: 'address',
+    description: 'Address of the member.',
+  },
+  credential: {
+    name: 'credential',
+    description: 'Credentials associated with the member.',
+  },
+  member_card: {
+    name: 'member_card',
+    description: 'Member card associated with the member.',
+  },
+};
+
 /*------------------------------------------------------------------------------------------------------*/
 /*------------------------------------- MEMBER CARD ----------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------*/
@@ -190,6 +254,22 @@ export const MemberCardControllerFilter: ApiOperationOptions = {
 };
 
 /*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const memberCardProperties = {
+  member_card_id: {
+    name: 'member_card_id',
+    description:
+      'Unique identifier for the member card. Uses a custom transformer for serialization.',
+  },
+  collective_session_count: {
+    name: 'collective_session_count',
+    description: 'Number of collective sessions available for the member.',
+  },
+  individual_session_count: {
+    name: 'individual_session_count',
+    description: 'Number of individual sessions available for the member.',
+  },
+};
 
 /*------------------------------------------------------------------------------------------------------*/
 /*--------------------------------------- ADDRESS ------------------------------------------------------*/
@@ -258,5 +338,611 @@ export const addressProperties = {
   complement: {
     name: 'complement',
     description: 'Additional address information',
+  },
+};
+
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- MEMBER PLAN --------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+export const MemberPlanControllerCreate: ApiOperationOptions = {
+  summary: 'Create Member Plan',
+  description:
+    'Create a new member plan and store its details in the database.',
+};
+
+export const MemberPlanControllerDetail: ApiOperationOptions = {
+  summary: 'Get Member Plan Details',
+  description: 'Retrieve the details of a specific member plan by its ID.',
+};
+
+export const MemberPlanControllerList: ApiOperationOptions = {
+  summary: 'List All Member Plans',
+  description: 'Retrieve a list of all member plans stored in the database.',
+};
+
+export const MemberPlanControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Member Plan',
+  description: 'Update the details of an existing member plan.',
+};
+
+export const MemberPlanControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Member Plan',
+  description: 'Delete a specific member plan from the database by its ID.',
+};
+
+export const MemberPlanControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Member Plans',
+  description:
+    'Retrieve a list of member plans based on specific filtering criteria.',
+};
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const memberPlanProperties = {
+  member_plan_id: {
+    name: 'member_plan_id',
+    description:
+      'Unique identifier for the member plan. Uses a custom transformer for serialization.',
+  },
+  title: {
+    name: 'title',
+    description: 'Title of the member plan.',
+  },
+  description: {
+    name: 'description',
+    description: 'Description of the member plan.',
+  },
+  nb_individual_training: {
+    name: 'nb_individual_training',
+    description: 'Number of individual training sessions included in the plan.',
+  },
+  nb_collective_training: {
+    name: 'nb_collective_training',
+    description: 'Number of collective training sessions included in the plan.',
+  },
+  price: {
+    name: 'price',
+    description: 'Price of the member plan.',
+  },
+};
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- EXERCISE DATA ------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+export const ExerciseDataControllerCreate: ApiOperationOptions = {
+  summary: 'Create Exercise Data',
+  description:
+    'Create a new exercise data and store its details in the database.',
+};
+
+export const ExerciseDataControllerDetail: ApiOperationOptions = {
+  summary: 'Get Exercise Data Details',
+  description: 'Retrieve the details of a specific exercise data by its ID.',
+};
+
+export const ExerciseDataControllerList: ApiOperationOptions = {
+  summary: 'List All Exercise Data',
+  description: 'Retrieve a list of all exercise data stored in the database.',
+};
+
+export const ExerciseDataControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Exercise Data',
+  description: 'Update the details of an existing exercise data.',
+};
+
+export const ExerciseDataControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Exercise Data',
+  description: 'Delete a specific exercise data from the database by its ID.',
+};
+
+export const ExerciseDataControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Exercise Data',
+  description:
+    'Retrieve a list of exercise data based on specific filtering criteria.',
+};
+
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const exerciseDataProperties = {
+  exercise_data_id: {
+    name: 'exercise_data_id',
+    description:
+      'Unique identifier for the exercise data. Uses a custom transformer for serialization.',
+  },
+  title: {
+    name: 'title',
+    description: 'Title of the exercise data.',
+  },
+  description: {
+    name: 'description',
+    description: 'Detailed description of the exercise.',
+  },
+  categories: {
+    name: 'categories',
+    description: 'Categories of the exercise data.',
+  },
+  video_youtube_link: {
+    name: 'video_youtube_link',
+    description: 'YouTube link associated with the exercise.',
+  },
+  video_asset_link: {
+    name: 'video_asset_link',
+    description: 'Link to the video asset for the exercise.',
+  },
+  exercise_training_list: {
+    name: 'exercise_training_list',
+    description:
+      'List of exercise trainings associated with this exercise data.',
+  },
+};
+
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- EXERCISE TRAINING --------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+export const ExerciseTrainingControllerCreate: ApiOperationOptions = {
+  summary: 'Create Exercise Training',
+  description:
+    'Create a new exercise training and store its details in the database.',
+};
+
+export const ExerciseTrainingControllerDetail: ApiOperationOptions = {
+  summary: 'Get Exercise Training Details',
+  description:
+    'Retrieve the details of a specific exercise training by its ID.',
+};
+
+export const ExerciseTrainingControllerList: ApiOperationOptions = {
+  summary: 'List All Exercise Trainings',
+  description:
+    'Retrieve a list of all exercise trainings stored in the database.',
+};
+
+export const ExerciseTrainingControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Exercise Training',
+  description: 'Update the details of an existing exercise training.',
+};
+
+export const ExerciseTrainingControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Exercise Training',
+  description:
+    'Delete a specific exercise training from the database by its ID.',
+};
+
+export const ExerciseTrainingControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Exercise Trainings',
+  description:
+    'Retrieve a list of exercise trainings based on specific filtering criteria.',
+};
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+export const exerciseTrainingProperties = {
+  exercise_training_id: {
+    name: 'exercise_training_id',
+    description:
+      'Unique identifier for the exercise training. Uses a custom transformer for serialization.',
+  },
+  nb_reps: {
+    name: 'nb_reps',
+    description: 'Number of repetitions for the exercise.',
+  },
+  intensity: {
+    name: 'intensity',
+    description: 'Intensity level of the exercise training.',
+  },
+  intensityType: {
+    name: 'intensityType',
+    description:
+      'Type of intensity measurement used for the exercise training.',
+  },
+  exercise_data: {
+    name: 'exercise_data',
+    description: 'Exercise data associated with this training session.',
+  },
+  training_circuit: {
+    name: 'training_circuit',
+    description: 'Training circuit that includes this exercise training.',
+  },
+};
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- TRAINING CIRCUIT ---------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+
+export const TrainingCircuitControllerCreate: ApiOperationOptions = {
+  summary: 'Create Training Circuit',
+  description:
+    'Create a new training circuit and store its details in the database.',
+};
+
+export const TrainingCircuitControllerDetail: ApiOperationOptions = {
+  summary: 'Get Training Circuit Details',
+  description: 'Retrieve the details of a specific training circuit by its ID.',
+};
+
+export const TrainingCircuitControllerList: ApiOperationOptions = {
+  summary: 'List All Training Circuits',
+  description:
+    'Retrieve a list of all training circuits stored in the database.',
+};
+
+export const TrainingCircuitControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Training Circuit',
+  description: 'Update the details of an existing training circuit.',
+};
+
+export const TrainingCircuitControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Training Circuit',
+  description:
+    'Delete a specific training circuit from the database by its ID.',
+};
+
+export const TrainingCircuitControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Training Circuits',
+  description:
+    'Retrieve a list of training circuits based on specific filtering criteria.',
+};
+
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+export const trainingCircuitProperties = {
+  training_circuit_id: {
+    name: 'training_circuit_id',
+    description:
+      'Unique identifier for the training circuit. Uses a custom transformer for serialization.',
+  },
+  title: {
+    name: 'title',
+    description: 'Title of the training circuit.',
+  },
+  exercise_training_list: {
+    name: 'exercise_training_list',
+    description:
+      'List of exercise trainings included in this training circuit.',
+  },
+  workout: {
+    name: 'workout',
+    description: 'Workout that includes this training circuit.',
+  },
+};
+
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- WORKOUT ------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+
+export const WorkoutControllerCreate: ApiOperationOptions = {
+  summary: 'Create Workout',
+  description: 'Create a new workout and store its details in the database.',
+};
+
+export const WorkoutControllerDetail: ApiOperationOptions = {
+  summary: 'Get Workout Details',
+  description: 'Retrieve the details of a specific workout by its ID.',
+};
+
+export const WorkoutControllerList: ApiOperationOptions = {
+  summary: 'List All Workouts',
+  description: 'Retrieve a list of all workouts stored in the database.',
+};
+
+export const WorkoutControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Workout',
+  description: 'Update the details of an existing workout.',
+};
+
+export const WorkoutControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Workout',
+  description: 'Delete a specific workout from the database by its ID.',
+};
+
+export const WorkoutControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Workouts',
+  description:
+    'Retrieve a list of workouts based on specific filtering criteria.',
+};
+
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const workoutProperties = {
+  workout_id: {
+    name: 'workout_id',
+    description:
+      'Unique identifier for the workout. Uses a custom transformer for serialization.',
+  },
+  title: {
+    name: 'title',
+    description: 'Title of the workout.',
+  },
+  training_circuits: {
+    name: 'training_circuits',
+    description: 'List of training circuits included in this workout.',
+  },
+  indoor_training: {
+    name: 'indoor_training',
+    description: 'Indoor training associated with this workout.',
+  },
+  home_training: {
+    name: 'home_training',
+    description: 'Home training associated with this workout.',
+  },
+};
+
+/*------------------------------------------------------------------------------------------------------*/
+/*------------------------------------ MEMBER PLAN SUBSCRIPTION ----------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+
+export const MemberPlanSubscriptionControllerCreate: ApiOperationOptions = {
+  summary: 'Create Member Plan Subscription',
+  description:
+    'Create a new member plan subscription and store its details in the database.',
+};
+
+export const MemberPlanSubscriptionControllerDetail: ApiOperationOptions = {
+  summary: 'Get Member Plan Subscription Details',
+  description:
+    'Retrieve the details of a specific member plan subscription by its ID.',
+};
+
+export const MemberPlanSubscriptionControllerList: ApiOperationOptions = {
+  summary: 'List All Member Plan Subscriptions',
+  description:
+    'Retrieve a list of all member plan subscriptions stored in the database.',
+};
+
+export const MemberPlanSubscriptionControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Member Plan Subscription',
+  description: 'Update the details of an existing member plan subscription.',
+};
+
+export const MemberPlanSubscriptionControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Member Plan Subscription',
+  description:
+    'Delete a specific member plan subscription from the database by its ID.',
+};
+
+export const MemberPlanSubscriptionControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Member Plan Subscriptions',
+  description:
+    'Retrieve a list of member plan subscriptions based on specific filtering criteria.',
+};
+
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const memberPlanSubscriptionProperties = {
+  member_plan_subscription_id: {
+    name: 'member_plan_subscription_id',
+    description:
+      'Unique identifier for the member plan subscription. Uses a custom transformer for serialization.',
+  },
+  purchase_date: {
+    name: 'purchase_date',
+    description: 'Date of purchase for the member plan subscription.',
+  },
+  member: {
+    name: 'member',
+    description: 'Member associated with the subscription.',
+  },
+  member_plan: {
+    name: 'member_plan',
+    description: 'Member plan associated with the subscription.',
+  },
+  member_card: {
+    name: 'member_card',
+    description: 'Member card associated with the subscription.',
+  },
+};
+
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- MEMBER HOME TRAINING -----------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+
+export const MemberHomeTrainingControllerCreate: ApiOperationOptions = {
+  summary: 'Create Member Home Training',
+  description:
+    'Create a new member home training and store its details in the database.',
+};
+
+export const MemberHomeTrainingControllerDetail: ApiOperationOptions = {
+  summary: 'Get Member Home Training Details',
+  description:
+    'Retrieve the details of a specific member home training by its ID.',
+};
+
+export const MemberHomeTrainingControllerList: ApiOperationOptions = {
+  summary: 'List All Member Home Trainings',
+  description:
+    'Retrieve a list of all member home trainings stored in the database.',
+};
+
+export const MemberHomeTrainingControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Member Home Training',
+  description: 'Update the details of an existing member home training.',
+};
+
+export const MemberHomeTrainingControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Member Home Training',
+  description:
+    'Delete a specific member home training from the database by its ID.',
+};
+
+export const MemberHomeTrainingControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Member Home Trainings',
+  description:
+    'Retrieve a list of member home trainings based on specific filtering criteria.',
+};
+
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const memberHomeTrainingProperties = {
+  member_home_training_id: {
+    name: 'member_home_training_id',
+    description:
+      'Unique identifier for the member home training. Uses a custom transformer for serialization.',
+  },
+  purchase_date: {
+    name: 'purchase_date',
+    description: 'Date of purchase for the member home training.',
+  },
+  member: {
+    name: 'member',
+    description: 'Member associated with the home training.',
+  },
+};
+
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- HOME TRAINING ------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+
+export const HomeTrainingControllerCreate: ApiOperationOptions = {
+  summary: 'Create Home Training',
+  description:
+    'Create a new home training program and store its details in the database.',
+};
+
+export const HomeTrainingControllerDetail: ApiOperationOptions = {
+  summary: 'Get Home Training Details',
+  description:
+    'Retrieve the details of a specific home training program by its ID.',
+};
+
+export const HomeTrainingControllerList: ApiOperationOptions = {
+  summary: 'List All Home Trainings',
+  description:
+    'Retrieve a list of all home training programs stored in the database.',
+};
+
+export const HomeTrainingControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Home Training',
+  description: 'Update the details of an existing home training program.',
+};
+
+export const HomeTrainingControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Home Training',
+  description:
+    'Delete a specific home training program from the database by its ID.',
+};
+
+export const HomeTrainingControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Home Trainings',
+  description:
+    'Retrieve a list of home training programs based on specific filtering criteria.',
+};
+
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const homeTrainingProperties = {
+  home_training_id: {
+    name: 'home_training_id',
+    description:
+      'Unique identifier for the home training program. Uses a custom transformer for serialization.',
+  },
+  title: {
+    name: 'title',
+    description: 'Title of the home training program.',
+  },
+  nb_week: {
+    name: 'nb_week',
+    description: 'Number of weeks in the home training program.',
+  },
+  nb_training_by_week: {
+    name: 'nb_training_by_week',
+    description: 'Number of training sessions per week.',
+  },
+  price: {
+    name: 'price',
+    description: 'Price of the home training program.',
+  },
+  workouts: {
+    name: 'workouts',
+    description: 'List of workouts associated with this home training program.',
+  },
+};
+
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- INDOOR TRAINING ----------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+
+export const IndoorTrainingControllerCreate: ApiOperationOptions = {
+  summary: 'Create Indoor Training',
+  description:
+    'Create a new indoor training session and store its details in the database.',
+};
+
+export const IndoorTrainingControllerDetail: ApiOperationOptions = {
+  summary: 'Get Indoor Training Details',
+  description:
+    'Retrieve the details of a specific indoor training session by its ID.',
+};
+
+export const IndoorTrainingControllerList: ApiOperationOptions = {
+  summary: 'List All Indoor Trainings',
+  description:
+    'Retrieve a list of all indoor training sessions stored in the database.',
+};
+
+export const IndoorTrainingControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Indoor Training',
+  description: 'Update the details of an existing indoor training session.',
+};
+
+export const IndoorTrainingControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Indoor Training',
+  description:
+    'Delete a specific indoor training session from the database by its ID.',
+};
+
+export const IndoorTrainingControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Indoor Trainings',
+  description:
+    'Retrieve a list of indoor training sessions based on specific filtering criteria.',
+};
+
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const indoorTrainingProperties = {
+  indoor_training_id: {
+    name: 'indoor_training_id',
+    description:
+      'Unique identifier for the indoor training. Uses a custom transformer for serialization.',
+  },
+  title: {
+    name: 'title',
+    description: 'Title of the indoor training session.',
+  },
+  training_date: {
+    name: 'training_date',
+    description: 'Date of the training session.',
+  },
+  start_hours: {
+    name: 'start_hours',
+    description: 'Start time of the training session.',
+  },
+  end_hours: {
+    name: 'end_hours',
+    description: 'End time of the training session.',
+  },
+  nb_place: {
+    name: 'nb_place',
+    description: 'Number of available places for the training session.',
+  },
+  nb_subscription: {
+    name: 'nb_subscription',
+    description: 'Number of subscriptions for the training session.',
+  },
+  workout: {
+    name: 'workout',
+    description: 'Workout associated with the indoor training session.',
   },
 };

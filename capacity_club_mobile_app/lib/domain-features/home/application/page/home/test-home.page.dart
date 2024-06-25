@@ -1,4 +1,6 @@
+import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective_training_carousel_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective_training_detail_screen.dart';
+import 'package:capacity_club_mobile_app/domain-features/test-auth.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,6 +16,49 @@ class _HomePageStateTest extends State<HomePageTest> {
   DateTime selectedDay = DateTime.now();
   DateTime today = DateTime.now();
   bool calendarType = false;
+
+  final Color _mainColor = const Color(0xffe77610);
+  final Color _tabBarColor = const Color(0xFF15121f);
+  final Color _greyColor = const Color(0xff93989b);
+  final Color _darkColor = const Color(0xff25232a);
+
+  final bool _isDarkMode = false;
+
+  String timeVal = '08:00';
+
+  int _currentImageSlider = 0;
+
+  Widget _customRadioButton2({value = '08:00'}) {
+    final double size = (MediaQuery.of(context).size.width - 64 - (16 * 3)) / 4;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          timeVal = value;
+        });
+      },
+      child: Container(
+        width: size,
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+            color: timeVal == value
+                ? _mainColor
+                : _isDarkMode
+                    ? _darkColor
+                    : Colors.white),
+        child: Center(
+            child: Text(value.toString(),
+                style: TextStyle(
+                    color: timeVal == value
+                        ? Colors.white
+                        : _isDarkMode
+                            ? Colors.white
+                            : Colors.black,
+                    fontWeight: FontWeight.bold))),
+      ),
+    );
+  }
 
   final List<Map<String, dynamic>> workouts = [
     {
@@ -101,82 +146,66 @@ class _HomePageStateTest extends State<HomePageTest> {
     }
 
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          TableCalendar(
-            focusedDay: today,
-            firstDay: DateTime.utc(2020, 10, 16),
-            lastDay: DateTime.utc(2030, 3, 14),
-            calendarFormat:
-                calendarType ? CalendarFormat.month : CalendarFormat.week,
-            availableCalendarFormats: const {
-              CalendarFormat.month: 'Month',
-              CalendarFormat.week: 'Week',
-            },
-            onFormatChanged: (format) {
-              setState(() {
-                calendarType = !calendarType;
-              });
-            },
-            selectedDayPredicate: (day) {
-              return isSameDay(selectedDay, day);
-            },
-            onDaySelected: (selectedDay, focusedDay) {
-              setState(() {
-                this.selectedDay = selectedDay;
-                this.today = focusedDay;
-              });
-            },
-          ),
-          SizedBox(height: 16),
-          Text(
-            'Entraînements du jour',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 8),
-          Container(
-            height: 500,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: workouts.length,
-              itemBuilder: (context, index) {
-                final workout = workouts[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 16.0),
-                  child: WorkoutCard(
-                    workoutName: workout['workoutName'],
-                    date: workout['date'],
-                    startTime: workout['startTime'],
-                    endTime: workout['endTime'],
-                    totalSlots: workout['totalSlots'],
-                    registeredSlots: workout['registeredSlots'],
-                    isUserRegistered: workout['isUserRegistered'],
-                    onRegister: () {
-                      print(
-                          'Register button pressed for ${workout['workoutName']}');
-                    },
-                    onUnregister: () {
-                      print(
-                          'Unregister button pressed for ${workout['workoutName']}');
-                    },
-                    onDetails: () {
-                      _showDetails(context);
-                    },
-                  ),
-                );
-              },
+        child: Column(
+      children: [
+        DateTimeLineWithYearSelector(),
+        SizedBox(
+          height: 20,
+        ),
+        const Text('COLLECTIVE TRAINING',
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 16),
+        const CollectiveTrainingCarousel(),
+        const Divider(),
+        const SizedBox(height: 12),
+        const Text('INDIVIDUAL TRAINING',
+            style: TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            _customRadioButton2(value: '08:00'),
+            _customRadioButton2(value: '09:00'),
+            _customRadioButton2(value: '10:00'),
+            _customRadioButton2(value: '11:00'),
+            _customRadioButton2(value: '12:00'),
+            _customRadioButton2(value: '13:00'),
+            _customRadioButton2(value: '14:00'),
+            _customRadioButton2(value: '15:00'),
+            _customRadioButton2(value: '16:00'),
+            _customRadioButton2(value: '17:00'),
+            _customRadioButton2(value: '18:00'),
+            _customRadioButton2(value: '19:00'),
+          ],
+        ),
+        const SizedBox(height: 24),
+        TextButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) => _mainColor,
+              ),
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3),
+              )),
+              padding: WidgetStateProperty.all<EdgeInsets>(
+                  const EdgeInsets.symmetric(vertical: 18)),
             ),
-          ),
-          Divider(
-            height: 40,
-            thickness: 2,
-            indent: 20,
-            endIndent: 20,
-          )
-        ],
-      ),
-    );
+            onPressed: () {},
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                'Book Now',
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            ))
+      ],
+    ));
   }
 }
 

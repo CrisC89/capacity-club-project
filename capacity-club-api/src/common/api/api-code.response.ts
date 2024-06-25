@@ -27,7 +27,8 @@ export enum ApiCodeResponse {
   SIGNUP_PAYLOAD_MAIL_IS_MISSING = 'api.error.signup-payload-mail-empty',
   SIGNUP_PAYLOAD_MAIL_INVALID = 'api.error.signup-payload-mail-invalid',
 
-  CREDENTIAL_ID_MISSING = 'api.error.credential-id-missing',
+  CREDENTIAL_PAYLOAD_ID_IS_MISSING = 'api.error.credential-payload-id-is-missing',
+  CREDENTIAL_PAYLOAD_MEMBER_IS_MISSING = 'api.error.credential-payload-member-is-missing',
 
   USER_NOT_FOUND = 'api.error.user-not-found',
   USER_ALREADY_EXIST = 'api.error.user-already-exist',
@@ -82,20 +83,12 @@ export enum ApiCodeResponse {
   MEMBER_PLAN_CREATE_SUCCESS = 'api.success.member-plan-create',
   MEMBER_PLAN_UPDATE_ERROR = 'api.error.member-plan-update',
   MEMBER_PLAN_UPDATE_SUCCESS = 'api.success.member-plan-update',
-  MEMBER_PLAN_TYPE_INVALID = 'api.error.member-plan.type.invalid',
-  MEMBER_PLAN_TITLE_MANDATORY = 'api.error.member-plan.title.mandatory',
-  MEMBER_PLAN_TITLE_LENGTH_ERROR = 'api.error.member-plan.title.length-error',
-  MEMBER_PLAN_DESCRIPTION_INVALID = 'api.error.member-plan.description.invalid',
-  MEMBER_PLAN_PICTURE_LENGTH_ERROR = 'api.error.member-plan.picture.length-error',
-  MEMBER_PLAN_PRICE_INVALID = 'api.error.member-plan.price.invalid',
-  MEMBER_PLAN_PRICE_MANDATORY = 'api.error.member-plan.price.mandatory',
-  MEMBER_PLAN_NB_MONTH_INVALID = 'api.error.member-plan.nb-month.invalid',
-  MEMBER_PLAN_NB_MONTH_MANDATORY = 'api.error.member-plan.nb-month.mandatory',
-  MEMBER_PLAN_PAYMENT_INVALID = 'api.error.member-plan.payment.invalid',
-  MEMBER_PLAN_CUMULATIVE_INVALID = 'api.error.member-plan.cumulative.invalid',
-  MEMBER_PLAN_FREQ_TRAINING_INVALID = 'api.error.member-plan.freq-training.invalid',
-  MEMBER_PLAN_NB_TRAINING_INVALID = 'api.error.member-plan.nb-training.invalid',
-  MEMBER_PLAN_ID_MANDATORY = 'api.error.member-plan.id.mandatory',
+
+  MEMBER_PLAN_TITLE_IS_MISSING = 'api.error.member-plan-titleis-missing',
+  MEMBER_PLAN_TITLE_LENGTH_ERROR = 'api.error.member-plan-title-length-error',
+  MEMBER_PLAN_DESCRIPTION_INVALID = 'api.error.member-plan-description-invalid',
+  MEMBER_PLAN_PRICE_IS_MISSING = 'api.error.member-plan-price-is-missing',
+  MEMBER_PLAN_ID_IS_MISSING = 'api.error.member-plan-is-is-missing',
 
   MEMBER_PLAN_SUBSCRIPTION_NOT_FOUND = 'api.error.member-plan-subscription-not-found',
   MEMBER_PLAN_SUBSCRIPTION_DELETE_ERROR = 'api.error.member-plan-subscription-delete',
@@ -128,6 +121,11 @@ export enum ApiCodeResponse {
   EXERCISE_DATA_LIST_SUCCESS = 'api.success.exercise-data-list',
   EXERCISE_DATA_CREATE_ERROR = 'api.error.exercise-data-create',
   EXERCISE_DATA_CREATE_SUCCESS = 'api.success.exercise-data-create',
+
+  EXERCISE_DATA_ID_IS_MISSING = 'api.success.exercise-data-id-is-missing',
+  EXERCISE_DATA_TITLE_IS_MISSING = 'api.success.exercise-data-title-is-missing',
+  EXERCISE_DATA_DESCRIPTION_IS_MISSING = 'api.success.exercise-data-description-is-missing',
+  EXERCISE_DATA_CATEGORIES_ARE_MISSING = 'api.success.exercise-data-categories-are-missing',
 
   EXERCISE_TRAINING_NOT_FOUND = 'api.error.exercise-training-not-found',
   EXERCISE_TRAINING_DELETE_SUCCESS = 'api.success.exercise-training-delete',
