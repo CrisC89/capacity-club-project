@@ -1,5 +1,5 @@
 import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
-import 'package:capacity_club_mobile_app/common/routing/navigator_key.dart';
+import 'package:capacity_club_mobile_app/common/config/navigator_key.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective_training_carousel_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';

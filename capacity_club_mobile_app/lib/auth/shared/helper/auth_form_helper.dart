@@ -3,8 +3,8 @@ import 'package:capacity_club_mobile_app/auth/data/builder/sign_up_request_build
 import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart';
 import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/common/i18n/app_local.dart';
-import 'package:capacity_club_mobile_app/common/widgets/black_botton_widget.dart';
-import 'package:capacity_club_mobile_app/common/widgets/text_field_with_icon_widgt.dart';
+import 'package:capacity_club_mobile_app/common/widgets/button/black_botton_widget.dart';
+import 'package:capacity_club_mobile_app/common/widgets/text-label/text_field_with_icon_widgt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

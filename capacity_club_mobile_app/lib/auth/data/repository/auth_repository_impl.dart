@@ -4,7 +4,7 @@ import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart'
 import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/auth/domain/failure/login_failure.dart';
 import 'package:capacity_club_mobile_app/auth/domain/repository/auth_repository.dart';
-import 'package:capacity_club_mobile_app/common/abstract/failure.dart';
+import 'package:capacity_club_mobile_app/common/model/abstract/failure.dart';
 import 'package:capacity_club_mobile_app/common/model/api_response.dart';
 import 'package:either_dart/either.dart';
 

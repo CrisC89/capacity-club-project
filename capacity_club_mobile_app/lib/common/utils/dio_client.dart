@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:capacity_club_mobile_app/common/abstract/payload.dart';
+import 'package:capacity_club_mobile_app/common/model/abstract/payload.dart';
+import 'package:capacity_club_mobile_app/common/config/constant.dart';
 import 'package:capacity_club_mobile_app/common/model/api_response.dart';
-import 'package:capacity_club_mobile_app/common/utils/config_constant.dart';
 import 'package:capacity_club_mobile_app/common/utils/refresh_token_interceptor.dart';
 import 'package:dio/dio.dart';
 

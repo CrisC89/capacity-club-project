@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/common/abstract/payload.dart';
+import 'package:capacity_club_mobile_app/common/model/abstract/payload.dart';
 
 class SignupRequest extends Payload {
   final String mail;

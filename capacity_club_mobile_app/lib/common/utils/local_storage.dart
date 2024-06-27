@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:capacity_club_mobile_app/auth/data/model/credential_and_token_model.dart';
-import 'package:capacity_club_mobile_app/common/utils/config_constant.dart';
+import 'package:capacity_club_mobile_app/common/config/constant.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LocalStorage {

@@ -1,16 +1,18 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/credential_and_token_model.dart';
 import 'package:capacity_club_mobile_app/common/routing/go_router.dart';
-import 'package:capacity_club_mobile_app/common/routing/navigator_key.dart';
+import 'package:capacity_club_mobile_app/common/config/navigator_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
-  CredentialAndTokenModel? _user;
+  late CredentialAndTokenModel? _credentialUser;
   AuthFlowBloc? _authFlowBloc;
   BuildContext? _context;
+  String? _token;
+  String? _refreshToken;
 
   // Instance unique de AuthProvider
   static final AuthProvider _instance = AuthProvider._internal();
@@ -23,8 +25,16 @@ class AuthProvider extends ChangeNotifier {
     return _instance;
   }
 
+  void setIsLoggedIn(bool isLoggedIn) {
+    _isLoggedIn = isLoggedIn;
+  }
+
+  void setCredentialUser(CredentialAndTokenModel credentialUser) {
+    _credentialUser = credentialUser;
+  }
+
   bool get isLoggedIn => _isLoggedIn;
-  CredentialAndTokenModel? get user => _user;
+  CredentialAndTokenModel? get credentialUser => _credentialUser;
 
   void initialize(BuildContext context) {
     if (_context == null) {
@@ -34,7 +44,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void setUser(CredentialAndTokenModel user) {
-    _user = user;
+    _credentialUser = user;
     _isLoggedIn = true;
     notifyListeners();
     if (_authFlowBloc != null) {
@@ -43,7 +53,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void clearUser() {
-    _user = null;
+    _credentialUser = null;
     _isLoggedIn = false;
     notifyListeners();
     if (_authFlowBloc != null) {

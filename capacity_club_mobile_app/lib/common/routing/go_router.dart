@@ -1,7 +1,7 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/login/login_page.dart';
 import 'package:capacity_club_mobile_app/auth/shared/layout/public_layout.dart';
 import 'package:capacity_club_mobile_app/common/routing/go_router_observer.dart';
-import 'package:capacity_club_mobile_app/common/routing/navigator_key.dart';
+import 'package:capacity_club_mobile_app/common/config/navigator_key.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/home_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/common-features/authenticated_layout.dart';
 import 'package:capacity_club_mobile_app/domain-features/personal-training/application/pages/personal-training-page/personal_training_page.dart';
