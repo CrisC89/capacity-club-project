@@ -55,6 +55,7 @@ class DioClient {
       return response;
     } on DioException catch (e) {
       print(e.response);
+      print('dio exception from post $e');
       return const ApiResponse(result: false, data: null, code: 'SYSTEM_ERROR');
     } catch (e) {
       print('error from post $e');

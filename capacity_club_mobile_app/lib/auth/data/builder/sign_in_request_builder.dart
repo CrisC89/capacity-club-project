@@ -1,14 +1,14 @@
 import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart';
 
 class SignInRequestBuilder {
-  String _mail = '';
+  String _username = '';
   String _password = '';
   String _googleHash = "";
   String _facebookHash = "";
   final bool _socialLogin = false;
 
-  SignInRequestBuilder setMail(String value) {
-    _mail = value;
+  SignInRequestBuilder setUsername(String value) {
+    _username = value;
     return this;
   }
 
@@ -29,6 +29,6 @@ class SignInRequestBuilder {
 
   SignInRequest build() {
     return SignInRequest(
-        _mail, _password, _googleHash, _facebookHash, _socialLogin);
+        _username, _password, _googleHash, _facebookHash, _socialLogin);
   }
 }

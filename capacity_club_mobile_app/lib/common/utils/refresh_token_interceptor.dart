@@ -28,12 +28,21 @@ class RefreshTokenInterceptor extends Interceptor {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     print("----dio on request------------");
-    if (!options.path.contains('http')) {
+    print("----option path start------------");
+    print(options.path);
+    if (!options.path.startsWith('http')) {
       print("----dio on request if http------------");
       options.path = '$_baseURL${options.path}';
     }
-    if (options.path != ApiURI.getEndpoint('ACCOUNT', 'SIGNIN') &&
-        options.path != ApiURI.getEndpoint('ACCOUNT', 'SIGNUP')) {
+    print("----option path------------");
+    print(options.path);
+    print("----uri path------------");
+    print(ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'));
+    print("----Relative path------------");
+    final relativePath = options.path.replaceFirst(_baseURL, '');
+    print(relativePath);
+    if (relativePath != ApiURI.getEndpoint('ACCOUNT', 'SIGNIN') &&
+        relativePath != ApiURI.getEndpoint('ACCOUNT', 'SIGNUP')) {
       print("----dio on request if path------------");
       options.headers['Authorization'] = 'Bearer $token';
     }

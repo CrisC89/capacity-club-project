@@ -13,7 +13,7 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 Widget loginBodyContent(BuildContext context, FormGroup form) {
-  _loginByMail(SignInRequest signInRequest) {
+  _loginByUsername(SignInRequest signInRequest) {
     context
         .read<LoginBloc>()
         .add(LoginByMailEvent(signInRequest: signInRequest));
@@ -38,7 +38,7 @@ Widget loginBodyContent(BuildContext context, FormGroup form) {
           if (form.valid) {
             final SignInRequest signInRequest =
                 AuthFormHelper.fromSignInForm(form);
-            _loginByMail(signInRequest);
+            _loginByUsername(signInRequest);
           } else {
             form.markAllAsTouched();
           }

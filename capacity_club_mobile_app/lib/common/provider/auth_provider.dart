@@ -17,10 +17,8 @@ class AuthProvider extends ChangeNotifier {
   // Instance unique de AuthProvider
   static final AuthProvider _instance = AuthProvider._internal();
 
-  // Constructeur privé pour empêcher l'instanciation en dehors de cette classe
   AuthProvider._internal();
 
-  // Méthode statique pour récupérer l'instance unique de AuthProvider
   factory AuthProvider() {
     return _instance;
   }

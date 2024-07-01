@@ -19,8 +19,7 @@ class LoginLoadedView extends StatefulWidget {
 
 class _LoginLoadedViewState extends State<LoginLoadedView> {
   final FormGroup form = FormGroup({
-    'mail': FormControl<String>(
-        validators: [Validators.required, Validators.email]),
+    'username': FormControl<String>(validators: [Validators.required]),
     'password': FormControl<String>(
         validators: [Validators.required, Validators.minLength(8)]),
   });

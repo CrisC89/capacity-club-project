@@ -26,6 +26,7 @@ class AuthDataSource implements AuthDataSourceInterface {
   static final LocalStorage localStorage = LocalStorage();
   //late bool? isAuthenticated$ = null;
   CredentialAndTokenModel? user$ = null;
+  final AuthProvider authProvider = AuthProvider();
   final DioClient dioClient;
 
   AuthDataSource({required this.dioClient});
@@ -50,7 +51,7 @@ class AuthDataSource implements AuthDataSourceInterface {
       errorSnackBar('_apiService.messageFromCode(response.code)');
     }
     AuthProvider().login();
-    return handleSignInSignupPostProcess(response);
+    return handleSignInSignUpPostProcess(response);
   }
 
   @override
@@ -59,12 +60,12 @@ class AuthDataSource implements AuthDataSourceInterface {
   }
 
   @override
-  Future<bool> handleSignInSignupPostProcess(ApiResponse response) async {
+  Future<bool> handleSignInSignUpPostProcess(ApiResponse response) async {
     try {
       if (response.result) {
         await localStorage.write(USER_KEY, jsonEncode(response.data));
         String? data = await localStorage.read(USER_KEY);
-        //print(data);
+        print(data);
         if (data == null) {
           return Future(() => false);
         }
@@ -151,7 +152,7 @@ class AuthDataSource implements AuthDataSourceInterface {
     if (!response.result) {
       errorSnackBar('_apiService.messageFromCode(response.code)');
     }
-    return handleSignInSignupPostProcess(response);
+    return handleSignInSignUpPostProcess(response);
   }
 
   @override
@@ -170,8 +171,8 @@ class AuthDataSource implements AuthDataSourceInterface {
             id = item.value;
           }
         }
-        return signUp(SignupRequestBuilder()
-            .setMail(email)
+        return signUp(SignUpRequestBuilder()
+            .setUsername('')
             .setGoogleHash('')
             .setFacebookHash(_hashUsername(email + id))
             .build());
@@ -194,8 +195,8 @@ class AuthDataSource implements AuthDataSourceInterface {
       GoogleSignInAccount? data = await GoogleHelper.signIn();
       print('OK after Google API call');
       if (data != null) {
-        return signUp(SignupRequestBuilder()
-            .setMail(data.email)
+        return signUp(SignUpRequestBuilder()
+            .setUsername('')
             .setFacebookHash('')
             .setGoogleHash(_hashUsername('${data.email}${data.id}'))
             .build());
@@ -230,8 +231,10 @@ class AuthDataSource implements AuthDataSourceInterface {
             : Stream<ApiResponse?>.value(null);
       }).listen((ApiResponse? result) {
         if (result != null && result.result) {
+          authProvider.setUser(userData!);
           user$ = userData!;
         } else {
+          authProvider.clearUser();
           user$ = null;
         }
       });

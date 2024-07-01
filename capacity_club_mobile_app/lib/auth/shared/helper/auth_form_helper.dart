@@ -17,11 +17,9 @@ class AuthFormHelper {
         formGroup: form,
         child: Column(
           children: [
-            textFieldWithIcon(Icons.verified_user_outlined, 'mail',
+            textFieldWithIcon(Icons.verified_user_outlined, 'username',
                 AppLocale.label_mail.getString(context), false, {
               'required': (error) => AppLocale.mail_required.getString(context),
-              'email': (error) =>
-                  AppLocale.email_format_error.getString(context)
             }),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             textFieldWithIcon(
@@ -59,11 +57,9 @@ class AuthFormHelper {
         formGroup: form,
         child: Column(
           children: [
-            textFieldWithIcon(FontAwesomeIcons.user, 'mail',
+            textFieldWithIcon(FontAwesomeIcons.user, 'username',
                 AppLocale.label_mail.getString(context), false, {
               'required': (error) => AppLocale.mail_required.getString(context),
-              'email': (error) =>
-                  AppLocale.email_format_error.getString(context)
             }),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             textFieldWithIcon(
@@ -88,8 +84,8 @@ class AuthFormHelper {
     SignInRequestBuilder builder = SignInRequestBuilder();
     for (var value in form.value.entries) {
       switch (value.key) {
-        case 'mail':
-          builder = builder.setMail(value.value as String);
+        case 'username':
+          builder = builder.setUsername(value.value as String);
           break;
         case 'password':
           builder = builder.setPassword(value.value as String);
@@ -100,11 +96,11 @@ class AuthFormHelper {
   }
 
   static SignupRequest fromSignupForm(FormGroup form) {
-    SignupRequestBuilder builder = SignupRequestBuilder();
+    SignUpRequestBuilder builder = SignUpRequestBuilder();
     for (var value in form.value.entries) {
       switch (value.key) {
-        case 'mail':
-          builder = builder.setMail(value.value as String);
+        case 'username':
+          builder = builder.setUsername(value.value as String);
           break;
         case 'password':
           builder = builder.setPassword(value.value as String);

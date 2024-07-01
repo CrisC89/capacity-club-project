@@ -21,7 +21,7 @@ abstract class AuthDataSourceInterface {
 
   String _hashUsername(String string);
 
-  Future<bool> handleSignInSignupPostProcess(ApiResponse response);
+  Future<bool> handleSignInSignUpPostProcess(ApiResponse response);
 
   Future<String?> getToken();
 

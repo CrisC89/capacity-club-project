@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:capacity_club_mobile_app/auth/data/builder/sign_in_request_builder.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/credential_and_token_model.dart';
 import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart';
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
+import 'package:capacity_club_mobile_app/common/model/api_response.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
