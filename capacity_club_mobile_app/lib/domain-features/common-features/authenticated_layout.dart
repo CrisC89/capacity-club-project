@@ -1,12 +1,8 @@
-import 'package:capacity_club_mobile_app/common/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/domain-features/common-features/application/navigation/bloc/navigation_bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/contact/page/contact_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/home_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/test-home.page.dart';
 import 'package:capacity_club_mobile_app/domain-features/personal-training/application/pages/personal-training-page/personal_training_page.dart';
-import 'package:capacity_club_mobile_app/domain-features/setting/application/pages/setting-page/setting_page.dart';
-import 'package:capacity_club_mobile_app/domain-features/test-auth.screen.dart';
-import 'package:capacity_club_mobile_app/domain-features/user-profile/application/pages/user-profile/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

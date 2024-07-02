@@ -34,10 +34,10 @@ final class LoginGenericState extends LoginState {
 
 final class LoginByMailState extends LoginState {}
 
-final class LoginInitial extends LoginState {}
+final class LoginInitialState extends LoginState {}
 
-final class LoginLoading extends LoginState {}
+final class LoginLoadingState extends LoginState {}
 
-final class LoginSucces extends LoginState {}
+final class LoginSuccesState extends LoginState {}
 
-final class LoginFailure2 extends LoginState {}
+final class LoginFailureState extends LoginState {}

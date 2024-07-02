@@ -1,5 +1,6 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/login/bloc/login_bloc.dart';
+import 'package:capacity_club_mobile_app/auth/application/pages/register/bloc/register_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/data/datasource/auth_datasource.dart';
 import 'package:capacity_club_mobile_app/auth/data/repository/auth_repository_impl.dart';
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
@@ -14,6 +15,8 @@ Future<void> init() async {
   serviceLocator.registerFactory<AuthFlowBloc>(() => AuthFlowBloc());
   serviceLocator.registerFactory<LoginBloc>(
       () => LoginBloc(authUseCase: serviceLocator()));
+  serviceLocator.registerFactory<RegisterBloc>(
+      () => RegisterBloc(authUseCase: serviceLocator()));
 // ! domain Layer
   serviceLocator.registerFactory<AuthUseCase>(
       () => AuthUseCase(authRepository: serviceLocator()));

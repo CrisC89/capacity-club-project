@@ -15,7 +15,7 @@ abstract class AuthRepository {
 
   Future<Either<Failure, ApiResponse<CredentialModel>>> me();
 
-  Future<Either<Failure, bool>> signUp(SignupRequest request);
+  Future<Either<Failure, bool>> signUp(SignUpRequest request);
 
   Future<Either<Failure, bool>> signupWithGoogle();
 

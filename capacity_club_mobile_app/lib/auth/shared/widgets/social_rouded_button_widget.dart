@@ -5,13 +5,18 @@ import 'package:flutter/material.dart';
 class SocialRoundedButton extends StatelessWidget {
   final double? size;
   final String? assetImage;
-  const SocialRoundedButton(
-      {super.key, this.size = 23, required this.assetImage});
+  final VoidCallback? onPressed;
+  const SocialRoundedButton({
+    super.key,
+    this.size = 23,
+    required this.assetImage,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: CircleAvatar(
             backgroundColor: AppTheme.transparent,
             radius: size,

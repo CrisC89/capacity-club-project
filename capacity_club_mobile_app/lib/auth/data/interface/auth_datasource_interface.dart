@@ -11,7 +11,7 @@ abstract class AuthDataSourceInterface {
 
   Future<ApiResponse> me();
 
-  Future<bool> signUp(SignupRequest request);
+  Future<bool> signUp(SignUpRequest request);
 
   Future<bool> signupWithGoogle();
 

@@ -1,15 +1,15 @@
 import 'package:capacity_club_mobile_app/common/model/abstract/payload.dart';
 
-class SignupRequest extends Payload {
+class SignUpRequest extends Payload {
   final String username;
   final String password;
   final String googleHash;
   final String facebookHash;
 
-  SignupRequest(
+  SignUpRequest(
       this.username, this.password, this.googleHash, this.facebookHash);
 
-  SignupRequest.fromJson(Map<String, dynamic> json)
+  SignUpRequest.fromJson(Map<String, dynamic> json)
       : username = json['username'],
         password = json['password'],
         googleHash = json['googleHash'],

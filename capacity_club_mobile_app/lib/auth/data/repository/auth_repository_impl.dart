@@ -56,7 +56,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> signUp(SignupRequest request) async {
+  Future<Either<Failure, bool>> signUp(SignUpRequest request) async {
     try {
       final result = await authDataSource.signUp(request);
       print("------ REPO --------");

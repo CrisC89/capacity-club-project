@@ -1,6 +1,7 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/auth_flow_page.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/login/bloc/login_bloc.dart';
+import 'package:capacity_club_mobile_app/auth/application/pages/register/bloc/register_bloc.dart';
 import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/common/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/common/utils/dependency_injection.dart';
@@ -36,7 +37,9 @@ void main() async {
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           BlocProvider<AuthFlowBloc>(
               create: (_) => serviceLocator<AuthFlowBloc>()),
-          BlocProvider<LoginBloc>(create: (_) => serviceLocator<LoginBloc>())
+          BlocProvider<LoginBloc>(create: (_) => serviceLocator<LoginBloc>()),
+          BlocProvider<RegisterBloc>(
+              create: (_) => serviceLocator<RegisterBloc>())
         ],
         child: Builder(builder: (context) {
           AuthProvider authProvider =

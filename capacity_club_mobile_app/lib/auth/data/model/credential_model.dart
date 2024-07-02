@@ -20,19 +20,6 @@ class CredentialModel extends Equatable {
       required this.isAdmin});
 
   factory CredentialModel.fromJson(Map<String, dynamic> json) {
-    print('json');
-    print(json);
-    print('Type of data: ${json.runtimeType}');
-    print('credential_id');
-    print(json['credential_id']);
-    print('Type of data: ${json['credential_id'].runtimeType}');
-    print('Active');
-    print(json['isActive']);
-    print('Type of data: ${json['active'].runtimeType}');
-
-    print('Admin');
-    print(json['isAdmin']);
-    print('Type of data: ${json['isAdmin'].runtimeType}');
     return CredentialModel(
         username: json['username'],
         googleHash: json['googleHash'] ?? '',

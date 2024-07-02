@@ -1,4 +1,5 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/login/login_page.dart';
+import 'package:capacity_club_mobile_app/auth/application/pages/register/register_page.dart';
 import 'package:capacity_club_mobile_app/auth/shared/layout/public_layout.dart';
 import 'package:capacity_club_mobile_app/common/routing/go_router_observer.dart';
 import 'package:capacity_club_mobile_app/common/config/navigator_key.dart';
@@ -22,7 +23,12 @@ final GoRouter publicRouter = GoRouter(
         GoRoute(
           name: '/login',
           path: '/login',
-          builder: (context, state) => LoginPage(),
+          builder: (context, state) => const LoginPage(),
+        ),
+        GoRoute(
+          name: '/register',
+          path: '/register',
+          builder: (context, state) => const RegisterPage(),
         )
       ],
     )

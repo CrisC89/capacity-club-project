@@ -26,7 +26,7 @@ class SignUpRequestBuilder {
     return this;
   }
 
-  SignupRequest build() {
-    return SignupRequest(_username, _password, _googleHash, _facebookHash);
+  SignUpRequest build() {
+    return SignUpRequest(_username, _password, _googleHash, _facebookHash);
   }
 }

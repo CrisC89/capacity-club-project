@@ -141,7 +141,7 @@ class AuthDataSource implements AuthDataSourceInterface {
   }
 
   @override
-  Future<bool> signUp(SignupRequest request) async {
+  Future<bool> signUp(SignUpRequest request) async {
     print('signUp request ${request.toJson()}');
     ApiResponse<CredentialAndTokenModel>? response =
         await dioClient.post<CredentialAndTokenModel>(
@@ -152,6 +152,10 @@ class AuthDataSource implements AuthDataSourceInterface {
     if (!response.result) {
       errorSnackBar('_apiService.messageFromCode(response.code)');
     }
+
+    RefreshTokenInterceptor().setToken(response.data?.token);
+    RefreshTokenInterceptor().setRefreshToken(response.data?.refreshToken);
+    AuthProvider().login();
     return handleSignInSignUpPostProcess(response);
   }
 

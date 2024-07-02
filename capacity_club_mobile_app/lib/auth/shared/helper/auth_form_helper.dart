@@ -17,15 +17,16 @@ class AuthFormHelper {
         formGroup: form,
         child: Column(
           children: [
-            textFieldWithIcon(Icons.verified_user_outlined, 'username',
-                AppLocale.label_mail.getString(context), false, {
-              'required': (error) => AppLocale.mail_required.getString(context),
+            textFieldWithIcon(FontAwesomeIcons.user, 'username',
+                AppLocale.label_username.getString(context), false, {
+              'required': (error) =>
+                  AppLocale.username_required.getString(context),
             }),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             textFieldWithIcon(
-              Icons.lock_clock,
+              FontAwesomeIcons.eye,
               'password',
-              AppLocale.label_password,
+              AppLocale.label_password.getString(context),
               true,
               {
                 'required': (error) =>
@@ -36,9 +37,9 @@ class AuthFormHelper {
             ),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
             textFieldWithIcon(
-              Icons.lock_clock,
+              FontAwesomeIcons.eye,
               'confirmation',
-              'local.signup_screen_label_confirmation',
+              AppLocale.label_password_confirmation.getString(context),
               true,
               {
                 'mustMatch': (error) =>
@@ -46,7 +47,7 @@ class AuthFormHelper {
               },
             ),
             const Padding(padding: EdgeInsets.only(bottom: 15)),
-            blackButton('local.signup_screen_button', signUp)
+            blackButton(AppLocale.sign_up.getString(context), signUp)
           ],
         ));
   }
@@ -58,7 +59,7 @@ class AuthFormHelper {
         child: Column(
           children: [
             textFieldWithIcon(FontAwesomeIcons.user, 'username',
-                AppLocale.label_mail.getString(context), false, {
+                AppLocale.label_username.getString(context), false, {
               'required': (error) => AppLocale.mail_required.getString(context),
             }),
             const Padding(padding: EdgeInsets.only(bottom: 5)),
@@ -95,7 +96,7 @@ class AuthFormHelper {
     return builder.build();
   }
 
-  static SignupRequest fromSignupForm(FormGroup form) {
+  static SignUpRequest fromSignupForm(FormGroup form) {
     SignUpRequestBuilder builder = SignUpRequestBuilder();
     for (var value in form.value.entries) {
       switch (value.key) {
