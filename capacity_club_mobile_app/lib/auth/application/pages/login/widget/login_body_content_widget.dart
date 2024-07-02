@@ -16,7 +16,7 @@ Widget loginBodyContent(BuildContext context, FormGroup form) {
   _loginByUsername(SignInRequest signInRequest) {
     context
         .read<LoginBloc>()
-        .add(LoginByMailEvent(signInRequest: signInRequest));
+        .add(LoginByUsernameEvent(signInRequest: signInRequest));
   }
 
   final colorScheme = Theme.of(context).colorScheme;

@@ -6,14 +6,26 @@ sealed class LoginEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoginByMailEvent extends LoginEvent {
+class LoginByUsernameEvent extends LoginEvent {
   final SignInRequest signInRequest;
-  LoginByMailEvent({required this.signInRequest});
+  LoginByUsernameEvent({required this.signInRequest});
 
   @override
   List<Object> get props => [signInRequest];
 }
 
-class LoginByGoogleEvent extends LoginEvent {}
+class LoginByGoogleEvent extends LoginEvent {
+  final SignInRequest signInRequest;
+  LoginByGoogleEvent({required this.signInRequest});
 
-class LoginByFacebookEvent extends LoginEvent {}
+  @override
+  List<Object> get props => [signInRequest];
+}
+
+class LoginByFacebookEvent extends LoginEvent {
+  final SignInRequest signInRequest;
+  LoginByFacebookEvent({required this.signInRequest});
+
+  @override
+  List<Object> get props => [signInRequest];
+}

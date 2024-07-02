@@ -12,8 +12,9 @@ part 'register_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthUseCase authUseCase;
   RegisterBloc({required this.authUseCase}) : super(RegisterInitial()) {
-    on<RegisterByUsernameEvent>(_onRegisterByUsername
-        as EventHandler<RegisterByUsernameEvent, RegisterState>);
+    on<RegisterByUsernameEvent>(_onRegisterByUsername);
+    on<RegisterByGoogleEvent>(_onRegisterByGoogle);
+    on<RegisterByFacebookEvent>(_onRegisterByFacebook);
   }
 
   FutureOr<void> _onRegisterByUsername(
@@ -43,4 +44,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           "--------------------------------------------------------------------------------");
     }
   }
+
+  FutureOr<void> _onRegisterByGoogle(
+      RegisterByGoogleEvent event, Emitter<RegisterState> emit) async {}
+
+  FutureOr<void> _onRegisterByFacebook(
+      RegisterByFacebookEvent event, Emitter<RegisterState> emit) async {}
 }

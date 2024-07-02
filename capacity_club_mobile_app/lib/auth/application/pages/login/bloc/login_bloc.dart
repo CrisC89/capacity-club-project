@@ -15,12 +15,14 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthUseCase authUseCase;
-  LoginBloc({required this.authUseCase}) : super(LoginByMailState()) {
-    on<LoginByMailEvent>(_onLoginByMail);
+  LoginBloc({required this.authUseCase}) : super(LoginInitial()) {
+    on<LoginByUsernameEvent>(_onLoginByMail);
+    on<LoginByGoogleEvent>(_onLoginByGoogle);
+    on<LoginByFacebookEvent>(_onLoginByFacebook);
   }
 
   FutureOr<void> _onLoginByMail(
-      LoginByMailEvent event, Emitter<LoginState> emit) async {
+      LoginByUsernameEvent event, Emitter<LoginState> emit) async {
     SignInRequest data = event.signInRequest;
     try {
       print(
@@ -46,4 +48,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           "--------------------------------------------------------------------------------");
     }
   }
+
+  FutureOr<void> _onLoginByGoogle(
+      LoginByGoogleEvent event, Emitter<LoginState> emit) async {}
+  FutureOr<void> _onLoginByFacebook(
+      LoginByFacebookEvent event, Emitter<LoginState> emit) async {}
 }

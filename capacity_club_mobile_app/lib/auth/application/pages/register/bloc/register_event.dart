@@ -14,6 +14,18 @@ class RegisterByUsernameEvent extends RegisterEvent {
   List<Object> get props => [signUpRequest];
 }
 
-class RegisterByGoogleEvent extends RegisterEvent {}
+class RegisterByGoogleEvent extends RegisterEvent {
+  final SignUpRequest signUpRequest;
+  RegisterByGoogleEvent({required this.signUpRequest});
 
-class RegisterByFacebookEvent extends RegisterEvent {}
+  @override
+  List<Object> get props => [signUpRequest];
+}
+
+class RegisterByFacebookEvent extends RegisterEvent {
+  final SignUpRequest signUpRequest;
+  RegisterByFacebookEvent({required this.signUpRequest});
+
+  @override
+  List<Object> get props => [signUpRequest];
+}

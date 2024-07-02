@@ -32,9 +32,9 @@ final class LoginGenericState extends LoginState {
   List<Object?> get props => [email, password, message, status];
 }
 
-final class LoginByMailState extends LoginState {}
+final class LoginInitial extends LoginState {}
 
-final class LoginInitialState extends LoginState {}
+final class LoginByMailState extends LoginState {}
 
 final class LoginLoadingState extends LoginState {}
 
