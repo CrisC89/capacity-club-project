@@ -15,17 +15,9 @@ class LoginByUsernameEvent extends LoginEvent {
 }
 
 class LoginByGoogleEvent extends LoginEvent {
-  final SignInRequest signInRequest;
-  LoginByGoogleEvent({required this.signInRequest});
-
-  @override
-  List<Object> get props => [signInRequest];
+  LoginByGoogleEvent();
 }
 
 class LoginByFacebookEvent extends LoginEvent {
-  final SignInRequest signInRequest;
-  LoginByFacebookEvent({required this.signInRequest});
-
-  @override
-  List<Object> get props => [signInRequest];
+  LoginByFacebookEvent();
 }

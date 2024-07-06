@@ -1,3 +1,4 @@
+import 'package:capacity_club_mobile_app/common/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -21,7 +22,7 @@ ReactiveTextField textFieldWithIcon(
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
       hintText: hint,
-      hintStyle: TextStyle(fontSize: 15, color: Colors.grey),
+      hintStyle: AppTheme.dustyGrayMedium16,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.zero,
         borderSide: BorderSide(width: 1, color: Colors.blueGrey),

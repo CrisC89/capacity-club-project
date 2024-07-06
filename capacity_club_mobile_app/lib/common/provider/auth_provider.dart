@@ -1,7 +1,18 @@
+import 'dart:convert';
+
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
+import 'package:capacity_club_mobile_app/auth/data/datasource/auth_datasource.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/credential_and_token_model.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
+import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
+import 'package:capacity_club_mobile_app/common/config/constant.dart';
+import 'package:capacity_club_mobile_app/common/model/abstract/failure.dart';
+import 'package:capacity_club_mobile_app/common/model/api_response.dart';
 import 'package:capacity_club_mobile_app/common/routing/go_router.dart';
 import 'package:capacity_club_mobile_app/common/config/navigator_key.dart';
+import 'package:capacity_club_mobile_app/common/utils/dependency_injection.dart';
+import 'package:capacity_club_mobile_app/common/utils/local_storage.dart';
+import 'package:either_dart/src/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +24,7 @@ class AuthProvider extends ChangeNotifier {
   BuildContext? _context;
   String? _token;
   String? _refreshToken;
+  final LocalStorage _localStorage = LocalStorage();
 
   // Instance unique de AuthProvider
   static final AuthProvider _instance = AuthProvider._internal();
@@ -34,19 +46,12 @@ class AuthProvider extends ChangeNotifier {
   bool get isLoggedIn => _isLoggedIn;
   CredentialAndTokenModel? get credentialUser => _credentialUser;
 
-  void initialize(BuildContext context) {
-    if (_context == null) {
-      _context = context;
-      _authFlowBloc = BlocProvider.of<AuthFlowBloc>(_context!);
-    }
-  }
-
   void setUser(CredentialAndTokenModel user) {
     _credentialUser = user;
     _isLoggedIn = true;
     notifyListeners();
     if (_authFlowBloc != null) {
-      _authFlowBloc?.add(AuthFlowStartedEvent());
+      _authFlowBloc?.add(AuthFlowCheckStateEvent());
     }
   }
 
@@ -55,7 +60,7 @@ class AuthProvider extends ChangeNotifier {
     _isLoggedIn = false;
     notifyListeners();
     if (_authFlowBloc != null) {
-      _authFlowBloc?.add(AuthFlowStartedEvent());
+      _authFlowBloc?.add(AuthFlowCheckStateEvent());
     }
   }
 
@@ -63,7 +68,7 @@ class AuthProvider extends ChangeNotifier {
     _isLoggedIn = true;
     notifyListeners();
     if (_authFlowBloc != null) {
-      _authFlowBloc?.add(AuthFlowStartedEvent());
+      _authFlowBloc?.add(AuthFlowCheckStateEvent());
     }
   }
 
@@ -71,7 +76,18 @@ class AuthProvider extends ChangeNotifier {
     _isLoggedIn = false;
     notifyListeners();
     if (_authFlowBloc != null) {
-      _authFlowBloc?.add(AuthFlowStartedEvent());
+      _authFlowBloc?.add(AuthFlowCheckStateEvent());
     }
+  }
+
+  void initialize(BuildContext context) async {
+    if (_context == null) {
+      _context = context;
+      _authFlowBloc = BlocProvider.of<AuthFlowBloc>(_context!);
+    }
+  }
+
+  Future<String?> getToken() async {
+    return await _localStorage.read(USER_KEY);
   }
 }

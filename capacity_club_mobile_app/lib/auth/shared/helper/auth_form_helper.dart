@@ -3,16 +3,19 @@ import 'package:capacity_club_mobile_app/auth/data/builder/sign_up_request_build
 import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart';
 import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/common/i18n/app_local.dart';
+import 'package:capacity_club_mobile_app/common/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/common/widgets/button/black_botton_widget.dart';
 import 'package:capacity_club_mobile_app/common/widgets/text-label/text_field_with_icon_widgt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AuthFormHelper {
   static Widget getSignupForm(
       FormGroup form, Function signUp, BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return ReactiveForm(
         formGroup: form,
         child: Column(
@@ -47,13 +50,15 @@ class AuthFormHelper {
               },
             ),
             const Padding(padding: EdgeInsets.only(bottom: 15)),
-            blackButton(AppLocale.sign_up.getString(context), signUp)
+            blackButton(AppLocale.sign_up.getString(context), signUp,
+                themeProvider.isDarkModeOn)
           ],
         ));
   }
 
   static Widget getSignInForm(
       FormGroup form, Function signUp, BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return ReactiveForm(
         formGroup: form,
         child: Column(
@@ -76,7 +81,8 @@ class AuthFormHelper {
               },
             ),
             const Padding(padding: EdgeInsets.only(bottom: 15)),
-            blackButton(AppLocale.sign_in.getString(context), signUp)
+            blackButton(AppLocale.sign_in.getString(context), signUp,
+                themeProvider.isDarkModeOn)
           ],
         ));
   }

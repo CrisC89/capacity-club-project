@@ -4,6 +4,7 @@ import 'package:capacity_club_mobile_app/auth/application/pages/register/bloc/re
 import 'package:capacity_club_mobile_app/auth/data/datasource/auth_datasource.dart';
 import 'package:capacity_club_mobile_app/auth/data/repository/auth_repository_impl.dart';
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
+import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/common/utils/dio_client.dart';
 import 'package:get_it/get_it.dart';
 
@@ -12,7 +13,8 @@ final serviceLocator = GetIt.I;
 Future<void> init() async {
 // ! application Layer
   // Factory = every time a new/fresh instance of that class
-  serviceLocator.registerFactory<AuthFlowBloc>(() => AuthFlowBloc());
+  serviceLocator.registerFactory<AuthFlowBloc>(
+      () => AuthFlowBloc(authUseCase: serviceLocator()));
   serviceLocator.registerFactory<LoginBloc>(
       () => LoginBloc(authUseCase: serviceLocator()));
   serviceLocator.registerFactory<RegisterBloc>(

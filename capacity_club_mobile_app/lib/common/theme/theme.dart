@@ -183,6 +183,41 @@ class AppTheme {
 
 //TextStyles
 
+  static const TextStyle titleTextStyle = TextStyle(
+      color: black,
+      fontSize: 48,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'Audiowide',
+      letterSpacing: 2);
+
+  static const TextStyle blackSemiBold36 = TextStyle(
+    color: black,
+    fontSize: 36,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle deepTealBold16 = TextStyle(
+    fontSize: 16,
+    color: deepTeal,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle dustyGrayMedium16 = TextStyle(
+    fontSize: 16,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle whiteTypeMedium14 = TextStyle(
+    fontSize: 14,
+    color: whiteType,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
 //Custom
   static const TextStyle blackSemiBold24 = TextStyle(
     color: black,
@@ -197,12 +232,6 @@ class AppTheme {
     fontFamily: 'Montserrat',
   );
 
-  static const TextStyle dustyGrayMedium16 = TextStyle(
-    fontSize: 16,
-    color: dustyGray,
-    fontWeight: FontWeight.w500,
-    fontFamily: 'Montserrat',
-  );
   static const TextStyle blackRegular16 = TextStyle(
       fontSize: 16,
       color: black,
@@ -214,12 +243,7 @@ class AppTheme {
     fontWeight: FontWeight.w400,
     fontFamily: 'Montserrat',
   );
-  static const TextStyle whiteTypeMedium14 = TextStyle(
-    fontSize: 14,
-    color: whiteType,
-    fontWeight: FontWeight.w500,
-    fontFamily: 'Montserrat',
-  );
+
   static const TextStyle whiteTypeSemiBold16 = TextStyle(
     fontSize: 16,
     color: whiteType,
@@ -478,12 +502,7 @@ class AppTheme {
     fontWeight: FontWeight.w500,
     fontFamily: 'Montserrat',
   );
-  static const TextStyle deepTealBold16 = TextStyle(
-    fontSize: 16,
-    color: deepTeal,
-    fontWeight: FontWeight.bold,
-    fontFamily: 'Montserrat',
-  );
+
   static const TextStyle deepTealBold14 = TextStyle(
     fontSize: 14,
     color: deepTeal,

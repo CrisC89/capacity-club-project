@@ -17,6 +17,14 @@ Widget registerBodyContent(BuildContext context, FormGroup form) {
         .add(RegisterByUsernameEvent(signUpRequest: signup));
   }
 
+  _registerByGoogle() {
+    context.read<RegisterBloc>().add(RegisterByGoogleEvent());
+  }
+
+  _registerByFacebook() {
+    context.read<RegisterBloc>().add(RegisterByFacebookEvent());
+  }
+
   final colorScheme = Theme.of(context).colorScheme;
   return Container(
     color: colorScheme.surface,
@@ -24,13 +32,14 @@ Widget registerBodyContent(BuildContext context, FormGroup form) {
     padding: const EdgeInsets.symmetric(
         horizontal: AppTheme.fixPadding * 1.5, vertical: AppTheme.fixPadding),
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         AppTheme.heightSpace50,
         Text(AppLocale.sign_up.getString(context),
-            style: AppTheme.blackBold16, textAlign: TextAlign.center),
+            style: AppTheme.titleTextStyle, textAlign: TextAlign.center),
         AppTheme.heightSpace30,
-        appLogo(),
+        appLogo(context),
         AppTheme.heightSpace30,
         AuthFormHelper.getSignupForm(form, () {
           if (form.valid) {
@@ -42,11 +51,28 @@ Widget registerBodyContent(BuildContext context, FormGroup form) {
           }
         }, context),
         AppTheme.heightSpace20,
-        Text(
-          AppLocale.or_register_with.getString(context),
-          style: AppTheme.dustyGrayMedium16,
-          textAlign: TextAlign.center,
-        ),
+        Column(children: [
+          Row(mainAxisSize: MainAxisSize.max, children: [
+            Expanded(
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                AppLocale.or_register_with.getString(context),
+                style: AppTheme.dustyGrayMedium16,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Expanded(
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+          ]),
+        ]),
         AppTheme.heightSpace5,
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -54,11 +80,11 @@ Widget registerBodyContent(BuildContext context, FormGroup form) {
             SocialRoundedButton(
                 assetImage: 'assets/img/facebook.png',
                 size: 19,
-                onPressed: () {}),
+                onPressed: _registerByFacebook),
             SocialRoundedButton(
                 assetImage: 'assets/img/google.png',
                 size: 19,
-                onPressed: () {}),
+                onPressed: _registerByGoogle),
           ],
         ),
       ],

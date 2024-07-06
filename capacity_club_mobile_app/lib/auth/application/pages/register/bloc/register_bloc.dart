@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
+import 'package:capacity_club_mobile_app/common/config/logger/bloc_loggers.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -21,33 +22,43 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       RegisterByUsernameEvent event, Emitter<RegisterState> emit) async {
     SignUpRequest data = event.signUpRequest;
     try {
-      print(
-          "--------------------------ENTER TRY---------------------------------------------");
       final response = await authUseCase.signUp(data);
-      print(
-          "--------------------------RESPONSE----------------------------------------------");
-      print(response);
-      print(
-          "--------------------------------------------------------------------------------");
+      registerBlocLogger.e(response);
       if (response is bool && response == true) {
-        print(
-            "--------------------------IF TRUE---------------------------------------------------");
+        registerBlocLogger.e(response);
       } else {
-        print(
-            "--------------------------ELSE--------------------------------------------------");
+        registerBlocLogger.e(response);
       }
     } catch (e) {
-      print(
-          "-----------------------------ERROR---------------------------------------------");
-      print(e.toString());
-      print(
-          "--------------------------------------------------------------------------------");
+      registerBlocLogger.e('ERROR ${e.toString()}');
     }
   }
 
   FutureOr<void> _onRegisterByGoogle(
-      RegisterByGoogleEvent event, Emitter<RegisterState> emit) async {}
+      RegisterByGoogleEvent event, Emitter<RegisterState> emit) async {
+    try {
+      final response = await authUseCase.signUpWithGoogle();
+      if (response is bool && response == true) {
+        registerBlocLogger.e(response);
+      } else {
+        registerBlocLogger.e(response);
+      }
+    } catch (e) {
+      registerBlocLogger.e(e.toString());
+    }
+  }
 
   FutureOr<void> _onRegisterByFacebook(
-      RegisterByFacebookEvent event, Emitter<RegisterState> emit) async {}
+      RegisterByFacebookEvent event, Emitter<RegisterState> emit) async {
+    try {
+      final response = await authUseCase.signUpWithFacebook();
+      if (response is bool && response == true) {
+        registerBlocLogger.e(response);
+      } else {
+        registerBlocLogger.e(response);
+      }
+    } catch (e) {
+      registerBlocLogger.e('ERROR ${e.toString()}');
+    }
+  }
 }

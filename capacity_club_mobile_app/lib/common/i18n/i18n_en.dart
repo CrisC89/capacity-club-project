@@ -15,7 +15,7 @@ const Map<String, dynamic> i18nEn = {
       'The password must contain at least 8 characters.',
   AppLocale.email_format_error: 'Invalid email address.',
   AppLocale.dont_have_account: 'You don\'t have a account ?',
-  AppLocale.already_have_account: 'I already have an account',
+  AppLocale.already_have_account: 'Do you already have an account ?',
   AppLocale.or_connect_with: 'Or connect with',
   AppLocale.or_register_with: 'Or register with'
 };

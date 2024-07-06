@@ -8,7 +8,7 @@ Widget AuthLogo(BuildContext context, String title) {
     child: Column(
       children: [
         const Spacer(),
-        appLogo(),
+        appLogo(context),
         titleText(title),
         const Padding(padding: EdgeInsets.only(top: 20)),
       ],

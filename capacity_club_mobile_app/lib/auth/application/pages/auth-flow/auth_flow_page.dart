@@ -2,11 +2,13 @@ import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/a
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/view_states/auth_flow_init_view.dart';
 import 'package:capacity_club_mobile_app/auth/application/core/view/auth_flow_loading_view.dart';
 import 'package:capacity_club_mobile_app/common/i18n/app_local.dart';
+import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/common/routing/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class AuthFlowPage extends StatefulWidget {
   const AuthFlowPage({super.key});
@@ -43,9 +45,15 @@ class _AuthFlowPageState extends State<AuthFlowPage> {
     setState(() {});
   }
 
+  Future<void> _initializeAuth() async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    authProvider.initialize(context);
+    BlocProvider.of<AuthFlowBloc>(context).add(AuthFlowCheckUserEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<AuthFlowBloc>(context).add(AuthFlowStartedEvent());
+    _initializeAuth();
     return BlocBuilder<AuthFlowBloc, AuthFlowState>(
       builder: (context, state) {
         if (state is AuthFlowInitial) {
