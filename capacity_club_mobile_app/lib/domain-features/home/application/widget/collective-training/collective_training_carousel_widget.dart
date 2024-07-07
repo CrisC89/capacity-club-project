@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective_training_card.dart';
+import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective-training/collective_training_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 

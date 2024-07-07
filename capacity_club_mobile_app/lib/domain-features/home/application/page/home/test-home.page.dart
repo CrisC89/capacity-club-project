@@ -1,21 +1,23 @@
-import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
-import 'package:capacity_club_mobile_app/common/config/navigator_key.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective-training/collective_training_carousel_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/home/application/page/unusing-prototype/collective_training_detail_screen.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/calendar/date_time_line_calendar_widget.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:capacity_club_mobile_app/domain-features/test-auth.screen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class TestPage extends StatefulWidget {
-  const TestPage({super.key});
+class HomePageTest extends StatefulWidget {
+  const HomePageTest({super.key});
 
   @override
-  State<TestPage> createState() => _TestPageState();
+  State<HomePageTest> createState() => _HomePageStateTest();
 }
 
-class _TestPageState extends State<TestPage> {
+class _HomePageStateTest extends State<HomePageTest> {
+  DateTime selectedDay = DateTime.now();
+  DateTime today = DateTime.now();
+  bool calendarType = false;
+
   final Color _mainColor = const Color(0xffe77610);
   final Color _tabBarColor = const Color(0xFF15121f);
   final Color _greyColor = const Color(0xff93989b);
@@ -59,10 +61,93 @@ class _TestPageState extends State<TestPage> {
     );
   }
 
+  final List<Map<String, dynamic>> workouts = [
+    {
+      'workoutName': 'Death by Burpees',
+      'date': '2024-06-08',
+      'startTime': '11:00 AM',
+      'endTime': '12:00 PM',
+      'totalSlots': 15,
+      'registeredSlots': 15,
+      'isUserRegistered': true,
+    },
+    {
+      'workoutName': 'Firebreather',
+      'date': '2024-06-09',
+      'startTime': '9:00 AM',
+      'endTime': '10:00 AM',
+      'totalSlots': 25,
+      'registeredSlots': 5,
+      'isUserRegistered': false,
+    },
+    {
+      'workoutName': 'Iron Fist',
+      'date': '2024-06-11',
+      'startTime': '6:00 AM',
+      'endTime': '7:00 AM',
+      'totalSlots': 15,
+      'registeredSlots': 12,
+      'isUserRegistered': true,
+    },
+    {
+      'workoutName': 'Endurance WOD',
+      'date': '2024-06-12',
+      'startTime': '5:00 PM',
+      'endTime': '6:00 PM',
+      'totalSlots': 25,
+      'registeredSlots': 20,
+      'isUserRegistered': false,
+    },
+    {
+      'workoutName': 'Power Hour',
+      'date': '2024-06-13',
+      'startTime': '8:00 AM',
+      'endTime': '9:00 AM',
+      'totalSlots': 30,
+      'registeredSlots': 25,
+      'isUserRegistered': false,
+    },
+    {
+      'workoutName': 'Metcon Madness',
+      'date': '2024-06-14',
+      'startTime': '4:00 PM',
+      'endTime': '5:00 PM',
+      'totalSlots': 20,
+      'registeredSlots': 10,
+      'isUserRegistered': true,
+    },
+    {
+      'workoutName': 'Warrior WOD',
+      'date': '2024-06-15',
+      'startTime': '9:00 AM',
+      'endTime': '10:00 AM',
+      'totalSlots': 20,
+      'registeredSlots': 15,
+      'isUserRegistered': false,
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
+    void _showDetails(BuildContext context) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (BuildContext context) {
+          return Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+            ),
+            child: Center(child: TrainingExample().build(context)),
+          );
+        },
+      );
+    }
+
+    return SingleChildScrollView(
+        child: Column(
       children: [
         DateTimeLineWithYearSelector(),
         SizedBox(
