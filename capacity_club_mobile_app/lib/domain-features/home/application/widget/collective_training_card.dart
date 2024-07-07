@@ -1,3 +1,4 @@
+import 'package:capacity_club_mobile_app/domain-features/home/application/widget/card_logo_widget.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutCard extends StatelessWidget {
@@ -28,7 +29,8 @@ class WorkoutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Expanded(
+        child: Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
@@ -38,37 +40,44 @@ class WorkoutCard extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              workoutName,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              children: [
+                Center(child: cardLogo(context)),
+                SizedBox(width: 10),
+                Text(
+                  workoutName,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 8),
             Text(
               'Date: $date',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 color: Colors.grey[600],
               ),
             ),
             Text(
               'Time: $startTime - $endTime',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 color: Colors.grey[600],
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
                   'Slots: $registeredSlots / $totalSlots',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     color: Colors.grey[600],
                   ),
                 ),
@@ -76,7 +85,7 @@ class WorkoutCard extends StatelessWidget {
                   Text(
                     'Available',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Colors.green,
                     ),
                   )
@@ -84,27 +93,30 @@ class WorkoutCard extends StatelessWidget {
                   Text(
                     'Full',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Colors.red,
                     ),
                   ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                if (!isUserRegistered && totalSlots - registeredSlots > 0)
-                  ElevatedButton(
-                    onPressed: onRegister,
-                    child: Text('Register'),
-                  ),
                 if (isUserRegistered)
                   ElevatedButton(
                     onPressed: onUnregister,
                     child: Text('Unregister'),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.red,
+                    ),
+                  ),
+                if (!isUserRegistered)
+                  ElevatedButton(
+                    onPressed: onRegister,
+                    child: Text('Register'),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.green,
                     ),
                   ),
                 SizedBox(width: 8),
@@ -117,6 +129,6 @@ class WorkoutCard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

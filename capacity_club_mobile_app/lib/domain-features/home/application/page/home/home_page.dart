@@ -1,8 +1,9 @@
-import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/fake_data.dart';
+import 'package:capacity_club_mobile_app/common/theme/theme.dart';
+import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective_training_carousel_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective_training_detail_screen.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/date_time_line_calendar_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/test-auth.screen.dart';
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,44 @@ class _HomePageState extends State<HomePage> {
   DateTime selectedDay = DateTime.now();
   DateTime today = DateTime.now();
   bool calendarType = false;
+
+  final Color _mainColorBack = const Color(0xffe77610);
+
+  final Color _mainColor = Color.fromARGB(255, 4, 136, 183);
+  final Color _tabBarColor = const Color(0xFF15121f);
+  final Color _greyColor = const Color(0xff93989b);
+  final Color _darkColor = const Color(0xff25232a);
+
+  final bool _isDarkMode = false;
+
+  String timeVal = '08:00';
+
+  int _currentImageSlider = 0;
+
+  Widget _customRadioButton2({value = '08:00'}) {
+    final double size = (MediaQuery.of(context).size.width - 64 - (16 * 3)) / 4;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          timeVal = value;
+        });
+      },
+      child: Container(
+        width: size,
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+            color: timeVal == value
+                ? _mainColor
+                : _isDarkMode
+                    ? _darkColor
+                    : Colors.white),
+        child: Center(
+            child: Text(value.toString(), style: AppTheme.dustyGrayMedium16)),
+      ),
+    );
+  }
 
   final List<Map<String, dynamic>> workouts = [
     {
@@ -81,13 +120,6 @@ class _HomePageState extends State<HomePage> {
       'isUserRegistered': false,
     }
   ];
-  late List<Map<String, dynamic>> individualSlots;
-
-  @override
-  void initState() {
-    individualSlots = individual_slots_data;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,309 +141,107 @@ class _HomePageState extends State<HomePage> {
     }
 
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          DateTimeLineCalendar(),
-          SizedBox(height: 4),
-          Divider(
-            height: 20,
-            thickness: 1,
-            indent: 20,
-            endIndent: 20,
-          ),
-          SizedBox(height: 4),
-          Text(
-            'Entraînements du jour',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 8),
-          Container(
-            height: 300, // Adjusted height for collective training cards
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: workouts.length,
-              itemBuilder: (context, index) {
-                final workout = workouts[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 16.0),
-                  child: WorkoutCard(
-                    workoutName: workout['workoutName'],
-                    date: workout['date'],
-                    startTime: workout['startTime'],
-                    endTime: workout['endTime'],
-                    totalSlots: workout['totalSlots'],
-                    registeredSlots: workout['registeredSlots'],
-                    isUserRegistered: workout['isUserRegistered'],
-                    onRegister: () {
-                      setState(() {
-                        workout['isUserRegistered'] = true;
-                        workout['registeredSlots'] += 1;
-                      });
-                    },
-                    onUnregister: () {
-                      setState(() {
-                        workout['isUserRegistered'] = false;
-                        workout['registeredSlots'] -= 1;
-                      });
-                    },
-                    onDetails: () {
-                      _showDetails(context);
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 8),
-          Divider(
-            height: 40,
-            thickness: 2,
-            indent: 20,
-            endIndent: 20,
-          ),
-          SizedBox(height: 8),
-          Text(
-            'Créneaux séances individuels',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 8),
-          Container(
-            height: 400, // Adjust the height as needed
-            child: SingleChildScrollView(
-              child: Column(
-                children: individualSlots.map((slot) {
-                  return Column(
-                    children: [
-                      IndividualSlotCard(
-                        time: slot['time'],
-                        isAvailable: slot['isAvailable'],
-                        isUserRegistered: slot['isUserRegistered'] ?? false,
-                        onBook: () {
-                          setState(() {
-                            slot['isUserRegistered'] = true;
-                            slot['isAvailable'] = false;
-                          });
-                        },
-                        onCancel: () {
-                          setState(() {
-                            slot['isUserRegistered'] = false;
-                            slot['isAvailable'] = true;
-                          });
-                        },
-                      ),
-                      Divider(
-                        thickness: 1,
-                        indent: 20,
-                        endIndent: 20,
-                      ),
-                    ],
-                  );
-                }).toList(),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class WorkoutCard extends StatelessWidget {
-  final String workoutName;
-  final String date;
-  final String startTime;
-  final String endTime;
-  final int totalSlots;
-  final int registeredSlots;
-  final bool isUserRegistered;
-  final VoidCallback onRegister;
-  final VoidCallback onUnregister;
-  final VoidCallback onDetails;
-
-  const WorkoutCard({
-    Key? key,
-    required this.workoutName,
-    required this.date,
-    required this.startTime,
-    required this.endTime,
-    required this.totalSlots,
-    required this.registeredSlots,
-    required this.isUserRegistered,
-    required this.onRegister,
-    required this.onUnregister,
-    required this.onDetails,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Container(
-        width: MediaQuery.of(context).size.width *
-            0.8, // Reduced width for collective training cards
-        padding: EdgeInsets.all(8),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            // Logo de l'entreprise
-            Center(
-                child: Image.asset('assets/img/icon_logo_v2.png',
-                    width: 50)), // Reduced logo size
-            SizedBox(height: 4),
-            Text(
-              workoutName,
-              style: TextStyle(
-                fontSize: 20, // Reduced font size
-                fontWeight: FontWeight.bold,
-              ),
+      children: [
+        DateTimeLineWithYearSelector(),
+        SizedBox(
+          height: 20,
+        ),
+        Row(mainAxisSize: MainAxisSize.max, children: [
+          const Expanded(
+            child: Divider(
+              thickness: 1,
             ),
-            SizedBox(height: 4),
-            Text(
-              'Date: $date',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: const Text('COLLECTIVE TRAINING',
+                style: AppTheme.subTitleTextStyle),
+          ),
+          const Expanded(
+            child: Divider(
+              thickness: 1,
             ),
-            Text(
-              'Time: $startTime - $endTime',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-              ),
+          ),
+        ]),
+        const SizedBox(height: 16),
+        const CollectiveTrainingCarousel(),
+        Row(mainAxisSize: MainAxisSize.max, children: [
+          const Expanded(
+            child: Divider(
+              thickness: 1,
             ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  'Slots: $registeredSlots / $totalSlots',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
-                  ),
-                ),
-                if (totalSlots - registeredSlots > 0)
-                  Text(
-                    'Disponible',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.green,
-                    ),
-                  )
-                else
-                  Text(
-                    'Complet',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.red,
-                    ),
-                  ),
-              ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: const Text('INDIVIDUAL TRAINING',
+                style: AppTheme.subTitleTextStyle),
+          ),
+          const Expanded(
+            child: Divider(
+              thickness: 1,
             ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                if (isUserRegistered)
-                  ElevatedButton(
-                    onPressed: onUnregister,
-                    child: Text('Annuler'),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.red,
-                    ),
-                  ),
-                if (!isUserRegistered)
-                  ElevatedButton(
-                    onPressed: onRegister,
-                    child: Text('Réserver'),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.green,
-                    ),
-                  ),
-                SizedBox(width: 4),
-                ElevatedButton(
-                  onPressed: onDetails,
-                  child: Text('Détails'),
-                ),
-              ],
-            ),
+          ),
+        ]),
+        const SizedBox(height: 16),
+        Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            _customRadioButton2(value: '08:00'),
+            _customRadioButton2(value: '09:00'),
+            _customRadioButton2(value: '10:00'),
+            _customRadioButton2(value: '11:00'),
+            _customRadioButton2(value: '12:00'),
+            _customRadioButton2(value: '13:00'),
+            _customRadioButton2(value: '14:00'),
+            _customRadioButton2(value: '15:00'),
+            _customRadioButton2(value: '16:00'),
+            _customRadioButton2(value: '17:00'),
+            _customRadioButton2(value: '18:00'),
+            _customRadioButton2(value: '19:00'),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class IndividualSlotCard extends StatelessWidget {
-  final String time;
-  final bool isAvailable;
-  final bool isUserRegistered;
-  final VoidCallback onBook;
-  final VoidCallback onCancel;
-
-  const IndividualSlotCard({
-    Key? key,
-    required this.time,
-    required this.isAvailable,
-    required this.isUserRegistered,
-    required this.onBook,
-    required this.onCancel,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Text(
-              time,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+        const SizedBox(height: 24),
+        TextButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                (Set<WidgetState> states) => _mainColor,
               ),
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3),
+              )),
+              padding: WidgetStateProperty.all<EdgeInsets>(
+                  const EdgeInsets.symmetric(vertical: 18)),
             ),
-            SizedBox(height: 8),
-            if (isUserRegistered)
-              ElevatedButton(
-                onPressed: onCancel,
-                child: Text('Annuler réservation'),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.red,
-                ),
-              )
-            else if (isAvailable)
-              ElevatedButton(
-                  onPressed: onBook,
-                  child: Text('Réserver'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.green,
-                  ))
-            else
-              Text(
-                'Indisponible',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.red,
-                ),
+            onPressed: () {},
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                'Book Now',
+                style: AppTheme.whiteTypeMedium14,
+                textAlign: TextAlign.center,
               ),
-          ],
-        ),
-      ),
-    );
+            )),
+        const SizedBox(height: 24),
+        Row(mainAxisSize: MainAxisSize.max, children: [
+          const Expanded(
+            child: Divider(
+              thickness: 1,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: const Text('CONTACT US', style: AppTheme.subTitleTextStyle),
+          ),
+          const Expanded(
+            child: Divider(
+              thickness: 1,
+            ),
+          ),
+        ]),
+      ],
+    ));
   }
 }

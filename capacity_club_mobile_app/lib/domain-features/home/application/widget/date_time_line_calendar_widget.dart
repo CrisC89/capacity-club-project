@@ -1,16 +1,20 @@
+import 'package:capacity_club_mobile_app/common/theme/theme.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 
-class DateTimeLineCalendar extends StatefulWidget {
-  const DateTimeLineCalendar({super.key});
+class DateTimeLineWithYearSelector extends StatefulWidget {
+  const DateTimeLineWithYearSelector({super.key});
 
   @override
-  _DateTimeLineCalendarState createState() => _DateTimeLineCalendarState();
+  _DateTimeLineWithYearSelectorState createState() =>
+      _DateTimeLineWithYearSelectorState();
 }
 
-class _DateTimeLineCalendarState extends State<DateTimeLineCalendar> {
-  final Color _mainColor = const Color(0xffe77610);
-  final Color _greyTextColor = const Color(0xff808a96);
+class _DateTimeLineWithYearSelectorState
+    extends State<DateTimeLineWithYearSelector> {
+  final Color _mainColorOpaque = Color.fromARGB(100, 4, 136, 183);
+  final Color _mainColor = Color.fromARGB(255, 4, 136, 183);
+  //final Color _greyTextColor = const Color(0xff808a96);
   final bool _isDarkMode = false;
 
   int _currentYear = DateTime.now().year;
@@ -25,7 +29,8 @@ class _DateTimeLineCalendarState extends State<DateTimeLineCalendar> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back,
+                  size: 24, color: Color(0xff949494)),
               onPressed: () {
                 setState(() {
                   _currentYear--;
@@ -36,10 +41,11 @@ class _DateTimeLineCalendarState extends State<DateTimeLineCalendar> {
             ),
             Text(
               '$_currentYear',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: AppTheme.subTitleTextStyle,
             ),
             IconButton(
-              icon: const Icon(Icons.arrow_forward),
+              icon: const Icon(Icons.arrow_forward,
+                  size: 24, color: Color(0xff949494)),
               onPressed: () {
                 setState(() {
                   _currentYear++;
@@ -58,32 +64,21 @@ class _DateTimeLineCalendarState extends State<DateTimeLineCalendar> {
             });
           },
           headerProps: EasyHeaderProps(
-            padding: EdgeInsets.zero,
-            selectedDateStyle: TextStyle(
-              color: _isDarkMode ? Colors.white : Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-            dateFormatter: const DateFormatter.fullDateDMY(),
-          ),
+              padding: EdgeInsets.zero,
+              selectedDateStyle: AppTheme.dustyGrayMedium16,
+              dateFormatter: const DateFormatter.fullDateDMY(),
+              monthStyle: AppTheme.dustyGrayMedium16),
           activeColor: _mainColor,
           dayProps: EasyDayProps(
             height: 56.0,
             width: 56.0,
             dayStructure: DayStructure.dayNumDayStr,
-            inactiveDayStyle: const DayStyle(
-              dayNumStyle: TextStyle(
-                fontSize: 24.0,
-              ),
-            ),
-            activeDayStyle: const DayStyle(
-              dayNumStyle: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
+            inactiveDayStyle:
+                const DayStyle(dayNumStyle: AppTheme.unselectedDate),
+            activeDayStyle: const DayStyle(dayNumStyle: AppTheme.selectedDate),
             todayHighlightStyle: TodayHighlightStyle.withBackground,
-            todayHighlightColor: Colors.orange[100],
+            todayHighlightColor: _mainColorOpaque,
+            todayStyle: const DayStyle(dayNumStyle: AppTheme.unselectedDate),
           ),
         ),
       ],

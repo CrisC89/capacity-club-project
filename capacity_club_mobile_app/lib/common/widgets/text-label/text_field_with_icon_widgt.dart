@@ -14,7 +14,8 @@ ReactiveTextField textFieldWithIcon(
       prefixIcon: Padding(
         padding: const EdgeInsetsDirectional.only(start: 15, end: 25.0),
         child: Icon(icon,
-            size: 15, color: Colors.black), // _myIcon is a 48px-wide widget.
+            size: 15,
+            color: Color(0xff949494)), // _myIcon is a 48px-wide widget.
       ),
       prefixIconConstraints: const BoxConstraints(
         minWidth: 40,

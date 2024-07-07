@@ -1,8 +1,9 @@
+import 'package:capacity_club_mobile_app/common/theme/theme.dart';
 import 'package:capacity_club_mobile_app/domain-features/common-features/application/navigation/bloc/navigation_bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/contact/page/contact_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/home_page.dart';
-import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/test-home.page.dart';
 import 'package:capacity_club_mobile_app/domain-features/personal-training/application/pages/personal-training-page/personal_training_page.dart';
+import 'package:capacity_club_mobile_app/domain-features/user-profile/application/pages/user-profile/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,36 +20,112 @@ class AuthenticatedLayout extends StatefulWidget {
 class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
   List<NavigationDestination> destinations = [
     const NavigationDestination(
-        icon: FaIcon(FontAwesomeIcons.home), label: 'Home'),
+        icon: FaIcon(FontAwesomeIcons.house), label: 'Home'),
     const NavigationDestination(
         icon: FaIcon(FontAwesomeIcons.dumbbell), label: 'Training'),
     const NavigationDestination(
         icon: FaIcon(FontAwesomeIcons.user), label: 'User'),
     const NavigationDestination(
-        icon: FaIcon(FontAwesomeIcons.cog), label: 'Setting')
+        icon: FaIcon(FontAwesomeIcons.gear), label: 'Setting'),
   ];
 
-  _onNavigate(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        BlocProvider.of<NavigationBloc>(context).add(NavigateToHomePage());
-        break;
-      case 1:
-        BlocProvider.of<NavigationBloc>(context)
-            .add(NavigateToPersonalTrainingPage());
-        break;
-      case 2:
-        BlocProvider.of<NavigationBloc>(context)
-            .add(NavigateToUserProfilePage());
-        break;
-      case 3:
-        BlocProvider.of<NavigationBloc>(context).add(NavigateToSettingPage());
-        break;
-    }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: const Text(
+            'CAPACITY CLUB',
+            style: AppTheme.mediumTitleTextStyle,
+          ),
+          centerTitle: true),
+      body: SafeArea(
+        child: AdaptiveLayout(
+          primaryNavigation: SlotLayout(
+            config: <Breakpoint, SlotLayoutConfig>{
+              Breakpoints.mediumAndUp: SlotLayout.from(
+                key: const Key('primary-navigation-medium'),
+                builder: (context) => AdaptiveScaffold.standardNavigationRail(
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  selectedIconTheme: IconThemeData(
+                    color: Color.fromARGB(255, 4, 136, 183),
+                  ),
+                  unselectedIconTheme: IconThemeData(
+                    color: Color(0xff949494),
+                  ),
+                  selectedLabelTextStyle: TextStyle(
+                    color: Color.fromARGB(255, 4, 136, 183),
+                  ),
+                  unSelectedLabelTextStyle: TextStyle(
+                    color: Color(0xff949494),
+                  ),
+                  destinations: destinations
+                      .map((element) =>
+                          AdaptiveScaffold.toRailDestination(element))
+                      .toList(),
+                  selectedIndex: _getSelectedIndex(context),
+                  onDestinationSelected: (index) {
+                    _onNavigate(context, index);
+                  },
+                ),
+              ),
+            },
+          ),
+          bottomNavigation: SlotLayout(
+            config: <Breakpoint, SlotLayoutConfig>{
+              Breakpoints.small: SlotLayout.from(
+                key: const Key('bottom-navigation-small'),
+                builder: (context) =>
+                    BlocBuilder<NavigationBloc, NavigationState>(
+                  builder: (context, state) {
+                    return BottomNavigationBar(
+                      items: destinations
+                          .map((element) => BottomNavigationBarItem(
+                                icon: element.icon,
+                                label: element.label,
+                              ))
+                          .toList(),
+                      currentIndex: _getSelectedIndex(context),
+                      selectedItemColor: Color.fromARGB(255, 4, 136, 183),
+                      unselectedItemColor: Color(0xff949494),
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      onTap: (index) {
+                        _onNavigate(context, index);
+                      },
+                    );
+                  },
+                ),
+              ),
+            },
+          ),
+          body: SlotLayout(
+            config: <Breakpoint, SlotLayoutConfig>{
+              Breakpoints.smallAndUp: SlotLayout.from(
+                key: const Key('primary-body-small'),
+                builder: (context) =>
+                    BlocBuilder<NavigationBloc, NavigationState>(
+                  builder: (context, state) {
+                    if (state is HomeState) {
+                      return HomePage();
+                    } else if (state is PersonalTrainingState) {
+                      return PersonalTrainingPage();
+                    } else if (state is UserProfileState) {
+                      return UserProfilePage();
+                    } else if (state is SettingState) {
+                      return ContactPage();
+                    }
+                    return HomePage(); // Default case
+                  },
+                ),
+              ),
+            },
+          ),
+        ),
+      ),
+    );
   }
 
-  int _onSelectedIndex(BuildContext context) {
-    final state = context.read<NavigationBloc>().state;
+  int _getSelectedIndex(BuildContext context) {
+    final state = context.watch<NavigationBloc>().state;
 
     if (state is HomeState) {
       return 0;
@@ -63,102 +140,20 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NavigationBloc(),
-      child: Scaffold(
-        appBar: AppBar(title: const Text('CAPACITY CLUB'), centerTitle: true),
-        body: SafeArea(
-          child: AdaptiveLayout(
-            primaryNavigation: SlotLayout(
-              config: <Breakpoint, SlotLayoutConfig>{
-                Breakpoints.mediumAndUp: SlotLayout.from(
-                  key: const Key('primary-navigation-medium'),
-                  builder: (context) => AdaptiveScaffold.standardNavigationRail(
-                    backgroundColor: Theme.of(context).colorScheme.surface,
-                    selectedIconTheme: IconThemeData(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    unselectedIconTheme: IconThemeData(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                    selectedLabelTextStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    unSelectedLabelTextStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                    destinations: destinations
-                        .map(
-                          (element) =>
-                              AdaptiveScaffold.toRailDestination(element),
-                        )
-                        .toList(),
-                    selectedIndex: _onSelectedIndex(context),
-                    onDestinationSelected: (index) {
-                      _onNavigate(context, index);
-                    },
-                  ),
-                ),
-              },
-            ),
-            bottomNavigation: SlotLayout(
-              config: <Breakpoint, SlotLayoutConfig>{
-                Breakpoints.small: SlotLayout.from(
-                  key: const Key('bottom-navigation-small'),
-                  builder: (context) =>
-                      BlocBuilder<NavigationBloc, NavigationState>(
-                    builder: (context, state) {
-                      return BottomNavigationBar(
-                        items: destinations
-                            .map(
-                              (element) => BottomNavigationBarItem(
-                                icon: element.icon,
-                                label: element.label,
-                              ),
-                            )
-                            .toList(),
-                        currentIndex: _onSelectedIndex(context),
-                        selectedItemColor:
-                            Theme.of(context).colorScheme.primary,
-                        unselectedItemColor:
-                            Theme.of(context).colorScheme.secondary,
-                        backgroundColor: Theme.of(context).colorScheme.surface,
-                        onTap: (index) {
-                          _onNavigate(context, index);
-                        },
-                      );
-                    },
-                  ),
-                ),
-              },
-            ),
-            body: SlotLayout(
-              config: <Breakpoint, SlotLayoutConfig>{
-                Breakpoints.smallAndUp: SlotLayout.from(
-                  key: const Key('primary-body-small'),
-                  builder: (context) =>
-                      BlocBuilder<NavigationBloc, NavigationState>(
-                    builder: (context, state) {
-                      if (state is HomeState) {
-                        return HomePage();
-                      } else if (state is PersonalTrainingState) {
-                        return PersonalTrainingPage();
-                      } else if (state is UserProfileState) {
-                        return HomePageTest();
-                      } else if (state is SettingState) {
-                        return ContactPage();
-                      }
-                      return HomePage(); // Default case
-                    },
-                  ),
-                ),
-              },
-            ),
-          ),
-        ),
-      ),
-    );
+  void _onNavigate(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        context.read<NavigationBloc>().add(NavigateToHomePage());
+        break;
+      case 1:
+        context.read<NavigationBloc>().add(NavigateToPersonalTrainingPage());
+        break;
+      case 2:
+        context.read<NavigationBloc>().add(NavigateToUserProfilePage());
+        break;
+      case 3:
+        context.read<NavigationBloc>().add(NavigateToSettingPage());
+        break;
+    }
   }
 }

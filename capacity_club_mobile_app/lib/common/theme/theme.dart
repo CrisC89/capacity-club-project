@@ -101,6 +101,78 @@ class AppTheme {
   static const Color _cardColor = const Color(0xffededed);
   static const Color _darkColor = const Color(0xff25232a);
 
+  //TextStyles
+
+  static const TextStyle titleTextStyle = TextStyle(
+      color: dustyGray,
+      fontSize: 48,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'Audiowide',
+      letterSpacing: 2);
+
+  static const TextStyle mediumTitleTextStyle = TextStyle(
+    fontSize: 24,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle subTitleTextStyle = TextStyle(
+    fontSize: 16,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle selectedDate = TextStyle(
+    fontSize: 24,
+    color: whiteType,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle unselectedDate = TextStyle(
+    fontSize: 24,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle calendarTextStyle = TextStyle(
+    fontSize: 14,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle blackSemiBold36 = TextStyle(
+    color: black,
+    fontSize: 36,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle deepTealBold16 = TextStyle(
+    fontSize: 16,
+    color: deepTeal,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle dustyGrayMedium16 = TextStyle(
+    fontSize: 16,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle whiteTypeMedium14 = TextStyle(
+    fontSize: 14,
+    color: whiteType,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
 // Light Mode Colors
   static const Color kPrimaryColorLight = Color(0xFF007AFF);
   static const Color kAccentColorLight = Color(0xFFFF4081);
@@ -180,43 +252,6 @@ class AppTheme {
   static const SizedBox heightSpace40 = SizedBox(height: 40);
   static const SizedBox heightSpace50 = SizedBox(height: 50);
   static const SizedBox heightSpace100 = SizedBox(height: 100);
-
-//TextStyles
-
-  static const TextStyle titleTextStyle = TextStyle(
-      color: black,
-      fontSize: 48,
-      fontWeight: FontWeight.w600,
-      fontFamily: 'Audiowide',
-      letterSpacing: 2);
-
-  static const TextStyle blackSemiBold36 = TextStyle(
-    color: black,
-    fontSize: 36,
-    fontWeight: FontWeight.w600,
-    fontFamily: 'Audiowide',
-  );
-
-  static const TextStyle deepTealBold16 = TextStyle(
-    fontSize: 16,
-    color: deepTeal,
-    fontWeight: FontWeight.bold,
-    fontFamily: 'Audiowide',
-  );
-
-  static const TextStyle dustyGrayMedium16 = TextStyle(
-    fontSize: 16,
-    color: dustyGray,
-    fontWeight: FontWeight.w500,
-    fontFamily: 'Audiowide',
-  );
-
-  static const TextStyle whiteTypeMedium14 = TextStyle(
-    fontSize: 14,
-    color: whiteType,
-    fontWeight: FontWeight.w500,
-    fontFamily: 'Audiowide',
-  );
 
 //Custom
   static const TextStyle blackSemiBold24 = TextStyle(

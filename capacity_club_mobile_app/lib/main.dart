@@ -5,6 +5,7 @@ import 'package:capacity_club_mobile_app/auth/application/pages/register/bloc/re
 import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/common/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/common/utils/dependency_injection.dart';
+import 'package:capacity_club_mobile_app/domain-features/common-features/application/navigation/bloc/navigation_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,7 @@ void main() async {
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
           ChangeNotifierProvider(create: (_) => AuthProvider()),
+          BlocProvider<NavigationBloc>(create: (_) => NavigationBloc()),
           BlocProvider<AuthFlowBloc>(
               create: (_) => serviceLocator<AuthFlowBloc>()),
           BlocProvider<LoginBloc>(create: (_) => serviceLocator<LoginBloc>()),

@@ -1,8 +1,4 @@
-import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/home_page.dart';
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
-
+import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective_training_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +12,7 @@ class CollectiveTrainingCarousel extends StatefulWidget {
 
 class _CollectiveTrainingCarouselState
     extends State<CollectiveTrainingCarousel> {
-  final Color _mainColor = const Color(0xffe77610);
+  final Color _mainColor = Color.fromARGB(255, 4, 136, 183);
   final Color _greyTextColor = const Color(0xff808a96);
 
   int _currentImageSlider = 0;
