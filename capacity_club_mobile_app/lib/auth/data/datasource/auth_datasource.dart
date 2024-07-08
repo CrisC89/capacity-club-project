@@ -220,30 +220,4 @@ class AuthDataSource implements AuthDataSourceInterface {
     var bytes = utf8.encode(string);
     return sha1.convert(bytes).toString();
   }
-
-  void _checkUser() {
-    CredentialAndTokenModel? userData;
-    try {
-      FromCallableStream(() async => await getToken())
-          .map((String? token) => (token != null)
-              ? CredentialAndTokenModel.fromJson(jsonDecode(token))
-              : null)
-          .switchMap((CredentialAndTokenModel? result) {
-        userData = result;
-        return (result != null)
-            ? FromCallableStream(() async => await me())
-            : Stream<ApiResponse?>.value(null);
-      }).listen((ApiResponse? result) {
-        if (result != null && result.result) {
-          authProvider.setUser(userData!);
-          user$ = userData!;
-        } else {
-          authProvider.clearUser();
-          user$ = null;
-        }
-      });
-    } on Exception catch (e) {
-      print(e);
-    }
-  }
 }

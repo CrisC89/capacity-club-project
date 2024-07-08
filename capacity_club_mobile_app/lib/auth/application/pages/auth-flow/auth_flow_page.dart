@@ -54,6 +54,7 @@ class _AuthFlowPageState extends State<AuthFlowPage> {
   @override
   Widget build(BuildContext context) {
     _initializeAuth();
+    //BlocProvider.of<AuthFlowBloc>(context).add(AuthFlowCheckStateEvent());
     return BlocBuilder<AuthFlowBloc, AuthFlowState>(
       builder: (context, state) {
         if (state is AuthFlowInitial) {

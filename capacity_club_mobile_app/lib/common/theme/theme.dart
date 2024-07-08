@@ -166,6 +166,20 @@ class AppTheme {
     fontFamily: 'Audiowide',
   );
 
+  static const TextStyle dustyGrayMedium12 = TextStyle(
+    fontSize: 12,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle whiteTypeMedium16 = TextStyle(
+    fontSize: 16,
+    color: whiteType,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
   static const TextStyle whiteTypeMedium14 = TextStyle(
     fontSize: 14,
     color: whiteType,

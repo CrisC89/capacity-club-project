@@ -1,4 +1,5 @@
 import 'package:capacity_club_mobile_app/common/theme/theme.dart';
+import 'package:capacity_club_mobile_app/domain-features/home/application/widget/coach_info_card_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective-training/collective_training_carousel_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/unusing-prototype/collective_training_detail_screen.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/calendar/date_time_line_calendar_widget.dart';
@@ -50,7 +51,10 @@ class _HomePageState extends State<HomePage> {
                     ? _darkColor
                     : Colors.white),
         child: Center(
-            child: Text(value.toString(), style: AppTheme.dustyGrayMedium16)),
+            child: Text(value.toString(),
+                style: timeVal == value
+                    ? AppTheme.whiteTypeMedium16
+                    : AppTheme.dustyGrayMedium16)),
       ),
     );
   }
@@ -141,107 +145,118 @@ class _HomePageState extends State<HomePage> {
     }
 
     return SingleChildScrollView(
-        child: Column(
-      children: [
-        DateTimeLineWithYearSelector(),
-        SizedBox(
-          height: 20,
-        ),
-        Row(mainAxisSize: MainAxisSize.max, children: [
-          const Expanded(
-            child: Divider(
-              thickness: 1,
-            ),
+        child: Expanded(
+      child: Column(
+        children: [
+          DateTimeLineWithYearSelector(),
+          SizedBox(
+            height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: const Text('COLLECTIVE TRAINING',
-                style: AppTheme.subTitleTextStyle),
-          ),
-          const Expanded(
-            child: Divider(
-              thickness: 1,
-            ),
-          ),
-        ]),
-        const SizedBox(height: 16),
-        const CollectiveTrainingCarousel(),
-        Row(mainAxisSize: MainAxisSize.max, children: [
-          const Expanded(
-            child: Divider(
-              thickness: 1,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: const Text('INDIVIDUAL TRAINING',
-                style: AppTheme.subTitleTextStyle),
-          ),
-          const Expanded(
-            child: Divider(
-              thickness: 1,
-            ),
-          ),
-        ]),
-        const SizedBox(height: 16),
-        Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: [
-            _customRadioButton2(value: '08:00'),
-            _customRadioButton2(value: '09:00'),
-            _customRadioButton2(value: '10:00'),
-            _customRadioButton2(value: '11:00'),
-            _customRadioButton2(value: '12:00'),
-            _customRadioButton2(value: '13:00'),
-            _customRadioButton2(value: '14:00'),
-            _customRadioButton2(value: '15:00'),
-            _customRadioButton2(value: '16:00'),
-            _customRadioButton2(value: '17:00'),
-            _customRadioButton2(value: '18:00'),
-            _customRadioButton2(value: '19:00'),
-          ],
-        ),
-        const SizedBox(height: 24),
-        TextButton(
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.resolveWith<Color>(
-                (Set<WidgetState> states) => _mainColor,
+          Row(mainAxisSize: MainAxisSize.max, children: [
+            const Expanded(
+              child: Divider(
+                thickness: 1,
               ),
-              overlayColor: WidgetStateProperty.all(Colors.transparent),
-              shape: WidgetStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: const Text('COLLECTIVE TRAINING',
+                  style: AppTheme.subTitleTextStyle),
+            ),
+            const Expanded(
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+          ]),
+          const SizedBox(height: 16),
+          const CollectiveTrainingCarousel(),
+          Row(mainAxisSize: MainAxisSize.max, children: [
+            const Expanded(
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: const Text('INDIVIDUAL TRAINING',
+                  style: AppTheme.subTitleTextStyle),
+            ),
+            const Expanded(
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+          ]),
+          const SizedBox(height: 16),
+          Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            children: [
+              _customRadioButton2(value: '08:00'),
+              _customRadioButton2(value: '09:00'),
+              _customRadioButton2(value: '10:00'),
+              _customRadioButton2(value: '11:00'),
+              _customRadioButton2(value: '12:00'),
+              _customRadioButton2(value: '13:00'),
+              _customRadioButton2(value: '14:00'),
+              _customRadioButton2(value: '15:00'),
+              _customRadioButton2(value: '16:00'),
+              _customRadioButton2(value: '17:00'),
+              _customRadioButton2(value: '18:00'),
+              _customRadioButton2(value: '19:00'),
+            ],
+          ),
+          const SizedBox(height: 24),
+          TextButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                  (Set<WidgetState> states) => _mainColor,
+                ),
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
+                shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3),
+                )),
+                padding: WidgetStateProperty.all<EdgeInsets>(
+                    const EdgeInsets.symmetric(vertical: 18)),
+              ),
+              onPressed: () {},
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  'Book Now',
+                  style: AppTheme.whiteTypeMedium14,
+                  textAlign: TextAlign.center,
+                ),
               )),
-              padding: WidgetStateProperty.all<EdgeInsets>(
-                  const EdgeInsets.symmetric(vertical: 18)),
-            ),
-            onPressed: () {},
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                'Book Now',
-                style: AppTheme.whiteTypeMedium14,
-                textAlign: TextAlign.center,
+          const SizedBox(height: 24),
+          Row(mainAxisSize: MainAxisSize.max, children: [
+            const Expanded(
+              child: Divider(
+                thickness: 1,
               ),
-            )),
-        const SizedBox(height: 24),
-        Row(mainAxisSize: MainAxisSize.max, children: [
-          const Expanded(
-            child: Divider(
-              thickness: 1,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: const Text('CONTACT US', style: AppTheme.subTitleTextStyle),
-          ),
-          const Expanded(
-            child: Divider(
-              thickness: 1,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child:
+                  const Text('CONTACT US', style: AppTheme.subTitleTextStyle),
             ),
-          ),
-        ]),
-      ],
+            const Expanded(
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+          ]),
+          const SizedBox(height: 24),
+          CoachInfoCard(
+            name: 'Jehan LECARME',
+            description: 'COACH / PRÉPARATION PHYSIQUE / CROSSFIT / HALTÉRO',
+            imageUrl: 'assets/img/jl_logo.png',
+            email: 'jehan.lecarme@example.com',
+            phoneNumber: '+123456789',
+          )
+        ],
+      ),
     ));
   }
 }

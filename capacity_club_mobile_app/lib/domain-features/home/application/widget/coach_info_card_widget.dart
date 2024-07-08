@@ -1,4 +1,8 @@
+import 'package:capacity_club_mobile_app/common/theme/theme.dart';
+import 'package:capacity_club_mobile_app/common/widgets/button/custom_icon_button_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/home/application/widget/custom_coach_logo_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CoachInfoCard extends StatelessWidget {
@@ -46,8 +50,10 @@ class CoachInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
+      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
+        side: BorderSide(color: Color(0xff949494)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -55,48 +61,36 @@ class CoachInfoCard extends StatelessWidget {
           children: [
             Row(
               children: <Widget>[
-                CircleAvatar(
-                  backgroundImage: AssetImage(imageUrl),
-                  radius: 40,
+                CustomCoachLogo(
+                  backgroundColor: Color.fromARGB(255, 4, 136, 183),
+                  text: 'JL',
+                  radius: 30,
                 ),
-                SizedBox(width: 16),
+                SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
                         name,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTheme.dustyGrayMedium16,
                       ),
-                      SizedBox(height: 8),
-                      Text(
-                        description,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                        ),
+                      SizedBox(height: 4),
+                      Text(description, style: AppTheme.dustyGrayMedium12),
+                      SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          CustomIconButton(
+                              icon: FontAwesomeIcons.envelope,
+                              onTap: _sendEmail),
+                          CustomIconButton(
+                              icon: FontAwesomeIcons.whatsapp,
+                              onTap: _callPhone)
+                        ],
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: _sendEmail,
-                  icon: Icon(Icons.email),
-                  label: Text('Email'),
-                ),
-                ElevatedButton.icon(
-                  onPressed: _callPhone,
-                  icon: Icon(Icons.phone),
-                  label: Text('Appel'),
                 ),
               ],
             ),

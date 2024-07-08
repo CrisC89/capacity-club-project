@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
+import 'package:capacity_club_mobile_app/common/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,7 +24,7 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   File? _image;
-
+  final AuthUseCase _authUseCase = serviceLocator<AuthUseCase>();
   Future<void> _pickImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -31,6 +33,22 @@ class _UserProfilePageState extends State<UserProfilePage> {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
       }
+    });
+  }
+
+  void _callMeMethod() {
+    _authUseCase.me().then((value) {
+      value.fold(
+        (failure) {
+          print('Error');
+        },
+        (data) {
+          print('username');
+          print(data.data!.username);
+        },
+      );
+    }).catchError((error) {
+      print('Error: $error');
     });
   }
 
@@ -151,6 +169,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ),
               ),
             ),
+            Center(
+              child: ElevatedButton(
+                onPressed: _callMeMethod,
+                child: Text('Call me Method'),
+              ),
+            )
           ],
         ),
       ),

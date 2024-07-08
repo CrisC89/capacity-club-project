@@ -1,6 +1,7 @@
 import 'package:capacity_club_mobile_app/common/theme/theme.dart';
 import 'package:capacity_club_mobile_app/domain-features/common-features/application/navigation/bloc/navigation_bloc.dart';
-import 'package:capacity_club_mobile_app/domain-features/contact/page/contact_page.dart';
+import 'package:capacity_club_mobile_app/domain-features/setting/application/pages/setting-page/setting_page.dart';
+import 'package:capacity_club_mobile_app/unused/contact/page/contact_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/home/home_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/personal-training/application/pages/personal-training-page/personal_training_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/user-profile/application/pages/user-profile/user_profile_page.dart';
@@ -111,7 +112,7 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
                     } else if (state is UserProfileState) {
                       return UserProfilePage();
                     } else if (state is SettingState) {
-                      return ContactPage();
+                      return SettingPage();
                     }
                     return HomePage(); // Default case
                   },
