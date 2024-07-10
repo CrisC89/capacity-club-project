@@ -3,7 +3,7 @@ import 'package:capacity_club_mobile_app/domain-features/home/application/widget
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/collective-training/collective_training_carousel_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/page/unusing-prototype/collective_training_detail_screen.dart';
 import 'package:capacity_club_mobile_app/domain-features/home/application/widget/calendar/date_time_line_calendar_widget.dart';
-import 'package:capacity_club_mobile_app/domain-features/test-auth.screen.dart';
+import 'package:capacity_club_mobile_app/unused/page/test-auth.screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

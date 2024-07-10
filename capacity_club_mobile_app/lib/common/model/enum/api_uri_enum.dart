@@ -24,7 +24,11 @@ enum ApiURI {
   MEMBER_SUBSCRIPTION_DETAIL('member-subscription/detail/'),
   MEMBER_SUBSCRIPTION_FILTER('member-subscription/filter'),
   MEMBER_SUBSCRIPTION_LIST('member-subscription/list'),
-  MEMBER_SUBSCRIPTION_UPDATE('member-subscription/update');
+  MEMBER_SUBSCRIPTION_UPDATE('member-subscription/update'),
+
+  INDOOR_TRAINING_DETAIL('indoor-training/detail/'),
+  INDOOR_TRAINING_FILTER('indoor-training/filter'),
+  INDOOR_TRAINING_UPDATE('indoor-training/update');
 
   const ApiURI(this.url);
 
@@ -44,6 +48,18 @@ enum ApiURI {
             return ApiURI.ACCOUNT_DELETE.url;
           case 'REFRESH':
             return ApiURI.ACCOUNT_REFRESH.url;
+          default:
+            break;
+        }
+        break;
+      case 'INDOOR_TRAINING':
+        switch (operation) {
+          case 'DETAIL':
+            return ApiURI.INDOOR_TRAINING_DETAIL.url;
+          case 'FILTER':
+            return ApiURI.INDOOR_TRAINING_FILTER.url;
+          case 'UPDATE':
+            return ApiURI.INDOOR_TRAINING_UPDATE.url;
           default:
             break;
         }

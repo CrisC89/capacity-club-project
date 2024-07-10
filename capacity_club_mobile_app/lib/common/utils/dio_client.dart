@@ -43,7 +43,7 @@ class DioClient {
     }
   }
 
-  Future<ApiResponse> post<T>(String path, Payload payload,
+  Future<ApiResponse<T>> post<T>(String path, Payload payload,
       T Function(Map<String, dynamic> json) fromJsonT) async {
     try {
       print(
@@ -63,7 +63,7 @@ class DioClient {
     }
   }
 
-  Future<ApiResponse> put<T>(String path, Payload payload,
+  Future<ApiResponse<T>> put<T>(String path, Payload payload,
       T Function(Map<String, dynamic> json) fromJsonT) async {
     try {
       ApiResponse<T> response = ApiResponse.fromJson(
