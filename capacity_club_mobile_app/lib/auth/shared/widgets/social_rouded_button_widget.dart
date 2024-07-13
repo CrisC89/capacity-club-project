@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/common/theme/theme.dart';
+import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

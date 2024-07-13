@@ -1,10 +1,10 @@
 import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
-import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
-import 'package:capacity_club_mobile_app/common/model/abstract/failure.dart';
-import 'package:capacity_club_mobile_app/common/model/api_response.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/core/model/abstract/failure.dart';
+import 'package:capacity_club_mobile_app/core/model/entities/api_response.dart';
 import 'package:either_dart/either.dart';
 
-import '../../data/request/sign_in_request.dart';
+import '../../data/model/request/sign_in_request.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, bool>> signIn(SignInRequest request);

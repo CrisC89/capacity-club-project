@@ -1,6 +1,6 @@
 import { Payload } from '@domain-modules-shared';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { Workout } from 'domain-modules/workout/model';
 
 /**
@@ -27,6 +27,6 @@ export class IndoorTrainingCreatePayload implements Payload {
   @IsNotEmpty()
   nb_subscription: number;
   @ApiProperty({ type: () => Workout })
-  @IsNotEmpty()
+  @IsOptional()
   workout: Workout;
 }

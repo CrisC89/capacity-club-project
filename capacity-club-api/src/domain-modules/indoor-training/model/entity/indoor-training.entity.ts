@@ -33,6 +33,7 @@ export class IndoorTraining extends BaseEntity {
 
   @OneToOne(() => Workout, {
     lazy: true,
+    nullable: true,
   })
   @JoinColumn({ name: 'workout_id', referencedColumnName: 'workout_id' })
   @ApiProperty({ type: () => Workout })

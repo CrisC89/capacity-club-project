@@ -1,10 +1,10 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/register/bloc/register_bloc.dart';
-import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/request/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/auth/shared/helper/auth_form_helper.dart';
 import 'package:capacity_club_mobile_app/auth/shared/widgets/social_rouded_button_widget.dart';
-import 'package:capacity_club_mobile_app/common/i18n/app_local.dart';
-import 'package:capacity_club_mobile_app/common/theme/theme.dart';
-import 'package:capacity_club_mobile_app/common/widgets/app_logo_widget.dart';
+import 'package:capacity_club_mobile_app/core/config/i18n/app_local.dart';
+import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
+import 'package:capacity_club_mobile_app/core/widgets/app_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';

@@ -2,14 +2,14 @@ import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/a
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/auth_flow_page.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/login/bloc/login_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/register/bloc/register_bloc.dart';
-import 'package:capacity_club_mobile_app/common/provider/auth_provider.dart';
-import 'package:capacity_club_mobile_app/common/provider/theme_provider.dart';
-import 'package:capacity_club_mobile_app/common/utils/dependency_injection.dart';
-import 'package:capacity_club_mobile_app/domain-features/common-features/application/navigation/bloc/navigation_bloc.dart';
+import 'package:capacity_club_mobile_app/core/provider/auth_provider.dart';
+import 'package:capacity_club_mobile_app/core/provider/theme_provider.dart';
+import 'package:capacity_club_mobile_app/core/utils/dependency_injection.dart';
+import 'package:capacity_club_mobile_app/domain-features/core/navigation/bloc/navigation_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'common/utils/dependency_injection.dart' as dependencyInjection;
+import 'core/utils/dependency_injection.dart' as dependencyInjection;
 
 /*void main() => runApp(MyApp());
 

@@ -1,11 +1,11 @@
 import 'package:capacity_club_mobile_app/auth/data/builder/sign_in_request_builder.dart';
 import 'package:capacity_club_mobile_app/auth/data/builder/sign_up_request_builder.dart';
-import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart';
-import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
-import 'package:capacity_club_mobile_app/common/i18n/app_local.dart';
-import 'package:capacity_club_mobile_app/common/provider/theme_provider.dart';
-import 'package:capacity_club_mobile_app/common/widgets/button/black_botton_widget.dart';
-import 'package:capacity_club_mobile_app/common/widgets/text-label/text_field_with_icon_widgt.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/request/sign_in_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/core/config/i18n/app_local.dart';
+import 'package:capacity_club_mobile_app/core/provider/theme_provider.dart';
+import 'package:capacity_club_mobile_app/core/widgets/button/black_botton_widget.dart';
+import 'package:capacity_club_mobile_app/core/widgets/text-label/text_field_with_icon_widgt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

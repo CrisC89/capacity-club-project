@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:capacity_club_mobile_app/common/model/unique_id.dart';
+import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:equatable/equatable.dart';
 
 class CredentialModel extends Equatable {

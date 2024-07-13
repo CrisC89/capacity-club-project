@@ -3,9 +3,9 @@ import 'package:capacity_club_mobile_app/auth/application/pages/login/widget/log
 import 'package:capacity_club_mobile_app/auth/application/pages/login/widget/login_bottom_page_widget.dart';
 import 'package:capacity_club_mobile_app/auth/shared/helper/auth_form_helper.dart';
 import 'package:capacity_club_mobile_app/auth/shared/widgets/auth_logo_widget.dart';
-import 'package:capacity_club_mobile_app/common/theme/theme.dart';
+import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
 import 'package:capacity_club_mobile_app/auth/shared/widgets/social_rouded_button_widget.dart';
-import 'package:capacity_club_mobile_app/common/widgets/app_logo_widget.dart';
+import 'package:capacity_club_mobile_app/core/widgets/app_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 

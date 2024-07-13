@@ -1,12 +1,12 @@
-import 'package:capacity_club_mobile_app/auth/data/datasource/auth_datasource.dart';
-import 'package:capacity_club_mobile_app/auth/data/interface/auth_datasource_interface.dart';
+import 'package:capacity_club_mobile_app/auth/data/datasource/impl/auth_datasource.dart';
+import 'package:capacity_club_mobile_app/auth/data/datasource/interface/auth_datasource_interface.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
-import 'package:capacity_club_mobile_app/auth/data/request/sign_in_request.dart';
-import 'package:capacity_club_mobile_app/auth/data/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/request/sign_in_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/request/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/auth/domain/failure/login_failure.dart';
 import 'package:capacity_club_mobile_app/auth/domain/repository/auth_repository.dart';
-import 'package:capacity_club_mobile_app/common/model/abstract/failure.dart';
-import 'package:capacity_club_mobile_app/common/model/api_response.dart';
+import 'package:capacity_club_mobile_app/core/model/abstract/failure.dart';
+import 'package:capacity_club_mobile_app/core/model/entities/api_response.dart';
 import 'package:either_dart/either.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../common/utils/dependency_injection.dart';
+import '../../../../core/utils/dependency_injection.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

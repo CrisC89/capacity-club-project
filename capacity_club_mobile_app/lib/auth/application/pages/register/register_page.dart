@@ -1,6 +1,6 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/login/bloc/login_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/register/view_states/register_loaded_view.dart';
-import 'package:capacity_club_mobile_app/common/utils/dependency_injection.dart';
+import 'package:capacity_club_mobile_app/core/utils/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
