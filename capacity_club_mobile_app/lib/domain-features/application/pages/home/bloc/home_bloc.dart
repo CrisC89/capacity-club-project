@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/usecases/indoor_training_usecase.dart';
+import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/usecase/indoor_training_usecase.dart';
 import 'package:meta/meta.dart';
 
 part 'home_event.dart';

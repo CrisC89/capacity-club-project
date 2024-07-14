@@ -5,9 +5,9 @@ import 'package:capacity_club_mobile_app/auth/data/datasource/impl/auth_datasour
 import 'package:capacity_club_mobile_app/auth/data/repository/auth_repository_impl.dart';
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
 import 'package:capacity_club_mobile_app/core/utils/dio_client.dart';
-import 'package:capacity_club_mobile_app/domain-features/data/datasources/impls/indoor_training_datasource.dart';
-import 'package:capacity_club_mobile_app/domain-features/data/repositories/indoor_training_repository_impl.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/usecases/indoor_training_usecase.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/datasource/indoor_training_datasource.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/repository/indoor_training_repository_impl.dart';
+import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/usecase/indoor_training_usecase.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/bloc/home_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -27,8 +27,6 @@ Future<void> init() async {
 // ! domain Layer
   serviceLocator.registerFactory<AuthUseCase>(
       () => AuthUseCase(authRepository: serviceLocator()));
-  serviceLocator.registerFactory<IndoorTrainingUsecase>(
-      () => IndoorTrainingUsecase(indoorTrainingRepository: serviceLocator()));
 // ! data Layer
   serviceLocator.registerFactory<AuthRepositoryImpl>(
       () => AuthRepositoryImpl(authDataSource: serviceLocator()));
