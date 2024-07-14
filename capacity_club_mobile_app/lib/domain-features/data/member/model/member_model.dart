@@ -4,7 +4,7 @@ import 'package:capacity_club_mobile_app/domain-features/data/address/model/addr
 import 'package:capacity_club_mobile_app/domain-features/data/member-card/model/member_card_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-home-training/model/member_home_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-plan-subscription/model/member_plan_subscription_model.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/enum/gender_enum.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/enum/gender_enum.dart';
 import 'package:equatable/equatable.dart';
 
 class MemberModel extends Equatable {

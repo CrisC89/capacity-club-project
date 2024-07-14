@@ -1,7 +1,7 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-data/model/exercise_data_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/training-circuit/model/training_circuit_model.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/enum/training_intensity.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/enum/training_intensity.dart';
 import 'package:equatable/equatable.dart';
 
 class ExerciseTrainingModel extends Equatable {
