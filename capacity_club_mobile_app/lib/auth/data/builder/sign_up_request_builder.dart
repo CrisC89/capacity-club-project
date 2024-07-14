@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/auth/data/model/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_up_request.dart';
 
 class SignUpRequestBuilder {
   String _username = '';

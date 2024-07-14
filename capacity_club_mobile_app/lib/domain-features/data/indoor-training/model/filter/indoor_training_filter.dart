@@ -1,3 +1,5 @@
+import 'package:capacity_club_mobile_app/core/model/extension/json_map_extension.dart';
+
 class IndoorTrainingFilter {
   final String? title;
   final DateTime? training_date;
@@ -15,25 +17,14 @@ class IndoorTrainingFilter {
     this.nb_subscription,
   });
 
-  factory IndoorTrainingFilter.fromJson(Map<String, dynamic> json) {
-    return IndoorTrainingFilter(
-      title: json['title'],
-      training_date: json[
-          'training_date'], // training_date: json['training_date'] != null? DateTime.parse(json['training_date']): null,
-      start_hours: json['start_hours'],
-      end_hours: json['end_hours'],
-      nb_place: json['nb_place'],
-      nb_subscription: json['nb_subscription'],
-    );
+  Map<String, dynamic> toJson() {
+    final json = <String, dynamic>{};
+    json.addIfNotNull('title', title);
+    json.addIfNotNull('training_date', training_date?.toIso8601String());
+    json.addIfNotNull('start_hours', start_hours);
+    json.addIfNotNull('end_hours', end_hours);
+    json.addIfNotNull('nb_place', nb_place);
+    json.addIfNotNull('nb_subscription', nb_subscription);
+    return json;
   }
-
-  Map<String, dynamic> toJson() => {
-        'title': title,
-        'training_date':
-            training_date, //'training_date': training_date?.toIso8601String(),
-        'start_hours': start_hours,
-        'end_hours': end_hours,
-        'nb_place': nb_place,
-        'nb_subscription': nb_subscription,
-      };
 }

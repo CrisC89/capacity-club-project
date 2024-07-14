@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:capacity_club_mobile_app/auth/data/model/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
 import 'package:capacity_club_mobile_app/core/config/logger/bloc_loggers.dart';
 import 'package:equatable/equatable.dart';

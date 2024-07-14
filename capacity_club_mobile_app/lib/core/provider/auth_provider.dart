@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
-import 'package:capacity_club_mobile_app/auth/data/datasource/impl/auth_datasource.dart';
+import 'package:capacity_club_mobile_app/auth/data/datasource/auth_datasource.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/credential_and_token_model.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';

@@ -1,13 +1,12 @@
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/login/bloc/login_bloc.dart';
 import 'package:capacity_club_mobile_app/auth/application/pages/register/bloc/register_bloc.dart';
-import 'package:capacity_club_mobile_app/auth/data/datasource/impl/auth_datasource.dart';
+import 'package:capacity_club_mobile_app/auth/data/datasource/auth_datasource.dart';
 import 'package:capacity_club_mobile_app/auth/data/repository/auth_repository_impl.dart';
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
 import 'package:capacity_club_mobile_app/core/utils/dio_client.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/datasource/indoor_training_datasource.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/repository/indoor_training_repository_impl.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/usecase/indoor_training_usecase.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/bloc/home_bloc.dart';
 import 'package:get_it/get_it.dart';
 

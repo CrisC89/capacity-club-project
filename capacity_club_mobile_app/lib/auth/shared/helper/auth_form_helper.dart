@@ -1,7 +1,7 @@
 import 'package:capacity_club_mobile_app/auth/data/builder/sign_in_request_builder.dart';
 import 'package:capacity_club_mobile_app/auth/data/builder/sign_up_request_builder.dart';
-import 'package:capacity_club_mobile_app/auth/data/model/request/sign_in_request.dart';
-import 'package:capacity_club_mobile_app/auth/data/model/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_in_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/core/config/i18n/app_local.dart';
 import 'package:capacity_club_mobile_app/core/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/core/widgets/button/black_botton_widget.dart';

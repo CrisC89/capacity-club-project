@@ -1,7 +1,7 @@
 import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
 import 'package:capacity_club_mobile_app/auth/data/repository/auth_repository_impl.dart';
-import 'package:capacity_club_mobile_app/auth/data/model/request/sign_in_request.dart';
-import 'package:capacity_club_mobile_app/auth/data/model/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_in_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/core/model/abstract/failure.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/api_response.dart';
 import 'package:either_dart/either.dart';

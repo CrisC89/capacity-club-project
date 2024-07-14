@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/domain-features/data/enum/training_intensity.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/exercise-training/model/enum/training_intensity.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-data/model/exercise_data_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/training-circuit/model/training_circuit_model.dart';
 import 'package:equatable/equatable.dart';

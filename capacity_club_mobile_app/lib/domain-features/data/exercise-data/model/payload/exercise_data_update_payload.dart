@@ -1,5 +1,5 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
-import 'package:capacity_club_mobile_app/domain-features/data/enum/exercise_data_category_enum.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/exercise-data/model/enum/exercise_data_category_enum.dart';
 import 'package:equatable/equatable.dart';
 
 class ExerciseDataUpdatePayload extends Equatable {

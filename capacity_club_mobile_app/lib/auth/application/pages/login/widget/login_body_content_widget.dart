@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:capacity_club_mobile_app/auth/application/pages/login/bloc/login_bloc.dart';
-import 'package:capacity_club_mobile_app/auth/data/model/request/sign_in_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_in_request.dart';
 import 'package:capacity_club_mobile_app/auth/shared/helper/auth_form_helper.dart';
 import 'package:capacity_club_mobile_app/auth/shared/widgets/social_rouded_button_widget.dart';
 import 'package:capacity_club_mobile_app/core/config/i18n/app_local.dart';

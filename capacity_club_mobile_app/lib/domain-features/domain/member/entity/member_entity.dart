@@ -4,7 +4,7 @@ import 'package:capacity_club_mobile_app/domain-features/domain/address/entity/a
 import 'package:capacity_club_mobile_app/domain-features/domain/member-card/entity/member_card_entity.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/member-home-training/entity/member_home_training_entity.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/member-plan-subscription/entity/member_plan_subscription_entity.dart';
-import 'package:capacity_club_mobile_app/domain-features/data/enum/gender_enum.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/member/model/enum/gender_enum.dart';
 
 class MemberEntity {
   final UniqueId member_id;

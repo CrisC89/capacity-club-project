@@ -1,7 +1,7 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/exercise-data/entity/exercise_data_entity.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/training-circuit/entity/training_circuit_entity.dart';
-import 'package:capacity_club_mobile_app/domain-features/data/enum/training_intensity.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/exercise-training/model/enum/training_intensity.dart';
 
 class ExerciseTrainingEntity {
   final UniqueId exercise_training_id;

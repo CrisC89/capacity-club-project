@@ -5,8 +5,8 @@ import 'package:capacity_club_mobile_app/auth/data/builder/sign_up_request_build
 import 'package:capacity_club_mobile_app/auth/data/datasource/interface/auth_datasource_interface.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/credential_and_token_model.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
-import 'package:capacity_club_mobile_app/auth/data/model/request/sign_in_request.dart';
-import 'package:capacity_club_mobile_app/auth/data/model/request/sign_up_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_in_request.dart';
+import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_up_request.dart';
 import 'package:capacity_club_mobile_app/core/config/constant.dart';
 import 'package:capacity_club_mobile_app/core/model/helper/facebook_helper.dart';
 import 'package:capacity_club_mobile_app/core/model/helper/google_helper.dart';

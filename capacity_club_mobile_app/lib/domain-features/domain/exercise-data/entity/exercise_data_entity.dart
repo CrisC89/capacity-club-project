@@ -1,6 +1,6 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/exercise-data/model/enum/exercise_data_category_enum.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/exercise-training/exercise-data/entity/exercise_training_entity.dart';
-import 'package:capacity_club_mobile_app/domain-features/data/enum/exercise_data_category_enum.dart';
 
 class ExerciseDataEntity {
   final UniqueId exercise_data_id;
