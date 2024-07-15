@@ -6,5 +6,5 @@ abstract class DataSource<MODEL, CREATE_PAYLOAD, UPDATE_PAYLOAD, FILTER, ID> {
   Future<ApiResponse<MODEL>> detail(ID uniqueId);
   Future<ApiResponse<MODEL>> update(UPDATE_PAYLOAD payload);
   Future<ApiResponse<MODEL>> create(CREATE_PAYLOAD payload);
-  Future<void> delete(ID uniqueId);
+  Future<ApiResponse<void>> delete(ID uniqueId);
 }

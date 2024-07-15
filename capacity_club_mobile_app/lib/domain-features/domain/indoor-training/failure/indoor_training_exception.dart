@@ -4,4 +4,8 @@ class IndoorTrainingNotFoundFailure implements Failure {}
 
 class IndoorTrainingListFailure implements Failure {}
 
+class IndoorTrainingFilterFailure implements Failure {}
+
 class IndoorTrainingUpdateFailure implements Failure {}
+
+class IndoorTrainingCreateFailure implements Failure {}

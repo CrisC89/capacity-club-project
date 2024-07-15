@@ -45,7 +45,7 @@ class TrainingCircuitDatasource extends DataSource<
   }
 
   @override
-  Future<void> delete(String uniqueId) async {
+  Future<ApiResponse<void>> delete(String uniqueId) async {
     try {
       _logger.info('Deleting training circuit with ID: $uniqueId');
       ApiResponse<void> response = await dioClient.delete(
@@ -57,6 +57,8 @@ class TrainingCircuitDatasource extends DataSource<
             'Failed to delete training circuit with ID: $uniqueId and status: ${response.result}');
         throw ServerException();
       }
+      _logger.info('Successfully deleted indoor training with ID: $uniqueId');
+      return response;
     } catch (e, stackTrace) {
       _logger.severe(
           'Error deleting training circuit with ID: $uniqueId', e, stackTrace);

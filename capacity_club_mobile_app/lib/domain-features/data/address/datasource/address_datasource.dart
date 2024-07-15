@@ -39,7 +39,7 @@ class AddressDatasource extends DataSource<AddressModel, AddressCreatePayload,
   }
 
   @override
-  Future<void> delete(String uniqueId) async {
+  Future<ApiResponse<void>> delete(String uniqueId) async {
     try {
       ApiResponse<void> response = await dioClient.delete(
           '${ApiURI.getEndpoint('ADDRESS', 'DELETE')}/$uniqueId',
@@ -50,6 +50,8 @@ class AddressDatasource extends DataSource<AddressModel, AddressCreatePayload,
             'Failed to delete address with ID: $uniqueId and status: ${response.result}');
         throw ServerException();
       }
+      _logger.info('Successfully deleted indoor training with ID: $uniqueId');
+      return response;
     } catch (e, stackTrace) {
       _logger.severe(
           'Error deleting address with ID: $uniqueId', e, stackTrace);

@@ -45,7 +45,7 @@ class MemberPlanDatasource extends DataSource<
   }
 
   @override
-  Future<void> delete(String uniqueId) async {
+  Future<ApiResponse<void>> delete(String uniqueId) async {
     try {
       _logger.info('Deleting member plan with ID: $uniqueId');
       ApiResponse<void> response = await dioClient.delete(
@@ -57,6 +57,8 @@ class MemberPlanDatasource extends DataSource<
             'Failed to delete member plan with ID: $uniqueId and status: ${response.result}');
         throw ServerException();
       }
+      _logger.info('Successfully deleted indoor training with ID: $uniqueId');
+      return response;
     } catch (e, stackTrace) {
       _logger.severe(
           'Error deleting member plan with ID: $uniqueId', e, stackTrace);

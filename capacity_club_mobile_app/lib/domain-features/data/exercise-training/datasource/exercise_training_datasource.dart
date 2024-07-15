@@ -44,7 +44,7 @@ class ExerciseTrainingDatasource extends DataSource<
   }
 
   @override
-  Future<void> delete(String uniqueId) async {
+  Future<ApiResponse<void>> delete(String uniqueId) async {
     try {
       ApiResponse<void> response = await dioClient.delete(
           '${ApiURI.getEndpoint('EXERCISE_TRAINING', 'DELETE')}/$uniqueId',
@@ -55,6 +55,8 @@ class ExerciseTrainingDatasource extends DataSource<
             'Failed to delete exercise training with ID: $uniqueId and status: ${response.result}');
         throw ServerException();
       }
+      _logger.info('Successfully deleted indoor training with ID: $uniqueId');
+      return response;
     } catch (e, stackTrace) {
       _logger.severe(
           'Error deleting exercise training with ID: $uniqueId', e, stackTrace);
