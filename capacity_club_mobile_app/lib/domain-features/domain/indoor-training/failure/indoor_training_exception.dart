@@ -8,4 +8,6 @@ class IndoorTrainingFilterFailure implements Failure {}
 
 class IndoorTrainingUpdateFailure implements Failure {}
 
+class IndoorTrainingDeleteFailure implements Failure {}
+
 class IndoorTrainingCreateFailure implements Failure {}

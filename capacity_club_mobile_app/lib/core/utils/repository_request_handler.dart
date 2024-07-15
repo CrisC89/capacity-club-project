@@ -5,7 +5,7 @@ import 'package:capacity_club_mobile_app/core/model/failure/common_failure.dart'
 import 'package:either_dart/either.dart';
 
 mixin RepositoryRequestHandler {
-  Future<Either<Failure, ApiResponse<T>>> handleRequest<T>(
+  Future<Either<Failure, ApiResponse<T>>> repositoryHandleRequest<T>(
       Future<ApiResponse<T>> Function() request, Failure failure) async {
     try {
       final response = await request();
