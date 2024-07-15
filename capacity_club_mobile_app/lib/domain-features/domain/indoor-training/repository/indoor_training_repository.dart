@@ -6,12 +6,12 @@ import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/mo
 import 'package:either_dart/either.dart';
 
 abstract class IndoorTrainingRepository {
-  Future<Either<ApiResponse<List<IndoorTrainingModel>>, Failure>> filter(
+  Future<Either<Failure, ApiResponse<List<IndoorTrainingModel>>>> filter(
       IndoorTrainingFilter filter);
 
-  Future<Either<ApiResponse<IndoorTrainingModel>, Failure>> detail(
+  Future<Either<Failure, ApiResponse<IndoorTrainingModel>>> detail(
       String unique_id);
 
-  Future<Either<ApiResponse<IndoorTrainingModel>, Failure>> update(
+  Future<Either<Failure, ApiResponse<IndoorTrainingModel>>> update(
       IndoorTrainingUpdatePayload payload);
 }

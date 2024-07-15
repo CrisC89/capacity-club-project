@@ -1,7 +1,8 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:equatable/equatable.dart';
 
-class AddressUpdatePayload extends Equatable {
+class AddressUpdatePayload extends Equatable implements Payload {
   final UniqueId address_id;
   final String street;
   final String number;

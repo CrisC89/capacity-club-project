@@ -11,19 +11,19 @@ class IndoorTrainingUsecase {
 
   IndoorTrainingUsecase({required this.indoorTrainingRepository});
 
-  Future<Either<ApiResponse<List<IndoorTrainingModel>>, Failure>> filter(
+  Future<Either<Failure, ApiResponse<List<IndoorTrainingModel>>>> filter(
       IndoorTrainingFilter filter) {
     return this.indoorTrainingRepository.filter(filter);
     //here we can add business logic if we need it
   }
 
-  Future<Either<ApiResponse<IndoorTrainingModel>, Failure>> detail(
+  Future<Either<Failure, ApiResponse<IndoorTrainingModel>>> detail(
       String unique_id) {
     return this.indoorTrainingRepository.detail(unique_id);
     //here we can add business logic if we need it
   }
 
-  Future<Either<ApiResponse<IndoorTrainingModel>, Failure>> update(
+  Future<Either<Failure, ApiResponse<IndoorTrainingModel>>> update(
       IndoorTrainingUpdatePayload payload) {
     return this.indoorTrainingRepository.update(payload);
     //here we can add business logic if we need it

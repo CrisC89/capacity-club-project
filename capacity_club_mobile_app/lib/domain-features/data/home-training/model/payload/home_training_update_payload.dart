@@ -1,8 +1,9 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/workout/model/workout_model.dart';
 import 'package:equatable/equatable.dart';
 
-class HomeTrainingUpdatePayload extends Equatable {
+class HomeTrainingUpdatePayload extends Equatable implements Payload {
   final UniqueId home_training_id;
   final String title;
   final int nb_week;

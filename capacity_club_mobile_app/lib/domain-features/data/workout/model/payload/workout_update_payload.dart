@@ -1,10 +1,11 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/home-training/model/home_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/model/indoor_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/training-circuit/model/training_circuit_model.dart';
 import 'package:equatable/equatable.dart';
 
-class WorkoutUpdatePayload extends Equatable {
+class WorkoutUpdatePayload extends Equatable implements Payload {
   final UniqueId workout_id;
   final String title;
   final List<TrainingCircuitModel> training_circuits;

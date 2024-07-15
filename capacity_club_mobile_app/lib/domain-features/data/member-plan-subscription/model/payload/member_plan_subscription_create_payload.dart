@@ -1,9 +1,10 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-card/model/member_card_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-plan/model/member_plan_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member/model/member_model.dart';
 import 'package:equatable/equatable.dart';
 
-class MemberPlanSubscriptionCreatePayload extends Equatable {
+class MemberPlanSubscriptionCreatePayload extends Equatable implements Payload {
   final DateTime purchase_date;
   final MemberModel member;
   final MemberPlanModel member_plan;

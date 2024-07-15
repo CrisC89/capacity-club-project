@@ -1,9 +1,10 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/home-training/model/home_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member/model/member_model.dart';
 import 'package:equatable/equatable.dart';
 
-class MemberHomeTrainingUpdatePayload extends Equatable {
+class MemberHomeTrainingUpdatePayload extends Equatable implements Payload {
   final UniqueId member_home_training_id;
   final DateTime purchase_date;
   final HomeTrainingModel home_training;

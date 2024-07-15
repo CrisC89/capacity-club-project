@@ -1,9 +1,10 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-training/model/enum/training_intensity.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-data/model/exercise_data_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/training-circuit/model/training_circuit_model.dart';
 import 'package:equatable/equatable.dart';
 
-class ExerciseTrainingCreatePayload extends Equatable {
+class ExerciseTrainingCreatePayload extends Equatable implements Payload {
   final int nb_reps;
   final String intensity;
   final TrainingIntensity intensityType;

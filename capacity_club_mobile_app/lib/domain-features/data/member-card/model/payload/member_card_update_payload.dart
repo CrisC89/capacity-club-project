@@ -1,7 +1,8 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:equatable/equatable.dart';
 
-class MemberCardUpdatePayload extends Equatable {
+class MemberCardUpdatePayload extends Equatable implements Payload {
   final UniqueId member_card_id;
   final int collective_session_count;
   final int individual_session_count;

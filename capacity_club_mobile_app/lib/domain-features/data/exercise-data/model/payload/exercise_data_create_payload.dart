@@ -1,7 +1,8 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-data/model/enum/exercise_data_category_enum.dart';
 import 'package:equatable/equatable.dart';
 
-class ExerciseDataCreatePayload extends Equatable {
+class ExerciseDataCreatePayload extends Equatable implements Payload {
   final String title;
   final List<String> description;
   final List<ExerciseDataCategory> categories;

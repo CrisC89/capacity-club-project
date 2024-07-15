@@ -1,6 +1,7 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:equatable/equatable.dart';
 
-class AddressCreatePayload extends Equatable {
+class AddressCreatePayload extends Equatable implements Payload {
   final String street;
   final String number;
   final String zip_code;

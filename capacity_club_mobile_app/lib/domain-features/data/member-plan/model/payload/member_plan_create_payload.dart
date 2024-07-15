@@ -1,6 +1,7 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:equatable/equatable.dart';
 
-class MemberPlanCreatePayload extends Equatable {
+class MemberPlanCreatePayload extends Equatable implements Payload {
   final String title;
   final String description;
   final int nb_individual_training;

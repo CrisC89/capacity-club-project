@@ -1,7 +1,8 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:equatable/equatable.dart';
 
-class MemberPlanUpdatePayload extends Equatable {
+class MemberPlanUpdatePayload extends Equatable implements Payload {
   final UniqueId member_plan_id;
   final String title;
   final String description;

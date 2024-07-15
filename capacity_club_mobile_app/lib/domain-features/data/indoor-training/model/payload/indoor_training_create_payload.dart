@@ -1,7 +1,8 @@
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/workout/model/workout_model.dart';
 import 'package:equatable/equatable.dart';
 
-class IndoorTrainingCreatePayload extends Equatable {
+class IndoorTrainingCreatePayload extends Equatable implements Payload {
   final String title;
   final DateTime training_date;
   final String start_hours;

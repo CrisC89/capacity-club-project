@@ -1,4 +1,5 @@
 import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
+import 'package:capacity_club_mobile_app/core/model/abstract/payload.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/address/model/address_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member/model/enum/gender_enum.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-card/model/member_card_model.dart';
@@ -6,7 +7,7 @@ import 'package:capacity_club_mobile_app/domain-features/data/member-home-traini
 import 'package:capacity_club_mobile_app/domain-features/data/member-plan-subscription/model/member_plan_subscription_model.dart';
 import 'package:equatable/equatable.dart';
 
-class MemberCreatePayload extends Equatable {
+class MemberCreatePayload extends Equatable implements Payload {
   final String firstname;
   final String lastname;
   final DateTime birthdate;

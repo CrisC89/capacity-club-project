@@ -14,54 +14,55 @@ class IndoorTrainingRepositoryImpl implements IndoorTrainingRepository {
   final IndoorTrainingDataSource indoorTrainingDataSource;
 
   IndoorTrainingRepositoryImpl({required this.indoorTrainingDataSource});
+
   @override
-  Future<Either<ApiResponse<IndoorTrainingModel>, Failure>> detail(
+  Future<Either<Failure, ApiResponse<IndoorTrainingModel>>> detail(
       String unique_id) async {
     try {
       final response = await indoorTrainingDataSource.detail(unique_id);
       if (response.result) {
-        return Future.value(Left(response));
+        return Right(response);
       } else {
-        return Future.value(Right(IndoorTrainingNotFoundFailure()));
+        return Left(IndoorTrainingNotFoundFailure());
       }
     } on ServerException catch (e) {
-      return Future.value(Right(ServerFailure(stackTrace: e.toString())));
-    } on GenericException catch (e) {
-      return Future.value(Right(GenericFailure(stackTrace: e.toString())));
+      return Left(ServerFailure(stackTrace: e.toString()));
+    } catch (e) {
+      return Left(GenericFailure(stackTrace: e.toString()));
     }
   }
 
   @override
-  Future<Either<ApiResponse<List<IndoorTrainingModel>>, Failure>> filter(
+  Future<Either<Failure, ApiResponse<List<IndoorTrainingModel>>>> filter(
       IndoorTrainingFilter filter) async {
     try {
       final response = await indoorTrainingDataSource.filter(filter);
       if (response.result) {
-        return Future.value(Left(response));
+        return Right(response);
       } else {
-        return Future.value(Right(IndoorTrainingListFailure()));
+        return Left(IndoorTrainingListFailure());
       }
     } on ServerException catch (e) {
-      return Future.value(Right(ServerFailure(stackTrace: e.toString())));
-    } on GenericException catch (e) {
-      return Future.value(Right(GenericFailure(stackTrace: e.toString())));
+      return Left(ServerFailure(stackTrace: e.toString()));
+    } catch (e) {
+      return Left(GenericFailure(stackTrace: e.toString()));
     }
   }
 
   @override
-  Future<Either<ApiResponse<IndoorTrainingModel>, Failure>> update(
+  Future<Either<Failure, ApiResponse<IndoorTrainingModel>>> update(
       IndoorTrainingUpdatePayload payload) async {
     try {
       final response = await indoorTrainingDataSource.update(payload);
       if (response.result) {
-        return Future.value(Left(response));
+        return Right(response);
       } else {
-        return Future.value(Right(IndoorTrainingUpdateFailure()));
+        return Left(IndoorTrainingUpdateFailure());
       }
     } on ServerException catch (e) {
-      return Future.value(Right(ServerFailure(stackTrace: e.toString())));
-    } on GenericException catch (e) {
-      return Future.value(Right(GenericFailure(stackTrace: e.toString())));
+      return Left(ServerFailure(stackTrace: e.toString()));
+    } catch (e) {
+      return Left(GenericFailure(stackTrace: e.toString()));
     }
   }
 }
