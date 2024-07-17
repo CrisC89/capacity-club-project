@@ -1,7 +1,5 @@
-import 'package:capacity_club_mobile_app/core/model/exception/common_exception.dart';
 import 'package:capacity_club_mobile_app/core/model/abstract/failure.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/api_response.dart';
-import 'package:capacity_club_mobile_app/core/model/failure/common_failure.dart';
 import 'package:capacity_club_mobile_app/core/utils/repository_request_handler.dart';
 import 'package:capacity_club_mobile_app/domain-features/core/interface/repository.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/datasource/indoor_training_datasource.dart';
