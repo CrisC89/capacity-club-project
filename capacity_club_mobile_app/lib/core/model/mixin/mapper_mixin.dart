@@ -1,5 +1,6 @@
 mixin Mapper<MODEL, ENTITY> {
-  ENTITY toEntity();
-  MODEL fromEntity(ENTITY model);
-  Map<String, dynamic> toJson();
+  ENTITY toEntity(MODEL model);
+  MODEL fromEntity(ENTITY entity);
+  Map<String, dynamic> toJson(MODEL model);
+  MODEL fromJson(Map<String, dynamic> json);
 }

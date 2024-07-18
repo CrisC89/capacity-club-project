@@ -1,4 +1,5 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/address/model/mapper/address_mapper.dart';
 import 'package:equatable/equatable.dart';
 
 class AddressModel extends Equatable {
@@ -21,25 +22,12 @@ class AddressModel extends Equatable {
       : complement = complement ?? '';
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
-    return AddressModel(
-        address_id: json['address_id'],
-        street: json['street'],
-        number: json['number'],
-        zip_code: json['zip_code'],
-        town: json['town'],
-        country: json['country'],
-        complement: json['complement']);
+    return AddressMapper().fromJson(json);
   }
 
-  Map<String, dynamic> toJson() => {
-        'address_id': address_id,
-        'street': street,
-        'number': number,
-        'zip_code': zip_code,
-        'town': town,
-        'country': country,
-        'complement': complement
-      };
+  Map<String, dynamic> toJson() {
+    return AddressMapper().toJson(this);
+  }
 
   @override
   List<Object?> get props =>
