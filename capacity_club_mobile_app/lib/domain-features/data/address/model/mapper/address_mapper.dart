@@ -1,3 +1,4 @@
+import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/core/model/mixin/mapper_mixin.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/address/model/address_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/address/entity/address_entity.dart';
@@ -19,7 +20,7 @@ class AddressMapper with Mapper<AddressModel, AddressEntity> {
   @override
   AddressModel fromJson(Map<String, dynamic> json) {
     return AddressModel(
-        address_id: json['address_id'],
+        address_id: UniqueId(json['address_id']),
         street: json['street'],
         number: json['number'],
         zip_code: json['zip_code'],
@@ -44,7 +45,7 @@ class AddressMapper with Mapper<AddressModel, AddressEntity> {
   @override
   Map<String, dynamic> toJson(AddressModel model) {
     return {
-      'address_id': model.address_id,
+      'address_id': model.address_id.toJson(),
       'street': model.street,
       'number': model.number,
       'zip_code': model.zip_code,

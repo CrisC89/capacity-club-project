@@ -8,6 +8,7 @@ class MemberPlanModel extends Equatable {
   final int nb_individual_training;
   final int nb_collective_training;
   final double price;
+
   MemberPlanModel(
       {required this.member_plan_id,
       required this.title,

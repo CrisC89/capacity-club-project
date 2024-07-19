@@ -6,7 +6,7 @@ class IndoorTrainingEntity {
   final String title;
   final DateTime training_date;
   final String start_hours;
-  final String end_hour;
+  final String end_hours;
   final int nb_place;
   final int nb_subscription;
   final WorkoutEntity workout;
@@ -16,7 +16,7 @@ class IndoorTrainingEntity {
       required this.title,
       required this.training_date,
       required this.start_hours,
-      required this.end_hour,
+      required this.end_hours,
       required this.nb_place,
       required this.nb_subscription,
       required this.workout});
@@ -27,7 +27,7 @@ class IndoorTrainingEntity {
         title: '',
         training_date: DateTime.now(),
         start_hours: '',
-        end_hour: '',
+        end_hours: '',
         nb_place: 0,
         nb_subscription: 0,
         workout: WorkoutEntity.empty());

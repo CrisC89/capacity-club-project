@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:capacity_club_mobile_app/auth/data/model/mapper/credential_mapper.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:equatable/equatable.dart';
 
@@ -20,23 +21,12 @@ class CredentialModel extends Equatable {
       required this.isAdmin});
 
   factory CredentialModel.fromJson(Map<String, dynamic> json) {
-    return CredentialModel(
-        username: json['username'],
-        googleHash: json['googleHash'] ?? '',
-        facebookHash: json['facebookHash'] ?? '',
-        credential_id: UniqueId(json['credential_id']),
-        isActive: json['isActive'] ?? true,
-        isAdmin: json['isAdmin']);
+    return CredentialMapper().fromJson(json);
   }
 
-  Map<String, dynamic> toJson() => {
-        'username': username,
-        'googleHash': googleHash,
-        'facebookHash': facebookHash,
-        'credential_id': credential_id.toJson(),
-        'isActive': isActive,
-        'isAdmin': isAdmin
-      };
+  Map<String, dynamic> toJson() {
+    return CredentialMapper().toJson(this);
+  }
 
   @override
   List<Object?> get props => [];

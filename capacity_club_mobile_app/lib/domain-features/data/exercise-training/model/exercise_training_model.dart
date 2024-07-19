@@ -1,5 +1,6 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-data/model/exercise_data_model.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/exercise-training/model/mapper/exercise_training_mapper.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/training-circuit/model/training_circuit_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-training/model/enum/training_intensity.dart';
 import 'package:equatable/equatable.dart';
@@ -22,24 +23,12 @@ class ExerciseTrainingModel extends Equatable {
   });
 
   factory ExerciseTrainingModel.fromJson(Map<String, dynamic> json) {
-    return ExerciseTrainingModel(
-      exercise_training_id: json['exercise_training_id'],
-      nb_reps: json['nb_reps'],
-      intensity: json['intensity'],
-      intensityType: json['intensityType'],
-      exercise_data: json['exercise_data'],
-      training_circuit: json['training_circuit'],
-    );
+    return ExerciseTrainingMapper().fromJson(json);
   }
 
-  Map<String, dynamic> toJson() => {
-        'exercise_training_id': exercise_training_id,
-        'nb_reps': nb_reps,
-        'intensity': intensity,
-        'intensityType': intensityType,
-        'exercise_data': exercise_data,
-        'training_circuit': training_circuit,
-      };
+  Map<String, dynamic> toJson() {
+    return ExerciseTrainingMapper().toJson(this);
+  }
 
   @override
   List<Object?> get props => [
