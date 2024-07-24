@@ -28,4 +28,7 @@ export class IndoorTrainingFilter {
   @ApiProperty()
   @IsOptional()
   workout: Workout;
+  @ApiProperty()
+  @IsOptional()
+  is_collective: boolean;
 }

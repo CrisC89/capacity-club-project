@@ -1,13 +1,55 @@
 import 'package:capacity_club_mobile_app/core/model/abstract/failure.dart';
 
-class IndoorTrainingNotFoundFailure implements Failure {}
+class IndoorTrainingNotFoundFailure extends Failure {
+  IndoorTrainingNotFoundFailure({this.stackTrace});
 
-class IndoorTrainingListFailure implements Failure {}
+  final String? stackTrace;
 
-class IndoorTrainingFilterFailure implements Failure {}
+  @override
+  List<Object?> get props => [stackTrace];
+}
 
-class IndoorTrainingUpdateFailure implements Failure {}
+class IndoorTrainingListFailure extends Failure {
+  IndoorTrainingListFailure({this.stackTrace});
 
-class IndoorTrainingDeleteFailure implements Failure {}
+  final String? stackTrace;
 
-class IndoorTrainingCreateFailure implements Failure {}
+  @override
+  List<Object?> get props => [stackTrace];
+}
+
+class IndoorTrainingFilterFailure extends Failure {
+  IndoorTrainingFilterFailure({this.stackTrace});
+
+  final String? stackTrace;
+
+  @override
+  List<Object?> get props => [stackTrace];
+}
+
+class IndoorTrainingUpdateFailure extends Failure {
+  IndoorTrainingUpdateFailure({this.stackTrace});
+
+  final String? stackTrace;
+
+  @override
+  List<Object?> get props => [stackTrace];
+}
+
+class IndoorTrainingDeleteFailure extends Failure {
+  IndoorTrainingDeleteFailure({this.stackTrace});
+
+  final String? stackTrace;
+
+  @override
+  List<Object?> get props => [stackTrace];
+}
+
+class IndoorTrainingCreateFailure extends Failure {
+  IndoorTrainingCreateFailure({this.stackTrace});
+
+  final String? stackTrace;
+
+  @override
+  List<Object?> get props => [stackTrace];
+}

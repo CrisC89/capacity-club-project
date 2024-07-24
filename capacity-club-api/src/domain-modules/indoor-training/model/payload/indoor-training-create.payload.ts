@@ -29,4 +29,7 @@ export class IndoorTrainingCreatePayload implements Payload {
   @ApiProperty({ type: () => Workout })
   @IsOptional()
   workout: Workout;
+  @ApiProperty()
+  @IsNotEmpty()
+  is_collective: boolean;
 }

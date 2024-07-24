@@ -10,6 +10,7 @@ class IndoorTrainingModel extends Equatable {
   final String end_hours;
   final int nb_place;
   final int nb_subscription;
+  final bool is_collective;
   final WorkoutModel workout;
 
   const IndoorTrainingModel(
@@ -20,6 +21,7 @@ class IndoorTrainingModel extends Equatable {
       required this.end_hours,
       required this.nb_place,
       required this.nb_subscription,
+      required this.is_collective,
       required this.workout});
 
   factory IndoorTrainingModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class IndoorTrainingModel extends Equatable {
       end_hours: json['end_hours'],
       nb_place: json['nb_place'],
       nb_subscription: json['nb_subscription'],
+      is_collective: json['is_collective'],
       workout: json['workout'],
     );
   }
@@ -43,6 +46,7 @@ class IndoorTrainingModel extends Equatable {
         'end_hours': end_hours,
         'nb_place': nb_place,
         'nb_subscription': nb_subscription,
+        'is_collective': is_collective,
         'workout': workout
       };
 

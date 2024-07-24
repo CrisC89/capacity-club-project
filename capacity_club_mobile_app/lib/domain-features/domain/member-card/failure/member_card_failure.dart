@@ -1,13 +1,37 @@
 import 'package:capacity_club_mobile_app/core/model/abstract/failure.dart';
 
-class MemberCardNotFoundFailure implements Failure {}
+class MemberCardNotFoundFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberCardListFailure implements Failure {}
+class MemberCardListFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberCardFilterFailure implements Failure {}
+class MemberCardFilterFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberCardUpdateFailure implements Failure {}
+class MemberCardUpdateFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberCardDeleteFailure implements Failure {}
+class MemberCardDeleteFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberCardCreateFailure implements Failure {}
+class MemberCardCreateFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}

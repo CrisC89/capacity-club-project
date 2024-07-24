@@ -11,6 +11,7 @@ class IndoorTrainingUpdatePayload extends Equatable implements Payload {
   final String end_hours;
   final int nb_place;
   final int nb_subscription;
+  final bool is_collective;
   final WorkoutModel? workout;
 
   const IndoorTrainingUpdatePayload(
@@ -21,6 +22,7 @@ class IndoorTrainingUpdatePayload extends Equatable implements Payload {
       required this.end_hours,
       required this.nb_place,
       required this.nb_subscription,
+      required this.is_collective,
       required this.workout});
 
   Map<String, dynamic> toJson() => {
@@ -31,6 +33,7 @@ class IndoorTrainingUpdatePayload extends Equatable implements Payload {
         'end_hours': end_hours,
         'nb_place': nb_place,
         'nb_subscription': nb_subscription,
+        'is_collective': is_collective,
         'workout': workout
       };
 

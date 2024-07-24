@@ -17,6 +17,7 @@ class IndoorTrainingMapper
       end_hours: entity.end_hours,
       nb_place: entity.nb_place,
       nb_subscription: entity.nb_subscription,
+      is_collective: entity.is_collective,
       workout: workoutMapper.fromEntity(entity.workout),
     );
   }
@@ -31,6 +32,7 @@ class IndoorTrainingMapper
       end_hours: json['end_hours'],
       nb_place: json['nb_place'],
       nb_subscription: json['nb_subscription'],
+      is_collective: json['is_collective'],
       workout: WorkoutMapper().fromJson(json['workout']),
     );
   }
@@ -45,6 +47,7 @@ class IndoorTrainingMapper
       end_hours: model.end_hours,
       nb_place: model.nb_place,
       nb_subscription: model.nb_subscription,
+      is_collective: model.is_collective,
       workout: workoutMapper.toEntity(model.workout),
     );
   }
@@ -59,6 +62,7 @@ class IndoorTrainingMapper
       'end_hours': model.end_hours,
       'nb_place': model.nb_place,
       'nb_subscription': model.nb_subscription,
+      'is_collective': model.is_collective,
       'workout': workoutMapper.toJson(model.workout),
     };
   }

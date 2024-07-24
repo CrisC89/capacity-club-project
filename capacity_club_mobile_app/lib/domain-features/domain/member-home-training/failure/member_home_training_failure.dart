@@ -1,13 +1,37 @@
 import 'package:capacity_club_mobile_app/core/model/abstract/failure.dart';
 
-class MemberHomeTrainingNotFoundFailure implements Failure {}
+class MemberHomeTrainingNotFoundFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberHomeTrainingListFailure implements Failure {}
+class MemberHomeTrainingListFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberHomeTrainingFilterFailure implements Failure {}
+class MemberHomeTrainingFilterFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberHomeTrainingUpdateFailure implements Failure {}
+class MemberHomeTrainingUpdateFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberHomeTrainingDeleteFailure implements Failure {}
+class MemberHomeTrainingDeleteFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class MemberHomeTrainingCreateFailure implements Failure {}
+class MemberHomeTrainingCreateFailure extends Failure {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}

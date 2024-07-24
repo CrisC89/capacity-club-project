@@ -30,6 +30,8 @@ export class IndoorTraining extends BaseEntity {
   nb_place: number;
   @Column({ nullable: false })
   nb_subscription: number;
+  @Column({ nullable: false })
+  is_collective: boolean;
 
   @OneToOne(() => Workout, {
     lazy: true,

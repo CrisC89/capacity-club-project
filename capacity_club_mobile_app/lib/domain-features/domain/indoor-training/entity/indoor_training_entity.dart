@@ -9,6 +9,7 @@ class IndoorTrainingEntity {
   final String end_hours;
   final int nb_place;
   final int nb_subscription;
+  final bool is_collective;
   final WorkoutEntity workout;
 
   IndoorTrainingEntity(
@@ -19,6 +20,7 @@ class IndoorTrainingEntity {
       required this.end_hours,
       required this.nb_place,
       required this.nb_subscription,
+      required this.is_collective,
       required this.workout});
 
   factory IndoorTrainingEntity.empty() {
@@ -30,6 +32,7 @@ class IndoorTrainingEntity {
         end_hours: '',
         nb_place: 0,
         nb_subscription: 0,
+        is_collective: false,
         workout: WorkoutEntity.empty());
   }
 }
