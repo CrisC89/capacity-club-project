@@ -5,9 +5,9 @@ import 'package:capacity_club_mobile_app/auth/data/datasource/auth_datasource.da
 import 'package:capacity_club_mobile_app/auth/data/repository/auth_repository_impl.dart';
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
 import 'package:capacity_club_mobile_app/core/utils/dio_client.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home/bloc/home_page_bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/datasource/indoor_training_datasource.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/repository/indoor_training_repository_impl.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/bloc/home_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.I;
@@ -21,8 +21,7 @@ Future<void> init() async {
       () => LoginBloc(authUseCase: serviceLocator()));
   serviceLocator.registerFactory<RegisterBloc>(
       () => RegisterBloc(authUseCase: serviceLocator()));
-  serviceLocator.registerFactory<HomeBloc>(
-      () => HomeBloc(indoorTrainingUsecase: serviceLocator()));
+  serviceLocator.registerFactory<HomePageBloc>(() => HomePageBloc());
 // ! domain Layer
   serviceLocator.registerFactory<AuthUseCase>(
       () => AuthUseCase(authRepository: serviceLocator()));

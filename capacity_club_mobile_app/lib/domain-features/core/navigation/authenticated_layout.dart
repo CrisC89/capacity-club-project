@@ -134,11 +134,11 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
     if (state is HomeState) {
       return HomePage();
     } else if (state is PersonalTrainingState) {
-      return HomeTrainingPage();
+      return HomeTrainingPage.pageConfig.child;
     } else if (state is UserProfileState) {
       return TestPage.pageConfig.child;
     } else if (state is SettingState) {
-      return SettingPage();
+      return SettingPage.pageConfig.child;
     } else {
       return HomePage(); // Default case
     }
