@@ -5,6 +5,7 @@ import 'package:capacity_club_mobile_app/auth/application/pages/register/bloc/re
 import 'package:capacity_club_mobile_app/core/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/core/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/core/utils/dependency_injection.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home/bloc/home_page_bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/test-page/bloc/test_bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/core/navigation/bloc/navigation_bloc.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,8 @@ void main() async {
           BlocProvider<LoginBloc>(create: (_) => serviceLocator<LoginBloc>()),
           BlocProvider<RegisterBloc>(
               create: (_) => serviceLocator<RegisterBloc>()),
+          BlocProvider<HomePageBloc>(
+              create: (_) => serviceLocator<HomePageBloc>()),
           //Test Bloc
           BlocProvider<TestBloc>(create: (_) => TestBloc())
         ],

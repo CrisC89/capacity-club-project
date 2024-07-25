@@ -18,13 +18,13 @@ export class IndoorTraining extends BaseEntity {
   @Transform(uniqueIdTransformer.to, { toClassOnly: true })
   @Transform(uniqueIdTransformer.from, { toPlainOnly: true })
   indoor_training_id: UniqueId;
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   title: string;
   @Column({ nullable: false })
   training_date: Date;
   @Column({ nullable: false })
   start_hours: string;
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   end_hours: string;
   @Column({ nullable: false })
   nb_place: number;

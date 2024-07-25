@@ -1,7 +1,3 @@
-import 'dart:io';
-
-import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
-import 'package:capacity_club_mobile_app/core/utils/dependency_injection.dart';
 import 'package:capacity_club_mobile_app/core/utils/page_config.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/user-profile/bloc/user_profile_page_bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/user-profile/provider/user_profile_page_provider.dart';
@@ -11,7 +7,6 @@ import 'package:capacity_club_mobile_app/domain-features/application/pages/user-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:image_picker/image_picker.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({super.key});

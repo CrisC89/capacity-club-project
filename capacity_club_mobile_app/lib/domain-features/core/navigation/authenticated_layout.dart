@@ -132,7 +132,7 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
 
   Widget _getPageFromState(NavigationState state) {
     if (state is HomeState) {
-      return HomePage();
+      return HomePage.pageConfig.child;
     } else if (state is PersonalTrainingState) {
       return HomeTrainingPage.pageConfig.child;
     } else if (state is UserProfileState) {

@@ -27,7 +27,26 @@ class TestBloc extends Bloc<TestEvent, TestState> {
       if (collection.isLeft) {
         emit(TestErrorState());
       } else {
-        emit(TestLoadedState(indoorTrainingList: collection.right));
+        List<Map<String, dynamic>> collectiveIndoorTrainingList = [];
+        List<Map<String, dynamic>> individualIndoorTrainingList = [];
+
+        for (var training in collection.right) {
+          if (training['isCollective'] == true) {
+            collectiveIndoorTrainingList.add(training);
+          } else {
+            individualIndoorTrainingList.add(training);
+          }
+        }
+
+        List<Map<String, dynamic>> uniqueCollectiveWorkouts =
+            collectiveIndoorTrainingList.toSet().toList().take(7).toList();
+
+        List<Map<String, dynamic>> uniqueIndividualWorkouts =
+            individualIndoorTrainingList.toSet().toList().take(7).toList();
+        emit(TestLoadedState(
+          collectiveIndoorTrainingList: uniqueCollectiveWorkouts,
+          individualIndoorTrainingList: uniqueIndividualWorkouts,
+        ));
       }
     } on Exception catch (e) {
       emit(TestErrorState());
@@ -40,7 +59,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
       if (collection.isLeft) {
         emit(TestErrorState());
       } else {
-        emit(TestLoadedState(indoorTrainingList: collection.right));
+        //emit(TestLoadedState(indoorTrainingList: collection.right));
       }
     } catch (e) {
       emit(TestErrorState());

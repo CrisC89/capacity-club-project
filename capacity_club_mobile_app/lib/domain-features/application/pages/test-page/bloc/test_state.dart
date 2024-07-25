@@ -12,12 +12,16 @@ final class TestInitial extends TestState {}
 final class TestLoadingState extends TestState {}
 
 final class TestLoadedState extends TestState {
-  final List<Map<String, dynamic>> indoorTrainingList;
+  final List<Map<String, dynamic>> collectiveIndoorTrainingList;
+  final List<Map<String, dynamic>> individualIndoorTrainingList;
 
-  const TestLoadedState({required this.indoorTrainingList});
+  const TestLoadedState(
+      {required this.collectiveIndoorTrainingList,
+      required this.individualIndoorTrainingList});
 
   @override
-  List<Object?> get props => [indoorTrainingList];
+  List<Object?> get props =>
+      [collectiveIndoorTrainingList, individualIndoorTrainingList];
 }
 
 final class TestErrorState extends TestState {}

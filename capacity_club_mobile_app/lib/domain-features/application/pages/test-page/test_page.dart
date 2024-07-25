@@ -13,7 +13,7 @@ class TestPageProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TestBloc()..add(OnInitTestEvent()),
+      create: (context) => TestBloc()..add(OnDateChangedTestEvent()),
       child: TestPage(),
     );
   }
@@ -39,7 +39,11 @@ class _TestPageState extends State<TestPage> {
           if (state is TestLoadingState) {
             return TestPageLoading();
           } else if (state is TestLoadedState) {
-            return TestPageLoaded(indoorTrainingList: state.indoorTrainingList);
+            return TestPageLoaded(
+                collectiveIndoorTrainingList:
+                    state.collectiveIndoorTrainingList,
+                individualIndoorTrainingList:
+                    state.individualIndoorTrainingList);
           } else if (state is TestErrorState) {
             return TestPageError();
           }
