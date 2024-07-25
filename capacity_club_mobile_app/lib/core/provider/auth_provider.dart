@@ -1,18 +1,7 @@
-import 'dart:convert';
-
 import 'package:capacity_club_mobile_app/auth/application/pages/auth-flow/bloc/auth_flow_bloc.dart';
-import 'package:capacity_club_mobile_app/auth/data/datasource/auth_datasource.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/credential_and_token_model.dart';
-import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
-import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
 import 'package:capacity_club_mobile_app/core/config/constant.dart';
-import 'package:capacity_club_mobile_app/core/model/abstract/failure.dart';
-import 'package:capacity_club_mobile_app/core/model/entities/api_response.dart';
-import 'package:capacity_club_mobile_app/core/gorouter/go_router.dart';
-import 'package:capacity_club_mobile_app/core/gorouter/navigator_key.dart';
-import 'package:capacity_club_mobile_app/core/utils/dependency_injection.dart';
 import 'package:capacity_club_mobile_app/core/utils/local_storage.dart';
-import 'package:either_dart/src/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

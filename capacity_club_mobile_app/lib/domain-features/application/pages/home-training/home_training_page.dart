@@ -18,17 +18,17 @@ class Week {
   Week({required this.weekNumber, required this.sessions});
 }
 
-class PersonalTrainingPage extends StatefulWidget {
-  const PersonalTrainingPage({super.key});
+class HomeTrainingPage extends StatefulWidget {
+  const HomeTrainingPage({super.key});
   static const pageConfig = PageConfig(
       icon: FontAwesomeIcons.dumbbell,
       name: 'training',
-      child: PersonalTrainingPage());
+      child: HomeTrainingPage());
   @override
-  _PersonalTrainingPageState createState() => _PersonalTrainingPageState();
+  _HomeTrainingPageState createState() => _HomeTrainingPageState();
 }
 
-class _PersonalTrainingPageState extends State<PersonalTrainingPage> {
+class _HomeTrainingPageState extends State<HomeTrainingPage> {
   final List<Week> weeks = List.generate(4, (weekIndex) {
     return Week(
       weekNumber: weekIndex + 1,
