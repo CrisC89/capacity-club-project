@@ -20,7 +20,6 @@ import 'package:capacity_club_mobile_app/core/utils/refresh_token_interceptor.da
 import 'package:capacity_club_mobile_app/core/widgets/snack-bar/error_snack_bar_widget.dart';
 import 'package:crypto/crypto.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:rxdart/rxdart.dart';
 
 class AuthDataSource implements AuthDataSourceInterface {
   static final LocalStorage localStorage = LocalStorage();
@@ -31,6 +30,7 @@ class AuthDataSource implements AuthDataSourceInterface {
 
   AuthDataSource({required this.dioClient});
 
+/*
   @override
   Future<bool> signin(SignInRequest request) async {
     print(
@@ -38,10 +38,9 @@ class AuthDataSource implements AuthDataSourceInterface {
     print(ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'));
     ApiResponse<CredentialAndTokenModel> response =
         await dioClient.post<CredentialAndTokenModel>(
-                ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'),
-                request,
-                (json) => CredentialAndTokenModel.fromJson(json))
-            as ApiResponse<CredentialAndTokenModel>;
+            ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'),
+            request,
+            (json) => CredentialAndTokenModel.fromJson(json));
     print(
         '-------------------------------AFTER RESPONSE--------------------------------------');
     RefreshTokenInterceptor().setToken(response.data?.token);
@@ -53,10 +52,42 @@ class AuthDataSource implements AuthDataSourceInterface {
     AuthProvider().login();
     return handleSignInSignUpPostProcess(response);
   }
-
+  */
   @override
-  Future<String?> getToken() async {
-    return await localStorage.read(USER_KEY);
+  Future<bool> signin(SignInRequest request) async {
+    print(
+        '-------------------------------SIGNIN--------------------------------------');
+    print(ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'));
+
+    try {
+      ApiResponse<CredentialAndTokenModel> response =
+          await dioClient.post<CredentialAndTokenModel>(
+              ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'),
+              request,
+              (json) => CredentialAndTokenModel.fromJson(json));
+
+      print(
+          '-------------------------------AFTER RESPONSE--------------------------------------');
+      print('Response Code: ${response.code}');
+
+      if (response.data != null) {
+        RefreshTokenInterceptor().setToken(response.data!.token);
+        RefreshTokenInterceptor().setRefreshToken(response.data!.refreshToken);
+
+        bool result = await handleSignInSignUpPostProcess(response);
+        if (!response.result) {
+          errorSnackBar('Login failed with code: ${response.code}');
+        }
+
+        return result;
+      } else {
+        print('No data in response');
+        return false;
+      }
+    } catch (e) {
+      print('Exception during sign in: $e');
+      return false;
+    }
   }
 
   @override
@@ -64,6 +95,45 @@ class AuthDataSource implements AuthDataSourceInterface {
     try {
       if (response.result) {
         await localStorage.write(USER_KEY, jsonEncode(response.data));
+        await localStorage.write(TOKEN_KEY, jsonEncode(response.data?.token));
+        await localStorage.write(
+            REFRESH_TOKEN_KEY, jsonEncode(response.data?.refreshToken));
+
+        String? data = await localStorage.read(USER_KEY);
+        print('Stored USER_KEY: $data');
+
+        if (data != null) {
+          CredentialAndTokenModel userData =
+              CredentialAndTokenModel.fromJson(jsonDecode(data));
+          print('User Data: $userData');
+          return true;
+        } else {
+          print('Failed to retrieve USER_KEY from local storage');
+        }
+      } else {
+        print('Response result is false');
+      }
+      return false;
+    } catch (e) {
+      print('Exception during post process: $e');
+      return false;
+    }
+  }
+
+  @override
+  Future<String?> getToken() async {
+    return await localStorage.read(USER_KEY);
+  }
+
+/*
+  @override
+  Future<bool> handleSignInSignUpPostProcess(ApiResponse response) async {
+    try {
+      if (response.result) {
+        await localStorage.write(USER_KEY, jsonEncode(response.data));
+        await localStorage.write(TOKEN_KEY, jsonEncode(response.data?.token));
+        await localStorage.write(
+            REFRESH_TOKEN_KEY, jsonEncode(response.data?.refreshToken));
         String? data = await localStorage.read(USER_KEY);
         print(data);
         if (data == null) {
@@ -81,7 +151,7 @@ class AuthDataSource implements AuthDataSourceInterface {
       return Future(() => false);
     }
   }
-
+*/
   @override
   void logOut() {
     //user$.add(null);
@@ -145,10 +215,9 @@ class AuthDataSource implements AuthDataSourceInterface {
     print('signUp request ${request.toJson()}');
     ApiResponse<CredentialAndTokenModel>? response =
         await dioClient.post<CredentialAndTokenModel>(
-                ApiURI.getEndpoint('ACCOUNT', 'SIGNUP'),
-                request,
-                (json) => CredentialAndTokenModel.fromJson(json))
-            as ApiResponse<CredentialAndTokenModel>;
+            ApiURI.getEndpoint('ACCOUNT', 'SIGNUP'),
+            request,
+            (json) => CredentialAndTokenModel.fromJson(json));
     if (!response.result) {
       errorSnackBar('_apiService.messageFromCode(response.code)');
     }

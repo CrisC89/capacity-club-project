@@ -9,7 +9,15 @@ import {
   AuthenticatedControllerSignIn,
   AuthenticatedControllerSignUp,
 } from '../common/documentation/swagger.annotations';
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Public } from '@common/config/metadata/public.metadata';
 import {
@@ -29,6 +37,7 @@ import { CredentialUpdatepPayload } from './model/payload/credential-update.payl
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 
+  private readonly logger = new Logger(AuthController.name);
   /**
    * Handles user sign-in.
    * @param payload - The sign-in payload containing login details.
@@ -38,6 +47,7 @@ export class AuthController {
   @Public()
   @Post('signin')
   public signIn(@Body() payload: SignInPayload) {
+    this.logger.log('SignIn endpoint called');
     return this.service.signIn(payload, false);
   }
 

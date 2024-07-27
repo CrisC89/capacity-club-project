@@ -22,6 +22,7 @@ class GetIndividualIndoorTrainingListByDate
   @override
   Future<Either<Failure, List<IndoorTrainingEntity>>> call(
       IndividualIndoorTrainingDateParams params) async {
+    print('ENTER INDIVIDUAL INDOOR TRAINING USECASE');
     try {
       final Either<Failure, ApiResponse<List<IndoorTrainingModel>>> result =
           await indoorTrainingRepository.filter(params.filter);

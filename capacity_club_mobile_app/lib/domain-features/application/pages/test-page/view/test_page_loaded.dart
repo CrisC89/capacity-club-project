@@ -1,5 +1,5 @@
 import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/collective-training/collective_training_carousel_widget.dart';
+import 'package:capacity_club_mobile_app/unused/collective-training/collective_training_carousel_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/test-page/widget/test_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/entity/indoor_training_entity.dart';
 import 'package:flutter/material.dart';

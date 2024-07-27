@@ -26,15 +26,48 @@ class ExerciseDataMapper with Mapper<ExerciseDataModel, ExerciseDataEntity> {
 
   @override
   ExerciseDataModel fromJson(Map<String, dynamic> json) {
+    print("ENTER EXERCISE DATA FROM JSON");
+    print("Received JSON: $json");
+
+    final exerciseDataId = json['exercise_data_id'];
+    print("Type of exercise_data_id: ${exerciseDataId.runtimeType}");
+    print("Value of exercise_data_id: $exerciseDataId");
+
+    final title = json['title'];
+    print("Type of title: ${title.runtimeType}");
+    print("Value of title: $title");
+
+    final description = json['description'];
+    print("Type of description: ${description.runtimeType}");
+    print("Value of description: $description");
+
+    final categories = json['categories'];
+    print("Type of categories: ${categories.runtimeType}");
+    print("Value of categories: $categories");
+
+    final videoYoutubeLink = json['video_youtube_link'];
+    print("Type of video_youtube_link: ${videoYoutubeLink.runtimeType}");
+    print("Value of video_youtube_link: $videoYoutubeLink");
+
+    final videoAssetLink = json['video_asset_link'];
+    print("Type of video_asset_link: ${videoAssetLink.runtimeType}");
+    print("Value of video_asset_link: $videoAssetLink");
+
+    final exerciseTrainingList = json['exercise_training_list'];
+    print(
+        "Type of exercise_training_list: ${exerciseTrainingList.runtimeType}");
+    print("Value of exercise_training_list: $exerciseTrainingList");
+
     return ExerciseDataModel(
-      exercise_data_id: UniqueId(json['exercise_data_id']),
-      title: json['title'],
-      description: json['description'],
-      categories: json['categories'],
-      video_youtube_link: json['video_youtube_link'],
-      video_asset_link: json['video_asset_link'],
-      exercise_training_list: (json['exercise_training_list'] as List)
-          .map((trainingJson) => exerciseTrainingMapper.fromJson(trainingJson))
+      exercise_data_id: UniqueId(exerciseDataId ?? ''),
+      title: title ?? '',
+      description: description ?? '',
+      categories: categories ?? '',
+      video_youtube_link: videoYoutubeLink ?? '',
+      video_asset_link: videoAssetLink ?? '',
+      exercise_training_list: (exerciseTrainingList as List? ?? [])
+          .map((trainingJson) => exerciseTrainingMapper
+              .fromJson(trainingJson as Map<String, dynamic>))
           .toList(),
     );
   }

@@ -2,7 +2,7 @@ import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
 import 'package:capacity_club_mobile_app/core/widgets/button/custom_icon_button_widget.dart';
 import 'package:capacity_club_mobile_app/core/widgets/button/generic_rounded_button_widget.dart';
 import 'package:capacity_club_mobile_app/core/widgets/label/genric_label_widget.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/collective-training/card_logo_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/indoor-training/collective-training/card_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

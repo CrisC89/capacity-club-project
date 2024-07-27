@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -43,6 +44,7 @@ export class IndoorTrainingController
     >
 {
   constructor(private readonly service: IndoorTrainingService) {}
+  private readonly logger = new Logger(IndoorTrainingController.name);
   /**
    * Endpoint to retrieve all indoor training sessions.
    * @returns A list of all IndoorTraining entries.
@@ -59,7 +61,8 @@ export class IndoorTrainingController
    */
   @ApiOperation(IndoorTrainingControllerFilter)
   @Post('filter')
-  filter(filter: IndoorTrainingFilter): Promise<IndoorTraining[]> {
+  filter(@Body() filter: IndoorTrainingFilter): Promise<IndoorTraining[]> {
+    this.logger.log('Indoor filter endpoint called');
     return this.service.filter(filter);
   }
   /**

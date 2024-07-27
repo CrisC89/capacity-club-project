@@ -11,20 +11,46 @@ class CredentialMapper with Mapper<CredentialModel, CredentialEntity> {
       username: entity.username,
       googleHash: entity.googleHash,
       facebookHash: entity.facebookHash,
-      isActive: entity.isActive,
       isAdmin: entity.isAdmin,
     );
   }
 
   @override
   CredentialModel fromJson(Map<String, dynamic> json) {
+    // Début de la méthode
+    print('ENTER CREDENTIAL FROM JSON');
+    print('JSON: $json');
+    print('Type of JSON: ${json.runtimeType}');
+
+    // Extraction des valeurs
+    final credentialId = json['credential_id'];
+    final username = json['username'];
+    final googleHash = json['googleHash'];
+    final facebookHash = json['facebookHash'];
+    final isActive = true;
+    final isAdmin = json['isAdmin'];
+
+    // Impression des valeurs et des types
+    print('Credential ID: $credentialId');
+    print('Type of Credential ID: ${credentialId.runtimeType}');
+    print('Username: $username');
+    print('Type of Username: ${username.runtimeType}');
+    print('Google Hash: $googleHash');
+    print('Type of Google Hash: ${googleHash.runtimeType}');
+    print('Facebook Hash: $facebookHash');
+    print('Type of Facebook Hash: ${facebookHash.runtimeType}');
+    print('Is Active: $isActive');
+    print('Type of Is Active: ${isActive.runtimeType}');
+    print('Is Admin: $isAdmin');
+    print('Type of Is Admin: ${isAdmin.runtimeType}');
+
+    // Création de l'objet CredentialModel
     return CredentialModel(
-      credential_id: UniqueId(json['credential_id']),
-      username: json['username'],
-      googleHash: json['googleHash'],
-      facebookHash: json['facebookHash'],
-      isActive: json['isActive'],
-      isAdmin: json['isAdmin'],
+      credential_id: UniqueId.fromJson(credentialId),
+      username: username as String,
+      googleHash: googleHash as String,
+      facebookHash: facebookHash as String,
+      isAdmin: isAdmin as bool,
     );
   }
 
@@ -35,7 +61,6 @@ class CredentialMapper with Mapper<CredentialModel, CredentialEntity> {
       username: model.username,
       googleHash: model.googleHash,
       facebookHash: model.facebookHash,
-      isActive: model.isActive,
       isAdmin: model.isAdmin,
     );
   }
@@ -47,7 +72,6 @@ class CredentialMapper with Mapper<CredentialModel, CredentialEntity> {
       'username': model.username,
       'googleHash': model.googleHash,
       'facebookHash': model.facebookHash,
-      'isActive': model.isActive,
       'isAdmin': model.isAdmin,
     };
   }

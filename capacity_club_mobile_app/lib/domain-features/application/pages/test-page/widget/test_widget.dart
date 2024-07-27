@@ -1,4 +1,4 @@
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/collective-training/collective_training_card.dart';
+import 'package:capacity_club_mobile_app/unused/collective-training/collective_training_card.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/params/collective_indoor_training_filter_params.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';

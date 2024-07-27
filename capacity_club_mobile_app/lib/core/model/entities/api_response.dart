@@ -12,13 +12,48 @@ class ApiResponse<T> {
   });
 
   factory ApiResponse.fromJson(
-      Map<String, dynamic> json, T Function(Map<String, dynamic>) fromJsonT) {
-    return ApiResponse(
-      result: json['result'],
-      data: fromJsonT(json['data']),
-      code: json['code'],
+      Map<String, dynamic> json, T Function(dynamic) fromJsonT) {
+    final resultValue = json['result'];
+    final dataValue = json['data'];
+    final codeValue = json['code'];
+
+    T? data;
+    data = fromJsonT(dataValue);
+    print(data);
+
+    return ApiResponse<T>(
+      result: resultValue as bool? ?? false,
+      data: data,
+      code: codeValue as String? ?? 'UNKNOWN_CODE',
     );
   }
+
+  /*
+  factory ApiResponse.fromJson(
+      Map<String, dynamic> json, T Function(Map<String, dynamic>) fromJsonT) {
+    /*API RESPONSE FROM JSON*/
+    print("ENTER FROM JSON");
+    print("JSON: $json");
+    print("Type of JSON: ${json.runtimeType}");
+
+    final resultValue = json['result'];
+    final dataValue = json['data'];
+    final codeValue = json['code'];
+
+    print("Type of resultValue: ${resultValue.runtimeType}");
+    print("Type of dataValue: ${dataValue.runtimeType}");
+    print("Type of codeValue: ${codeValue.runtimeType}");
+    final response = ApiResponse(
+      result: resultValue as bool? ?? false,
+      data: dataValue != null
+          ? fromJsonT(dataValue as Map<String, dynamic>)
+          : null,
+      code: codeValue as String? ?? 'UNKNOWN_CODE',
+    );
+    print("RETURN FROM JSON RESPONSE : $response");
+    return response;
+  }
+  */
 
   /*
   factory ApiResponse.fromJson(dynamic json) {
@@ -42,7 +77,6 @@ class ApiResponse<T> {
       );
     }
   }
-
   */
 
   Map<String, dynamic> toJson() => {

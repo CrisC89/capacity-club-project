@@ -1,5 +1,5 @@
 import 'package:capacity_club_mobile_app/unused/collective_training_exercise_exension_title_widget.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/individual-training/icon_text_row_widget.dart';
+import 'package:capacity_club_mobile_app/unused/icon_text_row_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

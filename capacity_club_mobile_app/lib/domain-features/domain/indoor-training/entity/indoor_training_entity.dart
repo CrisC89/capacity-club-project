@@ -10,7 +10,8 @@ class IndoorTrainingEntity {
   final int nb_place;
   final int nb_subscription;
   final bool is_collective;
-  final WorkoutEntity workout;
+  final WorkoutEntity? workout;
+  final bool is_user_registred;
 
   IndoorTrainingEntity(
       {required this.indoor_training_id,
@@ -21,7 +22,8 @@ class IndoorTrainingEntity {
       required this.nb_place,
       required this.nb_subscription,
       required this.is_collective,
-      required this.workout});
+      this.workout = null,
+      this.is_user_registred = false});
 
   factory IndoorTrainingEntity.empty() {
     return IndoorTrainingEntity(
@@ -33,6 +35,7 @@ class IndoorTrainingEntity {
         nb_place: 0,
         nb_subscription: 0,
         is_collective: false,
+        is_user_registred: false,
         workout: WorkoutEntity.empty());
   }
 }

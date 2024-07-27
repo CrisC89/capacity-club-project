@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/coach_info_card_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/coach-info/coach_info_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

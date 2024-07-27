@@ -18,6 +18,7 @@ import {
 import { isNil } from 'lodash';
 import { UniqueId } from '@common/model';
 import { Builder } from 'builder-pattern';
+import { Brackets } from 'typeorm';
 
 /**
  * Service for managing indoor training sessions.
@@ -63,12 +64,101 @@ export class IndoorTrainingService
     Object.keys(filter).forEach((key) => {
       if (filter[key] !== undefined && filter[key] !== null) {
         const value = filter[key];
+        console.log(`Key: ${key}, Value: ${value}, Type: ${typeof value}`);
+
+        switch (key) {
+          case 'is_collective':
+            queryBuilder.andWhere(`"indoor-training"."${key}" = :${key}`, {
+              [key]: value,
+            });
+            break;
+          case 'training_date':
+            const date = new Date(value);
+            const year: number = date.getUTCFullYear(); // Utilisez number pour TypeScript
+            const month: number = date.getUTCMonth() + 1; // Mois sont 0-indexés, donc ajoutez 1
+            const day: number = date.getUTCDate();
+
+            // Affichez les valeurs pour débogage
+            console.log(`Original date: ${date.toISOString()}`);
+            console.log(`Year: ${year}`);
+            console.log(`Month: ${month}`);
+            console.log(`Day: ${day}`);
+
+            queryBuilder.andWhere(
+              new Brackets((qb) => {
+                qb.where(
+                  `CAST(EXTRACT(YEAR FROM "indoor-training"."training_date") AS int) = :year`,
+                  { year },
+                )
+                  .andWhere(
+                    `CAST(EXTRACT(MONTH FROM "indoor-training"."training_date") AS int) = :month`,
+                    { month },
+                  )
+                  .andWhere(
+                    `CAST(EXTRACT(DAY FROM "indoor-training"."training_date") AS int) = :day`,
+                    { day },
+                  );
+              }),
+            );
+            break;
+          case 'start_hours':
+          case 'end_hours':
+            queryBuilder.andWhere(`"indoor-training"."${key}" = :${key}`, {
+              [key]: value,
+            });
+            break;
+          case 'nb_place':
+          case 'nb_subscription':
+            queryBuilder.andWhere(`"indoor-training"."${key}" = :${key}`, {
+              [key]: parseInt(value, 10),
+            });
+            break;
+          case 'workout':
+            queryBuilder.andWhere(`"indoor-training"."${key}" = :${key}`, {
+              [key]: value, // to check after
+            });
+            break;
+          default:
+            queryBuilder.andWhere(`"indoor-training"."${key}" LIKE :${key}`, {
+              [key]: `%${value}%`,
+            });
+        }
+      }
+    });
+    const response = await queryBuilder.getMany();
+    console.log(response);
+    return queryBuilder.getMany();
+  }
+
+  /*
+  async filter(filter: IndoorTrainingFilter): Promise<IndoorTraining[]> {
+    const queryBuilder = this.repository.createQueryBuilder('indoor-training');
+
+    Object.keys(filter).forEach((key) => {
+      if (filter[key] !== undefined && filter[key] !== null) {
+        const value = filter[key];
+        console.log(`Key: ${key}, Value: ${value}, Type: ${typeof value}`);
+
         if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`indoor-training.${key} = :${key}`, {
+          queryBuilder.andWhere(`"indoor-training"."${key}" = :${key}`, {
             [key]: value,
           });
+        } else if (value instanceof Date) {
+          // Format de la date en YYYY-MM-DD
+          const startOfDay = value.toISOString().split('T')[0] + 'T00:00:00Z';
+          const endOfDay =
+            new Date(value.getTime() + 24 * 60 * 60 * 1000 - 1)
+              .toISOString()
+              .split('T')[0] + 'T23:59:59Z';
+          queryBuilder.andWhere(
+            `"indoor-training"."${key}" BETWEEN :startOfDay AND :endOfDay`,
+            {
+              startOfDay,
+              endOfDay,
+            },
+          );
         } else {
-          queryBuilder.andWhere(`indoor-training.${key} LIKE :${key}`, {
+          queryBuilder.andWhere(`"indoor-training"."${key}" LIKE :${key}`, {
             [key]: `%${value}%`,
           });
         }
@@ -77,7 +167,8 @@ export class IndoorTrainingService
 
     return queryBuilder.getMany();
   }
-
+  
+  */
   /**
    * Retrieves the details of an indoor training session by ID.
    * @param id - The ID of the indoor training session to retrieve.

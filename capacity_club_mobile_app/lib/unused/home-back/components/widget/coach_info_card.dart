@@ -1,6 +1,6 @@
 import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
 import 'package:capacity_club_mobile_app/core/widgets/button/custom_icon_button_widget.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/custom_coach_logo_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/coach-info/custom_coach_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';

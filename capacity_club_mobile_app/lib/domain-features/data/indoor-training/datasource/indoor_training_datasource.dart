@@ -44,19 +44,28 @@ class IndoorTrainingDataSource extends DataSource<
   @override
   Future<ApiResponse<List<IndoorTrainingModel>>> filter(
       IndoorTrainingFilter filter) async {
-    try {
-      ApiResponse<List<IndoorTrainingModel>> reponse = await dioClient.get(
-          '${ApiURI.getEndpoint('INDOOR_TRAINING', 'FILTER')}',
-          filter.toJson(),
-          (json) => (json as List)
-              .map((item) => IndoorTrainingModel.fromJson(item))
-              .toList());
+    print("ENTER TO INDOOR TRAINING FILTER METHOD");
 
-      if (reponse.result != 200) {
+    try {
+      ApiResponse<List<IndoorTrainingModel>> reponse = await dioClient.filter(
+        '${ApiURI.getEndpoint('INDOOR_TRAINING', 'FILTER')}',
+        filter.toJson(),
+        (json) => (json as List).map((item) {
+          return IndoorTrainingModel.fromJson(item);
+        }).toList(),
+      );
+
+      print("AFTER DIO RETURN");
+
+      print(reponse.result);
+
+      if (!reponse.result) {
         _logger.warning(
             'Failed to filter data with filter: ${filter.toJson()} and status: ${reponse.result}');
         throw ServerException();
       }
+
+      print('SEND INDOOR TRAINING FROM DATA SOURCE');
 
       return reponse;
     } catch (e, stackTrace) {

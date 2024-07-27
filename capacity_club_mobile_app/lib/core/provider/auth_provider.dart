@@ -77,6 +77,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<String?> getToken() async {
-    return await _localStorage.read(USER_KEY);
+    return await _localStorage.read(TOKEN_KEY);
+    //return await _localStorage.read(USER_KEY);
   }
 }

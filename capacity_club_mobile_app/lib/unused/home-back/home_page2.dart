@@ -1,7 +1,7 @@
 import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
 import 'package:capacity_club_mobile_app/core/utils/page_config.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/coach_info_card_widget.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/collective-training/collective_training_carousel_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/coach-info/coach_info_card_widget.dart';
+import 'package:capacity_club_mobile_app/unused/collective-training/collective_training_carousel_widget.dart';
 import 'package:capacity_club_mobile_app/unused/collective_training_detail_screen.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/calendar/date_time_line_calendar_widget.dart';
 import 'package:flutter/material.dart';

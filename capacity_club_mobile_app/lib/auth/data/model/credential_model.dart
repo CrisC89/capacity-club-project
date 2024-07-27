@@ -9,7 +9,6 @@ class CredentialModel extends Equatable {
   final String username;
   final String googleHash;
   final String facebookHash;
-  final bool isActive;
   final bool isAdmin;
 
   const CredentialModel(
@@ -17,10 +16,10 @@ class CredentialModel extends Equatable {
       required this.username,
       required this.googleHash,
       required this.facebookHash,
-      required this.isActive,
       required this.isAdmin});
 
   factory CredentialModel.fromJson(Map<String, dynamic> json) {
+    print('ENTER CREDENTIAL FROM JSON');
     return CredentialMapper().fromJson(json);
   }
 

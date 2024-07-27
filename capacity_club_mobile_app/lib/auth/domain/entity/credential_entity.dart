@@ -5,7 +5,6 @@ class CredentialEntity {
   final String username;
   final String googleHash;
   final String facebookHash;
-  final bool isActive;
   final bool isAdmin;
 
   const CredentialEntity(
@@ -13,7 +12,6 @@ class CredentialEntity {
       required this.username,
       required this.googleHash,
       required this.facebookHash,
-      required this.isActive,
       required this.isAdmin});
 
   factory CredentialEntity.empty() {
@@ -22,7 +20,6 @@ class CredentialEntity {
         username: '',
         googleHash: '',
         facebookHash: '',
-        isActive: false,
         isAdmin: false);
   }
 }

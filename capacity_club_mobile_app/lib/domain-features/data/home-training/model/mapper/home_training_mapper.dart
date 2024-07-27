@@ -23,14 +23,42 @@ class HomeTrainingMapper with Mapper<HomeTrainingModel, HomeTrainingEntity> {
 
   @override
   HomeTrainingModel fromJson(Map<String, dynamic> json) {
+    print("ENTER HOME TRAINING FROM JSON");
+    print("Received JSON: $json");
+
+    final homeTrainingId = json['home_training_id'];
+    print("Type of home_training_id: ${homeTrainingId.runtimeType}");
+    print("Value of home_training_id: $homeTrainingId");
+
+    final title = json['title'];
+    print("Type of title: ${title.runtimeType}");
+    print("Value of title: $title");
+
+    final nbWeek = json['nb_week'];
+    print("Type of nb_week: ${nbWeek.runtimeType}");
+    print("Value of nb_week: $nbWeek");
+
+    final nbTrainingByWeek = json['nb_training_by_week'];
+    print("Type of nb_training_by_week: ${nbTrainingByWeek.runtimeType}");
+    print("Value of nb_training_by_week: $nbTrainingByWeek");
+
+    final price = json['price'];
+    print("Type of price: ${price.runtimeType}");
+    print("Value of price: $price");
+
+    final workouts = json['workouts'];
+    print("Type of workouts: ${workouts.runtimeType}");
+    print("Value of workouts: $workouts");
+
     return HomeTrainingModel(
-      home_training_id: UniqueId(json['home_training_id']),
-      title: json['title'],
-      nb_week: json['nb_week'],
-      nb_training_by_week: json['nb_training_by_week'],
-      price: json['price'],
-      workouts: (json['workouts'] as List)
-          .map((workoutJson) => workoutMapper.fromJson(workoutJson))
+      home_training_id: UniqueId(homeTrainingId ?? ''),
+      title: title ?? '',
+      nb_week: nbWeek ?? 0,
+      nb_training_by_week: nbTrainingByWeek ?? 0,
+      price: price ?? 0.0,
+      workouts: (workouts as List? ?? [])
+          .map((workoutJson) =>
+              workoutMapper.fromJson(workoutJson as Map<String, dynamic>))
           .toList(),
     );
   }

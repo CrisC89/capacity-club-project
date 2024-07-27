@@ -25,7 +25,9 @@ class _HomePageState extends State<HomePage> {
         if (state is HomePageLoadingState) {
           return HomePageLoadingView();
         } else if (state is HomePageLoadedState) {
-          return HomePageLoadedView();
+          return HomePageLoadedView(
+              collectiveIndoorTraining: state.collectiveIndoorTraining,
+              individualIndoorTraining: state.individualIndoorTraining);
         } else if (state is HomePageErrorState) {
           return HomePageErrorView();
         }

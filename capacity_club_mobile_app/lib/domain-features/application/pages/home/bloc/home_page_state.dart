@@ -9,7 +9,13 @@ sealed class HomePageState extends Equatable {
 
 final class HomePageInitial extends HomePageState {}
 
-final class HomePageLoadedState extends HomePageState {}
+final class HomePageLoadedState extends HomePageState {
+  final List<IndoorTrainingEntity> collectiveIndoorTraining;
+  final List<IndoorTrainingEntity> individualIndoorTraining;
+  HomePageLoadedState(
+      {required this.collectiveIndoorTraining,
+      required this.individualIndoorTraining});
+}
 
 final class HomePageLoadingState extends HomePageState {}
 

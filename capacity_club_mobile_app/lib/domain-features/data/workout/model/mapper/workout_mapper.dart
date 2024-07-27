@@ -22,14 +22,39 @@ class WorkoutMapper with Mapper<WorkoutModel, WorkoutEntity> {
 
   @override
   WorkoutModel fromJson(Map<String, dynamic> json) {
+    print("ENTER WORKOUT FROM JSON");
+    print("Received JSON: $json");
+
+    final workoutId = json['workout_id'];
+    print("Type of workout_id: ${workoutId.runtimeType}");
+    print("Value of workout_id: $workoutId");
+
+    final title = json['title'];
+    print("Type of title: ${title.runtimeType}");
+    print("Value of title: $title");
+
+    final trainingCircuits = json['training_circuits'];
+    print("Type of training_circuits: ${trainingCircuits.runtimeType}");
+    print("Value of training_circuits: $trainingCircuits");
+
+    final indoorTraining = json['indoor_training'];
+    print("Type of indoor_training: ${indoorTraining.runtimeType}");
+    print("Value of indoor_training: $indoorTraining");
+
+    final homeTraining = json['home_training'];
+    print("Type of home_training: ${homeTraining.runtimeType}");
+    print("Value of home_training: $homeTraining");
+
     return WorkoutModel(
-      workout_id: json['workout_id'],
-      title: json['title'],
-      training_circuits: (json['training_circuits'] as List)
-          .map((e) => TrainingCircuitMapper().fromJson(e))
-          .toList(),
-      indoor_training: IndoorTrainingMapper().fromJson(json['indoor_training']),
-      home_training: HomeTrainingMapper().fromJson(json['home_training']),
+      workout_id: workoutId ?? '',
+      title: title ?? '',
+      training_circuits: (trainingCircuits as List<dynamic>?)
+              ?.map((e) =>
+                  TrainingCircuitMapper().fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      indoor_training: IndoorTrainingMapper().fromJson(indoorTraining ?? {}),
+      home_training: HomeTrainingMapper().fromJson(homeTraining ?? {}),
     );
   }
 

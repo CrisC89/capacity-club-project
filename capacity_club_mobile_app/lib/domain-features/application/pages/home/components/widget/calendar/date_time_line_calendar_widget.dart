@@ -15,7 +15,6 @@ class _DateTimeLineWithYearSelectorState
   final Color _mainColorOpaque = Color.fromARGB(100, 4, 136, 183);
   final Color _mainColor = Color.fromARGB(255, 4, 136, 183);
   //final Color _greyTextColor = const Color(0xff808a96);
-  final bool _isDarkMode = false;
 
   int _currentYear = DateTime.now().year;
   DateTime _selectedDate = DateTime.now();
@@ -61,6 +60,7 @@ class _DateTimeLineWithYearSelectorState
           onDateChange: (selectedDate) {
             setState(() {
               _selectedDate = selectedDate;
+              print('Date changed');
             });
           },
           headerProps: EasyHeaderProps(

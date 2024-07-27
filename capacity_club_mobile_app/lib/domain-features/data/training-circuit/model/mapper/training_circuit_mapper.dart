@@ -20,13 +20,35 @@ class TrainingCircuitMapper
 
   @override
   TrainingCircuitModel fromJson(Map<String, dynamic> json) {
+    print("ENTER TRAINING CIRCUIT FROM JSON");
+    print("Received JSON: $json");
+
+    final trainingCircuitId = json['training_circuit_id'];
+    print("Type of training_circuit_id: ${trainingCircuitId.runtimeType}");
+    print("Value of training_circuit_id: $trainingCircuitId");
+
+    final title = json['title'];
+    print("Type of title: ${title.runtimeType}");
+    print("Value of title: $title");
+
+    final exerciseTrainingList = json['exercise_training_list'];
+    print(
+        "Type of exercise_training_list: ${exerciseTrainingList.runtimeType}");
+    print("Value of exercise_training_list: $exerciseTrainingList");
+
+    final workout = json['workout'];
+    print("Type of workout: ${workout.runtimeType}");
+    print("Value of workout: $workout");
+
     return TrainingCircuitModel(
-      training_circuit_id: json['training_circuit_id'],
-      title: json['title'],
-      exercise_training_list: (json['exercise_training_list'] as List)
-          .map((e) => ExerciseTrainingMapper().fromJson(e))
-          .toList(),
-      workout: WorkoutMapper().fromJson(json['workout']),
+      training_circuit_id: trainingCircuitId ?? '',
+      title: title ?? '',
+      exercise_training_list: (exerciseTrainingList as List<dynamic>?)
+              ?.map((e) =>
+                  ExerciseTrainingMapper().fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      workout: WorkoutMapper().fromJson(workout ?? {}),
     );
   }
 

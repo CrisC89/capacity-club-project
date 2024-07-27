@@ -40,4 +40,12 @@ final class LoginLoadingState extends LoginState {}
 
 final class LoginSuccesState extends LoginState {}
 
-final class LoginFailureState extends LoginState {}
+final class LoginFailureState extends LoginState {
+  final String stackTrace;
+  LoginFailureState({required this.stackTrace});
+
+  @override
+  List<Object?> get props => [stackTrace];
+}
+
+final class LoginSuccessState extends LoginState {}
