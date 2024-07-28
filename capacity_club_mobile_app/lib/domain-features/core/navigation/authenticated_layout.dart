@@ -1,7 +1,7 @@
 import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/test-page/test_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/core/navigation/bloc/navigation_bloc.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/setting/setting_page.dart';
+import 'package:capacity_club_mobile_app/unused/setting/setting_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/home_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/home_training_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/user-profile/user_profile_page.dart';
@@ -18,7 +18,6 @@ class AuthenticatedLayout extends StatefulWidget {
     HomeTrainingPage.pageConfig,
     UserProfilePage.pageConfig,
     SettingPage.pageConfig,
-    TestPage.pageConfig
   ];
 
   @override
@@ -136,9 +135,9 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
     } else if (state is PersonalTrainingState) {
       return HomeTrainingPage.pageConfig.child;
     } else if (state is UserProfileState) {
-      return TestPage.pageConfig.child;
+      return UserProfilePage.pageConfig.child;
     } else if (state is SettingState) {
-      return SettingPage.pageConfig.child;
+      return TestPage();
     } else {
       return HomePage(); // Default case
     }

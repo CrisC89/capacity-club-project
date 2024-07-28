@@ -1,5 +1,5 @@
-import 'package:capacity_club_mobile_app/domain-features/application/pages/setting/bloc/setting_page_bloc.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/setting/setting_page.dart';
+import 'package:capacity_club_mobile_app/unused/setting/bloc/setting_page_bloc.dart';
+import 'package:capacity_club_mobile_app/unused/setting/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

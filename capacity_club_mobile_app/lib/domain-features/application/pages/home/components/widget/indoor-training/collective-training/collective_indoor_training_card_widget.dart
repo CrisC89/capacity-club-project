@@ -21,8 +21,7 @@ class CollectiveIndoorTrainingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Card(
+    return Card(
       color: Colors.white,
       elevation: 5,
       shape: RoundedRectangleBorder(
@@ -69,6 +68,6 @@ class CollectiveIndoorTrainingCard extends StatelessWidget {
           ],
         ),
       ),
-    ));
+    );
   }
 }

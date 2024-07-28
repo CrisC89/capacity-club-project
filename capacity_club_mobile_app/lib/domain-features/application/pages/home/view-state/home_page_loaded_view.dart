@@ -46,6 +46,8 @@ class _HomePageLoadedViewState extends State<HomePageLoadedView> {
           IndividualIndoorTrainingSection(
               indoorTrainings: widget.individualIndoorTraining),
           const SizedBox(height: 24),
+          homePageSectionTitle(context, 'MY DAILY PLAN'),
+          const SizedBox(height: 24),
           homePageSectionTitle(context, 'CONTACT US'),
           const SizedBox(height: 24),
           CoachInfoCard(

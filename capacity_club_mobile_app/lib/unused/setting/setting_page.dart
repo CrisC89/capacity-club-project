@@ -1,10 +1,10 @@
 import 'package:capacity_club_mobile_app/core/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/core/utils/page_config.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/setting/bloc/setting_page_bloc.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/setting/provider/setting_page_provider.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/setting/view-state/setting_page_error_view.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/setting/view-state/setting_page_loaded_view.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/setting/view-state/setting_page_loading_view.dart';
+import 'package:capacity_club_mobile_app/unused/setting/bloc/setting_page_bloc.dart';
+import 'package:capacity_club_mobile_app/unused/setting/provider/setting_page_provider.dart';
+import 'package:capacity_club_mobile_app/unused/setting/view-state/setting_page_error_view.dart';
+import 'package:capacity_club_mobile_app/unused/setting/view-state/setting_page_loaded_view.dart';
+import 'package:capacity_club_mobile_app/unused/setting/view-state/setting_page_loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -117,7 +117,21 @@ class AppTheme {
     fontFamily: 'Audiowide',
   );
 
+  static const TextStyle labelTextStyle = TextStyle(
+    fontSize: 16,
+    color: dustyGray,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Audiowide',
+  );
+
   static const TextStyle subTitleTextStyle = TextStyle(
+    fontSize: 16,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle bodyTextStyle = TextStyle(
     fontSize: 16,
     color: dustyGray,
     fontWeight: FontWeight.w500,

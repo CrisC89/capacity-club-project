@@ -1,260 +1,116 @@
-import 'dart:io';
-
-import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
-import 'package:capacity_club_mobile_app/core/utils/dependency_injection.dart';
+import 'package:capacity_club_mobile_app/auth/domain/entity/credential_entity.dart';
+import 'package:capacity_club_mobile_app/core/config/theme/constant_size.dart';
+import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/test-page/widget/update_profile.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/user-profile/component/user/member_card_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/user-profile/component/user/user_image_with_icon_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/user-profile/component/user/user_profile_card_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/user-profile/component/user/user_profile_list_title_widget.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/member/model/enum/gender_enum.dart';
+import 'package:capacity_club_mobile_app/domain-features/domain/address/entity/address_entity.dart';
+import 'package:capacity_club_mobile_app/domain-features/domain/member-card/entity/member_card_entity.dart';
+import 'package:capacity_club_mobile_app/domain-features/domain/member/entity/member_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserProfilePageLoadedView extends StatelessWidget {
   UserProfilePageLoadedView({super.key});
 
-  File? _image;
-  final AuthUseCase _authUseCase = serviceLocator<AuthUseCase>();
-  Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    /*
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      }
-    });
-    */
-  }
-
-  void _callMeMethod() {
-    _authUseCase.me().then((value) {
-      value.fold(
-        (failure) {
-          print('Error');
-        },
-        (data) {
-          print('username');
-          print(data.data!.username);
-        },
-      );
-    }).catchError((error) {
-      print('Error: $error');
-    });
-  }
+  MemberEntity currentMember = MemberEntity(
+    member_id: UniqueId('456'),
+    firstname: 'John',
+    lastname: 'Doe',
+    birthdate: DateTime(1990, 5, 20),
+    gender: Gender.male,
+    phone: '123-456-7890',
+    mail: 'john.doe@example.com',
+    code_activation: 'abc123',
+    active: true,
+    subscriptions: [],
+    member_home_trainings: [],
+    address: AddressEntity(
+      address_id: UniqueId('123'),
+      street: 'Main Street',
+      number: '42',
+      zip_code: '12345',
+      town: 'Sample Town',
+      country: 'Sample Country',
+      complement: 'Apt 101',
+    ),
+    credential: CredentialEntity.empty(),
+    member_card: MemberCardEntity(
+      member_card_id: UniqueId('789'),
+      collective_session_count: 10,
+      individual_session_count: 5,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Informations Utilisateur'),
-      ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            UserInfoCard(
-              name: 'John Doe',
-              address: '1234 Rue Principale\nVille, Pays\nCode Postal',
-              email: 'john.doe@example.com',
-              onEdit: () {
-                // Navigate to edit user information page
-              },
-              image: _image,
-              onImagePick: _pickImage,
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  // Navigate to health metrics
-                },
-                icon: Icon(Icons.health_and_safety),
-                label: Text('Métriques de Santé'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Background color of the card
-                  foregroundColor: Colors.grey[800], // Text color
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  minimumSize: Size(double.infinity, 60),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+          child: Container(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.all(appDefaultPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  UserImageWithIcon(),
+                  SizedBox(height: 10),
+                  UserProfileCard(
+                      member: currentMember,
+                      onEdit: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UpdateProfileScreen()),
+                          )),
+                  MemberCardView(
+                      memberCard: currentMember.member_card, onEdit: () {}),
+                  UserProfileListTitle(
+                    title: "TRAINING HISTORY",
+                    icon: FontAwesomeIcons.dumbbell,
+                    onPress: () {},
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  // Navigate to subscription details
-                },
-                icon: Icon(Icons.subscriptions),
-                label: Text('Détails de l\'Abonnement'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Background color of the card
-                  foregroundColor: Colors.grey[800], // Text color
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  minimumSize: Size(double.infinity, 60),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  UserProfileListTitle(
+                    title: "SETTINGS",
+                    icon: FontAwesomeIcons.gear,
+                    onPress: () {},
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  // Navigate to workout history
-                },
-                icon: Icon(Icons.history),
-                label: Text('Historique des Séances'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Background color of the card
-                  foregroundColor: Colors.grey[800], // Text color
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  minimumSize: Size(double.infinity, 60),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  UserProfileListTitle(
+                    title: "Logout",
+                    icon: FontAwesomeIcons.rightFromBracket,
+                    endIcon: false,
+                    onPress: () => _showLogoutModal(context),
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  // Navigate to reservations
-                },
-                icon: Icon(Icons.event),
-                label: Text('Sessions Réservées'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Background color of the card
-                  foregroundColor: Colors.grey[800], // Text color
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  minimumSize: Size(double.infinity, 60),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  // Navigate to tips & advice
-                },
-                icon: Icon(Icons.lightbulb),
-                label: Text('Astuces & Conseils'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white, // Background color of the card
-                  foregroundColor: Colors.grey[800], // Text color
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  minimumSize: Size(double.infinity, 60),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-            ),
-            Center(
-              child: ElevatedButton(
-                onPressed: _callMeMethod,
-                child: Text('Call me Method'),
-              ),
-            )
-          ],
-        ),
-      ),
+                ],
+              ))),
     );
   }
-}
 
-class UserInfoCard extends StatelessWidget {
-  final String name;
-  final String address;
-  final String email;
-  final VoidCallback onEdit;
-  final File? image;
-  final VoidCallback onImagePick;
-
-  const UserInfoCard({
-    Key? key,
-    required this.name,
-    required this.address,
-    required this.email,
-    required this.onEdit,
-    this.image,
-    required this.onImagePick,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Container(
-        padding: EdgeInsets.all(16),
-        color: Colors.white, // Background color of the card
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            GestureDetector(
-              onTap: onImagePick,
-              child: Center(
-                child: CircleAvatar(
-                  radius: 40,
-                  backgroundImage: image != null
-                      ? FileImage(image!)
-                      : NetworkImage('https://via.placeholder.com/150')
-                          as ImageProvider,
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Icon(
-                      Icons.camera_alt,
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-              ),
+  _showLogoutModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("LOGOUT", style: TextStyle(fontSize: 20)),
+          content: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 15.0),
+            child: Text("Are you sure, you want to Logout?"),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Replace with your logout logic
+              },
+              child: const Text("Yes"),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Nom: $name',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Adresse:\n$address',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Email: $email',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
-            ),
-            SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.edit, color: Colors.blue),
-                  onPressed: onEdit,
-                ),
-              ],
+            OutlinedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text("No"),
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }

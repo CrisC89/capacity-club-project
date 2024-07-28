@@ -1,6 +1,6 @@
 import 'dart:io';
 
-const BASE_URL = 'http://192.168.77.108:3000/api/';
+const BASE_URL = 'http://192.168.137.1:3000/api/';
 const USER_KEY = 'cc_user';
 const TOKEN_KEY = 'cc_token';
 const REFRESH_TOKEN_KEY = 'cc_refresh_token';
