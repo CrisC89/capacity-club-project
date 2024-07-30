@@ -1,9 +1,11 @@
 import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home/bloc/home_page_bloc.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DateTimeLineWithYearSelector extends StatefulWidget {
-  const DateTimeLineWithYearSelector({super.key});
+  DateTimeLineWithYearSelector({super.key});
 
   @override
   _DateTimeLineWithYearSelectorState createState() =>
@@ -60,8 +62,11 @@ class _DateTimeLineWithYearSelectorState
           onDateChange: (selectedDate) {
             setState(() {
               _selectedDate = selectedDate;
-              print('Date changed');
             });
+            print(
+                "-----------------------------CALENDAR ${selectedDate} -------------------------------------------------");
+            BlocProvider.of<HomePageBloc>(context).add(
+                HomePageDateChangedEvent(selectedDate: selectedDate.toLocal()));
           },
           headerProps: EasyHeaderProps(
               padding: EdgeInsets.zero,

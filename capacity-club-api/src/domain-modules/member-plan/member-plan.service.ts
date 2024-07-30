@@ -92,20 +92,37 @@ export class MemberPlanService
    * @param filter - The filtering criteria.
    * @returns A list of MemberPlan entries matching the criteria.
    */
-  filter(filter: MemberPlanFilter): Promise<MemberPlan[]> {
+  async filter(filter: MemberPlanFilter): Promise<MemberPlan[]> {
     const queryBuilder = this.repository.createQueryBuilder('member-plan');
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`member-plan.${key} = :${key}`, {
-            [key]: value,
-          });
-        } else {
-          queryBuilder.andWhere(`member-plan.${key} LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'title':
+            queryBuilder.andWhere('member-plan.title LIKE :title', {
+              title: `%${value}%`,
+            });
+            break;
+          case 'nb_individual_training':
+            queryBuilder.andWhere(
+              'member-plan.nb_individual_training = :nb_individual_training',
+              { nb_individual_training: value },
+            );
+            break;
+          case 'nb_collective_training':
+            queryBuilder.andWhere(
+              'member-plan.nb_collective_training = :nb_collective_training',
+              { nb_collective_training: value },
+            );
+            break;
+          case 'price':
+            queryBuilder.andWhere('member-plan.price = :price', {
+              price: value,
+            });
+            break;
+          default:
+            break;
         }
       }
     });

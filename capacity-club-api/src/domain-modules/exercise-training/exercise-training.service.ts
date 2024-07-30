@@ -100,21 +100,27 @@ export class ExerciseTrainingService
    * @param filter - The filtering criteria.
    * @returns A list of ExerciseTraining entries matching the criteria.
    */
-  filter(filter: ExerciseTrainingFilter): Promise<ExerciseTraining[]> {
-    const queryBuilder =
-      this.repository.createQueryBuilder('exercise-training');
+  async filter(filter: ExerciseTrainingFilter): Promise<ExerciseTraining[]> {
+    const queryBuilder = this.repository.createQueryBuilder('exerciseTraining');
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`exercise-training.${key} = :${key}`, {
-            [key]: value,
-          });
-        } else {
-          queryBuilder.andWhere(`exercise-training.${key} LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'exercise_data':
+            queryBuilder.andWhere(
+              'exerciseTraining.exercise_data = :exercise_data',
+              { exercise_data: value },
+            );
+            break;
+          case 'training_circuit':
+            queryBuilder.andWhere(
+              'exerciseTraining.training_circuit = :training_circuit',
+              { training_circuit: value },
+            );
+            break;
+          default:
+            break;
         }
       }
     });

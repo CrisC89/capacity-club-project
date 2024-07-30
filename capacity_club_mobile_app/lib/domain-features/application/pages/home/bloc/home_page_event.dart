@@ -11,7 +11,13 @@ sealed class HomePageEvent extends Equatable {
 final class HomePageInitEvent extends HomePageEvent {
   HomePageInitEvent();
   final DateTime currentDate = DateTime.now();
-  final String currentDateToString = DateTime.now().toIso8601String();
+  @override
+  List<Object?> get props => [currentDate];
 }
 
-final class HomePageDateChangeEvent extends HomePageEvent {}
+final class HomePageDateChangedEvent extends HomePageEvent {
+  final DateTime selectedDate;
+  HomePageDateChangedEvent({required this.selectedDate});
+  @override
+  List<Object?> get props => [selectedDate];
+}

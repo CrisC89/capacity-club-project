@@ -56,20 +56,32 @@ export class MemberCardService
    * @param filter - The filtering criteria.
    * @returns A list of MemberCard entries matching the criteria.
    */
-  filter(filter: MemberCardFilter): Promise<MemberCard[]> {
-    const queryBuilder = this.repository.createQueryBuilder('member-card');
+  async filter(filter: MemberCardFilter): Promise<MemberCard[]> {
+    const queryBuilder = this.repository.createQueryBuilder('memberCard');
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`member-card.${key} = :${key}`, {
-            [key]: value,
-          });
-        } else {
-          queryBuilder.andWhere(`member-card.${key} LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'collective_session_count':
+            queryBuilder.andWhere(
+              'member-card.collective_session_count = :collective_session_count',
+              { collective_session_count: value },
+            );
+            break;
+          case 'individual_session_count':
+            queryBuilder.andWhere(
+              'member-card.individual_session_count = :individual_session_count',
+              { individual_session_count: value },
+            );
+            break;
+          case 'member':
+            queryBuilder.andWhere('member-card.member = :member', {
+              member: value,
+            });
+            break;
+          default:
+            break;
         }
       }
     });

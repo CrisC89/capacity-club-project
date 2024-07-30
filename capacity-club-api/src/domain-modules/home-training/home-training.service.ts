@@ -58,19 +58,37 @@ export class HomeTrainingService
    * @returns A list of HomeTraining entries matching the criteria.
    */
   async filter(filter: HomeTrainingFilter): Promise<HomeTraining[]> {
-    const queryBuilder = this.repository.createQueryBuilder('home-training');
+    const queryBuilder = this.repository.createQueryBuilder('homeTraining');
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`home-training.${key} = :${key}`, {
-            [key]: value,
-          });
-        } else {
-          queryBuilder.andWhere(`home-training.${key} LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'title':
+            queryBuilder.andWhere('homeTraining.title LIKE :title', {
+              title: `%${value}%`,
+            });
+            break;
+          case 'nb_week':
+            queryBuilder.andWhere('homeTraining.nb_week = :nb_week', {
+              nb_week: value,
+            });
+            break;
+          case 'nb_training_by_week':
+            queryBuilder.andWhere(
+              'homeTraining.nb_training_by_week = :nb_training_by_week',
+              { nb_training_by_week: value },
+            );
+            break;
+          case 'workouts':
+            if (Array.isArray(value) && value.length > 0) {
+              queryBuilder.andWhere('homeTraining.workouts IN (:...workouts)', {
+                workouts: value,
+              });
+            }
+            break;
+          default:
+            break;
         }
       }
     });

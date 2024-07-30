@@ -10,7 +10,6 @@ export enum ApiCodeResponse {
   COMMON_SUCCESS = 'api.success.common',
   COMMON_ERROR = 'api.error.common',
   ME_SUCCESS = 'api.success.me',
-
   SIGN_IN_SUCCESS = 'api.success.signin',
   SIGN_IN_ERROR = 'api.error.signin',
   SIGN_IN_PAYLOAD_USERNAME_MISSING = 'api.error.signin-payload-username-missing',
@@ -166,6 +165,16 @@ export enum ApiCodeResponse {
   INDOOR_TRAINING_LIST_SUCCESS = 'api.success.indoor-training-list',
   INDOOR_TRAINING_CREATE_ERROR = 'api.error.indoor-training-create',
   INDOOR_TRAINING_CREATE_SUCCESS = 'api.success.indoor-training-create',
+
+  INDOOR_TRAINING_SUBSCRIPTION_NOT_FOUND = 'api.error.indoor-training-subscription-not-found',
+  INDOOR_TRAINING_SUBSCRIPTION_DELETE_SUCCESS = 'api.success.indoor-training-subscription-delete',
+  INDOOR_TRAINING_SUBSCRIPTION_UPDATE_ERROR = 'api.error.indoor-training-subscription-update',
+  INDOOR_TRAINING_SUBSCRIPTION_UPDATE_SUCCESS = 'api.success.indoor-training-subscription-update',
+  INDOOR_TRAINING_SUBSCRIPTION_DELETE_ERROR = 'api.error.indoor-training-subscription-delete',
+  INDOOR_TRAINING_SUBSCRIPTION_LIST_ERROR = 'api.error.indoor-training-subscription-list',
+  INDOOR_TRAINING_SUBSCRIPTION_LIST_SUCCESS = 'api.success.indoor-training-subscription-list',
+  INDOOR_TRAINING_SUBSCRIPTION_CREATE_ERROR = 'api.error.indoor-training-subscription-create',
+  INDOOR_SUBSCRIPTION_TRAINING_CREATE_SUCCESS = 'api.success.indoor-training-subscription-create',
 
   COLLECTIVE_TRAINING_NOT_FOUND = 'api.error.collective-training-not-found',
   COLLECTIVE_TRAINING_DELETE_SUCCESS = 'api.success.collective-training-delete',

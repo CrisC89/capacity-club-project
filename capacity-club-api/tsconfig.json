@@ -16,7 +16,12 @@
       "@core/*": ["./core"],
       "@domain-modules-shared": ["./domain-modules/shared"],
       "@address": ["./domain-modules/address"],
-      "@collective-training": ["./domain-modules/colective-training"],
+      "@indoor-training": ["./domain-modules/indoor-training"],
+      "@indoor-training-subscription": [
+        "./domain-modules/indoor-training-subscription"
+      ],
+      "@home-training": ["./domain-modules/home-training"],
+      "@member-home-training": ["./domain-modules/member-home-training"],
       "@exercise-training": ["./domain-modules/exercise-training"],
       "@exercise-data": ["./domain-modules/exercise-data"],
       "@member": ["./domain-modules/member"],

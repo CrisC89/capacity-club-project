@@ -61,8 +61,15 @@ class CollectiveIndoorTrainingCard extends StatelessWidget {
                 availableLabel(context, indoorTraining.nb_place,
                     indoorTraining.nb_subscription),
                 SizedBox(width: 5),
-                registerButton(context, indoorTraining.is_user_registred,
-                    onRegister, onUnregister),
+                registerButton(context, indoorTraining.is_user_registred, () {
+                  print("Register");
+                  print(
+                      '${indoorTraining.title} ${indoorTraining.training_date}');
+                }, () {
+                  print("Unregister");
+                  print(
+                      '${indoorTraining.title} ${indoorTraining.training_date}');
+                }),
               ],
             ),
           ],

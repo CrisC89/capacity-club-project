@@ -1,5 +1,6 @@
 import 'package:capacity_club_mobile_app/core/utils/page_config.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/bloc/home_page_bloc.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/calendar/date_time_line_calendar_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/provider/home_page_provider.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/view-state/home_page_error_view.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/view-state/home_page_loaded_view.dart';
@@ -20,19 +21,25 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: BlocBuilder<HomePageBloc, HomePageState>(
-      builder: (context, state) {
-        if (state is HomePageLoadingState) {
-          return HomePageLoadingView();
-        } else if (state is HomePageLoadedState) {
-          return HomePageLoadedView(
-              collectiveIndoorTraining: state.collectiveIndoorTraining,
-              individualIndoorTraining: state.individualIndoorTraining);
-        } else if (state is HomePageErrorState) {
-          return HomePageErrorView();
-        }
-        return HomePageLoadingView();
-      },
-    ));
+    return Column(
+      children: [
+        DateTimeLineWithYearSelector(),
+        SizedBox(height: 20),
+        Container(child: BlocBuilder<HomePageBloc, HomePageState>(
+          builder: (context, state) {
+            if (state is HomePageLoadingState) {
+              return HomePageLoadingView();
+            } else if (state is HomePageLoadedState) {
+              return HomePageLoadedView(
+                  collectiveIndoorTraining: state.collectiveIndoorTraining,
+                  individualIndoorTraining: state.individualIndoorTraining);
+            } else if (state is HomePageErrorState) {
+              return HomePageErrorView();
+            }
+            return HomePageLoadingView();
+          },
+        ))
+      ],
+    );
   }
 }

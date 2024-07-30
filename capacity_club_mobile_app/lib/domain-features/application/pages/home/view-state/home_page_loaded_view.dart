@@ -35,8 +35,6 @@ class _HomePageLoadedViewState extends State<HomePageLoadedView> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          DateTimeLineWithYearSelector(),
-          SizedBox(height: 20),
           homePageSectionTitle(context, 'COLLECTIVE TRAINING'),
           const SizedBox(height: 16),
           CollectiveIndoorTrainingCarousel(

@@ -8,7 +8,7 @@ import {
 } from './model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isNil } from 'lodash';
-import { Repository } from 'typeorm';
+import { Brackets, Repository } from 'typeorm';
 import {
   MemberHomeTrainingCreateException,
   MemberHomeTrainingDeleteException,
@@ -65,16 +65,39 @@ export class MemberHomeTrainingService
     );
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`member-home-training.${key} = :${key}`, {
-            [key]: value,
-          });
-        } else {
-          queryBuilder.andWhere(`member-home-training.${key} LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'purchase_date':
+            const date = new Date(value);
+            const year: number = date.getUTCFullYear();
+            const month: number = date.getUTCMonth() + 1;
+            const day: number = date.getUTCDate();
+
+            queryBuilder.andWhere(
+              new Brackets((qb) => {
+                qb.where(
+                  `CAST(EXTRACT(YEAR FROM "member-home-training"."purchase_date") AS int) = :year`,
+                  { year },
+                )
+                  .andWhere(
+                    `CAST(EXTRACT(MONTH FROM "member-home-training"."purchase_date") AS int) = :month`,
+                    { month },
+                  )
+                  .andWhere(
+                    `CAST(EXTRACT(DAY FROM "member-home-training"."purchase_date") AS int) = :day`,
+                    { day },
+                  );
+              }),
+            );
+            break;
+          case 'member':
+            queryBuilder.andWhere('member-home-training.member = :member', {
+              member: value,
+            });
+            break;
+          default:
+            break;
         }
       }
     });

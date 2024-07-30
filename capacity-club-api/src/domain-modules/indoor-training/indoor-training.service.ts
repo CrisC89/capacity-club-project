@@ -74,15 +74,9 @@ export class IndoorTrainingService
             break;
           case 'training_date':
             const date = new Date(value);
-            const year: number = date.getUTCFullYear(); // Utilisez number pour TypeScript
-            const month: number = date.getUTCMonth() + 1; // Mois sont 0-indexés, donc ajoutez 1
+            const year: number = date.getUTCFullYear();
+            const month: number = date.getUTCMonth() + 1;
             const day: number = date.getUTCDate();
-
-            // Affichez les valeurs pour débogage
-            console.log(`Original date: ${date.toISOString()}`);
-            console.log(`Year: ${year}`);
-            console.log(`Month: ${month}`);
-            console.log(`Day: ${day}`);
 
             queryBuilder.andWhere(
               new Brackets((qb) => {

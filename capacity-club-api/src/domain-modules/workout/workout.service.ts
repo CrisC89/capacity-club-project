@@ -91,20 +91,39 @@ export class WorkoutService
    * @param filter - The filtering criteria.
    * @returns A list of Workout entries matching the criteria.
    */
-  filter(filter: WorkoutFilter): Promise<Workout[]> {
+  async filter(filter: WorkoutFilter): Promise<Workout[]> {
     const queryBuilder = this.repository.createQueryBuilder('workout');
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`member.${key} = :${key}`, {
-            [key]: value,
-          });
-        } else {
-          queryBuilder.andWhere(`member.${key} LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'title':
+            queryBuilder.andWhere('workout.title LIKE :title', {
+              title: `%${value}%`,
+            });
+            break;
+          case 'training_circuits':
+            if (Array.isArray(value) && value.length > 0) {
+              queryBuilder.andWhere(
+                'workout.training_circuits IN (:...training_circuits)',
+                { training_circuits: value },
+              );
+            }
+            break;
+          case 'home_training':
+            queryBuilder.andWhere('workout.home_training = :home_training', {
+              home_training: value,
+            });
+            break;
+          case 'indoor_training':
+            queryBuilder.andWhere(
+              'workout.indoor_training = :indoor_training',
+              { indoor_training: value },
+            );
+            break;
+          default:
+            break;
         }
       }
     });

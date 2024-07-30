@@ -98,20 +98,33 @@ export class TrainingCircuitService
    * @param filter - The filtering criteria.
    * @returns A list of TrainingCircuit entries matching the criteria.
    */
-  filter(filter: TrainingCircuitFilter): Promise<TrainingCircuit[]> {
+  async filter(filter: TrainingCircuitFilter): Promise<TrainingCircuit[]> {
     const queryBuilder = this.repository.createQueryBuilder('training-circuit');
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`training-circuit.${key} = :${key}`, {
-            [key]: value,
-          });
-        } else {
-          queryBuilder.andWhere(`training-circuit.${key} LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'title':
+            queryBuilder.andWhere('training-circuit.title LIKE :title', {
+              title: `%${value}%`,
+            });
+            break;
+          case 'exercise_training_list':
+            if (Array.isArray(value) && value.length > 0) {
+              queryBuilder.andWhere(
+                'training-circuit.exercise_training_list IN (:...exercise_training_list)',
+                { exercise_training_list: value },
+              );
+            }
+            break;
+          case 'workout':
+            queryBuilder.andWhere('training-circuit.workout = :workout', {
+              workout: value,
+            });
+            break;
+          default:
+            break;
         }
       }
     });

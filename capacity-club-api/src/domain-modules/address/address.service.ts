@@ -57,20 +57,45 @@ export class AddressService
    * @param filter - The filtering criteria.
    * @returns A list of Address entries matching the criteria.
    */
-  filter(filter: AddressFilter): Promise<Address[]> {
+  async filter(filter: AddressFilter): Promise<Address[]> {
     const queryBuilder = this.repository.createQueryBuilder('address');
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`address.${key} = :${key}`, {
-            [key]: value,
-          });
-        } else {
-          queryBuilder.andWhere(`address.${key} LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'street':
+            queryBuilder.andWhere('address.street LIKE :street', {
+              street: `%${value}%`,
+            });
+            break;
+          case 'number':
+            queryBuilder.andWhere('address.number LIKE :number', {
+              number: `%${value}%`,
+            });
+            break;
+          case 'zipcode':
+            queryBuilder.andWhere('address.zipcode LIKE :zipcode', {
+              zipcode: `%${value}%`,
+            });
+            break;
+          case 'town':
+            queryBuilder.andWhere('address.town LIKE :town', {
+              town: `%${value}%`,
+            });
+            break;
+          case 'country':
+            queryBuilder.andWhere('address.country LIKE :country', {
+              country: `%${value}%`,
+            });
+            break;
+          case 'complement':
+            queryBuilder.andWhere('address.complement LIKE :complement', {
+              complement: `%${value}%`,
+            });
+            break;
+          default:
+            break;
         }
       }
     });

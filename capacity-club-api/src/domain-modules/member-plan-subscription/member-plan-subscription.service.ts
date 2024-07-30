@@ -5,7 +5,7 @@ import {
   MemberPlanSubscriptionCreatePayload,
   MemberPlanSubscriptionUpdatePayload,
 } from './model';
-import { Repository } from 'typeorm';
+import { Brackets, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import {
@@ -57,7 +57,7 @@ export class MemberPlanSubscriptionService
    * @param filter - The filtering criteria.
    * @returns A list of MemberPlanSubscription entries matching the criteria.
    */
-  filter(
+  async filter(
     filter: MemberPlanSubscriptionFilter,
   ): Promise<MemberPlanSubscription[]> {
     const queryBuilder = this.repository.createQueryBuilder(
@@ -65,19 +65,51 @@ export class MemberPlanSubscriptionService
     );
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`member-plan-subscription.${key} = :${key}`, {
-            [key]: value,
-          });
-        } else {
-          queryBuilder.andWhere(
-            `member-plan-subscription.${key} LIKE :${key}`,
-            {
-              [key]: `%${value}%`,
-            },
-          );
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'purchase_date':
+            const date = new Date(value);
+            const year: number = date.getUTCFullYear();
+            const month: number = date.getUTCMonth() + 1;
+            const day: number = date.getUTCDate();
+
+            queryBuilder.andWhere(
+              new Brackets((qb) => {
+                qb.where(
+                  `CAST(EXTRACT(YEAR FROM "member-plan-subscription"."purchase_date") AS int) = :year`,
+                  { year },
+                )
+                  .andWhere(
+                    `CAST(EXTRACT(MONTH FROM "member-plan-subscription"."purchase_date") AS int) = :month`,
+                    { month },
+                  )
+                  .andWhere(
+                    `CAST(EXTRACT(DAY FROM "member-plan-subscription"."purchase_date") AS int) = :day`,
+                    { day },
+                  );
+              }),
+            );
+            break;
+          case 'member':
+            queryBuilder.andWhere('member-plan-subscription.member = :member', {
+              member: value,
+            });
+            break;
+          case 'member_plan':
+            queryBuilder.andWhere(
+              'member-plan-subscription.member_plan = :member_plan',
+              { member_plan: value },
+            );
+            break;
+          case 'member_card':
+            queryBuilder.andWhere(
+              'member-plan-subscription.member_card = :member_card',
+              { member_card: value },
+            );
+            break;
+          default:
+            break;
         }
       }
     });

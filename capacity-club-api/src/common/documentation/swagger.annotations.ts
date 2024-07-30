@@ -946,3 +946,67 @@ export const indoorTrainingProperties = {
     description: 'Workout associated with the indoor training session.',
   },
 };
+
+/*------------------------------------------------------------------------------------------------------*/
+/*--------------------------------- INDOOR TRAINING SUBSCRIPTION ---------------------------------------*/
+/*------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------- CONTROLLER -----------------------------------------------------*/
+
+export const IndoorTrainingSubscriptionControllerCreate: ApiOperationOptions = {
+  summary: 'Create Indoor Training Subscription',
+  description:
+    'Create a new indoor training subscription and store its details in the database.',
+};
+
+export const IndoorTrainingSubscriptionControllerDetail: ApiOperationOptions = {
+  summary: 'Get Indoor Training Subscription Details',
+  description:
+    'Retrieve the details of a specific indoor training subscription by its ID.',
+};
+
+export const IndoorTrainingSubscriptionControllerList: ApiOperationOptions = {
+  summary: 'List All Indoor Trainings Subscription',
+  description:
+    'Retrieve a list of all indoor training subscription stored in the database.',
+};
+
+export const IndoorTrainingSubscriptionControllerUpdate: ApiOperationOptions = {
+  summary: 'Update Indoor Training Subscription',
+  description:
+    'Update the details of an existing indoor training subscription.',
+};
+
+export const IndoorTrainingSubscriptionControllerDelete: ApiOperationOptions = {
+  summary: 'Delete Indoor Training Subscription',
+  description:
+    'Delete a specific indoor training subscription from the database by its ID.',
+};
+
+export const IndoorTrainingSubscriptionControllerFilter: ApiOperationOptions = {
+  summary: 'Filter Indoor Trainings Subscription',
+  description:
+    'Retrieve a list of indoor training subscription based on specific filtering criteria.',
+};
+
+/*--------------------------------------- ENTITY -------------------------------------------------------*/
+
+export const indoorTrainingSubscriptionProperties = {
+  indoor_training_subscription_id: {
+    name: 'indoor_training_subscription_id',
+    description:
+      'Unique identifier for the indoor training. Uses a custom transformer for serialization.',
+  },
+  training_date: {
+    name: 'training_date',
+    description: 'Date of subscription to the training session.',
+  },
+  indoor_training: {
+    name: 'indoor_training',
+    description: 'Indoor training concerned by the subscription.',
+  },
+  member: {
+    name: 'member',
+    description: 'Member concerned by the indoor training subscription.',
+  },
+};

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { CrudService } from 'domain-modules/shared/model/interface/crud-service.interface';
 import { isNil } from 'lodash';
-import { Repository } from 'typeorm';
+import { Brackets, Repository } from 'typeorm';
 import { Member, MemberCreatePayload, MemberUpdatePayload } from './model';
 import {
   MemberCreateException,
@@ -103,18 +103,67 @@ export class MemberService
    * @param filter - The filtering criteria.
    * @returns A list of Member entries matching the criteria.
    */
-  filter(filter: MemberFilter): Promise<Member[]> {
+  async filter(filter: MemberFilter): Promise<Member[]> {
     const queryBuilder = this.repository.createQueryBuilder('member');
 
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`member.${key} = :${key}`, { [key]: value });
-        } else {
-          queryBuilder.andWhere(`member.${key} LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
+      const value = filter[key];
+      if (value !== undefined && value !== null) {
+        switch (key) {
+          case 'firstname':
+            queryBuilder.andWhere('member.firstname LIKE :firstname', {
+              firstname: `%${value}%`,
+            });
+            break;
+          case 'lastname':
+            queryBuilder.andWhere('member.lastname LIKE :lastname', {
+              lastname: `%${value}%`,
+            });
+            break;
+          case 'birthdate':
+            const date = new Date(value);
+            const year: number = date.getUTCFullYear();
+            const month: number = date.getUTCMonth() + 1;
+            const day: number = date.getUTCDate();
+
+            queryBuilder.andWhere(
+              new Brackets((qb) => {
+                qb.where(
+                  `CAST(EXTRACT(YEAR FROM "member"."birthdate") AS int) = :year`,
+                  { year },
+                )
+                  .andWhere(
+                    `CAST(EXTRACT(MONTH FROM "member"."birthdate") AS int) = :month`,
+                    { month },
+                  )
+                  .andWhere(
+                    `CAST(EXTRACT(DAY FROM "member"."birthdate") AS int) = :day`,
+                    { day },
+                  );
+              }),
+            );
+            break;
+          case 'mail':
+            queryBuilder.andWhere('member.mail LIKE :mail', {
+              mail: `%${value}%`,
+            });
+            break;
+          case 'phone':
+            queryBuilder.andWhere('member.phone LIKE :phone', {
+              phone: `%${value}%`,
+            });
+            break;
+          case 'code_activation':
+            queryBuilder.andWhere(
+              'member.code_activation LIKE :code_activation',
+              { code_activation: `%${value}%` },
+            );
+            break;
+          case 'active':
+            queryBuilder.andWhere('member.active = :active', { active: value });
+            break;
+          default:
+            break;
         }
       }
     });
