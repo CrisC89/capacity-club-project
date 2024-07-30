@@ -104,10 +104,6 @@ export class AuthService {
       throw new UserAlreadyExistException();
     }
 
-    this.logger.log('result ' + result);
-
-    this.logger.log('googleHash');
-    this.logger.log(isNil(payload.facebookHash));
     try {
       const encryptedPassword =
         payload.facebookHash == '' && payload.googleHash == ''
@@ -122,7 +118,6 @@ export class AuthService {
           .username(payload.username)
           .build(),
       );
-      this.logger.log(response);
       const signInPayload: SignInPayload = {
         ...payload,
         socialLogin: !(payload.facebookHash == '' && payload.googleHash == ''),
@@ -147,6 +142,7 @@ export class AuthService {
    * Links a Facebook account to the user's credentials.
    * @param payload - The payload containing the credential ID and Facebook hash.
    * @throws UserNotFoundException if the credential is not found.
+   * @throws UserAlreadyExistException if the Facebook account is linked to another credential.
    */
   async linkFacebookAccount(payload: CredentialUpdatepPayload): Promise<void> {
     const credential = await this.repository.findOneBy({
@@ -157,6 +153,14 @@ export class AuthService {
       throw new UserNotFoundException();
     }
 
+    const existingCredential = await this.repository.findOneBy({
+      facebookHash: payload.facebookHash,
+    });
+
+    if (!isNil(existingCredential)) {
+      throw new UserAlreadyExistException();
+    }
+
     credential.facebookHash = payload.facebookHash;
     await this.repository.save(credential);
   }
@@ -165,6 +169,7 @@ export class AuthService {
    * Links a Google account to the user's credentials.
    * @param payload - The payload containing the credential ID and Google hash.
    * @throws UserNotFoundException if the credential is not found.
+   * @throws UserAlreadyExistException if the Google account is linked to another credential.
    */
   async linkGoogleAccount(payload: CredentialUpdatepPayload): Promise<void> {
     const credential = await this.repository.findOneBy({
@@ -173,6 +178,14 @@ export class AuthService {
 
     if (isNil(credential)) {
       throw new UserNotFoundException();
+    }
+
+    const existingCredential = await this.repository.findOneBy({
+      googleHash: payload.googleHash,
+    });
+
+    if (!isNil(existingCredential)) {
+      throw new UserAlreadyExistException();
     }
 
     credential.googleHash = payload.facebookHash;
@@ -203,6 +216,55 @@ export class AuthService {
     }
 
     credential.username = payload.username;
+    await this.repository.save(credential);
+  }
+
+  /**
+   * Links a member to the user's credentials.
+   * @param payload - The payload containing the credential ID and member.
+   * @throws UserNotFoundException if the credential is not found.
+   * @throws UserAlreadyExistException if the member is already linked to another credential.
+   */
+  async linkUserMember(payload: CredentialUpdatepPayload): Promise<void> {
+    const credential = await this.repository.findOneBy({
+      credential_id: payload.credential_id.toString(),
+    });
+
+    if (isNil(credential)) {
+      throw new UserNotFoundException();
+    }
+    const member = await payload.member;
+
+    const memberIsAlreadyLinkToCredential = await this.repository.findOne({
+      where: {
+        member: {
+          member_id: member.member_id.toString(),
+        },
+      },
+    });
+
+    if (!isNil(memberIsAlreadyLinkToCredential)) {
+      throw new UserAlreadyExistException();
+    }
+
+    credential.member = Promise.resolve(payload.member);
+    await this.repository.save(credential);
+  }
+
+  /**
+   * Updates the password for the user's credentials.
+   * @param payload - The payload containing the credential ID and new password.
+   * @throws UserNotFoundException if the credential is not found.
+   */
+  async updatePassword(payload: CredentialUpdatepPayload): Promise<void> {
+    const credential = await this.repository.findOneBy({
+      credential_id: payload.credential_id.toString(),
+    });
+
+    if (isNil(credential)) {
+      throw new UserNotFoundException();
+    }
+
     credential.password = await encryptPassword(payload.password);
     await this.repository.save(credential);
   }

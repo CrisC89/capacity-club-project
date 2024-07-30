@@ -16,6 +16,12 @@ export class AddressDeleteException extends ApiException {
   }
 }
 
+export class AddressFilterException extends ApiException {
+  constructor() {
+    super(ApiCodeResponse.ADDRESS_FILTER_ERROR, 200);
+  }
+}
+
 export class AddressListException extends ApiException {
   constructor() {
     super(ApiCodeResponse.ADDRESS_LIST_ERROR, 200);

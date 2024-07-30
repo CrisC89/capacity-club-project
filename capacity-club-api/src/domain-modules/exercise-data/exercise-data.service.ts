@@ -18,6 +18,7 @@ import {
 } from './exercise-data.exception';
 import { ExerciseDataFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
+import { ExerciseTrainingService } from 'domain-modules/exercise-training/exercise-training.service';
 
 /**
  * Service for managing exercise data.
@@ -37,6 +38,7 @@ export class ExerciseDataService
   constructor(
     @InjectRepository(ExerciseData)
     private readonly repository: Repository<ExerciseData>,
+    private readonly exercise_training_service: ExerciseTrainingService,
   ) {}
 
   /**
@@ -51,13 +53,10 @@ export class ExerciseDataService
         Builder<ExerciseData>()
           .exercise_data_id(UniqueId.generate())
           .title(payload.title)
-          .description(payload.description)
-          .categories(payload.categories)
-          .video_youtube_link(payload.video_youtube_link)
-          .video_asset_link(payload.video_asset_link)
-          .exercise_training_list(
-            Promise.resolve(payload.exercise_training_list),
-          )
+          .description(payload.description ?? [])
+          .categories(payload.categories ?? [])
+          .video_youtube_link(payload.video_youtube_link ?? '')
+          .video_asset_link(payload.video_asset_link ?? '')
           .build(),
       );
     } catch (e) {
@@ -154,9 +153,19 @@ export class ExerciseDataService
       detail.categories = payload.categories;
       detail.video_youtube_link = payload.video_youtube_link;
       detail.video_asset_link = payload.video_asset_link;
-      detail.exercise_training_list = Promise.resolve(
-        payload.exercise_training_list,
+
+      const resolved_exercise_training_list = await Promise.all(
+        payload.exercise_training_list.map(async (exercise_training) => {
+          return await this.exercise_training_service.detail(
+            exercise_training.exercise_training_id.toString(),
+          );
+        }),
       );
+
+      detail.exercise_training_list = Promise.resolve(
+        resolved_exercise_training_list,
+      );
+
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

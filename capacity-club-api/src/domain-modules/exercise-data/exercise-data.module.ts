@@ -4,6 +4,7 @@ import { ExerciseDataService } from './exercise-data.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExerciseData } from './model';
 import { ExerciseTraining } from 'domain-modules/exercise-training/model';
+import { ExerciseTrainingService } from 'domain-modules/exercise-training/exercise-training.service';
 
 /**
  * Module for managing ExerciseData.
@@ -11,6 +12,6 @@ import { ExerciseTraining } from 'domain-modules/exercise-training/model';
 @Module({
   imports: [TypeOrmModule.forFeature([ExerciseData, ExerciseTraining])],
   controllers: [ExerciseDataController],
-  providers: [ExerciseDataService],
+  providers: [ExerciseDataService, ExerciseTrainingService],
 })
 export class ExerciseDataModule {}

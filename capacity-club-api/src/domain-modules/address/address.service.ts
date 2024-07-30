@@ -1,5 +1,5 @@
 import { CrudService } from '@domain-modules-shared';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import {
   Address,
   AddressCreatePayload,
@@ -12,6 +12,7 @@ import { Builder } from 'builder-pattern';
 import {
   AddressCreateException,
   AddressDeleteException,
+  AddressFilterException,
   AddressListException,
   AddressNotFoundException,
   AddressUpdateException,
@@ -39,6 +40,9 @@ export class AddressService
     private readonly repository: Repository<Address>,
   ) {}
 
+  // Logger for logging messages.
+  private readonly logger = new Logger(AddressService.name);
+
   /**
    * Retrieves all addresses.
    * @returns A list of all Address entries.
@@ -58,49 +62,54 @@ export class AddressService
    * @returns A list of Address entries matching the criteria.
    */
   async filter(filter: AddressFilter): Promise<Address[]> {
-    const queryBuilder = this.repository.createQueryBuilder('address');
+    try {
+      const queryBuilder = this.repository.createQueryBuilder('address');
 
-    Object.keys(filter).forEach((key) => {
-      const value = filter[key];
-      if (value !== undefined && value !== null) {
-        switch (key) {
-          case 'street':
-            queryBuilder.andWhere('address.street LIKE :street', {
-              street: `%${value}%`,
-            });
-            break;
-          case 'number':
-            queryBuilder.andWhere('address.number LIKE :number', {
-              number: `%${value}%`,
-            });
-            break;
-          case 'zipcode':
-            queryBuilder.andWhere('address.zipcode LIKE :zipcode', {
-              zipcode: `%${value}%`,
-            });
-            break;
-          case 'town':
-            queryBuilder.andWhere('address.town LIKE :town', {
-              town: `%${value}%`,
-            });
-            break;
-          case 'country':
-            queryBuilder.andWhere('address.country LIKE :country', {
-              country: `%${value}%`,
-            });
-            break;
-          case 'complement':
-            queryBuilder.andWhere('address.complement LIKE :complement', {
-              complement: `%${value}%`,
-            });
-            break;
-          default:
-            break;
+      Object.keys(filter).forEach((key) => {
+        const value = filter[key];
+        if (value !== undefined && value !== null) {
+          switch (key) {
+            case 'street':
+              queryBuilder.andWhere('address.street LIKE :street', {
+                street: `%${value}%`,
+              });
+              break;
+            case 'number':
+              queryBuilder.andWhere('address.number LIKE :number', {
+                number: `%${value}%`,
+              });
+              break;
+            case 'zipcode':
+              queryBuilder.andWhere('address.zipcode LIKE :zipcode', {
+                zipcode: `%${value}%`,
+              });
+              break;
+            case 'town':
+              queryBuilder.andWhere('address.town LIKE :town', {
+                town: `%${value}%`,
+              });
+              break;
+            case 'country':
+              queryBuilder.andWhere('address.country LIKE :country', {
+                country: `%${value}%`,
+              });
+              break;
+            case 'complement':
+              queryBuilder.andWhere('address.complement LIKE :complement', {
+                complement: `%${value}%`,
+              });
+              break;
+            default:
+              break;
+          }
         }
-      }
-    });
+      });
 
-    return queryBuilder.getMany();
+      return queryBuilder.getMany();
+    } catch (e) {
+      this.logger.log(e.message);
+      throw new AddressFilterException();
+    }
   }
 
   /**
@@ -137,7 +146,7 @@ export class AddressService
           .build(),
       );
     } catch (e) {
-      console.log(e.message);
+      this.logger.log(e.message);
       throw new AddressCreateException();
     }
   }
@@ -159,7 +168,7 @@ export class AddressService
       detail.complement = payload.complement;
       return await this.repository.save(detail);
     } catch (e) {
-      console.log(e.message);
+      this.logger.log(e.message);
       throw new AddressUpdateException();
     }
   }
@@ -174,7 +183,7 @@ export class AddressService
       const detail = await this.detail(id);
       await this.repository.remove(detail);
     } catch (e) {
-      console.log(e.message);
+      this.logger.log(e.message);
       throw new AddressDeleteException();
     }
   }

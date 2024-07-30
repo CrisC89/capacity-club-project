@@ -25,7 +25,7 @@ export class ExerciseData extends BaseEntity {
   title: string;
   @Column('text', { nullable: false, array: true, default: [] })
   description: string[];
-  @Column('text', { nullable: true, array: true, default: [] })
+  @Column('text', { nullable: false, array: true, default: [] })
   categories: ExerciseDataCategory[];
   @Column({ nullable: true })
   video_youtube_link: string;

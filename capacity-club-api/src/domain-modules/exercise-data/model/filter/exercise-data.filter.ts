@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { ExerciseDataCategory } from '../enum';
 
 /**
@@ -8,9 +8,9 @@ import { ExerciseDataCategory } from '../enum';
  */
 export class ExerciseDataFilter {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   title: string;
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   categories: ExerciseDataCategory[];
 }

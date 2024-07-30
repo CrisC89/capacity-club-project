@@ -99,6 +99,8 @@ export enum ApiCodeResponse {
   ADDRESS_UPDATE_ERROR = 'api.error.address-update',
   ADDRESS_UPDATE_SUCCESS = 'api.success.address-update',
   ADDRESS_DELETE_ERROR = 'api.error.address-delete',
+  ADDRESS_FILTER_ERROR = 'api.error.address-filter',
+  ADDRESS_FILTER_SUCCES = 'api.succes.address-filter',
   ADDRESS_LIST_ERROR = 'api.error.address-list',
   ADDRESS_LIST_SUCCESS = 'api.success.address-list',
   ADDRESS_CREATE_ERROR = 'api.error.address-create',

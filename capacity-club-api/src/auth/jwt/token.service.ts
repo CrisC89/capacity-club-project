@@ -86,12 +86,14 @@ export class TokenService {
       const id = this.jwtService.verify(payload.refresh, {
         secret: configManager.getValue(ConfigKey.JWT_REFRESH_TOKEN_SECRET),
       }).sub;
-      /*const credential = await this.credentialRepository.findOneBy({
+      const credential = await this.credentialRepository.findOneBy({
         credential_id: id,
-      });*/
+      });
+      /*
       const credential = await this.credentialRepository.findOneBy({
         credential_id: UniqueId.from(id),
       });
+      */
       return await this.getTokens(credential);
     } catch (e) {
       this.logger.error(e.message);

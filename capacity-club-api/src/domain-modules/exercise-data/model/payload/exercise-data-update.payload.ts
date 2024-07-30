@@ -19,6 +19,7 @@ export class ExerciseDataUpdatePayload {
     message: ApiCodeResponse.EXERCISE_DATA_ID_IS_MISSING,
   })
   exercise_data_id: UniqueId;
+
   @ApiProperty({
     name: exerciseDataProperties.title.name,
     description: exerciseDataProperties.title.description,
@@ -27,6 +28,7 @@ export class ExerciseDataUpdatePayload {
     message: ApiCodeResponse.EXERCISE_DATA_TITLE_IS_MISSING,
   })
   title: string;
+
   @ApiProperty({
     name: exerciseDataProperties.description.name,
     description: exerciseDataProperties.description.description,
@@ -35,6 +37,7 @@ export class ExerciseDataUpdatePayload {
     message: ApiCodeResponse.EXERCISE_DATA_DESCRIPTION_IS_MISSING,
   })
   description: string[];
+
   @ApiProperty({
     name: exerciseDataProperties.categories.name,
     description: exerciseDataProperties.categories.description,
@@ -43,18 +46,21 @@ export class ExerciseDataUpdatePayload {
     message: ApiCodeResponse.EXERCISE_DATA_CATEGORIES_ARE_MISSING,
   })
   categories: ExerciseDataCategory[];
+
   @ApiProperty({
     name: exerciseDataProperties.video_youtube_link.name,
     description: exerciseDataProperties.video_youtube_link.description,
   })
   @IsOptional()
   video_youtube_link: string;
+
   @ApiProperty({
     name: exerciseDataProperties.video_asset_link.name,
     description: exerciseDataProperties.video_asset_link.description,
   })
   @IsOptional()
   video_asset_link: string;
+
   @ApiProperty({
     name: exerciseDataProperties.exercise_training_list.name,
     description: exerciseDataProperties.exercise_training_list.description,
