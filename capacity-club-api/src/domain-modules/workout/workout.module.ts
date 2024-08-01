@@ -1,25 +1,24 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { WorkoutService } from './workout.service';
 import { WorkoutController } from './workout.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Workout } from './model';
-import { TrainingCircuit } from 'domain-modules/training-circuit/model';
-import { IndoorTraining } from 'domain-modules/indoor-training/model';
-import { HomeTraining } from 'domain-modules/home-training/model/entity';
+import { IndoorTrainingModule } from 'domain-modules/indoor-training/indoor-training.module';
+import { TrainingCircuitModule } from 'domain-modules/training-circuit/training-circuit.module';
+import { HomeTrainingModule } from 'domain-modules/home-training/home-training.module';
 
 /**
  * Module for managing Workout.
  */
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      Workout,
-      TrainingCircuit,
-      IndoorTraining,
-      HomeTraining,
-    ]),
+    TypeOrmModule.forFeature([Workout]),
+    forwardRef(() => TrainingCircuitModule),
+    forwardRef(() => IndoorTrainingModule),
+    forwardRef(() => HomeTrainingModule),
   ],
   providers: [WorkoutService],
   controllers: [WorkoutController],
+  exports: [WorkoutService],
 })
 export class WorkoutModule {}

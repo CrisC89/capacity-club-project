@@ -1,9 +1,8 @@
 import { CrudService } from '@domain-modules-shared';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import {
   MemberPlanSubscription,
   MemberPlanSubscriptionCreatePayload,
-  MemberPlanSubscriptionUpdatePayload,
 } from './model';
 import { Brackets, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -18,6 +17,10 @@ import {
 import { isNil } from 'lodash';
 import { UniqueId } from '@common/model/unique-id';
 import { MemberPlanSubscriptionFilter } from './model/filter';
+import { MemberService } from 'domain-modules/member/member.service';
+import { MemberPlanService } from 'domain-modules/member-plan/member-plan.service';
+import { MemberCardService } from 'domain-modules/member-card/member-card.service';
+import { MemberPlanSubscriptionUpdatePayload } from './model/payload/member-plan-subscription-update.payload';
 
 /**
  * Service for managing member plan subscriptions.
@@ -37,6 +40,12 @@ export class MemberPlanSubscriptionService
   constructor(
     @InjectRepository(MemberPlanSubscription)
     private readonly repository: Repository<MemberPlanSubscription>,
+    @Inject(forwardRef(() => MemberService))
+    private readonly member_service: MemberService,
+    @Inject(forwardRef(() => MemberPlanService))
+    private readonly member_plan_service: MemberPlanService,
+    @Inject(forwardRef(() => MemberCardService))
+    private readonly member_card_service: MemberCardService,
   ) {}
 
   /**
@@ -143,13 +152,43 @@ export class MemberPlanSubscriptionService
     payload: MemberPlanSubscriptionCreatePayload,
   ): Promise<MemberPlanSubscription> {
     try {
+      let resolvedMemberPlan;
+      try {
+        resolvedMemberPlan = await this.member_plan_service.detail(
+          payload.member_plan.member_plan_id.toString(),
+        );
+      } catch (e) {
+        console.log('Error resolving member plan:', e.message);
+        resolvedMemberPlan = null;
+      }
+
+      let resolvedMember;
+      try {
+        resolvedMember = await this.member_service.detail(
+          payload.member.member_id.toString(),
+        );
+      } catch (e) {
+        console.log('Error resolving member:', e.message);
+        resolvedMember = null;
+      }
+
+      let resolvedMemberCard;
+      try {
+        resolvedMemberCard = await this.member_card_service.detail(
+          payload.member_card.member_card_id.toString(),
+        );
+      } catch (e) {
+        console.log('Error resolving member card:', e.message);
+        resolvedMemberCard = null;
+      }
+
       return await this.repository.save(
         Builder<MemberPlanSubscription>()
           .member_plan_subscription_id(UniqueId.generate())
           .purchase_date(payload.purchase_date)
-          .member_plan(payload.member_plan)
-          .member(Promise.resolve(payload.member))
-          .member_card(payload.member_card)
+          .member_plan(resolvedMemberPlan)
+          .member(Promise.resolve(resolvedMember))
+          .member_card(resolvedMemberCard)
           .build(),
       );
     } catch (e) {
@@ -170,10 +209,41 @@ export class MemberPlanSubscriptionService
       const detail = await this.detail(
         payload.member_plan_subscription_id.toString(),
       );
+
+      let resolvedMemberPlan;
+      try {
+        resolvedMemberPlan = await this.member_plan_service.detail(
+          payload.member_plan.member_plan_id.toString(),
+        );
+      } catch (e) {
+        console.log('Error resolving member plan:', e.message);
+        resolvedMemberPlan = null;
+      }
+
+      let resolvedMember;
+      try {
+        resolvedMember = await this.member_service.detail(
+          payload.member.member_id.toString(),
+        );
+      } catch (e) {
+        console.log('Error resolving member:', e.message);
+        resolvedMember = null;
+      }
+
+      let resolvedMemberCard;
+      try {
+        resolvedMemberCard = await this.member_card_service.detail(
+          payload.member_card.member_card_id.toString(),
+        );
+      } catch (e) {
+        console.log('Error resolving member card:', e.message);
+        resolvedMemberCard = null;
+      }
+
       detail.purchase_date = payload.purchase_date;
-      detail.member = Promise.resolve(payload.member);
-      detail.member_plan = payload.member_plan;
-      detail.member_card = payload.member_card;
+      detail.member = Promise.resolve(resolvedMember);
+      detail.member_plan = resolvedMemberPlan;
+      detail.member_card = resolvedMemberCard;
       return await this.repository.save(detail);
     } catch (e) {
       throw new MemberPlanSubscriptionUpdateException();

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { Credential } from './model/entity/credential.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Token } from './model/entity/token.entity';
@@ -9,6 +9,7 @@ import { ConfigKey } from '@common/config/enum/config-key.enum';
 import { Member } from 'domain-modules/member/model';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { MemberModule } from 'domain-modules/member/member.module';
 /**
  * AuthModule handles the authentication and authorization functionalities.
  * It imports necessary modules, declares providers and controllers, and exports services for use in other modules.
@@ -22,7 +23,8 @@ import { AuthController } from './auth.controller';
         expiresIn: configManager.getValue(ConfigKey.JWT_TOKEN_EXPIRE_IN),
       },
     }),
-    TypeOrmModule.forFeature([Credential, Token, Member]),
+    TypeOrmModule.forFeature([Credential, Token]),
+    forwardRef(() => MemberModule),
   ],
   exports: [AuthService],
   providers: [AuthService, TokenService],

@@ -63,18 +63,18 @@ export class AuthService {
       if (!isNil(payload.facebookHash) && payload.facebookHash.length > 0) {
         result = await this.repository.findOneBy({
           facebookHash: payload.facebookHash,
-          isAdmin: isAdmin,
+          is_admin: isAdmin,
         });
       } else if (!isNil(payload.googleHash) && payload.googleHash.length > 0) {
         result = await this.repository.findOneBy({
           googleHash: payload.googleHash,
-          isAdmin: isAdmin,
+          is_admin: isAdmin,
         });
       }
     } else {
       result = await this.repository.findOneBy({
         username: payload.username,
-        isAdmin: isAdmin,
+        is_admin: isAdmin,
       });
     }
 

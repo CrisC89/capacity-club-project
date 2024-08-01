@@ -1,5 +1,5 @@
 import { CrudService } from '@domain-modules-shared';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { isNil } from 'lodash';
@@ -18,6 +18,7 @@ import {
 } from './exercise-data.exception';
 import { ExerciseDataFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
+import { ExerciseTraining } from 'domain-modules/exercise-training/model';
 import { ExerciseTrainingService } from 'domain-modules/exercise-training/exercise-training.service';
 
 /**
@@ -38,6 +39,7 @@ export class ExerciseDataService
   constructor(
     @InjectRepository(ExerciseData)
     private readonly repository: Repository<ExerciseData>,
+    @Inject(forwardRef(() => ExerciseTrainingService))
     private readonly exercise_training_service: ExerciseTrainingService,
   ) {}
 
@@ -154,13 +156,18 @@ export class ExerciseDataService
       detail.video_youtube_link = payload.video_youtube_link;
       detail.video_asset_link = payload.video_asset_link;
 
-      const resolved_exercise_training_list = await Promise.all(
-        payload.exercise_training_list.map(async (exercise_training) => {
-          return await this.exercise_training_service.detail(
-            exercise_training.exercise_training_id.toString(),
-          );
-        }),
-      );
+      let resolved_exercise_training_list: ExerciseTraining[];
+      try {
+        resolved_exercise_training_list = await Promise.all(
+          payload.exercise_training_list.map(async (exercise_training) => {
+            return await this.exercise_training_service.detail(
+              exercise_training.exercise_training_id.toString(),
+            );
+          }),
+        );
+      } catch {
+        resolved_exercise_training_list = [];
+      }
 
       detail.exercise_training_list = Promise.resolve(
         resolved_exercise_training_list,

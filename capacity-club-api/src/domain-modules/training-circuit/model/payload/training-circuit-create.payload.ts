@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Length, IsOptional } from 'class-validator';
+import { IsString, Length, IsOptional, IsNotEmpty } from 'class-validator';
 import { ExerciseTraining } from 'domain-modules/exercise-training/model';
 import { Workout } from 'domain-modules/workout/model';
 /**
@@ -9,6 +9,7 @@ import { Workout } from 'domain-modules/workout/model';
 export class TrainingCircuitCreatePayload {
   @ApiProperty()
   @IsString()
+  @IsNotEmpty()
   @Length(1, 50)
   title: string;
   @ApiProperty({ type: () => ExerciseTraining, isArray: true })

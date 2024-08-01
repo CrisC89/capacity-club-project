@@ -11,5 +11,6 @@ import { MemberPlan } from './model';
   imports: [TypeOrmModule.forFeature([MemberPlan])],
   providers: [MemberPlanService],
   controllers: [MemberPlanController],
+  exports: [MemberPlanService],
 })
 export class MemberPlanModule {}

@@ -29,5 +29,6 @@ import { MemberCard } from 'domain-modules/member-card/model/entity';
   ],
   controllers: [MemberController],
   providers: [MemberService],
+  exports: [MemberService],
 })
 export class MemberModule {}

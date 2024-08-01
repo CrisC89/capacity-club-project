@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsOptional, Length } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, Length } from 'class-validator';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model/entity/training-circuit.entity';
 import { TrainingIntensity } from '../enum';
 import { ExerciseData } from 'domain-modules/exercise-data/model';
@@ -11,14 +11,16 @@ import { ExerciseData } from 'domain-modules/exercise-data/model';
 export class ExerciseTrainingCreatePayload {
   @ApiProperty()
   @Length(1, 50)
+  @IsNotEmpty()
   nb_reps: number;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   intensity: string;
 
   @ApiProperty()
   @IsEnum(TrainingIntensity)
+  @IsNotEmpty()
   intensityType: TrainingIntensity;
 
   @ApiProperty({ type: () => ExerciseData })

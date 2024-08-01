@@ -17,13 +17,15 @@ export class ExerciseTrainingUpdatePayload {
 
   @ApiProperty()
   @Length(1, 50)
+  @IsNotEmpty()
   nb_reps: number;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   intensity: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   @IsEnum(TrainingIntensity)
   intensityType: TrainingIntensity;
 

@@ -24,7 +24,7 @@ export class ExerciseTraining extends BaseEntity {
   exercise_training_id: UniqueId;
   @Column({ nullable: false })
   nb_reps: number;
-  @Column('varchar', { nullable: true })
+  @Column('varchar', { nullable: false })
   intensity: string;
   @Column('varchar', { nullable: false, default: TrainingIntensity.RPE })
   intensityType: TrainingIntensity;

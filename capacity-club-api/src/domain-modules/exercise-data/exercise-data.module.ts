@@ -1,17 +1,20 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ExerciseDataController } from './exercise-data.controller';
 import { ExerciseDataService } from './exercise-data.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExerciseData } from './model';
-import { ExerciseTraining } from 'domain-modules/exercise-training/model';
-import { ExerciseTrainingService } from 'domain-modules/exercise-training/exercise-training.service';
+import { ExerciseTrainingModule } from 'domain-modules/exercise-training/exercise-training.module';
 
 /**
  * Module for managing ExerciseData.
  */
 @Module({
-  imports: [TypeOrmModule.forFeature([ExerciseData, ExerciseTraining])],
+  imports: [
+    TypeOrmModule.forFeature([ExerciseData]),
+    forwardRef(() => ExerciseTrainingModule),
+  ],
   controllers: [ExerciseDataController],
-  providers: [ExerciseDataService, ExerciseTrainingService],
+  providers: [ExerciseDataService],
+  exports: [ExerciseDataService],
 })
 export class ExerciseDataModule {}

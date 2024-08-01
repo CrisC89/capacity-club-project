@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { isNil } from 'lodash';
@@ -18,6 +18,8 @@ import {
 import { CrudService } from '@domain-modules-shared';
 import { TrainingCircuitFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
+import { ExerciseTrainingService } from 'domain-modules/exercise-training/exercise-training.service';
+import { WorkoutService } from 'domain-modules/workout/workout.service';
 
 /**
  * Service for managing training circuits.
@@ -37,6 +39,10 @@ export class TrainingCircuitService
   constructor(
     @InjectRepository(TrainingCircuit)
     private readonly repository: Repository<TrainingCircuit>,
+    @Inject(forwardRef(() => ExerciseTrainingService))
+    private readonly exercise_training_service: ExerciseTrainingService,
+    @Inject(forwardRef(() => WorkoutService))
+    private readonly workout_service: WorkoutService,
   ) {}
 
   /**
@@ -49,14 +55,34 @@ export class TrainingCircuitService
     payload: TrainingCircuitCreatePayload,
   ): Promise<TrainingCircuit> {
     try {
+      let resolvedExerciseTrainingList;
+      try {
+        resolvedExerciseTrainingList = await Promise.all(
+          payload.exercise_training_list.map(async (exercise_training) => {
+            return await this.exercise_training_service.detail(
+              exercise_training.exercise_training_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedExerciseTrainingList = [];
+      }
+
+      let resolvedWorkout;
+      try {
+        resolvedWorkout = await this.workout_service.detail(
+          payload.workout.workout_id.toString(),
+        );
+      } catch (e) {
+        resolvedWorkout = null;
+      }
+
       return await this.repository.save(
         Builder<TrainingCircuit>()
           .training_circuit_id(UniqueId.generate())
           .title(payload.title)
-          .exercise_training_list(
-            Promise.resolve(payload.exercise_training_list),
-          )
-          .workout(Promise.resolve(payload.workout))
+          .exercise_training_list(resolvedExerciseTrainingList)
+          .workout(resolvedWorkout)
           .build(),
       );
     } catch (e) {
@@ -155,12 +181,34 @@ export class TrainingCircuitService
     payload: TrainingCircuitUpdatePayload,
   ): Promise<TrainingCircuit> {
     try {
+      let resolvedExerciseTrainingList;
+      try {
+        resolvedExerciseTrainingList = await Promise.all(
+          payload.exercise_training_list.map(async (exercise_training) => {
+            return await this.exercise_training_service.detail(
+              exercise_training.exercise_training_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedExerciseTrainingList = [];
+      }
+
+      let resolvedWorkout;
+      try {
+        resolvedWorkout = await this.workout_service.detail(
+          payload.workout.workout_id.toString(),
+        );
+      } catch (e) {
+        resolvedWorkout = null;
+      }
+
       const detail = await this.detail(payload.training_circuit_id.toString());
       detail.title = payload.title;
       detail.exercise_training_list = Promise.resolve(
-        payload.exercise_training_list,
+        resolvedExerciseTrainingList,
       );
-      detail.workout = Promise.resolve(payload.workout);
+      detail.workout = Promise.resolve(resolvedWorkout);
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

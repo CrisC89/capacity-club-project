@@ -15,5 +15,6 @@ import { MemberHomeTraining } from 'domain-modules/member-home-training/model';
   ],
   controllers: [HomeTrainingController],
   providers: [HomeTrainingService],
+  exports: [HomeTrainingService],
 })
 export class HomeTrainingModule {}

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Workout, WorkoutCreatePayload, WorkoutUpdatePayload } from './model';
 import { CrudService } from '@domain-modules-shared';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -14,6 +14,10 @@ import {
 } from './workout.exception';
 import { WorkoutFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
+import { TrainingCircuit } from 'domain-modules/training-circuit/model';
+import { TrainingCircuitService } from 'domain-modules/training-circuit/training-circuit.service';
+import { HomeTrainingService } from 'domain-modules/home-training/home-training.service';
+import { IndoorTrainingService } from 'domain-modules/indoor-training/indoor-training.service';
 
 /**
  * Service for managing workouts.
@@ -33,8 +37,13 @@ export class WorkoutService
   constructor(
     @InjectRepository(Workout)
     private readonly repository: Repository<Workout>,
+    @Inject(forwardRef(() => TrainingCircuitService))
+    private readonly training_circuit_service: TrainingCircuitService,
+    @Inject(forwardRef(() => HomeTrainingService))
+    private readonly home_training_service: HomeTrainingService,
+    @Inject(forwardRef(() => IndoorTrainingService))
+    private readonly indoor_training_service: IndoorTrainingService,
   ) {}
-
   /**
    * Creates a new workout.
    * @param payload - Data for creating a new workout.
@@ -43,13 +52,47 @@ export class WorkoutService
    */
   async create(payload: WorkoutCreatePayload): Promise<Workout> {
     try {
+      let resolvedTrainingCircuits;
+      try {
+        resolvedTrainingCircuits = await Promise.all(
+          payload.training_circuits.map(async (training_circuit) => {
+            return await this.training_circuit_service.detail(
+              training_circuit.training_circuit_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        console.log('Error resolving training circuits:', e.message);
+        resolvedTrainingCircuits = [];
+      }
+
+      let resolvedHomeTraining;
+      try {
+        resolvedHomeTraining = await this.home_training_service.detail(
+          payload.home_training.home_training_id.toString(),
+        );
+      } catch (e) {
+        console.log('Error resolving home training:', e.message);
+        resolvedHomeTraining = null;
+      }
+
+      let resolvedIndoorTraining;
+      try {
+        resolvedIndoorTraining = await this.indoor_training_service.detail(
+          payload.indoor_training.indoor_training_id.toString(),
+        );
+      } catch (e) {
+        console.log('Error resolving indoor training:', e.message);
+        resolvedIndoorTraining = null;
+      }
+
       return await this.repository.save(
         Builder<Workout>()
           .workout_id(UniqueId.generate())
           .title(payload.title)
-          .training_circuits(Promise.resolve(payload.training_circuits))
-          .home_training(Promise.resolve(payload.home_training))
-          .indoor_training(Promise.resolve(payload.indoor_training))
+          .training_circuits(Promise.resolve(resolvedTrainingCircuits))
+          .home_training(Promise.resolve(resolvedHomeTraining))
+          .indoor_training(Promise.resolve(resolvedIndoorTraining))
           .build(),
       );
     } catch (e) {
@@ -151,12 +194,45 @@ export class WorkoutService
    * @throws TrainingCircuitUpdateException if update fails.
    */
   async update(payload: WorkoutUpdatePayload): Promise<Workout> {
+    let resolvedTrainingCircuits;
+    try {
+      resolvedTrainingCircuits = await Promise.all(
+        payload.training_circuits.map(async (training_circuit) => {
+          return await this.training_circuit_service.detail(
+            training_circuit.training_circuit_id.toString(),
+          );
+        }),
+      );
+    } catch (e) {
+      console.log('Error resolving training circuits:', e.message);
+      resolvedTrainingCircuits = [];
+    }
+
+    let resolvedHomeTraining;
+    try {
+      resolvedHomeTraining = await this.home_training_service.detail(
+        payload.home_training.home_training_id.toString(),
+      );
+    } catch (e) {
+      console.log('Error resolving home training:', e.message);
+      resolvedHomeTraining = null;
+    }
+
+    let resolvedIndoorTraining;
+    try {
+      resolvedIndoorTraining = await this.indoor_training_service.detail(
+        payload.indoor_training.indoor_training_id.toString(),
+      );
+    } catch (e) {
+      console.log('Error resolving indoor training:', e.message);
+      resolvedIndoorTraining = null;
+    }
     try {
       const detail = await this.detail(payload.workout_id.toString());
       detail.title = payload.title;
-      detail.training_circuits = Promise.resolve(payload.training_circuits);
-      detail.home_training = Promise.resolve(payload.home_training);
-      detail.indoor_training = Promise.resolve(payload.indoor_training);
+      detail.training_circuits = Promise.resolve(resolvedTrainingCircuits);
+      detail.home_training = Promise.resolve(resolvedHomeTraining);
+      detail.indoor_training = Promise.resolve(resolvedIndoorTraining);
 
       return await this.repository.save(detail);
     } catch (e) {

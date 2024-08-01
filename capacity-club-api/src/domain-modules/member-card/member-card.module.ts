@@ -11,5 +11,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [TypeOrmModule.forFeature([MemberCard])],
   providers: [MemberCardService],
   controllers: [MemberCardController],
+  exports: [MemberCardService],
 })
 export class MemberCardModule {}

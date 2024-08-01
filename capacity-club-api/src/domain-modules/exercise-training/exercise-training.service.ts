@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { ExerciseDataService } from './../exercise-data/exercise-data.service';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import {
   ExerciseTraining,
   ExerciseTrainingCreatePayload,
@@ -18,6 +19,9 @@ import {
 } from './exercise-training.exception';
 import { ExerciseTrainingFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
+import { TrainingCircuitService } from 'domain-modules/training-circuit/training-circuit.service';
+import { ExerciseData } from 'domain-modules/exercise-data/model';
+import { TrainingCircuit } from 'domain-modules/training-circuit/model';
 
 /**
  * Service for managing exercise training sessions.
@@ -37,6 +41,10 @@ export class ExerciseTrainingService
   constructor(
     @InjectRepository(ExerciseTraining)
     private readonly repository: Repository<ExerciseTraining>,
+    @Inject(forwardRef(() => ExerciseDataService))
+    private readonly exercise_data_service: ExerciseDataService,
+    @Inject(forwardRef(() => TrainingCircuitService))
+    private readonly training_circuit_service: TrainingCircuitService,
   ) {}
 
   /**
@@ -49,14 +57,23 @@ export class ExerciseTrainingService
     payload: ExerciseTrainingCreatePayload,
   ): Promise<ExerciseTraining> {
     try {
+      const resolvedExerciseData = await this.exercise_data_service.detail(
+        payload.exercise_data.exercise_data_id.toString(),
+      );
+
+      const resolvedTrainingCircuit =
+        await this.training_circuit_service.detail(
+          payload.training_circuit.training_circuit_id.toString(),
+        );
+
       return await this.repository.save(
         Builder<ExerciseTraining>()
           .exercise_training_id(UniqueId.generate())
           .nb_reps(payload.nb_reps)
           .intensity(payload.intensity)
           .intensityType(payload.intensityType)
-          .exercise_data(Promise.resolve(payload.exercise_data))
-          .training_circuit(Promise.resolve(payload.training_circuit))
+          .exercise_data(Promise.resolve(resolvedExerciseData))
+          .training_circuit(Promise.resolve(resolvedTrainingCircuit))
           .build(),
       );
     } catch (e) {
@@ -151,12 +168,32 @@ export class ExerciseTrainingService
     payload: ExerciseTrainingUpdatePayload,
   ): Promise<ExerciseTraining> {
     try {
+      let resolvedExerciseData: ExerciseData;
+
+      try {
+        resolvedExerciseData = await this.exercise_data_service.detail(
+          payload.exercise_data.exercise_data_id.toString(),
+        );
+      } catch {
+        resolvedExerciseData = null;
+      }
+
+      let resolvedTrainingCircuit: TrainingCircuit;
+
+      try {
+        resolvedTrainingCircuit = await this.training_circuit_service.detail(
+          payload.training_circuit.training_circuit_id.toString(),
+        );
+      } catch {
+        resolvedTrainingCircuit = null;
+      }
+
       const detail = await this.detail(payload.exercise_training_id.toString());
       detail.nb_reps = payload.nb_reps;
       detail.intensity = payload.intensity;
       detail.intensityType = payload.intensityType;
-      detail.exercise_data = Promise.resolve(payload.exercise_data);
-      detail.training_circuit = Promise.resolve(payload.training_circuit);
+      detail.exercise_data = Promise.resolve(resolvedExerciseData);
+      detail.training_circuit = Promise.resolve(resolvedTrainingCircuit);
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

@@ -37,7 +37,11 @@ export class Credential extends BaseEntity {
 
   // Flag indicating if the user is an admin
   @Column({ default: false })
-  isAdmin: boolean;
+  is_admin: boolean;
+
+  // Flag indicating if the user is an admin
+  @Column({ default: true })
+  is_active: boolean;
 
   // Member associated with the credential
   @OneToOne(() => Member, { nullable: true, lazy: true })

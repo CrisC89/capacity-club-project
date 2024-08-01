@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:capacity_club_mobile_app/auth/data/model/mapper/credential_mapper.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:equatable/equatable.dart';

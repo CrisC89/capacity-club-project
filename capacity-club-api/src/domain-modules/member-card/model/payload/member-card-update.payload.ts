@@ -16,7 +16,4 @@ export class MemberCardUpdatePayload {
 
   @ApiProperty()
   individual_session_count: number;
-
-  @ApiProperty()
-  member: Member;
 }

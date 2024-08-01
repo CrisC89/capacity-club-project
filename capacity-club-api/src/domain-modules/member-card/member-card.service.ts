@@ -75,11 +75,6 @@ export class MemberCardService
               { individual_session_count: value },
             );
             break;
-          case 'member':
-            queryBuilder.andWhere('member-card.member = :member', {
-              member: value,
-            });
-            break;
           default:
             break;
         }

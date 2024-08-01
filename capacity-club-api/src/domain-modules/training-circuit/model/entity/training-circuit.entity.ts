@@ -40,7 +40,7 @@ export class TrainingCircuit extends BaseEntity {
       lazy: true,
     },
   )
-  @ApiProperty({ type: () => ExerciseTraining, isArray: true })
+  @ApiProperty({ type: () => ExerciseTraining, isArray: true, default: [] })
   exercise_training_list: Promise<ExerciseTraining[]>;
 
   @ManyToOne(() => Workout, (workout) => workout.training_circuits, {

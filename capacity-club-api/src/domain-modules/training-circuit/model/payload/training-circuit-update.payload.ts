@@ -15,6 +15,7 @@ export class TrainingCircuitUpdatePayload {
   training_circuit_id: UniqueId;
   @ApiProperty()
   @IsString()
+  @IsNotEmpty()
   @Length(1, 50)
   title: string;
   @ApiProperty({ type: () => ExerciseTraining, isArray: true })

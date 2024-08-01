@@ -16,6 +16,7 @@ export class WorkoutUpdatePayload {
   workout_id: UniqueId;
   @ApiProperty()
   @IsString()
+  @IsNotEmpty()
   @Length(1, 50)
   title: string;
   @ApiProperty({ type: () => TrainingCircuit, isArray: true })
