@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsOptional, Length } from 'class-validator';
+import { ExerciseData } from 'domain-modules/exercise-data/model/entity/exercise-data.entity';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model/entity/training-circuit.entity';
-import { TrainingIntensity } from '../enum';
-import { ExerciseData } from 'domain-modules/exercise-data/model';
+import { TrainingIntensity } from '../enum/training_intensity.enum';
 
 /**
  * Class used to create exercise training.

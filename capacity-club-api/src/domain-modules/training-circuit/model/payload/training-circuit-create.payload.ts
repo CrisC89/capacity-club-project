@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, Length, IsOptional, IsNotEmpty } from 'class-validator';
-import { ExerciseTraining } from 'domain-modules/exercise-training/model';
-import { Workout } from 'domain-modules/workout/model';
+import { ExerciseTraining } from 'domain-modules/exercise-training/model/entity/exercise-training.entity';
+import { Workout } from 'domain-modules/workout/model/entity/workout.entity';
+
 /**
  * Class used to create training circuit.
  * This class defines the payload used when creating new training circuit.

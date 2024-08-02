@@ -2,7 +2,7 @@ import { BaseEntity } from '@common/model/base.entity';
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Transform } from 'class-transformer';
-import { Member } from 'domain-modules/member/model';
+import { Member } from 'domain-modules/member/model/entity/member.entity';
 import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
 
 @Entity()

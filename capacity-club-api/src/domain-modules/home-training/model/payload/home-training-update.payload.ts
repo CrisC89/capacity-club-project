@@ -1,8 +1,9 @@
 import { UniqueId } from '@common/model';
 import { Payload } from '@domain-modules-shared';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, Length } from 'class-validator';
-import { Workout } from 'domain-modules/workout/model';
+import { IsNotEmpty, IsOptional, Length } from 'class-validator';
+import { MemberHomeTraining } from 'domain-modules/member-home-training/model/entity/member_home_training.entity';
+import { Workout } from 'domain-modules/workout/model/entity/workout.entity';
 
 /**
  * Class used to update home training.
@@ -17,6 +18,9 @@ export class HomeTrainingUpdatePayload implements Payload {
   @IsNotEmpty()
   title: string;
   @ApiProperty()
+  @IsOptional()
+  description: string;
+  @ApiProperty()
   @IsNotEmpty()
   nb_week: number;
   @ApiProperty()
@@ -28,4 +32,7 @@ export class HomeTrainingUpdatePayload implements Payload {
   @ApiProperty({ type: () => Workout, isArray: true })
   @IsNotEmpty()
   workouts: Workout[];
+  @ApiProperty({ type: () => MemberHomeTraining, isArray: true })
+  @IsNotEmpty()
+  member_home_trainings: MemberHomeTraining[];
 }

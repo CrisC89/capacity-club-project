@@ -8,14 +8,12 @@ import {
 } from './../../common/documentation/swagger.annotations';
 import { CrudController } from '@domain-modules-shared';
 import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
-import {
-  HomeTrainingCreatePayload,
-  HomeTrainingUpdatePayload,
-} from './model/payload';
-import { HomeTraining } from './model/entity';
 import { HomeTrainingFilter } from './model/filter/home-training.filter';
 import { HomeTrainingService } from './home-training.service';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { HomeTraining } from './model/entity/home-training.entity';
+import { HomeTrainingCreatePayload } from './model/payload/home-training-create.payload';
+import { HomeTrainingUpdatePayload } from './model/payload/home-training-update.payload';
 
 /**
  * Controller for managing home training programs.

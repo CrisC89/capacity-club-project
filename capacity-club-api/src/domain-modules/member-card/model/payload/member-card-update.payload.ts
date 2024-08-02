@@ -1,7 +1,6 @@
 import { UniqueId } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
-import { Member } from 'domain-modules/member/model';
 
 /**
  * Class used to update member card.

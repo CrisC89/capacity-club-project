@@ -1,5 +1,5 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { Workout, WorkoutCreatePayload, WorkoutUpdatePayload } from './model';
+
 import { CrudService } from '@domain-modules-shared';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
@@ -12,12 +12,15 @@ import {
   WorkoutNotFoundException,
   WorkoutListException,
 } from './workout.exception';
-import { WorkoutFilter } from './model/filter';
-import { UniqueId } from '@common/model/unique-id';
-import { TrainingCircuit } from 'domain-modules/training-circuit/model';
+
 import { TrainingCircuitService } from 'domain-modules/training-circuit/training-circuit.service';
 import { HomeTrainingService } from 'domain-modules/home-training/home-training.service';
 import { IndoorTrainingService } from 'domain-modules/indoor-training/indoor-training.service';
+import { UniqueId } from '@common/model';
+import { Workout } from './model/entity/workout.entity';
+import { WorkoutFilter } from './model/filter/workout.filter';
+import { WorkoutCreatePayload } from './model/payload/workout-create.payload';
+import { WorkoutUpdatePayload } from './model/payload/workout-update.payload';
 
 /**
  * Service for managing workouts.

@@ -1,3 +1,11 @@
+import {
+  ExerciseTrainingControllerCreate,
+  ExerciseTrainingControllerDelete,
+  ExerciseTrainingControllerDetail,
+  ExerciseTrainingControllerFilter,
+  ExerciseTrainingControllerList,
+  ExerciseTrainingControllerUpdate,
+} from '@common/documentation';
 import { CrudController } from '@domain-modules-shared';
 import {
   Body,
@@ -8,22 +16,12 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { ExerciseTrainingService } from './exercise-training.service';
-import {
-  ExerciseTraining,
-  ExerciseTrainingCreatePayload,
-  ExerciseTrainingUpdatePayload,
-} from './model';
-import { ExerciseTrainingFilter } from './model/filter';
-import {
-  ExerciseTrainingControllerCreate,
-  ExerciseTrainingControllerDelete,
-  ExerciseTrainingControllerDetail,
-  ExerciseTrainingControllerFilter,
-  ExerciseTrainingControllerList,
-  ExerciseTrainingControllerUpdate,
-} from '@common/documentation';
+import { ExerciseTraining } from './model/entity/exercise-training.entity';
+import { ExerciseTrainingFilter } from './model/filter/exercise-training.filter';
+import { ExerciseTrainingCreatePayload } from './model/payload/exercise-training-create.payload';
+import { ExerciseTrainingUpdatePayload } from './model/payload/exercise-training-update.payload';
 
 /**
  * Controller for managing exercise training sessions.

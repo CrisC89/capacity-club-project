@@ -1,7 +1,8 @@
 import { BaseEntity, UniqueId, uniqueIdTransformer } from '@common/model';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { Member } from 'domain-modules/member/model';
+import { HomeTraining } from 'domain-modules/home-training/model/entity/home-training.entity';
+import { Member } from 'domain-modules/member/model/entity/member.entity';
 import {
   PrimaryColumn,
   CreateDateColumn,
@@ -27,8 +28,17 @@ export class MemberHomeTraining extends BaseEntity {
   member_home_training_id: UniqueId;
   @CreateDateColumn()
   purchase_date: Date;
+
   @ManyToOne(() => Member, { lazy: true })
   @JoinColumn({ referencedColumnName: 'member_id', name: 'member_id_fk' })
   @ApiProperty({ type: () => Member })
   member: Promise<Member>;
+
+  @ManyToOne(() => HomeTraining, { lazy: true })
+  @JoinColumn({
+    referencedColumnName: 'home_training_id',
+    name: 'home_training_id_fk',
+  })
+  @ApiProperty({ type: () => HomeTraining })
+  home_training: Promise<HomeTraining>;
 }

@@ -1,24 +1,23 @@
 import { CrudService } from './../shared/model/interface/crud-service.interface';
-import { Injectable } from '@nestjs/common';
-import {
-  IndoorTraining,
-  IndoorTrainingCreatePayload,
-  IndoorTrainingFilter,
-  IndoorTrainingUpdatePayload,
-} from './model';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { WorkoutService } from 'domain-modules/workout/workout.service';
+import { IndoorTrainingSubscriptionService } from 'domain-modules/indoor-training-subscription/indoor-training-subscription.service';
+import { UniqueId } from '@common/model';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Builder } from 'builder-pattern';
+import { isNil } from 'lodash';
+import { Repository, Brackets } from 'typeorm';
 import {
-  IndoorTrainingCreateException,
-  IndoorTrainingDeleteException,
   IndoorTrainingListException,
   IndoorTrainingNotFoundException,
+  IndoorTrainingCreateException,
   IndoorTrainingUpdateException,
+  IndoorTrainingDeleteException,
 } from './indoor-training.exception';
-import { isNil } from 'lodash';
-import { UniqueId } from '@common/model';
-import { Builder } from 'builder-pattern';
-import { Brackets } from 'typeorm';
+import { IndoorTraining } from './model/entity/indoor-training.entity';
+import { IndoorTrainingFilter } from './model/filter/indoor-training.filter';
+import { IndoorTrainingCreatePayload } from './model/payload/indoor-training-create.payload';
+import { IndoorTrainingUpdatePayload } from './model/payload/indoor-training-update.payload';
 
 /**
  * Service for managing indoor training sessions.
@@ -38,6 +37,10 @@ export class IndoorTrainingService
   constructor(
     @InjectRepository(IndoorTraining)
     private readonly repository: Repository<IndoorTraining>,
+    @Inject(forwardRef(() => WorkoutService))
+    private readonly workout_service: WorkoutService,
+    @Inject(forwardRef(() => IndoorTrainingSubscriptionService))
+    private readonly indoor_training_subscription_service: IndoorTrainingSubscriptionService,
   ) {}
 
   /**
@@ -124,45 +127,6 @@ export class IndoorTrainingService
     return queryBuilder.getMany();
   }
 
-  /*
-  async filter(filter: IndoorTrainingFilter): Promise<IndoorTraining[]> {
-    const queryBuilder = this.repository.createQueryBuilder('indoor-training');
-
-    Object.keys(filter).forEach((key) => {
-      if (filter[key] !== undefined && filter[key] !== null) {
-        const value = filter[key];
-        console.log(`Key: ${key}, Value: ${value}, Type: ${typeof value}`);
-
-        if (typeof value === 'boolean') {
-          queryBuilder.andWhere(`"indoor-training"."${key}" = :${key}`, {
-            [key]: value,
-          });
-        } else if (value instanceof Date) {
-          // Format de la date en YYYY-MM-DD
-          const startOfDay = value.toISOString().split('T')[0] + 'T00:00:00Z';
-          const endOfDay =
-            new Date(value.getTime() + 24 * 60 * 60 * 1000 - 1)
-              .toISOString()
-              .split('T')[0] + 'T23:59:59Z';
-          queryBuilder.andWhere(
-            `"indoor-training"."${key}" BETWEEN :startOfDay AND :endOfDay`,
-            {
-              startOfDay,
-              endOfDay,
-            },
-          );
-        } else {
-          queryBuilder.andWhere(`"indoor-training"."${key}" LIKE :${key}`, {
-            [key]: `%${value}%`,
-          });
-        }
-      }
-    });
-
-    return queryBuilder.getMany();
-  }
-  
-  */
   /**
    * Retrieves the details of an indoor training session by ID.
    * @param id - The ID of the indoor training session to retrieve.
@@ -185,6 +149,30 @@ export class IndoorTrainingService
    */
   async create(payload: IndoorTrainingCreatePayload): Promise<IndoorTraining> {
     try {
+      let resolvedWorkout;
+      try {
+        resolvedWorkout = await this.workout_service.detail(
+          payload.workout.workout_id.toString(),
+        );
+      } catch (e) {
+        resolvedWorkout = null;
+      }
+
+      let resolvedIndoorTrainingSubscriptionList;
+      try {
+        resolvedIndoorTrainingSubscriptionList = await Promise.all(
+          payload.indoor_training_subscription_list.map(
+            async (subscription) => {
+              return await this.indoor_training_subscription_service.detail(
+                subscription.indoor_training_subscription_id.toString(),
+              );
+            },
+          ),
+        );
+      } catch (e) {
+        resolvedIndoorTrainingSubscriptionList = [];
+      }
+
       return await this.repository.save(
         Builder<IndoorTraining>()
           .indoor_training_id(UniqueId.generate())
@@ -195,7 +183,10 @@ export class IndoorTrainingService
           .nb_place(payload.nb_place)
           .nb_subscription(payload.nb_subscription)
           .is_collective(payload.is_collective)
-          .workout(Promise.resolve(payload.workout))
+          .workout(Promise.resolve(resolvedWorkout))
+          .indoor_training_subscription_list(
+            Promise.resolve(resolvedIndoorTrainingSubscriptionList),
+          )
           .build(),
       );
     } catch (e) {
@@ -213,6 +204,31 @@ export class IndoorTrainingService
   async update(payload: IndoorTrainingUpdatePayload): Promise<IndoorTraining> {
     try {
       const detail = await this.detail(payload.indoor_training_id.toString());
+
+      let resolvedWorkout;
+      try {
+        resolvedWorkout = await this.workout_service.detail(
+          payload.workout.workout_id.toString(),
+        );
+      } catch (e) {
+        resolvedWorkout = null;
+      }
+
+      let resolvedIndoorTrainingSubscriptionList;
+      try {
+        resolvedIndoorTrainingSubscriptionList = await Promise.all(
+          payload.indoor_training_subscription_list.map(
+            async (subscription) => {
+              return await this.indoor_training_subscription_service.detail(
+                subscription.indoor_training_subscription_id.toString(),
+              );
+            },
+          ),
+        );
+      } catch (e) {
+        resolvedIndoorTrainingSubscriptionList = [];
+      }
+
       detail.title = payload.title;
       detail.training_date = payload.training_date;
       detail.start_hours = payload.start_hours;
@@ -220,7 +236,10 @@ export class IndoorTrainingService
       detail.nb_place = payload.nb_place;
       detail.nb_subscription = payload.nb_subscription;
       detail.is_collective = payload.is_collective;
-      detail.workout = Promise.resolve(payload.workout);
+      detail.workout = Promise.resolve(resolvedWorkout);
+      detail.indoor_training_subscription_list = Promise.resolve(
+        resolvedIndoorTrainingSubscriptionList,
+      );
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

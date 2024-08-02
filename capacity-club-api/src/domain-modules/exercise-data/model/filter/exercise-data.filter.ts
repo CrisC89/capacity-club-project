@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional } from 'class-validator';
-import { ExerciseDataCategory } from '../enum';
+import { IsOptional } from 'class-validator';
+import { ExerciseDataCategory } from '../enum/exercise-data-category.enum';
 
 /**
  * Class used to filter exercise data.

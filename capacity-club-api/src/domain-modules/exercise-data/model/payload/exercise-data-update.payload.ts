@@ -2,9 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 import { ExerciseDataCategory } from '../enum/exercise-data-category.enum';
 import { UniqueId } from '@common/model/unique-id';
-import { ExerciseTraining } from 'domain-modules/exercise-training/model';
 import { exerciseDataProperties } from '@common/documentation';
 import { ApiCodeResponse } from '@common/api';
+import { ExerciseTraining } from 'domain-modules/exercise-training/model/entity/exercise-training.entity';
 
 /**
  * Class used to update exercise data.

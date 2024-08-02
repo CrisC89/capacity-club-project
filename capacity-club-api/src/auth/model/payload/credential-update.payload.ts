@@ -3,7 +3,7 @@ import { credentialProperties } from '@common/documentation';
 import { UniqueId } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, Length, IsOptional } from 'class-validator';
-import { Member } from 'domain-modules/member/model';
+import { Member } from 'domain-modules/member/model/entity/member.entity';
 
 /**
  * DTO (Data Transfer Object) for updating user credentials.

@@ -14,7 +14,6 @@ import { CrudController } from 'domain-modules/shared/model/interface/crud-contr
 import { MemberPlanCreatePayload } from './model/payload/member-plan-create.payload';
 import { MemberPlanUpdatePayload } from './model/payload/member-plan-update.payload';
 import { MemberPlanService } from './member-plan.service';
-import { MemberPlanFilter } from './model/filter';
 import {
   MemberPlanControllerCreate,
   MemberPlanControllerDelete,
@@ -23,6 +22,7 @@ import {
   MemberPlanControllerList,
   MemberPlanControllerUpdate,
 } from '@common/documentation';
+import { MemberPlanFilter } from './model/filter/member-plan.filter';
 
 /**
  * Controller for managing member plans.

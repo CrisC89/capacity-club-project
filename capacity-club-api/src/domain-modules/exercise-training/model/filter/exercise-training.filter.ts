@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
-import { ExerciseData } from 'domain-modules/exercise-data/model';
-import { TrainingCircuit } from 'domain-modules/training-circuit/model';
+import { ExerciseData } from 'domain-modules/exercise-data/model/entity/exercise-data.entity';
+import { TrainingCircuit } from 'domain-modules/training-circuit/model/entity/training-circuit.entity';
 
 /**
  * Class used to filter exercise training.

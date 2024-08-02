@@ -3,7 +3,7 @@ import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { ExerciseDataCategory } from '../enum/exercise-data-category.enum';
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { Transform } from 'class-transformer';
-import { ExerciseTraining } from 'domain-modules/exercise-training/model';
+import { ExerciseTraining } from 'domain-modules/exercise-training/model/entity/exercise-training.entity';
 
 /**
  * Entity representing exercise data.

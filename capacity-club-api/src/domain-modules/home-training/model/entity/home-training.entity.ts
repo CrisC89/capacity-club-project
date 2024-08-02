@@ -1,8 +1,9 @@
-import { uniqueIdTransformer, UniqueId } from '@common/model';
+import { uniqueIdTransformer, UniqueId, BaseEntity } from '@common/model';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { Workout } from 'domain-modules/workout/model';
-import { Entity, BaseEntity, PrimaryColumn, Column, OneToMany } from 'typeorm';
+import { MemberHomeTraining } from 'domain-modules/member-home-training/model/entity/member_home_training.entity';
+import { Workout } from 'domain-modules/workout/model/entity/workout.entity';
+import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
 
 /**
  * Entity representing a home training program.
@@ -21,6 +22,8 @@ export class HomeTraining extends BaseEntity {
   home_training_id: UniqueId;
   @Column({ nullable: false })
   title: string;
+  @Column({ nullable: true })
+  description: string;
   @Column({ nullable: false })
   nb_week: number;
   @Column({ nullable: false })
@@ -34,4 +37,15 @@ export class HomeTraining extends BaseEntity {
   })
   @ApiProperty({ type: () => Workout, isArray: true })
   workouts: Promise<Workout[]>;
+
+  @OneToMany(
+    () => MemberHomeTraining,
+    (member_home_training) => member_home_training.home_training,
+    {
+      cascade: true,
+      lazy: true,
+    },
+  )
+  @ApiProperty({ type: () => MemberHomeTraining, isArray: true })
+  member_home_trainings: Promise<MemberHomeTraining[]>;
 }

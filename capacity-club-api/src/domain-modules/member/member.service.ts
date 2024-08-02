@@ -1,10 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { CrudService } from 'domain-modules/shared/model/interface/crud-service.interface';
 import { isNil } from 'lodash';
 import { Brackets, Repository } from 'typeorm';
-import { Member, MemberCreatePayload, MemberUpdatePayload } from './model';
 import {
   MemberCreateException,
   MemberDeleteException,
@@ -12,9 +11,17 @@ import {
   MemberNotFoundException,
   MemberUpdateException,
 } from './member.exception';
-import { MemberFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
-import { Credential } from '@auth/model';
+import { AuthService } from '@auth/auth.service';
+import { AddressService } from 'domain-modules/address/address.service';
+import { MemberHomeTrainingService } from 'domain-modules/member-home-training/member-home-training.service';
+import { MemberPlanSubscriptionService } from 'domain-modules/member-plan-subscription/member-plan-subscription.service';
+import { IndoorTrainingSubscriptionService } from 'domain-modules/indoor-training-subscription/indoor-training-subscription.service';
+import { MemberCardService } from 'domain-modules/member-card/member-card.service';
+import { Member } from './model/entity/member.entity';
+import { MemberFilter } from './model/filter/member.filter';
+import { MemberCreatePayload } from './model/payload/member-create.payload';
+import { MemberUpdatePayload } from './model/payload/member-update.payload';
 
 /**
  * Service for managing members.
@@ -33,8 +40,18 @@ export class MemberService
 {
   constructor(
     @InjectRepository(Member) private readonly repository: Repository<Member>,
-    @InjectRepository(Credential)
-    private credentialRepository: Repository<Credential>,
+    @Inject(forwardRef(() => AuthService))
+    private readonly auth_service: AuthService,
+    @Inject(forwardRef(() => AddressService))
+    private readonly address_service: AddressService,
+    @Inject(forwardRef(() => MemberHomeTrainingService))
+    private readonly member_home_training_service: MemberHomeTrainingService,
+    @Inject(forwardRef(() => MemberPlanSubscriptionService))
+    private readonly member_plan_subscription_service: MemberPlanSubscriptionService,
+    @Inject(forwardRef(() => IndoorTrainingSubscriptionService))
+    private readonly indoor_training_subscription_service: IndoorTrainingSubscriptionService,
+    @Inject(forwardRef(() => MemberCardService))
+    private readonly member_card_service: MemberCardService,
   ) {}
 
   /**
@@ -45,6 +62,72 @@ export class MemberService
    */
   async create(payload: MemberCreatePayload): Promise<Member> {
     try {
+      let resolvedCredential;
+      try {
+        resolvedCredential = await this.auth_service.detail(
+          payload.credential.credential_id.toString(),
+        );
+      } catch (e) {
+        resolvedCredential = null;
+      }
+
+      let resolvedAddress;
+      try {
+        resolvedAddress = await this.address_service.detail(
+          payload.address.address_id.toString(),
+        );
+      } catch (e) {
+        resolvedAddress = null;
+      }
+
+      let resolvedMemberCard;
+      try {
+        resolvedMemberCard = await this.member_card_service.detail(
+          payload.member_card.member_card_id.toString(),
+        );
+      } catch (e) {
+        resolvedMemberCard = null;
+      }
+
+      let resolvedMemberHomeTrainings;
+      try {
+        resolvedMemberHomeTrainings = await Promise.all(
+          payload.member_home_trainings.map(async (training) => {
+            return await this.member_home_training_service.detail(
+              training.member_home_training_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedMemberHomeTrainings = [];
+      }
+
+      let resolvedMemberPlanSubscriptions;
+      try {
+        resolvedMemberPlanSubscriptions = await Promise.all(
+          payload.member_plan_subscriptions.map(async (subscription) => {
+            return await this.member_plan_subscription_service.detail(
+              subscription.member_plan_subscription_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedMemberPlanSubscriptions = [];
+      }
+
+      let resolvedIndoorTrainingSubscriptions;
+      try {
+        resolvedIndoorTrainingSubscriptions = await Promise.all(
+          payload.indoor_training_subscription.map(async (subscription) => {
+            return await this.indoor_training_subscription_service.detail(
+              subscription.indoor_training_subscription_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedIndoorTrainingSubscriptions = [];
+      }
+
       const created_member = Object.assign(
         new Member(),
         Builder<Member>()
@@ -55,10 +138,18 @@ export class MemberService
           .mail(payload.mail)
           .gender(payload.gender)
           .birthdate(payload.birthdate)
-          .address(payload.address)
           .active(payload.active)
           .code_activation(payload.code_activation)
-          .credential(Promise.resolve(payload.credential))
+          .address(resolvedAddress)
+          .credential(Promise.resolve(resolvedCredential))
+          .member_card(resolvedMemberCard)
+          .member_home_trainings(Promise.resolve(resolvedMemberHomeTrainings))
+          .member_plan_subscriptions(
+            Promise.resolve(resolvedMemberPlanSubscriptions),
+          )
+          .indoor_training_subscription(
+            Promise.resolve(resolvedIndoorTrainingSubscriptions),
+          )
           .build(),
       );
       return await this.repository.save(created_member);
@@ -193,18 +284,91 @@ export class MemberService
   async update(payload: MemberUpdatePayload): Promise<Member> {
     try {
       const detail: Member = await this.detail(payload.member_id.toString());
+
+      let resolvedCredential;
+      try {
+        resolvedCredential = await this.auth_service.detail(
+          payload.credential.credential_id.toString(),
+        );
+      } catch (e) {
+        resolvedCredential = null;
+      }
+
+      let resolvedAddress;
+      try {
+        resolvedAddress = await this.address_service.detail(
+          payload.address.address_id.toString(),
+        );
+      } catch (e) {
+        resolvedAddress = null;
+      }
+
+      let resolvedMemberCard;
+      try {
+        resolvedMemberCard = await this.member_card_service.detail(
+          payload.member_card.member_card_id.toString(),
+        );
+      } catch (e) {
+        resolvedMemberCard = null;
+      }
+
+      let resolvedMemberHomeTrainings;
+      try {
+        resolvedMemberHomeTrainings = await Promise.all(
+          payload.member_home_trainings.map(async (training) => {
+            return await this.member_home_training_service.detail(
+              training.member_home_training_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedMemberHomeTrainings = [];
+      }
+
+      let resolvedMemberPlanSubscriptions;
+      try {
+        resolvedMemberPlanSubscriptions = await Promise.all(
+          payload.member_plan_subscriptions.map(async (subscription) => {
+            return await this.member_plan_subscription_service.detail(
+              subscription.member_plan_subscription_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedMemberPlanSubscriptions = [];
+      }
+
+      let resolvedIndoorTrainingSubscriptions;
+      try {
+        resolvedIndoorTrainingSubscriptions = await Promise.all(
+          payload.indoor_training_subscription.map(async (subscription) => {
+            return await this.indoor_training_subscription_service.detail(
+              subscription.indoor_training_subscription_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedIndoorTrainingSubscriptions = [];
+      }
+
       detail.firstname = payload.firstname;
       detail.lastname = payload.lastname;
       detail.birthdate = payload.birthdate;
       detail.gender = payload.gender;
       detail.phone = payload.phone;
       detail.mail = payload.mail;
-      detail.address = payload.address;
       detail.active = payload.active;
-      detail.credential = Promise.resolve(
-        await this.credentialRepository.findOneBy({
-          credential_id: payload.credential.credential_id,
-        }),
+      detail.address = resolvedAddress;
+      detail.credential = Promise.resolve(resolvedCredential);
+      detail.member_card = resolvedMemberCard;
+      detail.indoor_training_subscription = Promise.resolve(
+        resolvedIndoorTrainingSubscriptions,
+      );
+      detail.member_home_trainings = Promise.resolve(
+        resolvedMemberHomeTrainings,
+      );
+      detail.member_plan_subscriptions = Promise.resolve(
+        resolvedMemberPlanSubscriptions,
       );
       return await this.repository.save(detail);
     } catch (e) {

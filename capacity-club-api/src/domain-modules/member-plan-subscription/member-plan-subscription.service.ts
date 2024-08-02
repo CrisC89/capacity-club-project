@@ -1,9 +1,5 @@
 import { CrudService } from '@domain-modules-shared';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import {
-  MemberPlanSubscription,
-  MemberPlanSubscriptionCreatePayload,
-} from './model';
 import { Brackets, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
@@ -16,11 +12,13 @@ import {
 } from './member-plan-subscription.exception';
 import { isNil } from 'lodash';
 import { UniqueId } from '@common/model/unique-id';
-import { MemberPlanSubscriptionFilter } from './model/filter';
 import { MemberService } from 'domain-modules/member/member.service';
 import { MemberPlanService } from 'domain-modules/member-plan/member-plan.service';
 import { MemberCardService } from 'domain-modules/member-card/member-card.service';
 import { MemberPlanSubscriptionUpdatePayload } from './model/payload/member-plan-subscription-update.payload';
+import { MemberPlanSubscription } from './model/entity/member-plan-subscription.entity';
+import { MemberPlanSubscriptionCreatePayload } from './model/payload/member-plan-subscription-create.payload';
+import { MemberPlanSubscriptionFilter } from './model/filter/member-plan-subscription.filter';
 
 /**
  * Service for managing member plan subscriptions.

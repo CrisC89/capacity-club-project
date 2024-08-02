@@ -1,11 +1,5 @@
 import { CrudService } from '@domain-modules-shared';
-import { Injectable } from '@nestjs/common';
-import {
-  MemberHomeTraining,
-  MemberHomeTrainingCreatePayload,
-  MemberHomeTrainingFilter,
-  MemberHomeTrainingUpdatePayload,
-} from './model';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isNil } from 'lodash';
 import { Brackets, Repository } from 'typeorm';
@@ -18,6 +12,13 @@ import {
 } from './member-home-training.exception';
 import { UniqueId } from '@common/model';
 import { Builder } from 'builder-pattern';
+import { MemberService } from 'domain-modules/member/member.service';
+
+import { HomeTrainingService } from 'domain-modules/home-training/home-training.service';
+import { MemberHomeTraining } from './model/entity/member_home_training.entity';
+import { MemberHomeTrainingFilter } from './model/filter/member_home_training.filter';
+import { MemberHomeTrainingCreatePayload } from './model/payload/member-home-training-create.payload';
+import { MemberHomeTrainingUpdatePayload } from './model/payload/member-home-training-update.payload';
 
 /**
  * Service for managing member home training programs.
@@ -37,6 +38,10 @@ export class MemberHomeTrainingService
   constructor(
     @InjectRepository(MemberHomeTraining)
     private readonly repository: Repository<MemberHomeTraining>,
+    @Inject(forwardRef(() => MemberService))
+    private readonly member_service: MemberService,
+    @Inject(forwardRef(() => HomeTrainingService))
+    private readonly home_training_service: HomeTrainingService,
   ) {}
 
   /**
@@ -131,11 +136,30 @@ export class MemberHomeTrainingService
     payload: MemberHomeTrainingCreatePayload,
   ): Promise<MemberHomeTraining> {
     try {
+      let resolvedMember;
+      try {
+        resolvedMember = await this.member_service.detail(
+          payload.member.member_id.toString(),
+        );
+      } catch (e) {
+        resolvedMember = null;
+      }
+
+      let resolvedHomeTraining;
+      try {
+        resolvedHomeTraining = await this.home_training_service.detail(
+          payload.home_training.home_training_id.toString(),
+        );
+      } catch (e) {
+        resolvedHomeTraining = null;
+      }
+
       return await this.repository.save(
         Builder<MemberHomeTraining>()
           .member_home_training_id(UniqueId.generate())
           .purchase_date(payload.purchase_date)
-          .member(Promise.resolve(payload.member))
+          .member(Promise.resolve(resolvedMember))
+          .home_training(Promise.resolve(resolvedHomeTraining))
           .build(),
       );
     } catch (e) {
@@ -156,8 +180,29 @@ export class MemberHomeTrainingService
       const detail = await this.detail(
         payload.member_home_training_id.toString(),
       );
+
+      let resolvedMember;
+      try {
+        resolvedMember = await this.member_service.detail(
+          payload.member.member_id.toString(),
+        );
+      } catch (e) {
+        resolvedMember = null;
+      }
+
+      let resolvedHomeTraining;
+      try {
+        resolvedHomeTraining = await this.home_training_service.detail(
+          payload.home_training.home_training_id.toString(),
+        );
+      } catch (e) {
+        resolvedHomeTraining = null;
+      }
+
       detail.purchase_date = payload.purchase_date;
-      detail.member = Promise.resolve(payload.member);
+      detail.member = Promise.resolve(resolvedMember);
+      detail.home_training = Promise.resolve(resolvedHomeTraining);
+
       return await this.repository.save(detail);
     } catch (e) {
       throw new MemberHomeTrainingUpdateException();

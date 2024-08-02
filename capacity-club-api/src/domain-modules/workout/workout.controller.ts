@@ -1,3 +1,4 @@
+import { CrudController } from '@domain-modules-shared';
 import {
   Body,
   Controller,
@@ -8,10 +9,11 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Workout, WorkoutCreatePayload, WorkoutUpdatePayload } from './model';
-import { CrudController } from '@domain-modules-shared';
+import { Workout } from './model/entity/workout.entity';
+import { WorkoutFilter } from './model/filter/workout.filter';
+import { WorkoutCreatePayload } from './model/payload/workout-create.payload';
+import { WorkoutUpdatePayload } from './model/payload/workout-update.payload';
 import { WorkoutService } from './workout.service';
-import { WorkoutFilter } from './model/filter';
 
 /**
  * Controller for managing workouts.

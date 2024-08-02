@@ -1,15 +1,14 @@
-import { ExerciseDataService } from './../exercise-data/exercise-data.service';
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import {
-  ExerciseTraining,
-  ExerciseTrainingCreatePayload,
-  ExerciseTrainingUpdatePayload,
-} from './model';
+import { UniqueId } from '@common/model';
 import { CrudService } from '@domain-modules-shared';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
+import { ExerciseData } from 'domain-modules/exercise-data/model/entity/exercise-data.entity';
+import { TrainingCircuit } from 'domain-modules/training-circuit/model/entity/training-circuit.entity';
+import { TrainingCircuitService } from 'domain-modules/training-circuit/training-circuit.service';
 import { isNil } from 'lodash';
 import { Repository } from 'typeorm';
+import { ExerciseDataService } from './../exercise-data/exercise-data.service';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import {
   ExerciseTrainingCreateException,
   ExerciseTrainingDeleteException,
@@ -17,11 +16,10 @@ import {
   ExerciseTrainingListException,
   ExerciseTrainingUpdateException,
 } from './exercise-training.exception';
-import { ExerciseTrainingFilter } from './model/filter';
-import { UniqueId } from '@common/model/unique-id';
-import { TrainingCircuitService } from 'domain-modules/training-circuit/training-circuit.service';
-import { ExerciseData } from 'domain-modules/exercise-data/model';
-import { TrainingCircuit } from 'domain-modules/training-circuit/model';
+import { ExerciseTraining } from './model/entity/exercise-training.entity';
+import { ExerciseTrainingFilter } from './model/filter/exercise-training.filter';
+import { ExerciseTrainingCreatePayload } from './model/payload/exercise-training-create.payload';
+import { ExerciseTrainingUpdatePayload } from './model/payload/exercise-training-update.payload';
 
 /**
  * Service for managing exercise training sessions.

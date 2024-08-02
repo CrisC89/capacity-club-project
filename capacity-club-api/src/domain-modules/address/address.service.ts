@@ -1,11 +1,5 @@
 import { CrudService } from '@domain-modules-shared';
 import { Injectable, Logger } from '@nestjs/common';
-import {
-  Address,
-  AddressCreatePayload,
-  AddressFilter,
-  AddressUpdatePayload,
-} from './model';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
@@ -19,6 +13,10 @@ import {
 } from './address.exception';
 import { isNil } from 'lodash';
 import { UniqueId } from '@common/model/unique-id';
+import { AddressUpdatePayload } from './model/payload/address-update.payload';
+import { AddressFilter } from './model/filter/address.filter';
+import { AddressCreatePayload } from './model/payload/address-create.payload';
+import { Address } from './model/entity/address.entity';
 
 /**
  * Service for managing addresses.

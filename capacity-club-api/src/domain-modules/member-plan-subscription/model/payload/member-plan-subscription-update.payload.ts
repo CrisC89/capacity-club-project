@@ -3,9 +3,8 @@ import { UniqueId } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, Length } from 'class-validator';
 import { MemberCard } from 'domain-modules/member-card/model/entity/member-card.entity';
-import { MemberPlan } from 'domain-modules/member-plan/model';
-import { Member } from 'domain-modules/member/model';
-
+import { MemberPlan } from 'domain-modules/member-plan/model/entity/member-plan.entity';
+import { Member } from 'domain-modules/member/model/entity/member.entity';
 /**
  * Class used to update  member plan subscription.
  * This class defines the payload used when updating existing  member plan subscription.

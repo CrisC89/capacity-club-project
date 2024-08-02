@@ -2,7 +2,7 @@ import { UniqueId } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 import { ExerciseTraining } from 'domain-modules/exercise-training/model/entity/exercise-training.entity';
-import { Workout } from 'domain-modules/workout/model';
+import { Workout } from 'domain-modules/workout/model/entity/workout.entity';
 
 /**
  * Class used to update training circuit.

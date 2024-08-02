@@ -1,31 +1,27 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Address } from 'domain-modules/address/model';
-import { MemberPlan } from 'domain-modules/member-plan/model';
 import { MemberController } from './member.controller';
-import { Member } from './model';
 import { MemberService } from './member.service';
-import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
-import { Credential } from '@auth/model';
-import { MemberHomeTraining } from 'domain-modules/member-home-training/model';
-import { IndoorTraining } from 'domain-modules/indoor-training/model';
-import { MemberCard } from 'domain-modules/member-card/model/entity';
+import { MemberPlanSubscriptionModule } from 'domain-modules/member-plan-subscription/member-plan-subscription.module';
+import { AddressModule } from 'domain-modules/address/address.module';
+import { AuthModule } from '@auth/auth.module';
+import { MemberHomeTrainingModule } from 'domain-modules/member-home-training/member-home-training.module';
+import { IndoorTrainingSubscriptionModule } from 'domain-modules/indoor-training-subscription/indoor-training-subscription.module';
+import { MemberCardModule } from 'domain-modules/member-card/member-card.module';
+import { Member } from './model/entity/member.entity';
 
 /**
  * Module for managing Member.
  */
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      Member,
-      MemberPlan,
-      MemberPlanSubscription,
-      Address,
-      Credential,
-      MemberHomeTraining,
-      IndoorTraining,
-      MemberCard,
-    ]),
+    TypeOrmModule.forFeature([Member]),
+    forwardRef(() => MemberPlanSubscriptionModule),
+    forwardRef(() => AddressModule),
+    forwardRef(() => AuthModule),
+    forwardRef(() => MemberHomeTrainingModule),
+    forwardRef(() => IndoorTrainingSubscriptionModule),
+    forwardRef(() => MemberCardModule),
   ],
   controllers: [MemberController],
   providers: [MemberService],

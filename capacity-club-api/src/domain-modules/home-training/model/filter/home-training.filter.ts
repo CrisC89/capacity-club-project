@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
-import { Workout } from 'domain-modules/workout/model';
+import { Workout } from 'domain-modules/workout/model/entity/workout.entity';
 
 /**
  * Class used to filter home training.

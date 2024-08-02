@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Member } from 'domain-modules/member/model';
+import { Member } from 'domain-modules/member/model/entity/member.entity';
 
 /**
  * Class used to filter member card.

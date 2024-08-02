@@ -1,10 +1,5 @@
 import { CrudService } from '@domain-modules-shared';
-import { Injectable } from '@nestjs/common';
-import { HomeTraining } from './model/entity';
-import {
-  HomeTrainingCreatePayload,
-  HomeTrainingUpdatePayload,
-} from './model/payload';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { HomeTrainingFilter } from './model/filter/home-training.filter';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -18,6 +13,11 @@ import {
 import { isNil } from 'lodash';
 import { UniqueId } from '@common/model';
 import { Builder } from 'builder-pattern';
+import { MemberHomeTrainingService } from 'domain-modules/member-home-training/member-home-training.service';
+import { WorkoutService } from 'domain-modules/workout/workout.service';
+import { HomeTraining } from './model/entity/home-training.entity';
+import { HomeTrainingCreatePayload } from './model/payload/home-training-create.payload';
+import { HomeTrainingUpdatePayload } from './model/payload/home-training-update.payload';
 
 /**
  * Service for managing home training programs.
@@ -37,6 +37,10 @@ export class HomeTrainingService
   constructor(
     @InjectRepository(HomeTraining)
     private readonly repository: Repository<HomeTraining>,
+    @Inject(forwardRef(() => MemberHomeTrainingService))
+    private readonly member_home_training_service: MemberHomeTrainingService,
+    @Inject(forwardRef(() => WorkoutService))
+    private readonly workout_service: WorkoutService,
   ) {}
 
   /**
@@ -118,6 +122,32 @@ export class HomeTrainingService
    */
   async create(payload: HomeTrainingCreatePayload): Promise<HomeTraining> {
     try {
+      let resolvedWorkouts;
+      try {
+        resolvedWorkouts = await Promise.all(
+          payload.workouts.map(async (workout) => {
+            return await this.workout_service.detail(
+              workout.workout_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedWorkouts = [];
+      }
+
+      let resolvedMemberHomeTrainings;
+      try {
+        resolvedMemberHomeTrainings = await Promise.all(
+          payload.member_home_trainings.map(async (memberHomeTraining) => {
+            return await this.member_home_training_service.detail(
+              memberHomeTraining.member_home_training_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedMemberHomeTrainings = [];
+      }
+
       return await this.repository.save(
         Builder<HomeTraining>()
           .home_training_id(UniqueId.generate())
@@ -125,7 +155,8 @@ export class HomeTrainingService
           .nb_week(payload.nb_week)
           .nb_training_by_week(payload.nb_training_by_week)
           .price(payload.price)
-          .workouts(Promise.resolve(payload.workouts))
+          .workouts(Promise.resolve(resolvedWorkouts))
+          .member_home_trainings(Promise.resolve(resolvedMemberHomeTrainings))
           .build(),
       );
     } catch (e) {
@@ -143,18 +174,49 @@ export class HomeTrainingService
   async update(payload: HomeTrainingUpdatePayload): Promise<HomeTraining> {
     try {
       const detail = await this.detail(payload.home_training_id.toString());
+
       detail.title = payload.title;
       detail.nb_week = payload.nb_week;
       detail.nb_training_by_week = payload.nb_training_by_week;
       detail.price = payload.price;
-      detail.workouts = Promise.resolve(payload.workouts);
+
+      let resolvedWorkouts;
+      try {
+        resolvedWorkouts = await Promise.all(
+          payload.workouts.map(async (workout) => {
+            return await this.workout_service.detail(
+              workout.workout_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedWorkouts = [];
+      }
+
+      let resolvedMemberHomeTrainings;
+      try {
+        resolvedMemberHomeTrainings = await Promise.all(
+          payload.member_home_trainings.map(async (memberHomeTraining) => {
+            return await this.member_home_training_service.detail(
+              memberHomeTraining.member_home_training_id.toString(),
+            );
+          }),
+        );
+      } catch (e) {
+        resolvedMemberHomeTrainings = [];
+      }
+
+      detail.workouts = Promise.resolve(resolvedWorkouts);
+      detail.member_home_trainings = Promise.resolve(
+        resolvedMemberHomeTrainings,
+      );
+
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);
       throw new HomeTrainingUpdateException();
     }
   }
-
   /**
    * Deletes an existing home training program by ID.
    * @param id - The ID of the home training program to delete.

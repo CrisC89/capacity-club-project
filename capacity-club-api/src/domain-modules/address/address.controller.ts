@@ -9,9 +9,11 @@ import {
 import { CrudController } from '@domain-modules-shared';
 import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Address, AddressCreatePayload, AddressUpdatePayload } from './model';
 import { AddressService } from './address.service';
 import { AddressFilter } from './model/filter/address.filter';
+import { Address } from './model/entity/address.entity';
+import { AddressUpdatePayload } from './model/payload/address-update.payload';
+import { AddressCreatePayload } from './model/payload/address-create.payload';
 
 /**
  * Controller for managing addresses.

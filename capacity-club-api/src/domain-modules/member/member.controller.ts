@@ -9,9 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { MemberService } from './member.service';
-import { Member, MemberCreatePayload, MemberUpdatePayload } from './model';
 import { CrudController } from 'domain-modules/shared/model/interface/crud-controller.interface';
-import { MemberFilter } from './model/filter';
 import {
   MemberControllerCreate,
   MemberControllerDelete,
@@ -20,6 +18,10 @@ import {
   MemberControllerList,
   MemberControllerUpdate,
 } from '@common/documentation';
+import { Member } from './model/entity/member.entity';
+import { MemberFilter } from './model/filter/member.filter';
+import { MemberCreatePayload } from './model/payload/member-create.payload';
+import { MemberUpdatePayload } from './model/payload/member-update.payload';
 
 /**
  * Controller for managing members.

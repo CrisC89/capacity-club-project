@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MemberPlanService } from './member-plan.service';
 import { MemberPlanController } from './member-plan.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MemberPlan } from './model';
+import { MemberPlan } from './model/entity/member-plan.entity';
 
 /**
  * Module for managing MemberPlan.

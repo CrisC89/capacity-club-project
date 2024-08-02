@@ -9,13 +9,11 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import {
-  TrainingCircuit,
-  TrainingCircuitCreatePayload,
-  TrainingCircuitUpdatePayload,
-} from './model';
+import { TrainingCircuit } from './model/entity/training-circuit.entity';
+import { TrainingCircuitFilter } from './model/filter/training-circuit.filter';
+import { TrainingCircuitCreatePayload } from './model/payload/training-circuit-create.payload';
+import { TrainingCircuitUpdatePayload } from './model/payload/training-circuit-update.payload';
 import { TrainingCircuitService } from './training-circuit.service';
-import { TrainingCircuitFilter } from './model/filter';
 
 /**
  * Controller for managing training circuits.

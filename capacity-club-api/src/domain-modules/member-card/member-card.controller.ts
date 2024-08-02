@@ -8,11 +8,6 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import {
-  MemberCardCreatePayload,
-  MemberCardUpdatePayload,
-} from './model/payload';
-import { MemberCard } from './model/entity';
 import { MemberCardFilter } from './model/filter/member-card.filter';
 import {
   MemberCardControllerCreate,
@@ -24,6 +19,9 @@ import {
 } from '@common/documentation';
 import { ApiOperation } from '@nestjs/swagger';
 import { MemberCardService } from './member-card.service';
+import { MemberCard } from './model/entity/member-card.entity';
+import { MemberCardCreatePayload } from './model/payload/member-card-create.payload';
+import { MemberCardUpdatePayload } from './model/payload/member-card-update.payload';
 
 /**
  * Controller for managing member cards.

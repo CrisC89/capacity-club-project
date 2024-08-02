@@ -11,10 +11,11 @@ import {
   MemberPlanListException,
   MemberPlanUpdateException,
 } from './member-plan.exception';
-import { MemberPlan, MemberPlanCreatePayload } from './model';
-import { MemberPlanUpdatePayload } from './model/payload/member-plan-update.payload';
-import { MemberPlanFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
+import { MemberPlan } from './model/entity/member-plan.entity';
+import { MemberPlanFilter } from './model/filter/member-plan.filter';
+import { MemberPlanCreatePayload } from './model/payload/member-plan-create.payload';
+import { MemberPlanUpdatePayload } from './model/payload/member-plan-update.payload';
 
 /**
  * Service for managing member plans.

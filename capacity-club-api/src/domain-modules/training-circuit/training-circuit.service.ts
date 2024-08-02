@@ -3,11 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Builder } from 'builder-pattern';
 import { isNil } from 'lodash';
 import { Repository } from 'typeorm';
-import {
-  TrainingCircuit,
-  TrainingCircuitCreatePayload,
-  TrainingCircuitUpdatePayload,
-} from './model';
+
+import { UniqueId } from '@common/model/unique-id';
+import { ExerciseTrainingService } from 'domain-modules/exercise-training/exercise-training.service';
+import { WorkoutService } from 'domain-modules/workout/workout.service';
+import { CrudService } from '@domain-modules-shared';
+import { TrainingCircuit } from './model/entity/training-circuit.entity';
+import { TrainingCircuitFilter } from './model/filter/training-circuit.filter';
+import { TrainingCircuitCreatePayload } from './model/payload/training-circuit-create.payload';
+import { TrainingCircuitUpdatePayload } from './model/payload/training-circuit-update.payload';
 import {
   TrainingCircuitCreateException,
   TrainingCircuitDeleteException,
@@ -15,11 +19,6 @@ import {
   TrainingCircuitListException,
   TrainingCircuitUpdateException,
 } from './training-circuit.exception';
-import { CrudService } from '@domain-modules-shared';
-import { TrainingCircuitFilter } from './model/filter';
-import { UniqueId } from '@common/model/unique-id';
-import { ExerciseTrainingService } from 'domain-modules/exercise-training/exercise-training.service';
-import { WorkoutService } from 'domain-modules/workout/workout.service';
 
 /**
  * Service for managing training circuits.

@@ -1,11 +1,5 @@
 import { CrudService } from '@domain-modules-shared';
-import {
-  IndoorTrainingSubscription,
-  IndoorTrainingSubscriptionCreatePayload,
-  IndoorTrainingSubscriptionFilter,
-  IndoorTrainingSubscriptionUpdatePayload,
-} from './model';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, Repository } from 'typeorm';
 import {
@@ -18,6 +12,12 @@ import {
 import { isNil } from 'lodash';
 import { UniqueId } from '@common/model';
 import { Builder } from 'builder-pattern';
+import { MemberService } from 'domain-modules/member/member.service';
+import { IndoorTrainingService } from 'domain-modules/indoor-training/indoor-training.service';
+import { IndoorTrainingSubscription } from './model/entity/indoor-training-subscription.entity';
+import { IndoorTrainingSubscriptionFilter } from './model/filter/indoor-training-subscription.filter';
+import { IndoorTrainingSubscriptionCreatePayload } from './model/payload/indoor-training-subscription-create.payload';
+import { IndoorTrainingSubscriptionUpdatePayload } from './model/payload/indoor-training-subscription-update.payload';
 
 /**
  * Service for managing indoor training sessions.
@@ -37,6 +37,10 @@ export class IndoorTrainingSubscriptionService
   constructor(
     @InjectRepository(IndoorTrainingSubscription)
     private readonly repository: Repository<IndoorTrainingSubscription>,
+    @Inject(forwardRef(() => MemberService))
+    private readonly member_service: MemberService,
+    @Inject(forwardRef(() => IndoorTrainingService))
+    private readonly indoor_training_service: IndoorTrainingService,
   ) {}
 
   /**
@@ -138,12 +142,30 @@ export class IndoorTrainingSubscriptionService
     payload: IndoorTrainingSubscriptionCreatePayload,
   ): Promise<IndoorTrainingSubscription> {
     try {
+      let resolvedMember;
+      try {
+        resolvedMember = await this.member_service.detail(
+          payload.member.member_id.toString(),
+        );
+      } catch (e) {
+        resolvedMember = null;
+      }
+
+      let resolvedIndoorTraining;
+      try {
+        resolvedIndoorTraining = await this.indoor_training_service.detail(
+          payload.indoor_training.indoor_training_id.toString(),
+        );
+      } catch (e) {
+        resolvedIndoorTraining = null;
+      }
+
       return await this.repository.save(
         Builder<IndoorTrainingSubscription>()
           .indoor_training_subscription_id(UniqueId.generate())
           .purchase_date(payload.purchase_date)
-          .indoor_training(Promise.resolve(payload.indoor_training))
-          .member(Promise.resolve(payload.member))
+          .indoor_training(Promise.resolve(resolvedIndoorTraining))
+          .member(Promise.resolve(resolvedMember))
           .build(),
       );
     } catch (e) {
@@ -165,9 +187,28 @@ export class IndoorTrainingSubscriptionService
       const detail = await this.detail(
         payload.indoor_training_subscription_id.toString(),
       );
+
+      let resolvedMember;
+      try {
+        resolvedMember = await this.member_service.detail(
+          payload.member.member_id.toString(),
+        );
+      } catch (e) {
+        resolvedMember = null;
+      }
+
+      let resolvedIndoorTraining;
+      try {
+        resolvedIndoorTraining = await this.indoor_training_service.detail(
+          payload.indoor_training.indoor_training_id.toString(),
+        );
+      } catch (e) {
+        resolvedIndoorTraining = null;
+      }
+
       detail.purchase_date = payload.purchase_date;
-      detail.indoor_training = Promise.resolve(payload.indoor_training);
-      detail.member = Promise.resolve(payload.member);
+      detail.indoor_training = Promise.resolve(resolvedIndoorTraining);
+      detail.member = Promise.resolve(resolvedMember);
       return await this.repository.save(detail);
     } catch (e) {
       console.log(e.message);

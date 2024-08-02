@@ -1,12 +1,10 @@
 import { CrudController } from '@domain-modules-shared';
 import { Controller } from '@nestjs/common';
-import {
-  MemberHomeTraining,
-  MemberHomeTrainingCreatePayload,
-  MemberHomeTrainingUpdatePayload,
-  MemberHomeTrainingFilter,
-} from './model';
 import { MemberHomeTrainingService } from './member-home-training.service';
+import { MemberHomeTrainingUpdatePayload } from './model/payload/member-home-training-update.payload';
+import { MemberHomeTraining } from './model/entity/member_home_training.entity';
+import { MemberHomeTrainingFilter } from './model/filter/member_home_training.filter';
+import { MemberHomeTrainingCreatePayload } from './model/payload/member-home-training-create.payload';
 
 /**
  * Controller for managing member home training programs.

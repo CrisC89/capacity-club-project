@@ -8,16 +8,14 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import {
-  IndoorTrainingSubscription,
-  IndoorTrainingSubscriptionCreatePayload,
-  IndoorTrainingSubscriptionFilter,
-  IndoorTrainingSubscriptionUpdatePayload,
-} from './model';
 import { CrudController } from '@domain-modules-shared';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { IndoorTrainingSubscriptionService } from './indoor-training-subscription.service';
 import { IndoorTrainingSubscriptionControllerFilter } from '@common/documentation';
+import { IndoorTrainingSubscription } from './model/entity/indoor-training-subscription.entity';
+import { IndoorTrainingSubscriptionFilter } from './model/filter/indoor-training-subscription.filter';
+import { IndoorTrainingSubscriptionCreatePayload } from './model/payload/indoor-training-subscription-create.payload';
+import { IndoorTrainingSubscriptionUpdatePayload } from './model/payload/indoor-training-subscription-update.payload';
 
 /**
  * Controller for managing indoor training sessions.

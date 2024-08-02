@@ -1,9 +1,3 @@
-import { Injectable } from '@nestjs/common';
-import { MemberCard } from './model/entity';
-import {
-  MemberCardCreatePayload,
-  MemberCardUpdatePayload,
-} from './model/payload';
 import { MemberCardFilter } from './model/filter/member-card.filter';
 import { CrudService } from '@domain-modules-shared';
 import { UniqueId } from '@common/model/unique-id';
@@ -18,6 +12,10 @@ import {
   MemberCardUpdateException,
 } from './member-card.exception';
 import { isNil } from 'lodash';
+import { Injectable } from '@nestjs/common';
+import { MemberCard } from './model/entity/member-card.entity';
+import { MemberCardCreatePayload } from './model/payload/member-card-create.payload';
+import { MemberCardUpdatePayload } from './model/payload/member-card-update.payload';
 
 /**
  * Service for managing member cards.

@@ -1,17 +1,19 @@
-import { HomeTraining } from 'domain-modules/home-training/model/entity';
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { HomeTrainingController } from './home-training.controller';
 import { HomeTrainingService } from './home-training.service';
-import { Workout } from 'domain-modules/workout/model';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MemberHomeTraining } from 'domain-modules/member-home-training/model';
+import { WorkoutModule } from 'domain-modules/workout/workout.module';
+import { MemberHomeTrainingModule } from 'domain-modules/member-home-training/member-home-training.module';
+import { HomeTraining } from './model/entity/home-training.entity';
 
 /**
  * Module for managing HomeTraining.
  */
 @Module({
   imports: [
-    TypeOrmModule.forFeature([HomeTraining, Workout, MemberHomeTraining]),
+    TypeOrmModule.forFeature([HomeTraining]),
+    forwardRef(() => WorkoutModule),
+    forwardRef(() => MemberHomeTrainingModule),
   ],
   controllers: [HomeTrainingController],
   providers: [HomeTrainingService],

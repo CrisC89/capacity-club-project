@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { BaseEntity } from '@common/model';
-import { TrainingCircuit } from 'domain-modules/training-circuit/model';
-import { PrimaryColumn, Column, ManyToOne, JoinColumn, Entity } from 'typeorm';
-import { TrainingIntensity } from '../enum';
-import { ExerciseData } from 'domain-modules/exercise-data/model';
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+import { ExerciseData } from 'domain-modules/exercise-data/model/entity/exercise-data.entity';
+import { TrainingCircuit } from 'domain-modules/training-circuit/model/entity/training-circuit.entity';
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { TrainingIntensity } from '../enum/training_intensity.enum';
 
 /**
  * Entity representing a specific exercise training session.

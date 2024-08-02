@@ -6,7 +6,6 @@ import { TokenService } from './jwt/token.service';
 import { JwtModule } from '@nestjs/jwt/dist/jwt.module';
 import { configManager } from '@common/config/config.manager';
 import { ConfigKey } from '@common/config/enum/config-key.enum';
-import { Member } from 'domain-modules/member/model';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { MemberModule } from 'domain-modules/member/member.module';

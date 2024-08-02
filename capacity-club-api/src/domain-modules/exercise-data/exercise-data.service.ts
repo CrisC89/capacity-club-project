@@ -5,21 +5,19 @@ import { Builder } from 'builder-pattern';
 import { isNil } from 'lodash';
 import { Repository } from 'typeorm';
 import {
-  ExerciseData,
-  ExerciseDataCreatePayload,
-  ExerciseDataUpdatePayload,
-} from './model';
-import {
   ExerciseDataCreateException,
   ExerciseDataDeleteException,
   ExerciseDataNotFoundException,
   ExerciseDataListException,
   ExerciseDataUpdateException,
 } from './exercise-data.exception';
-import { ExerciseDataFilter } from './model/filter';
 import { UniqueId } from '@common/model/unique-id';
-import { ExerciseTraining } from 'domain-modules/exercise-training/model';
 import { ExerciseTrainingService } from 'domain-modules/exercise-training/exercise-training.service';
+import { ExerciseTraining } from 'domain-modules/exercise-training/model/entity/exercise-training.entity';
+import { ExerciseData } from './model/entity/exercise-data.entity';
+import { ExerciseDataFilter } from './model/filter/exercise-data.filter';
+import { ExerciseDataCreatePayload } from './model/payload/exercise-data-create.payload';
+import { ExerciseDataUpdatePayload } from './model/payload/exercise-data-update.payload';
 
 /**
  * Service for managing exercise data.

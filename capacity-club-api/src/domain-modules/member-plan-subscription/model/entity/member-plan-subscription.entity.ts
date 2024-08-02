@@ -1,9 +1,9 @@
 import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { MemberCard } from 'domain-modules/member-card/model/entity';
-import { MemberPlan } from 'domain-modules/member-plan/model/entity';
-import { Member } from 'domain-modules/member/model';
+import { MemberCard } from 'domain-modules/member-card/model/entity/member-card.entity';
+import { MemberPlan } from 'domain-modules/member-plan/model/entity/member-plan.entity';
+import { Member } from 'domain-modules/member/model/entity/member.entity';
 import {
   Entity,
   PrimaryColumn,

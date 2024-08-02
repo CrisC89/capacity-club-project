@@ -1,9 +1,9 @@
+import { UniqueId } from '@common/model';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsOptional, Length } from 'class-validator';
+import { IsEnum, IsNotEmpty, Length } from 'class-validator';
+import { ExerciseData } from 'domain-modules/exercise-data/model/entity/exercise-data.entity';
 import { TrainingCircuit } from 'domain-modules/training-circuit/model/entity/training-circuit.entity';
-import { TrainingIntensity } from '../enum';
-import { UniqueId } from '@common/model/unique-id';
-import { ExerciseData } from 'domain-modules/exercise-data/model';
+import { TrainingIntensity } from '../enum/training_intensity.enum';
 
 /**
  * Class used to update exercise training.

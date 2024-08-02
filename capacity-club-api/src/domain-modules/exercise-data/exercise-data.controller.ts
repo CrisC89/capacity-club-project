@@ -11,12 +11,6 @@ import {
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ExerciseDataService } from './exercise-data.service';
 import {
-  ExerciseData,
-  ExerciseDataCreatePayload,
-  ExerciseDataUpdatePayload,
-} from './model';
-import { ExerciseDataFilter } from './model/filter';
-import {
   ExerciseDataControllerCreate,
   ExerciseDataControllerDelete,
   ExerciseDataControllerDetail,
@@ -24,6 +18,10 @@ import {
   ExerciseDataControllerList,
   ExerciseDataControllerUpdate,
 } from '@common/documentation';
+import { ExerciseData } from './model/entity/exercise-data.entity';
+import { ExerciseDataFilter } from './model/filter/exercise-data.filter';
+import { ExerciseDataCreatePayload } from './model/payload/exercise-data-create.payload';
+import { ExerciseDataUpdatePayload } from './model/payload/exercise-data-update.payload';
 
 /**
  * Controller for managing exercise data.

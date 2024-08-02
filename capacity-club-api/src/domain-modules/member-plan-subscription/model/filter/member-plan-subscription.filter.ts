@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { MemberCard } from 'domain-modules/member-card/model/entity';
-import { MemberPlan } from 'domain-modules/member-plan/model';
-import { Member } from 'domain-modules/member/model';
+import { MemberCard } from 'domain-modules/member-card/model/entity/member-card.entity';
+import { MemberPlan } from 'domain-modules/member-plan/model/entity/member-plan.entity';
+import { Member } from 'domain-modules/member/model/entity/member.entity';
 
 /**
  * Class used to filter member plan subscription.

@@ -1,6 +1,14 @@
-import { Address } from 'domain-modules/address/model';
+import { uniqueIdTransformer, UniqueId } from '@common/model';
+import { ApiProperty } from '@nestjs/swagger';
+import { Address } from 'domain-modules/address/model/entity/address.entity';
+import { IndoorTrainingSubscription } from 'domain-modules/indoor-training-subscription/model/entity/indoor-training-subscription.entity';
+import { MemberCard } from 'domain-modules/member-card/model/entity/member-card.entity';
+import { MemberHomeTraining } from 'domain-modules/member-home-training/model/entity/member_home_training.entity';
+import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model/entity/member-plan-subscription.entity';
+import { isNil } from 'lodash';
 import {
   Entity,
+  BaseEntity,
   PrimaryColumn,
   Column,
   OneToMany,
@@ -9,16 +17,9 @@ import {
   BeforeInsert,
 } from 'typeorm';
 import { ulid } from 'ulid';
-import { Gender } from '../enum';
-import { isNil } from 'lodash';
-import { BaseEntity } from '@common/model';
-import { MemberPlanSubscription } from 'domain-modules/member-plan-subscription/model';
-import { Credential } from '@auth/model';
-import { UniqueId, uniqueIdTransformer } from '@common/model/unique-id';
+import { Gender } from '../enum/gender.enum';
 import { Transform } from 'class-transformer';
-import { MemberCard } from 'domain-modules/member-card/model/entity/member-card.entity';
-import { MemberHomeTraining } from 'domain-modules/member-home-training/model/entity';
-import { ApiProperty } from '@nestjs/swagger';
+import { Credential } from '@auth/model';
 
 /**
  * Entity representing a member.
@@ -65,7 +66,15 @@ export class Member extends BaseEntity {
     nullable: true,
   })
   @ApiProperty({ type: () => MemberPlanSubscription, isArray: true })
-  subscriptions: Promise<MemberPlanSubscription[]>;
+  member_plan_subscriptions: Promise<MemberPlanSubscription[]>;
+
+  @OneToMany(() => MemberPlanSubscription, (ms) => ms.member, {
+    cascade: true,
+    lazy: true,
+    nullable: true,
+  })
+  @ApiProperty({ type: () => IndoorTrainingSubscription, isArray: true })
+  indoor_training_subscription: Promise<IndoorTrainingSubscription[]>;
 
   @OneToMany(() => MemberHomeTraining, (mht) => mht.member, {
     cascade: true,

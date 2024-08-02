@@ -1,9 +1,8 @@
 import { uniqueIdTransformer, UniqueId } from '@common/model';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IndoorTraining } from 'domain-modules/indoor-training/model';
-import { Member } from 'domain-modules/member/model';
-import { Workout } from 'domain-modules/workout/model';
+import { IndoorTraining } from 'domain-modules/indoor-training/model/entity/indoor-training.entity';
+import { Member } from 'domain-modules/member/model/entity/member.entity';
 import {
   BaseEntity,
   Column,

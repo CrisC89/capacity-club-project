@@ -1,13 +1,11 @@
 import { CrudController } from '@domain-modules-shared';
 import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
-import {
-  MemberPlanSubscription,
-  MemberPlanSubscriptionCreatePayload,
-  MemberPlanSubscriptionUpdatePayload,
-} from './model';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { MemberPlanSubscriptionService } from './member-plan-subscription.service';
-import { MemberPlanSubscriptionFilter } from './model/filter';
+import { MemberPlanSubscription } from './model/entity/member-plan-subscription.entity';
+import { MemberPlanSubscriptionFilter } from './model/filter/member-plan-subscription.filter';
+import { MemberPlanSubscriptionCreatePayload } from './model/payload/member-plan-subscription-create.payload';
+import { MemberPlanSubscriptionUpdatePayload } from './model/payload/member-plan-subscription-update.payload';
 
 /**
  * Controller for managing member plan subscriptions.
