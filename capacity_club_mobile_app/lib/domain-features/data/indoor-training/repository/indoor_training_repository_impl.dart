@@ -7,7 +7,7 @@ import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/mo
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/model/indoor_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/model/payload/indoor_training_create_payload.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/model/payload/indoor_training_update_payload.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/failure/indoor_training_exception.dart';
+import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/failure/indoor_training_failure.dart';
 import 'package:either_dart/src/either.dart';
 
 class IndoorTrainingRepositoryImpl

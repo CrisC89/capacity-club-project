@@ -47,6 +47,13 @@ enum ApiURI {
   INDOOR_TRAINING_LIST('indoor-training/list'),
   INDOOR_TRAINING_UPDATE('indoor-training/update'),
 
+  INDOOR_TRAINING_SUBSCRIPTION_CREATE('indoor-training-subscription/create'),
+  INDOOR_TRAINING_SUBSCRIPTION_DELETE('indoor-training-subscription/delete/'),
+  INDOOR_TRAINING_SUBSCRIPTION_DETAIL('indoor-training-subscription/detail/'),
+  INDOOR_TRAINING_SUBSCRIPTION_FILTER('indoor-training-subscription/filter'),
+  INDOOR_TRAINING_SUBSCRIPTION_LIST('indoor-training-subscription/list'),
+  INDOOR_TRAINING_SUBSCRIPTION_UPDATE('indoor-training-subscription/update'),
+
   HOME_TRAINING_CREATE('home-training/create'),
   HOME_TRAINING_DELETE('home-training/delete/'),
   HOME_TRAINING_DETAIL('home-training/detail/'),
@@ -210,6 +217,22 @@ enum ApiURI {
             return ApiURI.INDOOR_TRAINING_DELETE.url;
           case 'LIST':
             return ApiURI.INDOOR_TRAINING_LIST.url;
+          default:
+            break;
+        }
+        break;
+      case 'INDOOR_TRAINING_SUBSCRIPTION':
+        switch (operation) {
+          case 'DETAIL':
+            return ApiURI.INDOOR_TRAINING_SUBSCRIPTION_DETAIL.url;
+          case 'FILTER':
+            return ApiURI.INDOOR_TRAINING_SUBSCRIPTION_FILTER.url;
+          case 'UPDATE':
+            return ApiURI.INDOOR_TRAINING_SUBSCRIPTION_UPDATE.url;
+          case 'DELETE':
+            return ApiURI.INDOOR_TRAINING_SUBSCRIPTION_DELETE.url;
+          case 'LIST':
+            return ApiURI.INDOOR_TRAINING_SUBSCRIPTION_LIST.url;
           default:
             break;
         }

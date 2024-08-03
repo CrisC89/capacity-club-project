@@ -1,7 +1,7 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/core/model/helper/common_helper.dart';
 import 'package:capacity_club_mobile_app/core/model/mixin/mapper_mixin.dart';
-import 'package:capacity_club_mobile_app/domain-features/data/indoor-training-subscription/mapper/indoor_training_subscription_mapper.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/indoor-training-subscription/model/mapper/indoor_training_subscription_mapper.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/model/indoor_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/workout/model/mapper/workout_mapper.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/entity/indoor_training_entity.dart';

@@ -8,8 +8,8 @@ class WorkoutModel extends Equatable {
   final UniqueId workout_id;
   final String title;
   final List<TrainingCircuitModel> training_circuits;
-  final IndoorTrainingModel indoor_training;
-  final HomeTrainingModel home_training;
+  final IndoorTrainingModel? indoor_training;
+  final HomeTrainingModel? home_training;
 
   const WorkoutModel(
       {required this.workout_id,
