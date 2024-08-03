@@ -1,10 +1,12 @@
 import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/address/model/address_model.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/indoor-training-subscription/model/indoor_training_subscription_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-card/model/member_card_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-home-training/model/member_home_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-plan-subscription/model/member_plan_subscription_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member/model/enum/gender_enum.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/member/model/mapper/member_mapper.dart';
 import 'package:equatable/equatable.dart';
 
 class MemberModel extends Equatable {
@@ -17,11 +19,12 @@ class MemberModel extends Equatable {
   final String mail;
   final String code_activation;
   final bool active;
-  final List<MemberPlanSubscriptionModel> subscriptions;
+  final List<MemberPlanSubscriptionModel> member_plan_subscriptions;
   final List<MemberHomeTrainingModel> member_home_trainings;
-  final AddressModel address;
-  final CredentialModel credential;
-  final MemberCardModel member_card;
+  final List<IndoorTrainingSubscriptionModel> indoor_training_subscription;
+  final AddressModel? address;
+  final CredentialModel? credential;
+  final MemberCardModel? member_card;
 
   MemberModel(
       {required this.member_id,
@@ -33,46 +36,20 @@ class MemberModel extends Equatable {
       required this.mail,
       required this.code_activation,
       required this.active,
-      required this.subscriptions,
+      required this.member_plan_subscriptions,
+      required this.indoor_training_subscription,
       required this.member_home_trainings,
       required this.address,
       required this.credential,
       required this.member_card});
 
   factory MemberModel.fromJson(Map<String, dynamic> json) {
-    return MemberModel(
-        member_id: json['member_id'],
-        firstname: json['firstname'],
-        lastname: json['lastname'],
-        birthdate: json['birthdate'],
-        gender: json['gender'],
-        phone: json['phone'],
-        mail: json['mail'],
-        code_activation: json['code_activation'],
-        active: json['active'],
-        subscriptions: json['subscriptions'],
-        member_home_trainings: json['member_home_trainings'],
-        address: json['address'],
-        credential: json['credential'],
-        member_card: json['member_card']);
+    return MemberMapper().fromJson(json);
   }
 
-  Map<String, dynamic> toJson() => {
-        'member_id': member_id,
-        'firstname': firstname,
-        'lastname': lastname,
-        'birthdate': birthdate,
-        'gender': gender,
-        'phone': phone,
-        'mail': mail,
-        'code_activation': code_activation,
-        'active': active,
-        'subscriptions': subscriptions,
-        'member_home_trainings': member_home_trainings,
-        'address': address,
-        'credential': credential,
-        'member_card': member_card
-      };
+  Map<String, dynamic> toJson() {
+    return MemberMapper().toJson(this);
+  }
 
   @override
   List<Object?> get props => [
@@ -85,7 +62,8 @@ class MemberModel extends Equatable {
         mail,
         code_activation,
         active,
-        subscriptions,
+        member_plan_subscriptions,
+        indoor_training_subscription,
         member_home_trainings,
         address,
         credential,

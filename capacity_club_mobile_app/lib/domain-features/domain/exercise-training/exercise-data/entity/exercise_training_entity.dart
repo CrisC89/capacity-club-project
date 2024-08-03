@@ -10,6 +10,7 @@ class ExerciseTrainingEntity {
   final TrainingIntensity intensityType;
   final ExerciseDataEntity exercise_data;
   final TrainingCircuitEntity training_circuit;
+  final bool is_empty;
 
   ExerciseTrainingEntity(
       {required this.exercise_training_id,
@@ -17,7 +18,8 @@ class ExerciseTrainingEntity {
       required this.intensity,
       required this.intensityType,
       required this.exercise_data,
-      required this.training_circuit});
+      required this.training_circuit,
+      required this.is_empty});
 
   factory ExerciseTrainingEntity.empty() {
     return ExerciseTrainingEntity(
@@ -26,6 +28,7 @@ class ExerciseTrainingEntity {
         intensity: '',
         intensityType: TrainingIntensity.none,
         exercise_data: ExerciseDataEntity.empty(),
-        training_circuit: TrainingCircuitEntity.empty());
+        training_circuit: TrainingCircuitEntity.empty(),
+        is_empty: true);
   }
 }

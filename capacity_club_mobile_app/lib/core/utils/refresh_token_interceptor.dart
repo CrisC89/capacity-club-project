@@ -1,6 +1,5 @@
 import 'package:capacity_club_mobile_app/core/config/constant.dart';
 import 'package:capacity_club_mobile_app/core/model/enum/api_uri_enum.dart';
-import 'package:capacity_club_mobile_app/core/provider/auth_provider.dart';
 import 'package:capacity_club_mobile_app/core/utils/local_storage.dart';
 import 'package:dio/dio.dart';
 
@@ -60,10 +59,12 @@ class RefreshTokenInterceptor extends Interceptor {
 
   void _retrieveTokens() async {}
 
+/*
   void _printToken() {
     print('token $token');
     print('refresh $token');
   }
+  */
 
   void setToken(String? value) {
     token = value;

@@ -1,3 +1,4 @@
+import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/core/model/mixin/mapper_mixin.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-plan/model/member_plan_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/member-plan/entity/member_plan_entity.dart';
@@ -18,7 +19,9 @@ class MemberPlanMapper with Mapper<MemberPlanModel, MemberPlanEntity> {
   @override
   MemberPlanModel fromJson(Map<String, dynamic> json) {
     return MemberPlanModel(
-      member_plan_id: json['member_plan_id'],
+      member_plan_id: json['member_plan_id'] != null
+          ? UniqueId.fromJson(json['member_plan_id'])
+          : UniqueId(''),
       title: json['title'],
       description: json['description'],
       nb_individual_training: json['nb_individual_training'],
@@ -30,13 +33,13 @@ class MemberPlanMapper with Mapper<MemberPlanModel, MemberPlanEntity> {
   @override
   MemberPlanEntity toEntity(MemberPlanModel model) {
     return MemberPlanEntity(
-      member_plan_id: model.member_plan_id,
-      title: model.title,
-      description: model.description,
-      nb_individual_training: model.nb_individual_training,
-      nb_collective_training: model.nb_collective_training,
-      price: model.price,
-    );
+        member_plan_id: model.member_plan_id,
+        title: model.title,
+        description: model.description,
+        nb_individual_training: model.nb_individual_training,
+        nb_collective_training: model.nb_collective_training,
+        price: model.price,
+        is_empty: false);
   }
 
   @override

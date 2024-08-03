@@ -13,22 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'core/utils/dependency_injection.dart' as dependencyInjection;
 
-/*void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Loading Page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoadingLogoPage(),
-    );
-  }
-}*/
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dependencyInjection.init();

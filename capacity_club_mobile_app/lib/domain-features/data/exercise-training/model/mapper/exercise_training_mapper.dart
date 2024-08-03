@@ -1,9 +1,12 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
+import 'package:capacity_club_mobile_app/core/model/helper/common_helper.dart';
 import 'package:capacity_club_mobile_app/core/model/mixin/mapper_mixin.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-data/model/mapper/exercise_data_mapper.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-training/model/exercise_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/training-circuit/model/mapper/training_circuit_mapper.dart';
+import 'package:capacity_club_mobile_app/domain-features/domain/exercise-data/entity/exercise_data_entity.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/exercise-training/exercise-data/entity/exercise_training_entity.dart';
+import 'package:capacity_club_mobile_app/domain-features/domain/training-circuit/entity/training_circuit_entity.dart';
 
 class ExerciseTrainingMapper
     with Mapper<ExerciseTrainingModel, ExerciseTrainingEntity> {
@@ -17,61 +20,48 @@ class ExerciseTrainingMapper
       nb_reps: entity.nb_reps,
       intensity: entity.intensity,
       intensityType: entity.intensityType,
-      exercise_data: exerciseDataMapper.fromEntity(entity.exercise_data),
-      training_circuit:
-          trainingCircuitMapper.fromEntity(entity.training_circuit),
+      exercise_data: entity.exercise_data.is_empty
+          ? null
+          : exerciseDataMapper.fromEntity(entity.exercise_data),
+      training_circuit: entity.training_circuit.is_empty
+          ? null
+          : trainingCircuitMapper.fromEntity(entity.training_circuit),
     );
   }
 
   @override
   ExerciseTrainingModel fromJson(Map<String, dynamic> json) {
-    print("ENTER EXERCISE TRAINING FROM JSON");
-    print("Received JSON: $json");
-
-    final exerciseTrainingId = json['exercise_training_id'];
-    print("Type of exercise_training_id: ${exerciseTrainingId.runtimeType}");
-    print("Value of exercise_training_id: $exerciseTrainingId");
-
-    final nbReps = json['nb_reps'];
-    print("Type of nb_reps: ${nbReps.runtimeType}");
-    print("Value of nb_reps: $nbReps");
-
-    final intensity = json['intensity'];
-    print("Type of intensity: ${intensity.runtimeType}");
-    print("Value of intensity: $intensity");
-
-    final intensityType = json['intensityType'];
-    print("Type of intensityType: ${intensityType.runtimeType}");
-    print("Value of intensityType: $intensityType");
-
-    final exerciseData = json['exercise_data'];
-    print("Type of exercise_data: ${exerciseData.runtimeType}");
-    print("Value of exercise_data: $exerciseData");
-
-    final trainingCircuit = json['training_circuit'];
-    print("Type of training_circuit: ${trainingCircuit.runtimeType}");
-    print("Value of training_circuit: $trainingCircuit");
-
     return ExerciseTrainingModel(
-      exercise_training_id: UniqueId(exerciseTrainingId ?? ''),
-      nb_reps: nbReps ?? 0,
-      intensity: intensity ?? 0,
-      intensityType: intensityType ?? '',
-      exercise_data: exerciseDataMapper.fromJson(exerciseData ?? {}),
-      training_circuit: trainingCircuitMapper.fromJson(trainingCircuit ?? {}),
-    );
+        exercise_training_id: json['exercise_training_id'] != null
+            ? UniqueId.fromJson(json['exercise_training_id'])
+            : UniqueId(''),
+        nb_reps: json['nb_reps'] ?? '',
+        intensity: json['intensity'] ?? '',
+        intensityType: json['intensityType'] ?? '',
+        exercise_data:
+            CommonHelperMethod.jsonContainsAndNotNullKey(json, 'exercise_data')
+                ? exerciseDataMapper.fromJson(json['exercise_data'])
+                : null,
+        training_circuit: CommonHelperMethod.jsonContainsAndNotNullKey(
+                json, 'training_circuit')
+            ? trainingCircuitMapper.fromJson(json['training_circuit'])
+            : null);
   }
 
   @override
   ExerciseTrainingEntity toEntity(ExerciseTrainingModel model) {
     return ExerciseTrainingEntity(
-      exercise_training_id: model.exercise_training_id,
-      nb_reps: model.nb_reps,
-      intensity: model.intensity,
-      intensityType: model.intensityType,
-      exercise_data: exerciseDataMapper.toEntity(model.exercise_data),
-      training_circuit: trainingCircuitMapper.toEntity(model.training_circuit),
-    );
+        exercise_training_id: model.exercise_training_id,
+        nb_reps: model.nb_reps,
+        intensity: model.intensity,
+        intensityType: model.intensityType,
+        exercise_data: model.exercise_data != null
+            ? exerciseDataMapper.toEntity(model.exercise_data!)
+            : ExerciseDataEntity.empty(),
+        training_circuit: model.training_circuit != null
+            ? trainingCircuitMapper.toEntity(model.training_circuit!)
+            : TrainingCircuitEntity.empty(),
+        is_empty: false);
   }
 
   @override
@@ -81,8 +71,12 @@ class ExerciseTrainingMapper
       'nb_reps': model.nb_reps,
       'intensity': model.intensity,
       'intensityType': model.intensityType,
-      'exercise_data': exerciseDataMapper.toJson(model.exercise_data),
-      'training_circuit': trainingCircuitMapper.toJson(model.training_circuit),
+      'exercise_data': model.exercise_data != null
+          ? exerciseDataMapper.toJson(model.exercise_data!)
+          : {},
+      'training_circuit': model.training_circuit != null
+          ? trainingCircuitMapper.toJson(model.training_circuit!)
+          : {},
     };
   }
 }

@@ -56,17 +56,20 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         },
         (data) => data.map((entity) {
           return IndoorTrainingEntity(
-            indoor_training_id: entity.indoor_training_id,
-            title: entity.title,
-            training_date: entity.training_date,
-            start_hours: entity.start_hours,
-            end_hours: entity.end_hours,
-            nb_place: entity.nb_place,
-            nb_subscription: entity.nb_subscription,
-            is_collective: entity.is_collective,
-            is_user_registred: false,
-            workout: entity.workout,
-          );
+              indoor_training_id: entity.indoor_training_id,
+              title: entity.title,
+              training_date: entity.training_date,
+              start_hours: entity.start_hours,
+              end_hours: entity.end_hours,
+              nb_place: entity.nb_place,
+              nb_subscription: entity.nb_subscription,
+              is_collective: entity.is_collective,
+              is_active: entity.is_active,
+              is_user_registred: false,
+              workout: entity.workout,
+              indoor_training_subscription_list:
+                  entity.indoor_training_subscription_list,
+              is_empty: false);
         }).toList(),
       );
 
@@ -78,17 +81,20 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         },
         (data) => data.map((entity) {
           return IndoorTrainingEntity(
-            indoor_training_id: entity.indoor_training_id,
-            title: entity.title,
-            training_date: entity.training_date,
-            start_hours: entity.start_hours,
-            end_hours: entity.end_hours,
-            nb_place: entity.nb_place,
-            nb_subscription: entity.nb_subscription,
-            is_collective: entity.is_collective,
-            is_user_registred: false,
-            workout: entity.workout,
-          );
+              indoor_training_id: entity.indoor_training_id,
+              title: entity.title,
+              training_date: entity.training_date,
+              start_hours: entity.start_hours,
+              end_hours: entity.end_hours,
+              nb_place: entity.nb_place,
+              nb_subscription: entity.nb_subscription,
+              is_collective: entity.is_collective,
+              is_active: entity.is_active,
+              is_user_registred: false,
+              workout: entity.workout,
+              indoor_training_subscription_list:
+                  entity.indoor_training_subscription_list,
+              is_empty: false);
         }).toList(),
       );
 
@@ -131,17 +137,20 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         },
         (data) => data.map((entity) {
           return IndoorTrainingEntity(
-            indoor_training_id: entity.indoor_training_id,
-            title: entity.title,
-            training_date: entity.training_date,
-            start_hours: entity.start_hours,
-            end_hours: entity.end_hours,
-            nb_place: entity.nb_place,
-            nb_subscription: entity.nb_subscription,
-            is_collective: entity.is_collective,
-            is_user_registred: false,
-            workout: entity.workout,
-          );
+              indoor_training_id: entity.indoor_training_id,
+              title: entity.title,
+              training_date: entity.training_date,
+              start_hours: entity.start_hours,
+              end_hours: entity.end_hours,
+              nb_place: entity.nb_place,
+              nb_subscription: entity.nb_subscription,
+              is_collective: entity.is_collective,
+              is_active: entity.is_active,
+              is_user_registred: false,
+              workout: entity.workout,
+              indoor_training_subscription_list:
+                  entity.indoor_training_subscription_list,
+              is_empty: false);
         }).toList(),
       );
 
@@ -153,17 +162,20 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         },
         (data) => data.map((entity) {
           return IndoorTrainingEntity(
-            indoor_training_id: entity.indoor_training_id,
-            title: entity.title,
-            training_date: entity.training_date,
-            start_hours: entity.start_hours,
-            end_hours: entity.end_hours,
-            nb_place: entity.nb_place,
-            nb_subscription: entity.nb_subscription,
-            is_collective: entity.is_collective,
-            is_user_registred: false,
-            workout: entity.workout,
-          );
+              indoor_training_id: entity.indoor_training_id,
+              title: entity.title,
+              training_date: entity.training_date,
+              start_hours: entity.start_hours,
+              end_hours: entity.end_hours,
+              nb_place: entity.nb_place,
+              nb_subscription: entity.nb_subscription,
+              is_collective: entity.is_collective,
+              is_active: entity.is_active,
+              is_user_registred: false,
+              workout: entity.workout,
+              indoor_training_subscription_list:
+                  entity.indoor_training_subscription_list,
+              is_empty: false);
         }).toList(),
       );
 

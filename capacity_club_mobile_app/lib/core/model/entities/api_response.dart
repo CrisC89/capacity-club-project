@@ -1,8 +1,6 @@
 class ApiResponse<T> {
   final bool result;
   final T? data;
-  //final Map<String, dynamic>? data;
-  //final dynamic? data;
   final String code;
 
   const ApiResponse({
@@ -28,7 +26,15 @@ class ApiResponse<T> {
     );
   }
 
-  /*
+  Map<String, dynamic> toJson() => {
+        'result': result,
+        'data': data,
+        'code': code,
+      };
+}
+
+
+/*
   factory ApiResponse.fromJson(
       Map<String, dynamic> json, T Function(Map<String, dynamic>) fromJsonT) {
     /*API RESPONSE FROM JSON*/
@@ -78,10 +84,3 @@ class ApiResponse<T> {
     }
   }
   */
-
-  Map<String, dynamic> toJson() => {
-        'result': result,
-        'data': data,
-        'code': code,
-      };
-}

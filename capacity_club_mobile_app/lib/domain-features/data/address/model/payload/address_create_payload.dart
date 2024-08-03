@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class AddressCreatePayload extends Equatable implements Payload {
   final String street;
   final String number;
-  final String zip_code;
+  final String zipcode;
   final String town;
   final String country;
   final String complement;
@@ -12,7 +12,7 @@ class AddressCreatePayload extends Equatable implements Payload {
   AddressCreatePayload({
     required this.street,
     required this.number,
-    required this.zip_code,
+    required this.zipcode,
     required this.town,
     required this.country,
     this.complement = '',
@@ -21,7 +21,7 @@ class AddressCreatePayload extends Equatable implements Payload {
   Map<String, dynamic> toJson() => {
         'street': street,
         'number': number,
-        'zip_code': zip_code,
+        'zipcode': zipcode,
         'town': town,
         'country': country,
         'complement': complement,
@@ -29,5 +29,5 @@ class AddressCreatePayload extends Equatable implements Payload {
 
   @override
   List<Object?> get props =>
-      [street, number, zip_code, town, country, complement];
+      [street, number, zipcode, town, country, complement];
 }

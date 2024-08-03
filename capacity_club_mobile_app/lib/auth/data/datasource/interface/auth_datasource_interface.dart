@@ -19,11 +19,7 @@ abstract class AuthDataSourceInterface {
 
   void logOut();
 
-  String _hashUsername(String string);
-
   Future<bool> handleSignInSignUpPostProcess(ApiResponse response);
 
   Future<String?> getToken();
-
-  void _checkUser();
 }

@@ -79,7 +79,7 @@ class UserProfileCard extends StatelessWidget {
             ),
             LabelValueRow(
               label: 'Zip Code & Town',
-              value: '${member.address.zip_code} ${member.address.town}',
+              value: '${member.address.zipcode} ${member.address.town}',
             ),
             LabelValueRow(
               label: 'Country',

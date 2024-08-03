@@ -7,18 +7,21 @@ class TrainingCircuitEntity {
   final String title;
   final List<ExerciseTrainingEntity> exercise_training_list;
   final WorkoutEntity workout;
+  final bool is_empty;
 
   TrainingCircuitEntity(
       {required this.training_circuit_id,
       required this.title,
       required this.exercise_training_list,
-      required this.workout});
+      required this.workout,
+      required this.is_empty});
 
   factory TrainingCircuitEntity.empty() {
     return TrainingCircuitEntity(
         training_circuit_id: UniqueId(''),
         title: '',
         exercise_training_list: [],
-        workout: WorkoutEntity.empty());
+        workout: WorkoutEntity.empty(),
+        is_empty: true);
   }
 }

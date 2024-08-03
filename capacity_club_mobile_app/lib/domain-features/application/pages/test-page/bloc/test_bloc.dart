@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/test-page/mock/mock_data.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/entity/collective_indoor_training_entity.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/entity/indoor_training_entity.dart';
-import 'package:either_dart/either.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 

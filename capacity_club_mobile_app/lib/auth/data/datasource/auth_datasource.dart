@@ -23,36 +23,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthDataSource implements AuthDataSourceInterface {
   static final LocalStorage localStorage = LocalStorage();
-  //late bool? isAuthenticated$ = null;
   CredentialAndTokenModel? user$ = null;
   final AuthProvider authProvider = AuthProvider();
   final DioClient dioClient;
 
   AuthDataSource({required this.dioClient});
 
-/*
-  @override
-  Future<bool> signin(SignInRequest request) async {
-    print(
-        '-------------------------------SIGNIN--------------------------------------');
-    print(ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'));
-    ApiResponse<CredentialAndTokenModel> response =
-        await dioClient.post<CredentialAndTokenModel>(
-            ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'),
-            request,
-            (json) => CredentialAndTokenModel.fromJson(json));
-    print(
-        '-------------------------------AFTER RESPONSE--------------------------------------');
-    RefreshTokenInterceptor().setToken(response.data?.token);
-    RefreshTokenInterceptor().setRefreshToken(response.data?.refreshToken);
-    print(response.code);
-    if (!response.result) {
-      errorSnackBar('_apiService.messageFromCode(response.code)');
-    }
-    AuthProvider().login();
-    return handleSignInSignUpPostProcess(response);
-  }
-  */
   @override
   Future<bool> signin(SignInRequest request) async {
     print(
@@ -125,33 +101,6 @@ class AuthDataSource implements AuthDataSourceInterface {
     return await localStorage.read(USER_KEY);
   }
 
-/*
-  @override
-  Future<bool> handleSignInSignUpPostProcess(ApiResponse response) async {
-    try {
-      if (response.result) {
-        await localStorage.write(USER_KEY, jsonEncode(response.data));
-        await localStorage.write(TOKEN_KEY, jsonEncode(response.data?.token));
-        await localStorage.write(
-            REFRESH_TOKEN_KEY, jsonEncode(response.data?.refreshToken));
-        String? data = await localStorage.read(USER_KEY);
-        print(data);
-        if (data == null) {
-          return Future(() => false);
-        }
-        print('ok');
-        CredentialAndTokenModel userData =
-            CredentialAndTokenModel.fromJson(jsonDecode(data));
-        print('userData $userData');
-        return true;
-      }
-      return Future(() => false);
-    } catch (e) {
-      print(e);
-      return Future(() => false);
-    }
-  }
-*/
   @override
   void logOut() {
     //user$.add(null);
@@ -290,3 +239,56 @@ class AuthDataSource implements AuthDataSourceInterface {
     return sha1.convert(bytes).toString();
   }
 }
+
+
+/*
+  @override
+  Future<bool> handleSignInSignUpPostProcess(ApiResponse response) async {
+    try {
+      if (response.result) {
+        await localStorage.write(USER_KEY, jsonEncode(response.data));
+        await localStorage.write(TOKEN_KEY, jsonEncode(response.data?.token));
+        await localStorage.write(
+            REFRESH_TOKEN_KEY, jsonEncode(response.data?.refreshToken));
+        String? data = await localStorage.read(USER_KEY);
+        print(data);
+        if (data == null) {
+          return Future(() => false);
+        }
+        print('ok');
+        CredentialAndTokenModel userData =
+            CredentialAndTokenModel.fromJson(jsonDecode(data));
+        print('userData $userData');
+        return true;
+      }
+      return Future(() => false);
+    } catch (e) {
+      print(e);
+      return Future(() => false);
+    }
+  }
+*/
+
+/*
+  @override
+  Future<bool> signin(SignInRequest request) async {
+    print(
+        '-------------------------------SIGNIN--------------------------------------');
+    print(ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'));
+    ApiResponse<CredentialAndTokenModel> response =
+        await dioClient.post<CredentialAndTokenModel>(
+            ApiURI.getEndpoint('ACCOUNT', 'SIGNIN'),
+            request,
+            (json) => CredentialAndTokenModel.fromJson(json));
+    print(
+        '-------------------------------AFTER RESPONSE--------------------------------------');
+    RefreshTokenInterceptor().setToken(response.data?.token);
+    RefreshTokenInterceptor().setRefreshToken(response.data?.refreshToken);
+    print(response.code);
+    if (!response.result) {
+      errorSnackBar('_apiService.messageFromCode(response.code)');
+    }
+    AuthProvider().login();
+    return handleSignInSignUpPostProcess(response);
+  }
+  */

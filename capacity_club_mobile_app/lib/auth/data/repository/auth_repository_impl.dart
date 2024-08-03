@@ -1,5 +1,4 @@
 import 'package:capacity_club_mobile_app/auth/data/datasource/auth_datasource.dart';
-import 'package:capacity_club_mobile_app/auth/data/datasource/interface/auth_datasource_interface.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/credential_model.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_in_request.dart';
 import 'package:capacity_club_mobile_app/auth/data/model/payload/sign_up_request.dart';

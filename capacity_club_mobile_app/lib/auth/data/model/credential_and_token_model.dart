@@ -15,19 +15,10 @@ class CredentialAndTokenModel extends Equatable {
   factory CredentialAndTokenModel.fromJson(Map<String, dynamic> json) {
     /*CREDENTIAL AND TOKEN JSON*/
     print('ENTER CREDENTIAL AND TOKEN JSON');
-    print('JSON: $json');
-    print('Type of JSON: ${json.runtimeType}');
 
     final token = json['token'];
     final refreshToken = json['refreshToken'];
     final credential = json['credential'];
-
-    print('Token: $token');
-    print('Type of Token: ${token.runtimeType}');
-    print('RefreshToken: $refreshToken');
-    print('Type of RefreshToken: ${refreshToken.runtimeType}');
-    print('Credential: $credential');
-    print('Type of Credential: ${credential.runtimeType}');
 
     return CredentialAndTokenModel(
       token: token as String,
@@ -43,5 +34,5 @@ class CredentialAndTokenModel extends Equatable {
       };
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [token, refreshToken, credential];
 }

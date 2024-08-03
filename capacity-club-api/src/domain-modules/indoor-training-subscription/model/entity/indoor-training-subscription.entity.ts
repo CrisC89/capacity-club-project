@@ -24,8 +24,6 @@ export class IndoorTrainingSubscription extends BaseEntity {
   indoor_training_subscription_id: UniqueId;
   @Column({ nullable: false })
   purchase_date: Date;
-  @Column({ nullable: false })
-  start_hours: string;
   @OneToOne(() => IndoorTraining, {
     lazy: true,
     nullable: true,

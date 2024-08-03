@@ -35,5 +35,8 @@ class ExerciseDataModel extends Equatable {
         exercise_data_id,
         title,
         description,
+        categories,
+        video_youtube_link,
+        video_asset_link,
       ];
 }

@@ -6,7 +6,7 @@ class AddressModel extends Equatable {
   final UniqueId address_id;
   final String street;
   final String number;
-  final String zip_code;
+  final String zipcode;
   final String town;
   final String country;
   final String complement;
@@ -15,7 +15,7 @@ class AddressModel extends Equatable {
       {required this.address_id,
       required this.street,
       required this.number,
-      required this.zip_code,
+      required this.zipcode,
       required this.town,
       required this.country,
       String? complement})
@@ -31,5 +31,5 @@ class AddressModel extends Equatable {
 
   @override
   List<Object?> get props =>
-      [address_id, street, number, zip_code, town, country];
+      [address_id, street, number, zipcode, town, country];
 }

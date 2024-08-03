@@ -10,6 +10,7 @@ class ExerciseDataEntity {
   final String video_youtube_link;
   final String video_asset_link;
   final List<ExerciseTrainingEntity> exercise_training_list;
+  final bool is_empty;
 
   ExerciseDataEntity(
       {required this.exercise_data_id,
@@ -18,7 +19,8 @@ class ExerciseDataEntity {
       required this.categories,
       required this.video_youtube_link,
       required this.video_asset_link,
-      required this.exercise_training_list});
+      required this.exercise_training_list,
+      required this.is_empty});
 
   factory ExerciseDataEntity.empty() {
     return ExerciseDataEntity(
@@ -28,6 +30,7 @@ class ExerciseDataEntity {
         categories: [],
         video_youtube_link: '',
         video_asset_link: '',
-        exercise_training_list: []);
+        exercise_training_list: [],
+        is_empty: true);
   }
 }

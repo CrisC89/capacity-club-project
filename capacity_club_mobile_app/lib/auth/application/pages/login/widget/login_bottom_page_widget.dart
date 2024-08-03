@@ -1,4 +1,3 @@
-import 'package:capacity_club_mobile_app/auth/application/pages/login/view_states/login_loaded_view.dart';
 import 'package:capacity_club_mobile_app/core/config/i18n/app_local.dart';
 import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
 import 'package:capacity_club_mobile_app/core/widgets/button/basic_ink_well_widget.dart';

@@ -11,8 +11,8 @@ class AuthProvider extends ChangeNotifier {
   late CredentialAndTokenModel? _credentialUser;
   AuthFlowBloc? _authFlowBloc;
   BuildContext? _context;
-  String? _token;
-  String? _refreshToken;
+  //String? _token;
+  //String? _refreshToken;
   final LocalStorage _localStorage = LocalStorage();
 
   // Instance unique de AuthProvider

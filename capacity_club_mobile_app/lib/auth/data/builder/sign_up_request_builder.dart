@@ -5,6 +5,7 @@ class SignUpRequestBuilder {
   String _password = '';
   String _googleHash = '';
   String _facebookHash = '';
+  String _code_activation = '';
 
   SignUpRequestBuilder setFacebookHash(String value) {
     _facebookHash = value;
@@ -26,7 +27,13 @@ class SignUpRequestBuilder {
     return this;
   }
 
+  SignUpRequestBuilder setCodeActivation(String value) {
+    _code_activation = value;
+    return this;
+  }
+
   SignUpRequest build() {
-    return SignUpRequest(_username, _password, _googleHash, _facebookHash);
+    return SignUpRequest(
+        _username, _password, _googleHash, _facebookHash, _code_activation);
   }
 }

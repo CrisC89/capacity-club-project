@@ -1,4 +1,3 @@
-import 'package:capacity_club_mobile_app/core/provider/theme_provider.dart';
 import 'package:capacity_club_mobile_app/core/utils/page_config.dart';
 import 'package:capacity_club_mobile_app/unused/setting/bloc/setting_page_bloc.dart';
 import 'package:capacity_club_mobile_app/unused/setting/provider/setting_page_provider.dart';

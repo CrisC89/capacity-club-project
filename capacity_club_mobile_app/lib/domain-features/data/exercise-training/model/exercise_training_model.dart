@@ -10,8 +10,8 @@ class ExerciseTrainingModel extends Equatable {
   final int nb_reps;
   final String intensity;
   final TrainingIntensity intensityType;
-  final ExerciseDataModel exercise_data;
-  final TrainingCircuitModel training_circuit;
+  final ExerciseDataModel? exercise_data;
+  final TrainingCircuitModel? training_circuit;
 
   const ExerciseTrainingModel({
     required this.exercise_training_id,

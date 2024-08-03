@@ -7,13 +7,15 @@ class MemberPlanEntity {
   final int nb_individual_training;
   final int nb_collective_training;
   final double price;
+  final bool is_empty;
   MemberPlanEntity(
       {required this.member_plan_id,
       required this.title,
       required this.description,
       required this.nb_individual_training,
       required this.nb_collective_training,
-      required this.price});
+      required this.price,
+      this.is_empty = false});
 
   factory MemberPlanEntity.empty() {
     return MemberPlanEntity(
@@ -22,6 +24,7 @@ class MemberPlanEntity {
         description: '',
         nb_individual_training: 0,
         nb_collective_training: 0,
-        price: 0);
+        price: 0,
+        is_empty: true);
   }
 }

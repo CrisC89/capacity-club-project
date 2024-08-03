@@ -17,33 +17,34 @@ class UserProfilePageLoadedView extends StatelessWidget {
   UserProfilePageLoadedView({super.key});
 
   MemberEntity currentMember = MemberEntity(
-    member_id: UniqueId('456'),
-    firstname: 'John',
-    lastname: 'Doe',
-    birthdate: DateTime(1990, 5, 20),
-    gender: Gender.male,
-    phone: '123-456-7890',
-    mail: 'john.doe@example.com',
-    code_activation: 'abc123',
-    active: true,
-    subscriptions: [],
-    member_home_trainings: [],
-    address: AddressEntity(
-      address_id: UniqueId('123'),
-      street: 'Main Street',
-      number: '42',
-      zip_code: '12345',
-      town: 'Sample Town',
-      country: 'Sample Country',
-      complement: 'Apt 101',
-    ),
-    credential: CredentialEntity.empty(),
-    member_card: MemberCardEntity(
-      member_card_id: UniqueId('789'),
-      collective_session_count: 10,
-      individual_session_count: 5,
-    ),
-  );
+      member_id: UniqueId('456'),
+      firstname: 'John',
+      lastname: 'Doe',
+      birthdate: DateTime(1990, 5, 20),
+      gender: Gender.male,
+      phone: '123-456-7890',
+      mail: 'john.doe@example.com',
+      code_activation: 'abc123',
+      active: true,
+      member_plan_subscriptions: [],
+      indoor_training_subscription: [],
+      member_home_trainings: [],
+      address: AddressEntity(
+          address_id: UniqueId('123'),
+          street: 'Main Street',
+          number: '42',
+          zipcode: '12345',
+          town: 'Sample Town',
+          country: 'Sample Country',
+          complement: 'Apt 101',
+          is_empty: false),
+      credential: CredentialEntity.empty(),
+      member_card: MemberCardEntity(
+        member_card_id: UniqueId('789'),
+        collective_session_count: 10,
+        individual_session_count: 5,
+      ),
+      is_empty: false);
 
   @override
   Widget build(BuildContext context) {

@@ -7,18 +7,20 @@ class MemberHomeTrainingEntity {
   final DateTime purchase_date;
   final HomeTrainingEntity home_training;
   final MemberEntity member;
-
+  final bool is_empty;
   MemberHomeTrainingEntity(
       {required this.member_home_training_id,
       required this.purchase_date,
       required this.home_training,
-      required this.member});
+      required this.member,
+      this.is_empty = false});
 
   factory MemberHomeTrainingEntity.empty() {
     return MemberHomeTrainingEntity(
         member_home_training_id: UniqueId(''),
         purchase_date: DateTime.now(),
         home_training: HomeTrainingEntity.empty(),
-        member: MemberEntity.empty());
+        member: MemberEntity.empty(),
+        is_empty: true);
   }
 }

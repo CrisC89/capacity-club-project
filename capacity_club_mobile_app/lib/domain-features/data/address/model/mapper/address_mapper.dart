@@ -10,7 +10,7 @@ class AddressMapper with Mapper<AddressModel, AddressEntity> {
       address_id: entity.address_id,
       street: entity.street,
       number: entity.number,
-      zip_code: entity.zip_code,
+      zipcode: entity.zipcode,
       town: entity.town,
       country: entity.country,
       complement: entity.complement,
@@ -20,10 +20,12 @@ class AddressMapper with Mapper<AddressModel, AddressEntity> {
   @override
   AddressModel fromJson(Map<String, dynamic> json) {
     return AddressModel(
-        address_id: UniqueId(json['address_id']),
+        address_id: json['address_id'] != null
+            ? UniqueId.fromJson(json['address_id'])
+            : UniqueId(''),
         street: json['street'],
         number: json['number'],
-        zip_code: json['zip_code'],
+        zipcode: json['zipcode'],
         town: json['town'],
         country: json['country'],
         complement: json['complement']);
@@ -32,14 +34,14 @@ class AddressMapper with Mapper<AddressModel, AddressEntity> {
   @override
   AddressEntity toEntity(AddressModel model) {
     return AddressEntity(
-      address_id: model.address_id,
-      street: model.street,
-      number: model.number,
-      zip_code: model.zip_code,
-      town: model.town,
-      country: model.country,
-      complement: model.complement,
-    );
+        address_id: model.address_id,
+        street: model.street,
+        number: model.number,
+        zipcode: model.zipcode,
+        town: model.town,
+        country: model.country,
+        complement: model.complement,
+        is_empty: false);
   }
 
   @override
@@ -48,7 +50,7 @@ class AddressMapper with Mapper<AddressModel, AddressEntity> {
       'address_id': model.address_id.toJson(),
       'street': model.street,
       'number': model.number,
-      'zip_code': model.zip_code,
+      'zipcode': model.zipcode,
       'town': model.town,
       'country': model.country,
       'complement': model.complement

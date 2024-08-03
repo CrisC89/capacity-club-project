@@ -3,7 +3,7 @@ import 'package:capacity_club_mobile_app/core/model/extension/json_map_extension
 class AddressFilter {
   final String? street;
   final String? number;
-  final String? zipCode;
+  final String? zipcode;
   final String? town;
   final String? country;
   final String? complement;
@@ -11,7 +11,7 @@ class AddressFilter {
   AddressFilter({
     this.street,
     this.number,
-    this.zipCode,
+    this.zipcode,
     this.town,
     this.country,
     this.complement,
@@ -22,7 +22,7 @@ class AddressFilter {
 
     json.addIfNotNull('street', street);
     json.addIfNotNull('number', number);
-    json.addIfNotNull('zip_code', zipCode);
+    json.addIfNotNull('zipcode', zipcode);
     json.addIfNotNull('town', town);
     json.addIfNotNull('country', country);
     json.addIfNotNull('complement', complement);

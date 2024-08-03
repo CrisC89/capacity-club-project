@@ -9,13 +9,15 @@ class WorkoutEntity {
   final List<TrainingCircuitEntity> training_circuits;
   final IndoorTrainingEntity indoor_training;
   final HomeTrainingEntity home_training;
+  final bool is_empty;
 
   WorkoutEntity(
       {required this.workout_id,
       required this.title,
       required this.training_circuits,
       required this.indoor_training,
-      required this.home_training});
+      required this.home_training,
+      required this.is_empty});
 
   factory WorkoutEntity.empty() {
     return WorkoutEntity(
@@ -23,6 +25,7 @@ class WorkoutEntity {
         title: '',
         training_circuits: [],
         indoor_training: IndoorTrainingEntity.empty(),
-        home_training: HomeTrainingEntity.empty());
+        home_training: HomeTrainingEntity.empty(),
+        is_empty: true);
   }
 }

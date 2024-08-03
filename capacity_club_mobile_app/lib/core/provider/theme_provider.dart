@@ -5,10 +5,8 @@ class ThemeProvider extends ChangeNotifier {
 
   static final ThemeProvider _instance = ThemeProvider._internal();
 
-  // Constructeur privé pour empêcher l'instanciation en dehors de cette classe
   ThemeProvider._internal();
 
-  // Méthode statique pour récupérer l'instance unique de AuthProvider
   factory ThemeProvider() {
     return _instance;
   }

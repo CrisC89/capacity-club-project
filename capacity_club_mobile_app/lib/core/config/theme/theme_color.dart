@@ -2,14 +2,14 @@ import 'dart:ui';
 
 class ThemeColor {
   // Init
-  static const Color mainColorBack = Color(0xffe77610);
+  static const Color orangeColor = Color(0xffe77610);
   static const Color mainColor = Color.fromARGB(255, 4, 136, 183);
   static const Color tabBarColor = Color(0xFF15121f);
   static const Color greyColor = Color(0xff93989b);
   static const Color darkColor = Color(0xff25232a);
 
   // Getters
-  static Color getMainColorBack() => mainColorBack;
+  static Color getOrangeColor() => orangeColor;
   static Color getMainColor() => mainColor;
   static Color getTabBarColor() => tabBarColor;
   static Color getGreyColor() => greyColor;

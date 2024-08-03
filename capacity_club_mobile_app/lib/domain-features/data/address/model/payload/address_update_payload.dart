@@ -6,7 +6,7 @@ class AddressUpdatePayload extends Equatable implements Payload {
   final UniqueId address_id;
   final String street;
   final String number;
-  final String zip_code;
+  final String zipcode;
   final String town;
   final String country;
   final String complement;
@@ -15,7 +15,7 @@ class AddressUpdatePayload extends Equatable implements Payload {
     required this.address_id,
     required this.street,
     required this.number,
-    required this.zip_code,
+    required this.zipcode,
     required this.town,
     required this.country,
     this.complement = '',
@@ -25,7 +25,7 @@ class AddressUpdatePayload extends Equatable implements Payload {
         'address_id': address_id,
         'street': street,
         'number': number,
-        'zip_code': zip_code,
+        'zipcode': zipcode,
         'town': town,
         'country': country,
         'complement': complement,
@@ -33,5 +33,5 @@ class AddressUpdatePayload extends Equatable implements Payload {
 
   @override
   List<Object?> get props =>
-      [address_id, street, number, zip_code, town, country, complement];
+      [address_id, street, number, zipcode, town, country, complement];
 }

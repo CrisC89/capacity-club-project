@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:io';
 
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
@@ -12,6 +14,7 @@ class UserProfilePageLoadedView2 extends StatelessWidget {
   final AuthUseCase _authUseCase = serviceLocator<AuthUseCase>();
   Future<void> _pickImage() async {
     final picker = ImagePicker();
+    // ignore: unused_local_variable
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     /*
     setState(() {

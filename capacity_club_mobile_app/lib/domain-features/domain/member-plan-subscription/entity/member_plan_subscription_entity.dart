@@ -9,12 +9,14 @@ class MemberPlanSubscriptionEntity {
   final MemberEntity member;
   final MemberPlanEntity member_plan;
   final MemberCardEntity member_card;
+  final bool is_empty;
   MemberPlanSubscriptionEntity(
       {required this.member_plan_subscription_id,
       required this.purchase_date,
       required this.member,
       required this.member_plan,
-      required this.member_card});
+      required this.member_card,
+      this.is_empty = false});
 
   factory MemberPlanSubscriptionEntity.empty() {
     return MemberPlanSubscriptionEntity(
@@ -22,6 +24,7 @@ class MemberPlanSubscriptionEntity {
         purchase_date: DateTime.now(),
         member: MemberEntity.empty(),
         member_plan: MemberPlanEntity.empty(),
-        member_card: MemberCardEntity.empty());
+        member_card: MemberCardEntity.empty(),
+        is_empty: true);
   }
 }

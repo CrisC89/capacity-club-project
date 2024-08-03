@@ -6,8 +6,8 @@ import 'package:equatable/equatable.dart';
 class MemberHomeTrainingModel extends Equatable {
   final UniqueId member_home_training_id;
   final DateTime purchase_date;
-  final HomeTrainingModel home_training;
-  final MemberModel member;
+  final HomeTrainingModel? home_training;
+  final MemberModel? member;
 
   MemberHomeTrainingModel(
       {required this.member_home_training_id,
