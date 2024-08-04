@@ -7,30 +7,21 @@ import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training-
 import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/entity/indoor_training_entity.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/member/entity/member_entity.dart';
 
-import '../../../../../core/model/mixin/mapper_mixin.dart';
-
-class IndoorTrainingSubscriptionMapper
-    with
-        Mapper<IndoorTrainingSubscriptionModel,
-            IndoorTrainingSubcriptionEntity> {
-  MemberMapper _memberMapper = MemberMapper();
-  IndoorTrainingMapper _indoorTrainingMapper = IndoorTrainingMapper();
-  @override
-  IndoorTrainingSubscriptionModel fromEntity(
+class IndoorTrainingSubscriptionMapper {
+  static IndoorTrainingSubscriptionModel fromEntity(
       IndoorTrainingSubcriptionEntity entity) {
     return IndoorTrainingSubscriptionModel(
         indoor_training_subscription_id: entity.indoor_training_subscription_id,
         purchased_date: entity.purchased_date,
         member: entity.member.is_empty
             ? null
-            : _memberMapper.fromEntity(entity.member),
+            : MemberMapper.fromEntity(entity.member),
         indoor_training: entity.indoor_training.is_empty
             ? null
-            : _indoorTrainingMapper.fromEntity(entity.indoor_training));
+            : IndoorTrainingMapper.fromEntity(entity.indoor_training));
   }
 
-  @override
-  IndoorTrainingSubscriptionModel fromJson(Map<String, dynamic> json) {
+  static IndoorTrainingSubscriptionModel fromJson(Map<String, dynamic> json) {
     return IndoorTrainingSubscriptionModel(
         indoor_training_subscription_id:
             json['indoor_training_subscription_id'] != null
@@ -40,37 +31,44 @@ class IndoorTrainingSubscriptionMapper
             ? DateTime.parse(json['purchased_date'])
             : DateTime.now(),
         member: CommonHelperMethod.jsonContainsAndNotNullKey(json, 'member')
-            ? _memberMapper.fromJson(json['member'])
+            ? MemberMapper.fromJson(json['member'])
             : null,
         indoor_training: CommonHelperMethod.jsonContainsAndNotNullKey(
                 json, 'indoor_training')
-            ? _indoorTrainingMapper.fromJson(json['indoor_training'])
+            ? IndoorTrainingMapper.fromJson(json['indoor_training'])
             : null);
   }
 
-  @override
-  IndoorTrainingSubcriptionEntity toEntity(
+  static IndoorTrainingSubcriptionEntity toEntity(
       IndoorTrainingSubscriptionModel model) {
-    return IndoorTrainingSubcriptionEntity(
-        indoor_training_subscription_id: model.indoor_training_subscription_id,
-        purchased_date: model.purchased_date,
-        member: model.member != null
-            ? _memberMapper.toEntity(model.member!)
-            : MemberEntity.empty(),
-        indoor_training: model.indoor_training != null
-            ? _indoorTrainingMapper.toEntity(model.indoor_training!)
-            : IndoorTrainingEntity.empty());
+    print("enter indoor training subscription mapper to entity");
+    IndoorTrainingSubcriptionEntity retval;
+    try {
+      retval = IndoorTrainingSubcriptionEntity(
+          indoor_training_subscription_id:
+              model.indoor_training_subscription_id,
+          purchased_date: model.purchased_date,
+          member: model.member != null
+              ? MemberMapper.toEntity(model.member!)
+              : MemberEntity.empty(),
+          indoor_training: model.indoor_training != null
+              ? IndoorTrainingMapper.toEntity(model.indoor_training!)
+              : IndoorTrainingEntity.empty());
+    } catch (e) {
+      print(e.toString());
+      retval = IndoorTrainingSubcriptionEntity.empty();
+    }
+    return retval;
   }
 
-  @override
-  Map<String, dynamic> toJson(IndoorTrainingSubscriptionModel model) {
+  static Map<String, dynamic> toJson(IndoorTrainingSubscriptionModel model) {
     return {
       'indoor_training_subscription_id':
           model.indoor_training_subscription_id.toJson(),
       'purchased_date': model.purchased_date.toIso8601String(),
-      'member': model.member != null ? _memberMapper.toJson(model.member!) : {},
+      'member': model.member != null ? MemberMapper.toJson(model.member!) : {},
       'indoor_training': model.indoor_training != null
-          ? _indoorTrainingMapper.toJson(model.indoor_training!)
+          ? IndoorTrainingMapper.toJson(model.indoor_training!)
           : {}
     };
   }

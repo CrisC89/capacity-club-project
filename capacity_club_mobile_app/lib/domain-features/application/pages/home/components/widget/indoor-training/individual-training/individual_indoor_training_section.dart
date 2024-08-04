@@ -17,34 +17,41 @@ class IndividualIndoorTrainingSection extends StatefulWidget {
 
 class _IndividualIndoorTrainingSectionState
     extends State<IndividualIndoorTrainingSection> {
-  final Color _mainColor = Color.fromARGB(255, 4, 136, 183);
-  final Color _darkColor = const Color(0xff25232a);
-  bool _isDarkMode = false;
+  String timeVal = '';
 
-  String timeVal = '08:00';
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: widget.indoorTrainings.map<Widget>((training) {
-            return individualIndoorTrainingButton(
-              context,
-              training.start_hours,
-              timeVal,
-              () {
-                setState(() {
-                  timeVal = training.start_hours;
-                });
-              },
-            );
-          }).toList(),
+    return Card(
+      color: Theme.of(context).colorScheme.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      elevation: 1.0, // Ajustez l'élévation selon vos besoins
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              children: widget.indoorTrainings.map<Widget>((training) {
+                return individualIndoorTrainingButton(
+                  context,
+                  training.start_hours,
+                  timeVal,
+                  () {
+                    setState(() {
+                      timeVal = training.start_hours;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 24),
+            bookIndividualIndoorTrainingButton(() {}),
+          ],
         ),
-        const SizedBox(height: 24),
-        bookIndividualIndoorTrainingButton(() {}),
-      ],
+      ),
     );
   }
 }

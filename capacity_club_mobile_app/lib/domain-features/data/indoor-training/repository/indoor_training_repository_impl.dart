@@ -32,11 +32,13 @@ class IndoorTrainingRepositoryImpl
   @override
   Future<Either<Failure, ApiResponse<List<IndoorTrainingModel>>>> filter(
       IndoorTrainingFilter filter) async {
-    print('SEND INDOOR TRAINING FROM REPOSOTORY');
-    return repositoryHandleRequest(
+    print('ENTER INDOOR TRAINING REPOSOTORY');
+    final retval = repositoryHandleRequest(
       () => indoorTrainingDataSource.filter(filter),
       IndoorTrainingFilterFailure(),
     );
+    print('SEND INDOOR TRAINING FROM REPOSOTORY');
+    return retval;
   }
 
   @override

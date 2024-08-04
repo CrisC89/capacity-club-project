@@ -25,11 +25,11 @@ class HomeTrainingModel extends Equatable {
       required this.member_home_trainings});
 
   factory HomeTrainingModel.fromJson(Map<String, dynamic> json) {
-    return HomeTrainingMapper().fromJson(json);
+    return HomeTrainingMapper.fromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return HomeTrainingMapper().toJson(this);
+    return HomeTrainingMapper.toJson(this);
   }
 
   @override

@@ -20,11 +20,11 @@ class MemberPlanSubscriptionModel extends Equatable {
       required this.member_card});
 
   factory MemberPlanSubscriptionModel.fromJson(Map<String, dynamic> json) {
-    return MemberPlanSubscriptionMapper().fromJson(json);
+    return MemberPlanSubscriptionMapper.fromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return MemberPlanSubscriptionMapper().toJson(this);
+    return MemberPlanSubscriptionMapper.toJson(this);
   }
 
   @override

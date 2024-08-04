@@ -23,15 +23,14 @@ class UserProfileListTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isDark = false;
-    var iconColor = isDark ? mainColor : mainColor;
+    var iconColor = mainColor;
 
     return Card(
-        color: Colors.white,
-        elevation: 5,
+        color: Theme.of(context).colorScheme.surface,
+        elevation: 1,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-          side: BorderSide(color: Color(0xff949494)),
+          borderRadius: BorderRadius.circular(8),
+          //side: BorderSide(color: Color(0xff949494)),
         ),
         child: ListTile(
           onTap: onPress,
@@ -42,7 +41,9 @@ class UserProfileListTitle extends StatelessWidget {
               borderRadius: BorderRadius.circular(tBorderRadius),
               color: iconColor.withOpacity(0.1),
             ),
-            child: Icon(icon, color: iconColor),
+            child: Container(
+                color: Theme.of(context).colorScheme.surface,
+                child: Icon(icon, color: iconColor)),
           ),
           title: Text(title.toUpperCase(), style: AppTheme.subTitleTextStyle),
           trailing: endIcon

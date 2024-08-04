@@ -21,7 +21,6 @@ class MemberEntity {
   final List<IndoorTrainingSubcriptionEntity> indoor_training_subscription;
   final List<MemberHomeTrainingEntity> member_home_trainings;
   final AddressEntity address;
-  final CredentialEntity credential;
   final MemberCardEntity member_card;
   bool is_empty;
 
@@ -39,7 +38,6 @@ class MemberEntity {
       required this.indoor_training_subscription,
       required this.member_home_trainings,
       required this.address,
-      required this.credential,
       required this.member_card,
       required this.is_empty});
 
@@ -58,7 +56,6 @@ class MemberEntity {
         indoor_training_subscription: [],
         member_home_trainings: [],
         address: AddressEntity.empty(),
-        credential: CredentialEntity.empty(),
         member_card: MemberCardEntity.empty(),
         is_empty: true);
   }

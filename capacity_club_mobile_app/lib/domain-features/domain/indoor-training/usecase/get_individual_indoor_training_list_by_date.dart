@@ -27,21 +27,28 @@ class GetIndividualIndoorTrainingListByDate
       final Either<Failure, ApiResponse<List<IndoorTrainingModel>>> result =
           await indoorTrainingRepository.filter(params.filter);
 
+      print('RETURN FROM REPO WITH DATA');
+
+      print(result.isRight);
+
       return result.fold(
         (failure) => Left(failure),
         (response) {
           if (response.data != null && response.data!.isNotEmpty) {
             final List<IndoorTrainingEntity> entities = response.data!
-                .map((model) => IndoorTrainingMapper().toEntity(model))
+                .map((model) => IndoorTrainingMapper.toEntity(model))
                 .toList();
+            print(entities);
             return Right(entities);
           } else {
+            print("enter left");
             return Left(
                 IndoorTrainingFilterFailure(stackTrace: 'No data available'));
           }
         },
       );
     } on Exception catch (e) {
+      print('INDIVIDUAL INDOOR TRAINING USECASE ${e.toString()}');
       return Left(ServerFailure(stackTrace: e.toString()));
     }
   }

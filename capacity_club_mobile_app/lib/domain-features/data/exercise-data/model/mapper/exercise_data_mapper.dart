@@ -1,16 +1,11 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/core/model/helper/common_helper.dart';
-import 'package:capacity_club_mobile_app/core/model/mixin/mapper_mixin.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-data/model/exercise_data_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-training/model/mapper/exercise_training_mapper.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/exercise-data/entity/exercise_data_entity.dart';
 
-class ExerciseDataMapper with Mapper<ExerciseDataModel, ExerciseDataEntity> {
-  final ExerciseTrainingMapper exerciseTrainingMapper =
-      ExerciseTrainingMapper();
-
-  @override
-  ExerciseDataModel fromEntity(ExerciseDataEntity entity) {
+class ExerciseDataMapper {
+  static ExerciseDataModel fromEntity(ExerciseDataEntity entity) {
     return ExerciseDataModel(
       exercise_data_id: entity.exercise_data_id,
       title: entity.title,
@@ -21,14 +16,13 @@ class ExerciseDataMapper with Mapper<ExerciseDataModel, ExerciseDataEntity> {
       exercise_training_list: entity.exercise_training_list != []
           ? entity.exercise_training_list
               .map((trainingEntity) =>
-                  exerciseTrainingMapper.fromEntity(trainingEntity))
+                  ExerciseTrainingMapper.fromEntity(trainingEntity))
               .toList()
           : [],
     );
   }
 
-  @override
-  ExerciseDataModel fromJson(Map<String, dynamic> json) {
+  static ExerciseDataModel fromJson(Map<String, dynamic> json) {
     return ExerciseDataModel(
         exercise_data_id: json['exercise_data_id'] != null
             ? UniqueId.fromJson(json['exercise_data_id'])
@@ -41,14 +35,13 @@ class ExerciseDataMapper with Mapper<ExerciseDataModel, ExerciseDataEntity> {
         exercise_training_list: CommonHelperMethod.jsonContainsAndNotNullKey(
                 json, 'exercise_training_list')
             ? (json['exercise_training_list'] as List? ?? [])
-                .map((trainingJson) => exerciseTrainingMapper
-                    .fromJson(trainingJson as Map<String, dynamic>))
+                .map((trainingJson) => ExerciseTrainingMapper.fromJson(
+                    trainingJson as Map<String, dynamic>))
                 .toList()
             : []);
   }
 
-  @override
-  ExerciseDataEntity toEntity(ExerciseDataModel model) {
+  static ExerciseDataEntity toEntity(ExerciseDataModel model) {
     return ExerciseDataEntity(
         exercise_data_id: model.exercise_data_id,
         title: model.title,
@@ -59,14 +52,13 @@ class ExerciseDataMapper with Mapper<ExerciseDataModel, ExerciseDataEntity> {
         exercise_training_list: model.exercise_training_list != []
             ? model.exercise_training_list
                 .map((trainingModel) =>
-                    exerciseTrainingMapper.toEntity(trainingModel))
+                    ExerciseTrainingMapper.toEntity(trainingModel))
                 .toList()
             : [],
         is_empty: false);
   }
 
-  @override
-  Map<String, dynamic> toJson(ExerciseDataModel model) {
+  static Map<String, dynamic> toJson(ExerciseDataModel model) {
     return {
       'exercise_data_id': model.exercise_data_id.toJson(),
       'title': model.title,
@@ -77,7 +69,7 @@ class ExerciseDataMapper with Mapper<ExerciseDataModel, ExerciseDataEntity> {
       'exercise_training_list': model.exercise_training_list != []
           ? model.exercise_training_list
               .map((trainingModel) =>
-                  exerciseTrainingMapper.toJson(trainingModel))
+                  ExerciseTrainingMapper.toJson(trainingModel))
               .toList()
           : [],
     };

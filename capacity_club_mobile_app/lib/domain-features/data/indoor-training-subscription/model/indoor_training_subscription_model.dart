@@ -17,11 +17,11 @@ class IndoorTrainingSubscriptionModel extends Equatable {
       required this.indoor_training});
 
   factory IndoorTrainingSubscriptionModel.fromJson(Map<String, dynamic> json) {
-    return IndoorTrainingSubscriptionMapper().fromJson(json);
+    return IndoorTrainingSubscriptionMapper.fromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return IndoorTrainingSubscriptionMapper().toJson(this);
+    return IndoorTrainingSubscriptionMapper.toJson(this);
   }
 
   @override

@@ -22,11 +22,11 @@ class CollectiveIndoorTrainingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
-      elevation: 5,
+      color: Theme.of(context).colorScheme.surface,
+      elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
-        side: BorderSide(color: Color(0xff949494)),
+        //side: BorderSide(color: Color(0xff949494)),
       ),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.8,

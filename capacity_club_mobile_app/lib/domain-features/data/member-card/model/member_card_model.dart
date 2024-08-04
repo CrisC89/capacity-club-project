@@ -1,4 +1,5 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/member-card/model/mapper/member_card_mapper.dart';
 import 'package:equatable/equatable.dart';
 
 class MemberCardModel extends Equatable {
@@ -12,17 +13,12 @@ class MemberCardModel extends Equatable {
       required this.individual_session_count});
 
   factory MemberCardModel.fromJson(Map<String, dynamic> json) {
-    return MemberCardModel(
-        member_card_id: json['member_card_id'],
-        collective_session_count: json['collective_session_count'],
-        individual_session_count: json['individual_session_count']);
+    return MemberCardMapper.fromJson(json);
   }
 
-  Map<String, dynamic> toJson() => {
-        'member_card_id': member_card_id,
-        'collective_session_count': collective_session_count,
-        'individual_session_count': individual_session_count
-      };
+  Map<String, dynamic> toJson() {
+    return MemberCardMapper.toJson(this);
+  }
 
   @override
   List<Object?> get props => [

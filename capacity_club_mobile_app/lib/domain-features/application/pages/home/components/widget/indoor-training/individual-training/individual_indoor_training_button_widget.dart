@@ -6,8 +6,6 @@ Widget individualIndoorTrainingButton(BuildContext context, String buttonValue,
   final double size = (MediaQuery.of(context).size.width - 64 - (16 * 3)) / 4;
 
   final Color _mainColor = Color.fromARGB(255, 4, 136, 183);
-  final Color _darkColor = const Color(0xff25232a);
-  bool _isDarkMode = false;
 
   return GestureDetector(
     onTap: onTap,
@@ -18,9 +16,7 @@ Widget individualIndoorTrainingButton(BuildContext context, String buttonValue,
           borderRadius: const BorderRadius.all(Radius.circular(6)),
           color: currentTimeVal == buttonValue
               ? _mainColor
-              : _isDarkMode
-                  ? _darkColor
-                  : Colors.white),
+              : Theme.of(context).colorScheme.secondaryContainer),
       child: Center(
           child: Text(buttonValue,
               style: currentTimeVal == buttonValue

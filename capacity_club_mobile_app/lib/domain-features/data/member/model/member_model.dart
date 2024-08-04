@@ -44,11 +44,11 @@ class MemberModel extends Equatable {
       required this.member_card});
 
   factory MemberModel.fromJson(Map<String, dynamic> json) {
-    return MemberMapper().fromJson(json);
+    return MemberMapper.fromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return MemberMapper().toJson(this);
+    return MemberMapper.toJson(this);
   }
 
   @override

@@ -22,11 +22,11 @@ class AddressModel extends Equatable {
       : complement = complement ?? '';
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
-    return AddressMapper().fromJson(json);
+    return AddressMapper.fromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return AddressMapper().toJson(this);
+    return AddressMapper.toJson(this);
   }
 
   @override

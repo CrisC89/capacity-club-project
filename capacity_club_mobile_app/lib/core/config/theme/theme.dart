@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//
+
 class AppTheme {
   AppTheme._();
 
   static final lightTheme = ThemeData(
-      scaffoldBackgroundColor: const Color(0xfffafafa),
+      scaffoldBackgroundColor: Color(0xf9f9f9fa), //const Color(0xfffafafa),
       brightness: Brightness.light,
       useMaterial3: true,
       visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -52,47 +54,61 @@ class AppTheme {
         dividerColor: Colors.transparent,
       ),
       textTheme: const TextTheme(
-        bodyMedium: TextStyle(color: Color(0xff393d40)),
-      ));
+        bodyMedium: TextStyle(
+          color: dustyGray,
+        ),
+      ),
+      colorScheme: ColorScheme.light(
+          // Couleur secondaire
+          surface: Color(
+            0xfbfbfbfb, // Couleur de surface (par exemple, arrière-plan des cartes)
+          ),
+          secondaryContainer: Color(0xf0f0f0fa)));
 
   static final darkTheme = ThemeData(
-      brightness: Brightness.dark,
-      useMaterial3: true,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      pageTransitionsTheme: const PageTransitionsTheme(builders: {
-        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        TargetPlatform.android: ZoomPageTransitionsBuilder(),
-      }),
-      fontFamily: GoogleFonts.openSans().fontFamily,
-      appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.light,
-              systemNavigationBarColor: Color(0xFF1c1b1f),
-              systemNavigationBarIconBrightness: Brightness.light),
-          centerTitle: true,
-          titleTextStyle: TextStyle(
-            color: Color(0xffe6e1e5),
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          )),
-      inputDecorationTheme: const InputDecorationTheme(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xff25232a)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xff25232a)),
-          ),
-          filled: true,
-          fillColor: Color(0xff25232a),
-          contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-          isDense: true),
-      tabBarTheme: const TabBarTheme(
-        indicatorColor: Color(0xff1e86ff),
-        labelColor: Color(0xff1e86ff),
-        unselectedLabelColor: Colors.white,
-        dividerColor: Colors.transparent,
-      ));
+    scaffoldBackgroundColor: Color(0xff25232a),
+    brightness: Brightness.dark,
+    useMaterial3: true,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    pageTransitionsTheme: const PageTransitionsTheme(builders: {
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.android: ZoomPageTransitionsBuilder(),
+    }),
+    fontFamily: GoogleFonts.openSans().fontFamily,
+    appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.light,
+            systemNavigationBarColor: Color(0xFF1c1b1f),
+            systemNavigationBarIconBrightness: Brightness.light),
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          color: Color(0xffe6e1e5),
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        )),
+    inputDecorationTheme: const InputDecorationTheme(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xff25232a)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xff25232a)),
+        ),
+        filled: true,
+        fillColor: Color(0xff25232a),
+        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        isDense: true),
+    tabBarTheme: const TabBarTheme(
+      indicatorColor: Color(0xff1e86ff),
+      labelColor: Color(0xff1e86ff),
+      unselectedLabelColor: Colors.white,
+      dividerColor: Colors.transparent,
+    ),
+    colorScheme: ColorScheme.dark(
+        // Couleur secondaire
+        surface: Colors.black,
+        secondaryContainer: Color(0xff25232a)),
+  );
 
   static const Color _mainColor = const Color(0xffe77610);
   static const Color _tabBarColor = const Color(0xFF15121f);

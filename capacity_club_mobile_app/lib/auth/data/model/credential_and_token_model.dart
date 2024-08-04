@@ -20,11 +20,15 @@ class CredentialAndTokenModel extends Equatable {
     final refreshToken = json['refreshToken'];
     final credential = json['credential'];
 
-    return CredentialAndTokenModel(
+    print(credential);
+
+    final retval = CredentialAndTokenModel(
       token: token as String,
       refreshToken: refreshToken as String,
-      credential: CredentialModel.fromJson(credential as Map<String, dynamic>),
+      credential: CredentialModel.fromJson(credential),
     );
+
+    return retval;
   }
 
   Map<String, dynamic> toJson() => {

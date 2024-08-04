@@ -1,19 +1,13 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/core/model/helper/common_helper.dart';
-import 'package:capacity_club_mobile_app/core/model/mixin/mapper_mixin.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/home-training/model/home_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-home-training/model/mapper/member_home_training_mapper.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/workout/model/mapper/workout_mapper.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/home-training/entity/home_training_entity.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/member-home-training/entity/member_home_training_entity.dart';
 
-class HomeTrainingMapper with Mapper<HomeTrainingModel, HomeTrainingEntity> {
-  final WorkoutMapper _workoutMapper = WorkoutMapper();
-  final MemberHomeTrainingMapper _memberHomeTrainingMapper =
-      MemberHomeTrainingMapper();
-
-  @override
-  HomeTrainingModel fromEntity(HomeTrainingEntity entity) {
+class HomeTrainingMapper {
+  static HomeTrainingModel fromEntity(HomeTrainingEntity entity) {
     return HomeTrainingModel(
         home_training_id: entity.home_training_id,
         title: entity.title,
@@ -23,18 +17,16 @@ class HomeTrainingMapper with Mapper<HomeTrainingModel, HomeTrainingEntity> {
         price: entity.price,
         workouts: entity.workouts != []
             ? entity.workouts
-                .map(
-                    (workoutEntity) => _workoutMapper.fromEntity(workoutEntity))
+                .map((workoutEntity) => WorkoutMapper.fromEntity(workoutEntity))
                 .toList()
             : [],
         member_home_trainings: entity.member_home_trainings.is_empty
             ? null
-            : _memberHomeTrainingMapper
-                .fromEntity(entity.member_home_trainings));
+            : MemberHomeTrainingMapper.fromEntity(
+                entity.member_home_trainings));
   }
 
-  @override
-  HomeTrainingModel fromJson(Map<String, dynamic> json) {
+  static HomeTrainingModel fromJson(Map<String, dynamic> json) {
     return HomeTrainingModel(
         home_training_id: json['home_training_id'] != null
             ? UniqueId.fromJson(json['home_training_id'])
@@ -46,18 +38,17 @@ class HomeTrainingMapper with Mapper<HomeTrainingModel, HomeTrainingEntity> {
         price: json['price'] ?? 0.0,
         workouts: CommonHelperMethod.jsonContainsAndNotNullKey(json, 'workouts')
             ? (json['workouts'] as List? ?? [])
-                .map((workoutJson) => _workoutMapper
-                    .fromJson(workoutJson as Map<String, dynamic>))
+                .map((workoutJson) =>
+                    WorkoutMapper.fromJson(workoutJson as Map<String, dynamic>))
                 .toList()
             : [],
         member_home_trainings: CommonHelperMethod.jsonContainsAndNotNullKey(
                 json, 'member_home_trainings')
-            ? _memberHomeTrainingMapper.fromJson(json['member_home_trainings'])
+            ? MemberHomeTrainingMapper.fromJson(json['member_home_trainings'])
             : null);
   }
 
-  @override
-  HomeTrainingEntity toEntity(HomeTrainingModel model) {
+  static HomeTrainingEntity toEntity(HomeTrainingModel model) {
     return HomeTrainingEntity(
         home_training_id: model.home_training_id,
         title: model.title,
@@ -67,17 +58,16 @@ class HomeTrainingMapper with Mapper<HomeTrainingModel, HomeTrainingEntity> {
         price: model.price,
         workouts: model.workouts.isNotEmpty
             ? model.workouts
-                .map((workoutModel) => _workoutMapper.toEntity(workoutModel))
+                .map((workoutModel) => WorkoutMapper.toEntity(workoutModel))
                 .toList()
             : [],
         member_home_trainings: model.member_home_trainings != null
-            ? _memberHomeTrainingMapper.toEntity(model.member_home_trainings!)
+            ? MemberHomeTrainingMapper.toEntity(model.member_home_trainings!)
             : MemberHomeTrainingEntity.empty(),
         is_empty: false);
   }
 
-  @override
-  Map<String, dynamic> toJson(HomeTrainingModel model) {
+  static Map<String, dynamic> toJson(HomeTrainingModel model) {
     return {
       'home_training_id': model.home_training_id,
       'title': model.title,
@@ -87,11 +77,11 @@ class HomeTrainingMapper with Mapper<HomeTrainingModel, HomeTrainingEntity> {
       'price': model.price,
       'workouts': model.workouts != []
           ? model.workouts
-              .map((workoutModel) => _workoutMapper.toJson(workoutModel))
+              .map((workoutModel) => WorkoutMapper.toJson(workoutModel))
               .toList()
           : [],
       'member_home_trainings': model.member_home_trainings != null
-          ? _memberHomeTrainingMapper.toJson(model.member_home_trainings!)
+          ? MemberHomeTrainingMapper.toJson(model.member_home_trainings!)
           : {}
     };
   }

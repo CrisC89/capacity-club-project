@@ -1,11 +1,9 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
-import 'package:capacity_club_mobile_app/core/model/mixin/mapper_mixin.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/address/model/address_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/address/entity/address_entity.dart';
 
-class AddressMapper with Mapper<AddressModel, AddressEntity> {
-  @override
-  AddressModel fromEntity(AddressEntity entity) {
+class AddressMapper {
+  static AddressModel fromEntity(AddressEntity entity) {
     return AddressModel(
       address_id: entity.address_id,
       street: entity.street,
@@ -17,8 +15,7 @@ class AddressMapper with Mapper<AddressModel, AddressEntity> {
     );
   }
 
-  @override
-  AddressModel fromJson(Map<String, dynamic> json) {
+  static AddressModel fromJson(Map<String, dynamic> json) {
     return AddressModel(
         address_id: json['address_id'] != null
             ? UniqueId.fromJson(json['address_id'])
@@ -31,8 +28,7 @@ class AddressMapper with Mapper<AddressModel, AddressEntity> {
         complement: json['complement']);
   }
 
-  @override
-  AddressEntity toEntity(AddressModel model) {
+  static AddressEntity toEntity(AddressModel model) {
     return AddressEntity(
         address_id: model.address_id,
         street: model.street,
@@ -44,8 +40,7 @@ class AddressMapper with Mapper<AddressModel, AddressEntity> {
         is_empty: false);
   }
 
-  @override
-  Map<String, dynamic> toJson(AddressModel model) {
+  static Map<String, dynamic> toJson(AddressModel model) {
     return {
       'address_id': model.address_id.toJson(),
       'street': model.street,

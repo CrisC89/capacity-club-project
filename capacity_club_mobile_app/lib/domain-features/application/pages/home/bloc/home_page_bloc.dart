@@ -40,13 +40,11 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
           collectiveIndoorTrainingDateParams =
           CollectiveIndoorTrainingDateParams(training_date: trainingDate);
 
+      print('COLLECTIVE RESPONSE');
+
       final Either<Failure, List<IndoorTrainingEntity>> collectiveResponse =
           await getCollectiveIndoorTrainingListByDate(
               collectiveIndoorTrainingDateParams);
-
-      final Either<Failure, List<IndoorTrainingEntity>> individualResponse =
-          await getIndividualIndoorTrainingListByDate(
-              individualIndoorTrainingDateParams);
 
       final List<IndoorTrainingEntity> collectiveIndoorTraining =
           collectiveResponse.fold(
@@ -73,6 +71,14 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         }).toList(),
       );
 
+      print('END');
+
+      print('INDIVIDUAL RESPONSE');
+
+      final Either<Failure, List<IndoorTrainingEntity>> individualResponse =
+          await getIndividualIndoorTrainingListByDate(
+              individualIndoorTrainingDateParams);
+
       final List<IndoorTrainingEntity> individualIndoorTraining =
           individualResponse.fold(
         (failure) {
@@ -97,6 +103,8 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
               is_empty: false);
         }).toList(),
       );
+
+      print('END');
 
       emit(HomePageLoadedState(
         collectiveIndoorTraining: collectiveIndoorTraining,
@@ -111,7 +119,9 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       HomePageDateChangedEvent event, Emitter<HomePageState> emit) async {
     emit(HomePageLoadingState());
     try {
+      print('enter on date change');
       final selectedDate2 = event.selectedDate.add(const Duration(days: 1));
+      print(selectedDate2);
       final DateTime trainingDate = DateTime(
           selectedDate2.year, selectedDate2.month, selectedDate2.day, 0, 0, 0);
       final IndividualIndoorTrainingDateParams
@@ -121,13 +131,11 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
           collectiveIndoorTrainingDateParams =
           CollectiveIndoorTrainingDateParams(training_date: trainingDate);
 
+      print('COLLECTIVE RESPONSE');
+
       final Either<Failure, List<IndoorTrainingEntity>> collectiveResponse =
           await getCollectiveIndoorTrainingListByDate(
               collectiveIndoorTrainingDateParams);
-
-      final Either<Failure, List<IndoorTrainingEntity>> individualResponse =
-          await getIndividualIndoorTrainingListByDate(
-              individualIndoorTrainingDateParams);
 
       final List<IndoorTrainingEntity> collectiveIndoorTraining =
           collectiveResponse.fold(
@@ -136,6 +144,41 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
           return [];
         },
         (data) => data.map((entity) {
+          print('COLLECTIVE BLOC');
+          print(data);
+          return IndoorTrainingEntity(
+              indoor_training_id: entity.indoor_training_id,
+              title: entity.title,
+              training_date: entity.training_date,
+              start_hours: entity.start_hours,
+              end_hours: entity.end_hours,
+              nb_place: entity.nb_place,
+              nb_subscription: entity.nb_subscription,
+              is_collective: entity.is_collective,
+              is_active: entity.is_active,
+              is_user_registred: false,
+              workout: entity.workout,
+              indoor_training_subscription_list:
+                  entity.indoor_training_subscription_list,
+              is_empty: false);
+        }).toList(),
+      );
+      print('END');
+      print('INDIVIDUAL RESPONSE');
+
+      final Either<Failure, List<IndoorTrainingEntity>> individualResponse =
+          await getIndividualIndoorTrainingListByDate(
+              individualIndoorTrainingDateParams);
+
+      final List<IndoorTrainingEntity> individualIndoorTraining =
+          individualResponse.fold(
+        (failure) {
+          print('BLOC INDIVIDUAL FAILURE');
+          return [];
+        },
+        (data) => data.map((entity) {
+          print('INDIVIDUAL BLOC');
+          print(data);
           return IndoorTrainingEntity(
               indoor_training_id: entity.indoor_training_id,
               title: entity.title,
@@ -154,30 +197,11 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         }).toList(),
       );
 
-      final List<IndoorTrainingEntity> individualIndoorTraining =
-          individualResponse.fold(
-        (failure) {
-          print('BLOC INDIVIDUAL FAILURE');
-          return [];
-        },
-        (data) => data.map((entity) {
-          return IndoorTrainingEntity(
-              indoor_training_id: entity.indoor_training_id,
-              title: entity.title,
-              training_date: entity.training_date,
-              start_hours: entity.start_hours,
-              end_hours: entity.end_hours,
-              nb_place: entity.nb_place,
-              nb_subscription: entity.nb_subscription,
-              is_collective: entity.is_collective,
-              is_active: entity.is_active,
-              is_user_registred: false,
-              workout: entity.workout,
-              indoor_training_subscription_list:
-                  entity.indoor_training_subscription_list,
-              is_empty: false);
-        }).toList(),
-      );
+      print('END');
+
+      print('after list');
+      print(collectiveIndoorTraining);
+      print(individualIndoorTraining);
 
       emit(HomePageLoadedState(
         collectiveIndoorTraining: collectiveIndoorTraining,

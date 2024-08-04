@@ -1,11 +1,9 @@
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
-import 'package:capacity_club_mobile_app/core/model/mixin/mapper_mixin.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/member-plan/model/member_plan_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/member-plan/entity/member_plan_entity.dart';
 
-class MemberPlanMapper with Mapper<MemberPlanModel, MemberPlanEntity> {
-  @override
-  MemberPlanModel fromEntity(MemberPlanEntity entity) {
+class MemberPlanMapper {
+  static MemberPlanModel fromEntity(MemberPlanEntity entity) {
     return MemberPlanModel(
       member_plan_id: entity.member_plan_id,
       title: entity.title,
@@ -16,8 +14,7 @@ class MemberPlanMapper with Mapper<MemberPlanModel, MemberPlanEntity> {
     );
   }
 
-  @override
-  MemberPlanModel fromJson(Map<String, dynamic> json) {
+  static MemberPlanModel fromJson(Map<String, dynamic> json) {
     return MemberPlanModel(
       member_plan_id: json['member_plan_id'] != null
           ? UniqueId.fromJson(json['member_plan_id'])
@@ -30,8 +27,7 @@ class MemberPlanMapper with Mapper<MemberPlanModel, MemberPlanEntity> {
     );
   }
 
-  @override
-  MemberPlanEntity toEntity(MemberPlanModel model) {
+  static MemberPlanEntity toEntity(MemberPlanModel model) {
     return MemberPlanEntity(
         member_plan_id: model.member_plan_id,
         title: model.title,
@@ -42,8 +38,7 @@ class MemberPlanMapper with Mapper<MemberPlanModel, MemberPlanEntity> {
         is_empty: false);
   }
 
-  @override
-  Map<String, dynamic> toJson(MemberPlanModel model) {
+  static Map<String, dynamic> toJson(MemberPlanModel model) {
     return {
       'member_plan_id': model.member_plan_id,
       'title': model.title,

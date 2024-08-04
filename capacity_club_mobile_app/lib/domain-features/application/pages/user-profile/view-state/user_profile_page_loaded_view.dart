@@ -1,4 +1,3 @@
-import 'package:capacity_club_mobile_app/auth/domain/entity/credential_entity.dart';
 import 'package:capacity_club_mobile_app/core/config/theme/constant_size.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/test-page/widget/update_profile.dart';
@@ -16,7 +15,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class UserProfilePageLoadedView extends StatelessWidget {
   UserProfilePageLoadedView({super.key});
 
-  MemberEntity currentMember = MemberEntity(
+  final MemberEntity currentMember = MemberEntity(
       member_id: UniqueId('456'),
       firstname: 'John',
       lastname: 'Doe',
@@ -38,7 +37,6 @@ class UserProfilePageLoadedView extends StatelessWidget {
           country: 'Sample Country',
           complement: 'Apt 101',
           is_empty: false),
-      credential: CredentialEntity.empty(),
       member_card: MemberCardEntity(
         member_card_id: UniqueId('789'),
         collective_session_count: 10,
@@ -49,6 +47,7 @@ class UserProfilePageLoadedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: SingleChildScrollView(
           child: Container(
               width: MediaQuery.of(context).size.width,

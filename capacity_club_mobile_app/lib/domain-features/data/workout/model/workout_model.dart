@@ -2,6 +2,7 @@ import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/home-training/model/home_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/model/indoor_training_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/training-circuit/model/training_circuit_model.dart';
+import 'package:capacity_club_mobile_app/domain-features/data/workout/model/mapper/workout_mapper.dart';
 import 'package:equatable/equatable.dart';
 
 class WorkoutModel extends Equatable {
@@ -19,21 +20,12 @@ class WorkoutModel extends Equatable {
       required this.training_circuits});
 
   factory WorkoutModel.fromJson(Map<String, dynamic> json) {
-    return WorkoutModel(
-        workout_id: json['workout_id'],
-        title: json['title'],
-        training_circuits: json['training_circuits'],
-        indoor_training: json['indoor_training'],
-        home_training: json['home_training']);
+    return WorkoutMapper.fromJson(json);
   }
 
-  Map<String, dynamic> toJson() => {
-        'workout_id': workout_id,
-        'title': title,
-        'training_circuits': training_circuits,
-        'indoor_training': indoor_training,
-        'home_training': home_training
-      };
+  Map<String, dynamic> toJson() {
+    return WorkoutMapper.toJson(this);
+  }
 
   @override
   List<Object?> get props =>

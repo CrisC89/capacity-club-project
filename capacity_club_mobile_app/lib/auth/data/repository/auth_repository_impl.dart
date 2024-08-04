@@ -70,7 +70,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, bool>> signIn(SignInRequest request) async {
     try {
       final result = await authDataSource.signin(request);
-      print("------ REPO --------");
+      print("------ Credential --------");
       print(result);
       return Future.value(Right((result != null)));
     } on Exception catch (e) {

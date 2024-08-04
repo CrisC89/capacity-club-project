@@ -78,8 +78,10 @@ class _DateTimeLineWithYearSelectorState
             height: 56.0,
             width: 56.0,
             dayStructure: DayStructure.dayNumDayStr,
-            inactiveDayStyle:
-                const DayStyle(dayNumStyle: AppTheme.unselectedDate),
+            inactiveDayStyle: DayStyle(
+                dayNumStyle: AppTheme.unselectedDate,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface)),
             activeDayStyle: const DayStyle(dayNumStyle: AppTheme.selectedDate),
             todayHighlightStyle: TodayHighlightStyle.withBackground,
             todayHighlightColor: _mainColorOpaque,

@@ -23,11 +23,12 @@ class CredentialModel extends Equatable {
 
   factory CredentialModel.fromJson(Map<String, dynamic> json) {
     print('ENTER CREDENTIAL FROM JSON');
-    return CredentialMapper().fromJson(json);
+    print(json);
+    return CredentialMapper.fromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return CredentialMapper().toJson(this);
+    return CredentialMapper.toJson(this);
   }
 
   @override

@@ -37,7 +37,9 @@ class _AuthenticatedLayoutState extends State<AuthenticatedLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final themeContext = Theme.of(context);
     return Scaffold(
+      backgroundColor: themeContext.scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text(
           AuthenticatedLayout.tab[index].name.toUpperCase(),

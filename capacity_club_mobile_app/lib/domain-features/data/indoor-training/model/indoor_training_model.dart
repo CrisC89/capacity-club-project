@@ -32,11 +32,11 @@ class IndoorTrainingModel extends Equatable {
   });
 
   factory IndoorTrainingModel.fromJson(Map<String, dynamic> json) {
-    return IndoorTrainingMapper().fromJson(json);
+    return IndoorTrainingMapper.fromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return IndoorTrainingMapper().toJson(this);
+    return IndoorTrainingMapper.toJson(this);
   }
 
   @override

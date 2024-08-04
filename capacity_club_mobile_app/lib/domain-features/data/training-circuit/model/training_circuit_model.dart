@@ -17,11 +17,11 @@ class TrainingCircuitModel extends Equatable {
       required this.workout});
 
   factory TrainingCircuitModel.fromJson(Map<String, dynamic> json) {
-    return TrainingCircuitMapper().fromJson(json);
+    return TrainingCircuitMapper.fromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return TrainingCircuitMapper().toJson(this);
+    return TrainingCircuitMapper.toJson(this);
   }
 
   @override

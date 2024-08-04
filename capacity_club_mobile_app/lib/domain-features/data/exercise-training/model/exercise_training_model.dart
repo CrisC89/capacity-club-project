@@ -23,11 +23,11 @@ class ExerciseTrainingModel extends Equatable {
   });
 
   factory ExerciseTrainingModel.fromJson(Map<String, dynamic> json) {
-    return ExerciseTrainingMapper().fromJson(json);
+    return ExerciseTrainingMapper.fromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return ExerciseTrainingMapper().toJson(this);
+    return ExerciseTrainingMapper.toJson(this);
   }
 
   @override

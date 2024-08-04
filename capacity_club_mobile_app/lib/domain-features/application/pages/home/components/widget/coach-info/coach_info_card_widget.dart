@@ -49,11 +49,11 @@ class CoachInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
-      color: Colors.white,
+      elevation: 1,
+      color: Theme.of(context).colorScheme.surface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
-        side: BorderSide(color: Color(0xff949494)),
+        //side: BorderSide(color: Color(0xff949494)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
