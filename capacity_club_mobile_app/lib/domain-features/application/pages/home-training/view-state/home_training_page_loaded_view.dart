@@ -1,3 +1,5 @@
+import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/view/current_training_view.dart';
 import 'package:flutter/material.dart';
 
 class HomeTrainingPageLoadedView extends StatefulWidget {
@@ -32,9 +34,15 @@ class _HomeTrainingPageLoadedViewState extends State<HomeTrainingPageLoadedView>
           preferredSize:
               const Size.fromHeight(48.0), // Adjust this height as needed
           child: TabBar(
+            labelStyle: AppTheme.tabLabelSelected,
+            unselectedLabelStyle: AppTheme.tabLabelUnselected,
             controller: _tabController,
             tabs: const [
-              Tab(text: 'Current Training'),
+              Tab(
+                child: Text(
+                  'Training',
+                ),
+              ),
               Tab(text: 'Shop'),
               Tab(text: 'Templates'),
             ],
@@ -43,8 +51,8 @@ class _HomeTrainingPageLoadedViewState extends State<HomeTrainingPageLoadedView>
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: const [
-              CurrentTrainingPage(),
+            children: [
+              CurrentTrainingView(),
               ShopPage(),
               TemplatesPage(),
             ],

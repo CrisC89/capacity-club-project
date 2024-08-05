@@ -24,10 +24,6 @@ class _HomePageLoadedViewState extends State<HomePageLoadedView> {
   DateTime today = DateTime.now();
   bool calendarType = false;
 
-  final Color _mainColor = Color.fromARGB(255, 4, 136, 183);
-  final Color _darkColor = const Color(0xff25232a);
-  bool _isDarkMode = false;
-
   String timeVal = '08:00';
 
   @override

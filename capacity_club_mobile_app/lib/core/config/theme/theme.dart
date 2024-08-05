@@ -175,6 +175,22 @@ class AppTheme {
     fontFamily: 'Audiowide',
   );
 
+  static const tabLabelUnselected = TextStyle(
+    fontSize: 14,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  static const tabLabelSelected = TextStyle(
+    fontSize: 16,
+    color: Color.fromARGB(255, 4, 136, 183),
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Audiowide',
+  );
+
+  //Color.fromARGB(255, 4, 136, 183)
+
   static const TextStyle blackSemiBold36 = TextStyle(
     color: black,
     fontSize: 36,
@@ -186,6 +202,13 @@ class AppTheme {
     fontSize: 16,
     color: deepTeal,
     fontWeight: FontWeight.bold,
+    fontFamily: 'Audiowide',
+  );
+
+  static const TextStyle dustyGrayMedium20 = TextStyle(
+    fontSize: 20,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
     fontFamily: 'Audiowide',
   );
 

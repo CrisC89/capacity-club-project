@@ -7,6 +7,7 @@ class ThemeColor {
   static const Color tabBarColor = Color(0xFF15121f);
   static const Color greyColor = Color(0xff93989b);
   static const Color darkColor = Color(0xff25232a);
+  static const Color dustyGray = Color(0xff949494);
 
   // Getters
   static Color getOrangeColor() => orangeColor;
@@ -14,6 +15,7 @@ class ThemeColor {
   static Color getTabBarColor() => tabBarColor;
   static Color getGreyColor() => greyColor;
   static Color getDarkColor() => darkColor;
+  static Color getDustyGrey() => dustyGray;
 
   // -------------------------------------------------------------------------------------------
 // Light Mode Colors
