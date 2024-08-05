@@ -5,8 +5,8 @@ import 'package:capacity_club_mobile_app/domain-features/application/pages/home-
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/home_training_page.dart';
 import 'package:flutter/material.dart';
 
-class CurrentTrainingView extends StatelessWidget {
-  CurrentTrainingView({super.key});
+class CurrentTrainingPage extends StatelessWidget {
+  CurrentTrainingPage({super.key});
   final List<Week> weeks = List.generate(4, (weekIndex) {
     return Week(
       weekNumber: weekIndex + 1,

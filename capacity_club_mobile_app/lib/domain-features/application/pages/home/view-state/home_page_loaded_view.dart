@@ -1,6 +1,6 @@
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/calendar/date_time_line_calendar_widget.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/coach-info/coach_info_card_widget.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/home_page_section_title_widget.dart';
+import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
+
+import 'package:capacity_club_mobile_app/domain-features/application/core/page_section_title_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/indoor-training/collective-training/collective_indoor_training_carousel_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/components/widget/indoor-training/individual-training/individual_indoor_training_section.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/entity/indoor_training_entity.dart';
@@ -31,26 +31,24 @@ class _HomePageLoadedViewState extends State<HomePageLoadedView> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          homePageSectionTitle(context, 'COLLECTIVE TRAINING'),
+          pageSectionTitle(context, 'COLLECTIVE TRAINING'),
           const SizedBox(height: 16),
           CollectiveIndoorTrainingCarousel(
               indoorTrainings: widget.collectiveIndoorTraining),
-          homePageSectionTitle(context, 'INDIVIDUAL TRAINING'),
+          pageSectionTitle(context, 'INDIVIDUAL TRAINING'),
           const SizedBox(height: 16),
           IndividualIndoorTrainingSection(
               indoorTrainings: widget.individualIndoorTraining),
           const SizedBox(height: 24),
-          homePageSectionTitle(context, 'MY DAILY PLAN'),
+          pageSectionTitle(context, 'MY DAILY PLAN'),
           const SizedBox(height: 24),
-          homePageSectionTitle(context, 'CONTACT US'),
-          const SizedBox(height: 24),
-          CoachInfoCard(
-            name: 'Jehan LECARME',
-            description: 'COACH / PRÉPARATION PHYSIQUE / CROSSFIT / HALTÉRO',
-            imageUrl: 'assets/img/jl_logo.png',
-            email: 'jehan.lecarme@example.com',
-            phoneNumber: '+123456789',
-          ),
+          Container(
+              padding: const EdgeInsets.all(16.0),
+              color: Colors.grey[200],
+              child: Center(
+                  child: Text(
+                      'Section reserved for current member training, to be implemented.',
+                      style: AppTheme.dustyGrayMedium20))),
         ],
       ),
     );

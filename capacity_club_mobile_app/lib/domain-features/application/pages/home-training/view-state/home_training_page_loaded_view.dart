@@ -1,5 +1,6 @@
 import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/view/current_training_view.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/view/current_training_page.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/view/shop_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeTrainingPageLoadedView extends StatefulWidget {
@@ -52,7 +53,7 @@ class _HomeTrainingPageLoadedViewState extends State<HomeTrainingPageLoadedView>
           child: TabBarView(
             controller: _tabController,
             children: [
-              CurrentTrainingView(),
+              CurrentTrainingPage(),
               ShopPage(),
               TemplatesPage(),
             ],
@@ -60,24 +61,6 @@ class _HomeTrainingPageLoadedViewState extends State<HomeTrainingPageLoadedView>
         ),
       ],
     );
-  }
-}
-
-class CurrentTrainingPage extends StatelessWidget {
-  const CurrentTrainingPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Content for Current Training'));
-  }
-}
-
-class ShopPage extends StatelessWidget {
-  const ShopPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Content for Shop'));
   }
 }
 
