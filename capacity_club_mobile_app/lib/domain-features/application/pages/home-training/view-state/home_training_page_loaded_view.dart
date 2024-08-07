@@ -1,6 +1,6 @@
 import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/view/current_training_page.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/view/shop_page.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/page/current_training_page.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/page/shop_page.dart';
 import 'package:flutter/material.dart';
 
 class HomeTrainingPageLoadedView extends StatefulWidget {

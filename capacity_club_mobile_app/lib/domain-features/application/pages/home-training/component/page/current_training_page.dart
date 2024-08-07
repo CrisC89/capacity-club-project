@@ -55,7 +55,7 @@ class CurrentTrainingPage extends StatelessWidget {
                 itemCount: weeks.length,
                 itemBuilder: (context, index) {
                   final week = weeks[index];
-                  return trainingWeekStepper(week);
+                  return trainingWeekStepper(context, week);
                 },
               ),
             ],

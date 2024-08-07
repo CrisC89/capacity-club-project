@@ -9,7 +9,6 @@ class ExerciseTrainingEntity {
   final String intensity;
   final TrainingIntensity intensityType;
   final ExerciseDataEntity exercise_data;
-  final TrainingCircuitEntity training_circuit;
   final bool is_empty;
 
   ExerciseTrainingEntity(
@@ -18,7 +17,6 @@ class ExerciseTrainingEntity {
       required this.intensity,
       required this.intensityType,
       required this.exercise_data,
-      required this.training_circuit,
       required this.is_empty});
 
   factory ExerciseTrainingEntity.empty() {
@@ -28,7 +26,6 @@ class ExerciseTrainingEntity {
         intensity: '',
         intensityType: TrainingIntensity.none,
         exercise_data: ExerciseDataEntity.empty(),
-        training_circuit: TrainingCircuitEntity.empty(),
         is_empty: true);
   }
 }

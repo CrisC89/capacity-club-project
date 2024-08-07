@@ -4,22 +4,18 @@ import 'package:capacity_club_mobile_app/domain-features/data/exercise-training/
 import 'package:capacity_club_mobile_app/domain-features/data/training-circuit/model/training_circuit_model.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/workout/model/mapper/workout_mapper.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/training-circuit/entity/training_circuit_entity.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/workout/entity/workout_entity.dart';
 
 class TrainingCircuitMapper {
   static TrainingCircuitModel fromEntity(TrainingCircuitEntity entity) {
     return TrainingCircuitModel(
-      training_circuit_id: entity.training_circuit_id,
-      title: entity.title,
-      exercise_training_list: entity.exercise_training_list != []
-          ? entity.exercise_training_list
-              .map((e) => ExerciseTrainingMapper.fromEntity(e))
-              .toList()
-          : [],
-      workout: entity.workout.is_empty
-          ? null
-          : WorkoutMapper.fromEntity(entity.workout),
-    );
+        training_circuit_id: entity.training_circuit_id,
+        title: entity.title,
+        exercise_training_list: entity.exercise_training_list != []
+            ? entity.exercise_training_list
+                .map((e) => ExerciseTrainingMapper.fromEntity(e))
+                .toList()
+            : [],
+        workout: null);
   }
 
   static TrainingCircuitModel fromJson(Map<String, dynamic> json) {
@@ -50,9 +46,6 @@ class TrainingCircuitMapper {
                 .map((e) => ExerciseTrainingMapper.toEntity(e))
                 .toList()
             : [],
-        workout: model.workout != null
-            ? WorkoutMapper.toEntity(model.workout!)
-            : WorkoutEntity.empty(),
         is_empty: false);
   }
 

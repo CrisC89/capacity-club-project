@@ -147,6 +147,14 @@ class AppTheme {
     fontFamily: 'Audiowide',
   );
 
+  static const TextStyle subTitleItalicTextStyle = TextStyle(
+    fontSize: 14,
+    color: dustyGray,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.italic,
+    fontFamily: 'Audiowide',
+  );
+
   static const TextStyle bodyTextStyle = TextStyle(
     fontSize: 16,
     color: dustyGray,

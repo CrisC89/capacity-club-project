@@ -10,17 +10,14 @@ import 'package:capacity_club_mobile_app/domain-features/domain/training-circuit
 class ExerciseTrainingMapper {
   static ExerciseTrainingModel fromEntity(ExerciseTrainingEntity entity) {
     return ExerciseTrainingModel(
-      exercise_training_id: entity.exercise_training_id,
-      nb_reps: entity.nb_reps,
-      intensity: entity.intensity,
-      intensityType: entity.intensityType,
-      exercise_data: entity.exercise_data.is_empty
-          ? null
-          : ExerciseDataMapper.fromEntity(entity.exercise_data),
-      training_circuit: entity.training_circuit.is_empty
-          ? null
-          : TrainingCircuitMapper.fromEntity(entity.training_circuit),
-    );
+        exercise_training_id: entity.exercise_training_id,
+        nb_reps: entity.nb_reps,
+        intensity: entity.intensity,
+        intensityType: entity.intensityType,
+        exercise_data: entity.exercise_data.is_empty
+            ? null
+            : ExerciseDataMapper.fromEntity(entity.exercise_data),
+        training_circuit: null);
   }
 
   static ExerciseTrainingModel fromJson(Map<String, dynamic> json) {
@@ -50,9 +47,6 @@ class ExerciseTrainingMapper {
         exercise_data: model.exercise_data != null
             ? ExerciseDataMapper.toEntity(model.exercise_data!)
             : ExerciseDataEntity.empty(),
-        training_circuit: model.training_circuit != null
-            ? TrainingCircuitMapper.toEntity(model.training_circuit!)
-            : TrainingCircuitEntity.empty(),
         is_empty: false);
   }
 

@@ -1,10 +1,9 @@
 import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
-import 'package:capacity_club_mobile_app/core/config/theme/theme_color.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/widget/training_day_step_widget.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/home_training_page.dart';
 import 'package:flutter/material.dart';
 
-Widget trainingWeekStepper(Week week) {
+Widget trainingWeekStepper(BuildContext context, Week week) {
   return Card(
     margin: const EdgeInsets.all(8.0),
     shape: RoundedRectangleBorder(
@@ -39,7 +38,7 @@ Widget trainingWeekStepper(Week week) {
                   (sessionIndex) {
                     final session = week.sessions[sessionIndex];
                     final sessionDay = sessionIndex + 1;
-                    return trainingDayStep(session, sessionDay);
+                    return trainingDayStep(context, session, sessionDay);
                   },
                 ),
               ),
