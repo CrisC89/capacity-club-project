@@ -12,7 +12,7 @@ Widget customTextButton({
     onPressed: onPressed,
     child: Text(
       title,
-      style: textStyle,
+      style: AppTheme.whiteTypeMedium14,
       textAlign: TextAlign.center,
     ),
   );

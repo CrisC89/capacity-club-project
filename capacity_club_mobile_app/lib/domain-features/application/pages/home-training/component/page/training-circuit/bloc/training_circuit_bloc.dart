@@ -1,22 +1,27 @@
-import 'package:capacity_club_mobile_app/core/config/theme/theme.dart';
-import 'package:capacity_club_mobile_app/core/config/theme/theme_color.dart';
+import 'package:bloc/bloc.dart';
 import 'package:capacity_club_mobile_app/core/model/entities/unique_id.dart';
-import 'package:capacity_club_mobile_app/core/widgets/app_logo_widget.dart';
-import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/page/training-circuit/training_circuit_page.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/exercise-training/model/enum/training_intensity.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/exercise-data/entity/exercise_data_entity.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/exercise-training/exercise-data/entity/exercise_training_entity.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/training-circuit/entity/training_circuit_entity.dart';
-import 'package:capacity_club_mobile_app/domain-features/domain/workout/entity/workout_entity.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
-class WorkoutDetailPage extends StatelessWidget {
-  WorkoutDetailPage({super.key});
-  final workout = WorkoutEntity(
-    workout_id: UniqueId('1'),
-    title: 'Full Body Workout',
-    training_circuits: [
+part 'training_circuit_event.dart';
+part 'training_circuit_state.dart';
+
+class TrainingCircuitBloc
+    extends Bloc<TrainingCircuitEvent, TrainingCircuitState> {
+  TrainingCircuitBloc() : super(TrainingCircuitInitial()) {
+    on<LoadTrainingCircuits>(_onLoadTrainingCircuits);
+    on<NextCircuit>(_onNextCircuit);
+  }
+
+  void _onLoadTrainingCircuits(
+      LoadTrainingCircuits event, Emitter<TrainingCircuitState> emit) async {
+    emit(TrainingCircuitLoading());
+
+    final circuits = [
       TrainingCircuitEntity(
         training_circuit_id: UniqueId('circuit1'),
         title: 'Warm-Up',
@@ -293,161 +298,26 @@ class WorkoutDetailPage extends StatelessWidget {
         ],
         is_empty: false,
       ),
-    ],
-    is_empty: false,
-  );
+    ];
 
-  Widget build(BuildContext context) {
-    return _WorkoutDetailPageContent(workout: workout);
+    try {
+      emit(TrainingCircuitLoaded(circuits: circuits, currentIndex: 0));
+    } catch (e) {
+      emit(TrainingCircuitError(message: e.toString()));
+    }
   }
-}
 
-class _WorkoutDetailPageContent extends StatefulWidget {
-  final WorkoutEntity workout;
-
-  const _WorkoutDetailPageContent({super.key, required this.workout});
-
-  @override
-  __WorkoutDetailPageContentState createState() =>
-      __WorkoutDetailPageContentState();
-}
-
-class __WorkoutDetailPageContentState extends State<_WorkoutDetailPageContent> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 32),
-                appLogo(context),
-                const SizedBox(height: 32),
-                Center(
-                  child: Text(
-                    widget.workout.title,
-                    style: AppTheme.titleTextStyle,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 48),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.clock,
-                        color: ThemeColor.dustyGray,
-                      ), // Durée
-                      SizedBox(width: 8),
-                      Text(
-                        'Durée : 60\'',
-                        style: AppTheme.subTitleTextStyle,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.clipboardList,
-                        color: ThemeColor.dustyGray,
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        'Nombre de trainings : 3',
-                        style: AppTheme.subTitleTextStyle,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.dumbbell,
-                        color: ThemeColor.dustyGray,
-                      ), // Nombre d'exercices
-                      SizedBox(width: 8),
-                      Text(
-                        'Nombre d\'exercices : 18',
-                        style: AppTheme.subTitleTextStyle,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 32),
-            // Espace ajouté entre le titre principal et les ExpansionTile
-            Column(
-              children: [
-                ...widget.workout.training_circuits.map((circuit) {
-                  return ExpansionTile(
-                    title: Center(
-                      child: Text(
-                        circuit.title,
-                        style: AppTheme.mediumTitleTextStyle,
-                      ),
-                    ),
-                    iconColor: ThemeColor.mainColor,
-                    collapsedIconColor: ThemeColor.dustyGray,
-                    children: circuit.exercise_training_list.map((exercise) {
-                      return ListTile(
-                        title: Text(exercise.exercise_data.title,
-                            style: AppTheme.subTitleTextStyle),
-                        subtitle: Text(
-                          '${exercise.nb_reps} reps - ${exercise.intensity} intensity',
-                          style: AppTheme.subTitleItalicTextStyle,
-                        ),
-                      );
-                    }).toList(),
-                  );
-                }).toList(),
-                const SizedBox(height: 32),
-                Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(3),
-                      color: ThemeColor.mainColor,
-                    ),
-                    child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  TrainingCircuitPageProvider(),
-                            ),
-                          );
-                        },
-                        child: Text('Start Workout',
-                            style: AppTheme.whiteTypeMedium14,
-                            textAlign: TextAlign.center)))
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+  void _onNextCircuit(
+      NextCircuit event, Emitter<TrainingCircuitState> emit) async {
+    if (state is TrainingCircuitLoaded) {
+      final loadedState = state as TrainingCircuitLoaded;
+      if (loadedState.currentIndex < loadedState.circuits.length - 1) {
+        emit(TrainingCircuitLoaded(
+            circuits: loadedState.circuits,
+            currentIndex: loadedState.currentIndex + 1));
+      } else {
+        emit(TrainingCircuitEnding());
+      }
+    }
   }
 }

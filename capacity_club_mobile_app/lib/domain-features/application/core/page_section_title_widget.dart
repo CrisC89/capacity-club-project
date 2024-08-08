@@ -11,7 +11,11 @@ Widget pageSectionTitle(BuildContext context, String title) {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Text(title.toUpperCase(), style: AppTheme.subTitleTextStyle),
       ),
-      const Expanded(child: Divider(thickness: 1)),
+      const Expanded(
+          child: Divider(
+        thickness: 1,
+        color: ThemeColor.dustyGray,
+      )),
     ],
   );
 }

@@ -6,6 +6,7 @@ import 'package:capacity_club_mobile_app/auth/data/repository/auth_repository_im
 import 'package:capacity_club_mobile_app/auth/domain/usecase/auth_usecase.dart';
 import 'package:capacity_club_mobile_app/core/utils/dio_client.dart';
 import 'package:capacity_club_mobile_app/domain-features/application/pages/home/bloc/home_page_bloc.dart';
+import 'package:capacity_club_mobile_app/domain-features/application/pages/home-training/component/page/training-circuit/bloc/training_circuit_bloc.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/datasource/indoor_training_datasource.dart';
 import 'package:capacity_club_mobile_app/domain-features/data/indoor-training/repository/indoor_training_repository_impl.dart';
 import 'package:capacity_club_mobile_app/domain-features/domain/indoor-training/usecase/get_collective_indoor_training_list_by_date.dart';
@@ -25,6 +26,8 @@ Future<void> init() async {
 
   serviceLocator.registerFactory<RegisterBloc>(
       () => RegisterBloc(authUseCase: serviceLocator()));
+  serviceLocator
+      .registerFactory<TrainingCircuitBloc>(() => TrainingCircuitBloc());
 
   serviceLocator.registerFactory<HomePageBloc>(() => HomePageBloc(
       getCollectiveIndoorTrainingListByDate: serviceLocator(),
